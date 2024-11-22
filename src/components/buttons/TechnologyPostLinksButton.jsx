@@ -4,8 +4,11 @@ import appStoreIcon from "../../assets/images/app-store.png";
 import playStoreIcon from "../../assets/images/play-store.png";
 import webIcon from "../../assets/images/web.png";
 import { logoPrimaryColor } from "../../constant/Color";
+import VisitWebsiteButton from "./VisitWebsiteButton";
+import AppStoreLinkButton from "./AppStoreLinkButton";
+import PlayStoreLinkButton from "./PlayStoreLinkButton";
 
-const PostLinksButton = ({ mainInfoData }) => {
+const TechnologyPostLinksButton = ({ mainInfoData }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isWideScreen, setIsWideScreen] = useState(false);
 
@@ -35,46 +38,21 @@ const PostLinksButton = ({ mainInfoData }) => {
     setAnchorEl(null);
   };
 
+  const hasLinks = mainInfoData.playStoreUrl || mainInfoData.appStoreUrl || mainInfoData.webUrl;
+
+  if (!hasLinks) {
+    return null;
+  }
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 1 }}>
       {isWideScreen ? (
         <Box sx={{ display: 'flex', gap: 2 }}>
-          {mainInfoData.playStoreUrl && (
-            <Button
-              variant="outlined"
-              color="secondary"
-              onClick={() => handleMenuItemClick(mainInfoData.playStoreUrl)}
-              sx={{ textTransform: 'none', display: 'flex', alignItems: 'center', gap: 1, borderColor: logoPrimaryColor, color: logoPrimaryColor }}
-            >
-              <img src={playStoreIcon} alt="Play Store" style={{ width: 24, height: 24 }} />
-              Play Store
-            </Button>
-          )}
-          {mainInfoData.appStoreUrl && (
-            <Button
-              variant="outlined"
-              color="secondary"
-              onClick={() => handleMenuItemClick(mainInfoData.appStoreUrl)}
-              sx={{ textTransform: 'none', display: 'flex', alignItems: 'center', gap: 1, borderColor: logoPrimaryColor, color: logoPrimaryColor }}
-            >
-              <img src={appStoreIcon} alt="App Store" style={{ width: 24, height: 24 }} />
-              App Store
-            </Button>
-          )}
-          {mainInfoData.webUrl && (
-            <Button
-              variant="outlined"
-              color="secondary"
-              onClick={() => handleMenuItemClick(mainInfoData.webUrl)}
-              sx={{ textTransform: 'none', display: 'flex', alignItems: 'center', gap: 1, borderColor: logoPrimaryColor, color: logoPrimaryColor }}
-            >
-              <img src={webIcon} alt="Website" style={{ width: 24, height: 24 }} />
-              Visit Website
-            </Button>
-          )}
+          <PlayStoreLinkButton playStoreUrl={mainInfoData.playStoreUrl} />
+          <AppStoreLinkButton appStoreUrl={mainInfoData.appStoreUrl} />
+          <VisitWebsiteButton webUrl={mainInfoData.webUrl} />
         </Box>
       ) : (
-        // Show Visit button if screen width is less
         <>
           <Button
             variant="contained"
@@ -115,4 +93,4 @@ const PostLinksButton = ({ mainInfoData }) => {
   );
 };
 
-export default PostLinksButton;
+export default TechnologyPostLinksButton;

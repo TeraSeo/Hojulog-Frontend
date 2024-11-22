@@ -5,11 +5,11 @@ import PostTitleText from "../texts/PostTitleText";
 import PostMedia from "../media/PostMedia";
 import PostDetailedPreviewActions from "../buttons/PostDetailedPreviewActions";
 import PostPreviewTab from "../buttons/PostPreviewTab";
-import PostLinksButton from "../buttons/PostLinksButton";
 import DescriptionText from "../texts/DescriptionText";
 import PostFooterText from "../texts/PostFooterText";
+import TechnologyPostLinksButton from "../buttons/TechnologyPostLinksButton";
 
-const DetailedPostDialog = ({ open, onClose, mainInfoData, mediaData }) => {
+const TechnologyDetailedPostDialog = ({ open, onClose, mainInfoData, mediaData }) => {
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
       <DialogTitle>
@@ -25,13 +25,13 @@ const DetailedPostDialog = ({ open, onClose, mainInfoData, mediaData }) => {
       <DialogContent dividers>
         <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 2, marginBottom: 2 }}>
           <PostTitleText mainInfoData={mainInfoData} mediaData={mediaData} />
-          <PostLinksButton mainInfoData={mainInfoData} />
+          <TechnologyPostLinksButton mainInfoData={mainInfoData} />
         </Box>
 
         <PostPreviewTab />
 
         <Typography variant="h6" gutterBottom>
-          What is World Lotto?
+          What is {mainInfoData.title}?
         </Typography>
 
         <DescriptionText description={mainInfoData.description} />
@@ -46,4 +46,4 @@ const DetailedPostDialog = ({ open, onClose, mainInfoData, mediaData }) => {
   );
 };
 
-export default DetailedPostDialog;
+export default TechnologyDetailedPostDialog;

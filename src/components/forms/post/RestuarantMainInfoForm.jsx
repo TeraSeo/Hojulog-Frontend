@@ -1,151 +1,152 @@
 import React, { useState, useEffect } from "react";
-import { Typography, TextField, MenuItem, Button, Dialog, DialogContent, Box } from "@mui/material";
+import { Typography, Grid, Paper } from "@mui/material";
+import TitleField from "../../textfields/TitleField";
+import SubtitleField from "../../textfields/SubtitleField";
+import DescriptionField from "../../textfields/DescriptionField";
+import VisibilityField from "../../textfields/VisibilityField";
+import IsOwnWorkField from "../../textfields/IsOwnWorkField";
+import OwnerEmailField from "../../textfields/OwnerEmailField";
+import WebUrlField from "../../textfields/WebUrlField";
+import TagsField from "../../textfields/TagsField";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import LocationField from "../../textfields/LocationField";
+import LocationDialog from "../../dialog/LocationDialog";
 
-function RestaurantMainInfoForm({
-  title,
-  description,
-  location,
-  visibility,
-  setTitle,
-  setDescription,
-  setLocation,
-  setVisibility,
-  visibilities,
-  setLocationValid,
-}) {
+const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
+  const [formValues, setFormValues] = useState({
+    title: "",
+    subTitle: "",
+    description: "",
+    webUrl: "",
+    visibility: "Public",
+    isOwnWork: "yes",
+    ownerEmail: "",
+    tags: [],
+    location: "",
+  });
+
+  const [errors, setErrors] = useState({});
   const [mapOpen, setMapOpen] = useState(false);
   const [selectedLatLng, setSelectedLatLng] = useState(null);
-  const [locationError, setLocationError] = useState("");
 
-  const locationPattern = /^https:\/\/www\.google\.com\/maps\?q=(-?\d+(\.\d+)?),(-?\d+(\.\d+)?)$/;
+  const locationPattern = /^https:\/\/(www\.)?google\.[a-z]+\/maps(\?.*|\/.*)?$/;
+
+  const validateLocation = (value) => {
+    if (!locationPattern.test(value)) {
+      setErrors((prev) => ({
+        ...prev,
+        location: "Invalid Google Maps URL format.",
+      }));
+    } else {
+      setErrors((prev) => ({
+        ...prev,
+        location: "",
+      }));
+    }
+  };
+
+  const checkFormValidity = () => {
+    const newErrors = {};
+    const { title, subTitle, description, webUrl, isOwnWork, ownerEmail, location } = formValues;
+
+    if (!title.trim()) newErrors.title = "Title is required";
+    if (!subTitle.trim()) newErrors.subTitle = "Subtitle is required";
+    if (!description.trim()) newErrors.description = "Description is required";
+
+    if (!webUrl) {
+      newErrors.webUrl = "Web URL is required";
+    } else if (!/^https?:\/\/[^\s]+$/.test(webUrl)) {
+      newErrors.webUrl = "Invalid Website URL";
+    }
+
+    if (isOwnWork === "no") {
+      if (!ownerEmail.trim()) {
+        newErrors.ownerEmail = "Owner email is required";
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail)) {
+        newErrors.ownerEmail = "Invalid email format";
+      }
+    }
+
+    if (!location.trim()) {
+      newErrors.location = "Location is required";
+    } else if (!locationPattern.test(location)) {
+      newErrors.location = "Invalid Google Maps URL format.";
+    }
+
+    setErrors(newErrors);
+    setIsFormValid(Object.keys(newErrors).length === 0);
+  };
+
+  useEffect(() => {
+    checkFormValidity();
+    onDataChange(formValues);
+  }, [formValues]);
+
+  const handleInputChange = (field, value) => {
+    setFormValues((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
 
   const handleMapClick = (event) => {
     const lat = event.latLng.lat();
     const lng = event.latLng.lng();
     setSelectedLatLng({ lat, lng });
-    const googleMapsUrl = `https://www.google.com/maps?q=${lat},${lng}`;
-    setLocation(googleMapsUrl);
-    setLocationError("");
-    setLocationValid(true);
   };
 
-  const validateLocation = (value) => {
-    if (!locationPattern.test(value)) {
-      setLocationError("Invalid Google Maps URL format.");
-      setLocationValid(false);
-    } else {
-      setLocationError(""); 
-      setLocationValid(true);
+  const handleConfirmLocation = () => {
+    if (selectedLatLng) {
+      const googleMapsUrl = `https://www.google.com/maps?q=${selectedLatLng.lat},${selectedLatLng.lng}`;
+      handleInputChange("location", googleMapsUrl);
+      validateLocation(googleMapsUrl);
     }
-    setLocation(value);
+    setMapOpen(false);
   };
-
-  useEffect(() => {
-    if (location) validateLocation(location);
-  }, [location]);
 
   return (
-    <>
-      <Typography variant="h5" fontWeight="bold" sx={{ mb: 1 }}>
-        Tell us more about the restaurant
+    <Paper elevation={3} sx={{ padding: 3, borderRadius: 2 }}>
+      <Typography variant="h5" gutterBottom>
+        Main Information
       </Typography>
-      <Typography variant="body1" color="textSecondary" sx={{ mb: 4 }}>
-        It makes the advertisement more efficient
+      <Typography variant="body2" color="textSecondary" gutterBottom>
+        Enter the details of your product including title, subtitle, description, link, and location.
       </Typography>
 
-      <Typography variant="subtitle1" fontWeight="bold" sx={{ mb: 1 }}>
-        Name of the restaurant
-      </Typography>
-      <TextField
-        placeholder="Enter the restaurant name"
-        variant="outlined"
-        fullWidth
-        required
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        sx={{ mb: 3 }}
-      />
+      <Grid container spacing={3} sx={{ mt: 1 }}>
+        <TitleField value={formValues.title} error={errors.title} onChange={(value) => handleInputChange("title", value)} />
+        <SubtitleField value={formValues.subTitle} error={errors.subTitle} onChange={(value) => handleInputChange("subTitle", value)} />
+        <DescriptionField value={formValues.description} error={errors.description} onChange={(value) => handleInputChange("description", value)} />
+        <VisibilityField value={formValues.visibility} onChange={(value) => handleInputChange("visibility", value)} />
+        <IsOwnWorkField value={formValues.isOwnWork} onChange={(value) => handleInputChange("isOwnWork", value)} />
+        {formValues.isOwnWork === "no" && (
+          <OwnerEmailField value={formValues.ownerEmail} error={errors.ownerEmail} onChange={(value) => handleInputChange("ownerEmail", value)} />
+        )}
+        <WebUrlField value={formValues.webUrl} error={errors.webUrl} onChange={(value) => handleInputChange("webUrl", value)} />
+          
+        <TagsField tags={formValues.tags} onChange={(tags) => handleInputChange("tags", tags)} />
 
-      <Typography variant="subtitle1" fontWeight="bold" sx={{ mb: 1 }}>
-        Description
-      </Typography>
-      <TextField
-        placeholder="Describe your restaurant in a few sentences"
-        variant="outlined"
-        fullWidth
-        required
-        multiline
-        rows={4}
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        sx={{ mb: 3 }}
-      />
-
-      <Typography variant="subtitle1" fontWeight="bold" sx={{ mb: 1 }}>
-        Location of the restaurant
-      </Typography>
-      <TextField
-        placeholder="Click 'Select Location' to pick on the map"
-        variant="outlined"
-        fullWidth
-        required
-        value={location}
-        onChange={(e) => validateLocation(e.target.value)}
-        error={!!locationError}
-        helperText={locationError}
-        sx={{ mb: 3 }}
-      />
-      <Button variant="outlined" onClick={() => setMapOpen(true)} sx={{ mb: 3 }}>
-        Select Location
-      </Button>
-
-      <Typography variant="subtitle1" fontWeight="bold" sx={{ mb: 1 }}>
-        Visibility
-      </Typography>
-      <TextField
-        select
-        fullWidth
-        required
-        value={visibility}
-        onChange={(e) => setVisibility(e.target.value)}
-        sx={{ mb: 3 }}
-      >
-        {visibilities.map((vis) => (
-          <MenuItem key={vis} value={vis}>
-            {vis}
-          </MenuItem>
-        ))}
-      </TextField>
-
+        {/* Location Field */}
+        <LocationField
+          location={formValues.location}
+          errors={errors}
+          onLocationChange={(value) => {
+            handleInputChange("location", value);
+            validateLocation(value);
+          }}
+          onMapOpen={() => setMapOpen(true)}
+        />
+      </Grid>
       {/* Google Map Dialog */}
-      <Dialog open={mapOpen} onClose={() => setMapOpen(false)} fullWidth maxWidth="sm">
-        <DialogContent>
-          <Typography variant="h6" textAlign="center" sx={{ mb: 2 }}>
-            Select Location on the Map
-          </Typography>
-          <LoadScript googleMapsApiKey="AIzaSyAbpOOHTMEZeY_WNnQjuROdIUCAPpwM45Q">
-            <GoogleMap
-              mapContainerStyle={{ width: "100%", height: "400px" }}
-              center={{ lat: -34.397, lng: 150.644 }}
-              zoom={8}
-              onClick={handleMapClick}
-            >
-              {selectedLatLng && <Marker position={selectedLatLng} />}
-            </GoogleMap>
-          </LoadScript>
-          <Box display="flex" justifyContent="space-between" mt={2}>
-            <Button onClick={() => setMapOpen(false)} variant="outlined">
-              Cancel
-            </Button>
-            <Button onClick={() => setMapOpen(false)} variant="contained" color="primary">
-              Confirm
-            </Button>
-          </Box>
-        </DialogContent>
-      </Dialog>
-    </>
+      <LocationDialog
+        open={mapOpen}
+        onClose={() => setMapOpen(false)}
+        onConfirm={handleConfirmLocation}
+        onMapClick={handleMapClick}
+        selectedLatLng={selectedLatLng}
+      />
+    </Paper>
   );
-}
+};
 
 export default RestaurantMainInfoForm;

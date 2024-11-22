@@ -6,7 +6,7 @@ import ImageUploader from "../../media/ImageUploader";
 import VideoUploader from "../../media/VideoUploader";
 import AspectRatioSelector from "../../media/AspectRatioSelector";
 
-const TechnologyMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
+const RestuarantMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
   const [logoImage, setLogoImage] = useState(null);
   const [selectedImages, setSelectedImages] = useState([]);
   const [selectedVideos, setSelectedVideos] = useState([]);
@@ -19,7 +19,7 @@ const TechnologyMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
   const validateMedia = () => {
     const newErrors = {};
 
-    // Logo is optional, validate only if a logo is provided
+    // Logo is now optional, so we only validate if a logo is provided
     if (logoImage && !logoImage.type.startsWith("image/")) {
       newErrors.logoImage = "Logo must be a valid image file.";
     }
@@ -194,4 +194,4 @@ const TechnologyMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
   );
 };
 
-export default TechnologyMediaUploadForm;
+export default RestuarantMediaUploadForm;

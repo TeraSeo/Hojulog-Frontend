@@ -29,7 +29,6 @@ const LaunchTechnologyPage = () => {
   const { subCategory } = useParams();
 
   useEffect(() => {
-    // If the aspect ratio changes, update the preview dynamically
     if (isPreviewOpen) {
       handlePreview();
     }

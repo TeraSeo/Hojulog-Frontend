@@ -1,140 +1,149 @@
-import React, { useState } from "react";
-import { Box, Paper, Typography, Button } from "@mui/material";
-import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
-import ImageIcon from "@mui/icons-material/Image";
-import GroupIcon from "@mui/icons-material/Group";
-import SidebarNavigation from "../../components/bar/SidebarNavigation";
-import ImagesAndMediaForm from "../../components/forms/post/ImagesAndMediaForm";
-import OwnerInfoForm from "../../components/forms/post/OwnerInfoForm";
-import { postEtc } from "../../service/PostService";
+import React, { useState, useRef, useEffect } from "react";
+import {
+  Paper,
+  Typography,
+  Grid,
+  Box,
+  Button,
+} from "@mui/material";
+import { postEntertainment } from "../../service/PostService";
+import { useParams } from "react-router-dom";
+import { logoPrimaryColor } from "../../constant/Color";
+import { normalizeSubCategory } from "../../service/CategoryService";
+import PostStepper from "../../components/bar/PostStepper";
+import EducationPostPreviewDialog from "../../components/dialog/EducationPostPreviewDialog";
 import EntertainmentMainInfoForm from "../../components/forms/post/EntertainmentMainInfoForm";
+import EntertainmentMediaUploadForm from "../../components/forms/post/EntertainmentMediaUploadForm";
+import EntertainmentPostPreviewDialog from "../../components/dialog/EntertainmentPostPreviewDialog";
 
-const visibilities = ["PUBLIC", "PRIVATE"];
+const LaunchEntertainmentPage = () => {
+  const [isMainValid, setIsMainValid] = useState(false);
+  const [isMediaValid, setIsMediaValid] = useState(false);
+  const [mainInfoData, setMainInfoData] = useState({});
+  const [mediaData, setMediaData] = useState({});
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
-function LaunchEntertainmentPage() {
-    const [step, setStep] = useState(1);
-    const [title, setTitle] = useState("");
-    const [subTitle, setSubTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [link, setLink] = useState("");
-    const [visibility, setVisibility] = useState("PUBLIC");
-    const [selectedImages, setSelectedImages] = useState([]);
-    const [selectedVideos, setSelectedVideos] = useState([]);
-    const [isOwnWork, setIsOwnWork] = useState(false);
-    const [ownerInfo, setOwnerInfo] = useState("");
-    const [tags, setTags] = useState([]);
-    const [newTag, setNewTag] = useState("");
+  const mainInfoRef = useRef(null);
+  const mediaUploadRef = useRef(null);
+  const submitRef = useRef(null);
 
-    const isMainInfoValid = title && subTitle && description && link && visibility;
-    const isFilesValid = selectedImages.length > 0 || selectedVideos.length > 0;
-    const isMakerInfoValid = true;
+  const { subCategory } = useParams();
 
-    const sections = [
-        { id: 1, label: "Main Info", icon: <RocketLaunchIcon />, isValid: isMainInfoValid, color: "#F0E68C" },
-        { id: 2, label: "Images and Media", icon: <ImageIcon />, isValid: isFilesValid, color: "#ADD8E6" },
-        { id: 3, label: "Owner", icon: <GroupIcon />, isValid: isMakerInfoValid, color: "#DDA0DD" },
-    ];
+  useEffect(() => {
+    if (isPreviewOpen) {
+      handlePreview();
+    }
+  }, [mediaData]);
 
-    const handleNextStep = () => setStep((prevStep) => Math.min(prevStep + 1, sections.length));
-    const handlePreviousStep = () => setStep((prevStep) => Math.max(prevStep - 1, 1));
+  const handleStepClick = (step) => {
+    switch (step) {
+      case 0:
+        mainInfoRef.current.scrollIntoView({ behavior: "smooth" });
+        break;
+      case 1:
+        mediaUploadRef.current.scrollIntoView({ behavior: "smooth" });
+        break;
+      case 2:
+        submitRef.current.scrollIntoView({ behavior: "smooth" });
+        break;
+      default:
+        break;
+    }
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append("title", title);
-        formData.append("description", description);
-        formData.append("visibility", visibility);
-        formData.append("isOwnWork", isOwnWork);
-        formData.append("ownerInfo", ownerInfo);
+  const handleSubmit = () => {
+    const formData = new FormData();
+    const normalizedSubCategory = normalizeSubCategory(subCategory);
 
-        tags.forEach((tag, index) => formData.append(`tags[${index}]`, tag));
-
-        selectedImages.forEach((file, index) => formData.append(`images`, file));
-        selectedVideos.forEach((file, index) => formData.append(`videos`, file));
-
-        postEtc(formData);
+    const educationData = {
+      ...mainInfoData,
+      "category": "Entertainment",
+      "isPortrait": mediaData.isPortrait,
+      "subCategory": normalizedSubCategory
     };
 
-    return (
-        <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, maxWidth: "900px", margin: "auto", padding: "20px" }}>
-            <Box sx={{ width: { xs: "100%", sm: "200px" }, mb: { xs: 2, sm: 0 }, mr: { sm: 4 } }}>
-                <SidebarNavigation sections={sections} step={step} setStep={setStep} />
-            </Box>
-
-            <Box sx={{ flexGrow: 1 }}>
-                <Paper elevation={4} sx={{ padding: { xs: "20px", sm: "30px" }, borderRadius: "12px" }}>
-                    <Typography variant="h4" textAlign="center" mb={4} fontWeight="bold" color="primary">
-                        Launch Your Post
-                    </Typography>
-
-                    {step === 1 && (
-                        <EntertainmentMainInfoForm
-                            title={title}
-                            setTitle={setTitle}
-                            subTitle={subTitle}
-                            setSubTitle={setSubTitle}
-                            description={description}
-                            setDescription={setDescription}
-                            link={link}
-                            setLink={setLink}
-                            visibility={visibility}
-                            setVisibility={setVisibility}
-                            visibilities={visibilities}
-                        />
-                    )}
-                    {step === 2 && (
-                        <ImagesAndMediaForm
-                            selectedImages={selectedImages}
-                            setSelectedImages={setSelectedImages}
-                            selectedVideos={selectedVideos}
-                            setSelectedVideos={setSelectedVideos}
-                        />
-                    )}
-                    {step === 3 && (
-                        <OwnerInfoForm
-                            isOwnWork={isOwnWork}
-                            setIsOwnWork={setIsOwnWork}
-                            ownerInfo={ownerInfo}
-                            setOwnerInfo={setOwnerInfo}
-                            newTag={newTag}
-                            setNewTag={setNewTag}
-                            tags={tags}
-                            handleAddTag={() => setTags([...tags, newTag])}
-                            handleRemoveTag={(index) => setTags(tags.filter((_, i) => i !== index))}
-                        />
-                    )}
-                </Paper>
-
-                <Box display="flex" justifyContent="space-between" mt={3}>
-                    {step > 1 && (
-                        <Button variant="outlined" onClick={handlePreviousStep}>
-                            Previous
-                        </Button>
-                    )}
-                    {step < sections.length ? (
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleNextStep}
-                            disabled={(step === 1 && !isMainInfoValid) || (step === 2 && !isFilesValid)}
-                        >
-                            Next Step
-                        </Button>
-                    ) : (
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            color="primary"
-                            onClick={handleSubmit}
-                            disabled={!isMainInfoValid || !isFilesValid}
-                        >
-                            Post
-                        </Button>
-                    )}
-                </Box>
-            </Box>
-        </Box>
+    formData.append(
+      "entertainmentPostDto",
+      new Blob([JSON.stringify(educationData)], { type: "application/json" })
     );
-}
+
+    if (mediaData.logoImage) formData.append("logoImage", mediaData.logoImage);
+    mediaData.selectedImages.forEach((file) => formData.append("images", file));
+    mediaData.selectedVideos.forEach((file) => formData.append("videos", file));
+
+    postEntertainment(formData);
+  };
+
+  const handlePreview = () => {
+    setIsPreviewOpen(true);
+  };
+
+  const handleClosePreview = () => {
+    setIsPreviewOpen(false);
+  };
+
+  return (
+    <Paper
+      elevation={3}
+      sx={{ padding: 4, margin: 4, maxWidth: 800, mx: "auto", backgroundColor: "#f7f9fc" }}
+    >
+      <Typography variant="h4" gutterBottom align="center" sx={{ color: logoPrimaryColor }}>
+        Launch Your Entertainment
+      </Typography>
+      <Typography variant="subtitle1" align="center" color="textSecondary" sx={{ marginBottom: 4 }}>
+        Provide all the necessary details to launch your entertainment
+      </Typography>
+
+      <PostStepper isMainValid={isMainValid} isMediaValid={isMediaValid} handleStepClick={handleStepClick}/>
+
+      <Grid container spacing={4}>
+        <Grid item xs={12} ref={mainInfoRef}>
+          <EntertainmentMainInfoForm
+            onDataChange={(data) => setMainInfoData(data)}
+            setIsFormValid={setIsMainValid}
+          />
+        </Grid>
+        <Grid item xs={12} ref={mediaUploadRef}>
+          <Grid item xs={12}>
+            <EntertainmentMediaUploadForm
+              onMediaChange={(media) => setMediaData(media)}
+              setIsMediaValid={setIsMediaValid}
+            />
+          </Grid>
+        </Grid>
+        <Grid item xs={12} ref={submitRef}>
+          <Box textAlign="right">
+            <Button
+              type="button"
+              variant="outlined"
+              sx={{ marginRight: 2, color: logoPrimaryColor, borderColor: logoPrimaryColor }}
+              size="large"
+              onClick={handlePreview}
+            >
+              Preview
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ backgroundColor: logoPrimaryColor, color: "#FFF" }}
+              size="large"
+              disabled={!isMainValid || !isMediaValid}
+              onClick={handleSubmit}
+            >
+              Submit
+            </Button>
+          </Box>
+        </Grid>
+      </Grid>
+
+      <EntertainmentPostPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        mainInfoData={mainInfoData}
+        mediaData={mediaData}
+      />
+    </Paper>
+  );
+};
 
 export default LaunchEntertainmentPage;

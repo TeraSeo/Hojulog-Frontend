@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { Dialog, DialogTitle, DialogContent, IconButton, Box } from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, IconButton, Box, Button } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import PostTitleText from "../../components/texts/PostTitleText";
 import PostMedia from "../../components/media/PostMedia";
 import PostPreviewActions from "../buttons/PostPreviewActions";
-import TechnologyDetailedPostDialog from "./TechnologyDetailedPostDialog";
 import PostPreviewTab from "../buttons/PostPreviewTab";
 import LikeCountButton from "../buttons/LikeCountButton";
 import DescriptionText from "../texts/DescriptionText";
+import LocationButton from "../buttons/LocationButton";
+import EntertainmentDetailedPostDialog from "./EntertainmentDetailedPostDialog";
 
-const TechnologyPostPreviewDialog = ({ open, onClose, mainInfoData, mediaData = {} }) => {
+const EntertainmentPostPreviewDialog = ({ open, onClose, mainInfoData, mediaData = {} }) => {
   const [detailedDialogOpen, setDetailedDialogOpen] = useState(false);
 
   const handleViewDetailsClick = () => {
@@ -36,7 +37,10 @@ const TechnologyPostPreviewDialog = ({ open, onClose, mainInfoData, mediaData = 
         <DialogContent dividers>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 2 }}>
             <PostTitleText mainInfoData={mainInfoData} mediaData={mediaData} />
-            <LikeCountButton count={1223} />
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <LikeCountButton count={1223} />
+              <LocationButton location={mainInfoData.location} />
+            </Box>
           </Box>
 
           <PostPreviewTab />
@@ -45,7 +49,7 @@ const TechnologyPostPreviewDialog = ({ open, onClose, mainInfoData, mediaData = 
           <PostPreviewActions mainInfoData={mainInfoData} onViewDetailsClick={handleViewDetailsClick} />
         </DialogContent>
       </Dialog>
-      <TechnologyDetailedPostDialog
+      <EntertainmentDetailedPostDialog
         open={detailedDialogOpen}
         onClose={handleDetailedDialogClose}
         mainInfoData={mainInfoData}
@@ -55,4 +59,4 @@ const TechnologyPostPreviewDialog = ({ open, onClose, mainInfoData, mediaData = 
   );
 };
 
-export default TechnologyPostPreviewDialog;
+export default EntertainmentPostPreviewDialog;

@@ -7,7 +7,7 @@ const TagsText = ({ tags }) => {
   return (
     <>
       {tags && tags.length > 0 && (
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, maxWidth: '70%', overflow: 'hidden' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, maxWidth: '70%', overflow: 'hidden', mt: 1 }}>
           <LocalOfferIcon sx={{ color: logoPrimaryColor }} />
           <Typography
             variant="body2"
