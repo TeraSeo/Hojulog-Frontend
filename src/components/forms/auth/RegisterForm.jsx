@@ -22,7 +22,7 @@ function RegisterForm() {
         registerUser(data).then((response) => {
             const { success, message } = response;
             if (success) {
-                navigate('/login');
+                navigate("register/succeeded");
             }
             else {
                 setErrorMsg(message);

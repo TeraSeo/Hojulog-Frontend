@@ -20,7 +20,7 @@ const TechnologyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     appStoreUrl: "",
     webUrl: "",
     visibility: "Public",
-    isOwnWork: "yes",
+    isOwnWork: true,
     ownerEmail: "",
     tags: [],
   });
@@ -88,7 +88,7 @@ const TechnologyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         <DescriptionField value={formValues.description} error={errors.description} onChange={(value) => handleInputChange("description", value)} />
         <VisibilityField value={formValues.visibility} onChange={(value) => handleInputChange("visibility", value)} />
         <IsOwnWorkField value={formValues.isOwnWork} onChange={(value) => handleInputChange("isOwnWork", value)} />
-        {formValues.isOwnWork === "no" && (
+        {!formValues.isOwnWork && (
           <OwnerEmailField value={formValues.ownerEmail} error={errors.ownerEmail} onChange={(value) => handleInputChange("ownerEmail", value)} />
         )}
         <PlayStoreUrlField value={formValues.playStoreUrl} error={errors.playStoreUrl} onChange={(value) => handleInputChange("playStoreUrl", value)} />

@@ -50,7 +50,7 @@ const RestaurantLinksButton = ({ mainInfoData }) => {
           <LocationButton location={mainInfoData.location} />
         </Box>
       ) : (
-        <>
+        <> 
           <Button
             variant="contained"
             color="secondary"

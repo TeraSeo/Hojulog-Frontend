@@ -8,7 +8,6 @@ import IsOwnWorkField from "../../textfields/IsOwnWorkField";
 import OwnerEmailField from "../../textfields/OwnerEmailField";
 import WebUrlField from "../../textfields/WebUrlField";
 import TagsField from "../../textfields/TagsField";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import LocationField from "../../textfields/LocationField";
 import LocationDialog from "../../dialog/LocationDialog";
 
@@ -19,7 +18,7 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     description: "",
     webUrl: "",
     visibility: "Public",
-    isOwnWork: "yes",
+    isOwnWork: true,
     ownerEmail: "",
     tags: [],
     location: "",
@@ -119,7 +118,7 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         <DescriptionField value={formValues.description} error={errors.description} onChange={(value) => handleInputChange("description", value)} />
         <VisibilityField value={formValues.visibility} onChange={(value) => handleInputChange("visibility", value)} />
         <IsOwnWorkField value={formValues.isOwnWork} onChange={(value) => handleInputChange("isOwnWork", value)} />
-        {formValues.isOwnWork === "no" && (
+        {!formValues.isOwnWork && (
           <OwnerEmailField value={formValues.ownerEmail} error={errors.ownerEmail} onChange={(value) => handleInputChange("ownerEmail", value)} />
         )}
         <WebUrlField value={formValues.webUrl} error={errors.webUrl} onChange={(value) => handleInputChange("webUrl", value)} />

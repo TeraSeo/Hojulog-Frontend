@@ -8,9 +8,9 @@ import {
 } from "@mui/material";
 import TechnologyMediaUploadForm from "../../components/forms/post/TechnologyMediaUploadForm";
 import TechnologyMainInfoForm from "../../components/forms/post/TechnologyMainInfoForm";
-import { postTechnology } from "../../service/PostService";
+import { normalizeEmptyStringsToNull, postTechnology } from "../../service/PostService";
 import TechnologyPostPreviewDialog from "../../components/dialog/TechnologyPostPreviewDialog";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { logoPrimaryColor } from "../../constant/Color";
 import { normalizeSubCategory } from "../../service/CategoryService";
 import PostStepper from "../../components/bar/PostStepper";
@@ -21,6 +21,9 @@ const LaunchTechnologyPage = () => {
   const [mainInfoData, setMainInfoData] = useState({});
   const [mediaData, setMediaData] = useState({});
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const mainInfoRef = useRef(null);
   const mediaUploadRef = useRef(null);
@@ -50,12 +53,13 @@ const LaunchTechnologyPage = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const formData = new FormData();
-    const normalizedSubCategory = normalizeSubCategory(subCategory);
+    const normalizedSubCategory = normalizeSubCategory("Technology", subCategory);
+    const normalizedMainInfoData = normalizeEmptyStringsToNull(mainInfoData);
 
     const techPostData = {
-      ...mainInfoData,
+      ...normalizedMainInfoData,
       "category": "Technology",
       "isPortrait": mediaData.isPortrait,
       "subCategory": normalizedSubCategory
@@ -70,7 +74,14 @@ const LaunchTechnologyPage = () => {
     mediaData.selectedImages.forEach((file) => formData.append("images", file));
     mediaData.selectedVideos.forEach((file) => formData.append("videos", file));
 
-    postTechnology(formData);
+    setIsLoading(true);
+    const isCreated = await postTechnology(formData);
+        if (isCreated) {
+            navigate("/");
+        } else {
+          setError("Failed to submit your post. Please try again.");
+          setIsLoading(false);
+        }
   };
 
   const handlePreview = () => {
@@ -126,11 +137,17 @@ const LaunchTechnologyPage = () => {
               variant="contained"
               sx={{ backgroundColor: logoPrimaryColor, color: "#FFF" }}
               size="large"
-              disabled={!isMainValid || !isMediaValid}
+              disabled={!isMainValid || !isMediaValid || isLoading}
               onClick={handleSubmit}
             >
-              Submit
+              {isLoading ? "Submitting..." : "Submit"}
             </Button>
+
+            {error && (
+              <Typography color="error" align="center" sx={{ marginBottom: 2 }}>
+                {error}
+              </Typography>
+            )}
           </Box>
         </Grid>
       </Grid>

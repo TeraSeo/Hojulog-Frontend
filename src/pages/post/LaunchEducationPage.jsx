@@ -7,7 +7,7 @@ import {
   Button,
 } from "@mui/material";
 import { postEducation } from "../../service/PostService";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { logoPrimaryColor } from "../../constant/Color";
 import { normalizeSubCategory } from "../../service/CategoryService";
 import PostStepper from "../../components/bar/PostStepper";
@@ -21,6 +21,9 @@ const LaunchEducationPage = () => {
   const [mainInfoData, setMainInfoData] = useState({});
   const [mediaData, setMediaData] = useState({});
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const mainInfoRef = useRef(null);
   const mediaUploadRef = useRef(null);
@@ -50,9 +53,9 @@ const LaunchEducationPage = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const formData = new FormData();
-    const normalizedSubCategory = normalizeSubCategory(subCategory);
+    const normalizedSubCategory = normalizeSubCategory("Education", subCategory);
 
     const educationData = {
       ...mainInfoData,
@@ -69,8 +72,15 @@ const LaunchEducationPage = () => {
     if (mediaData.logoImage) formData.append("logoImage", mediaData.logoImage);
     mediaData.selectedImages.forEach((file) => formData.append("images", file));
     mediaData.selectedVideos.forEach((file) => formData.append("videos", file));
-
-    postEducation(formData);
+    
+    setIsLoading(true);
+    const isCreated = await postEducation(formData);
+        if (isCreated) {
+            navigate("/");
+        } else {
+          setError("Failed to submit your post. Please try again.");
+          setIsLoading(false);
+        }
   };
 
   const handlePreview = () => {
@@ -126,11 +136,17 @@ const LaunchEducationPage = () => {
               variant="contained"
               sx={{ backgroundColor: logoPrimaryColor, color: "#FFF" }}
               size="large"
-              disabled={!isMainValid || !isMediaValid}
+              disabled={!isMainValid || !isMediaValid || isLoading}
               onClick={handleSubmit}
             >
-              Submit
+              {isLoading ? "Submitting..." : "Submit"}
             </Button>
+
+            {error && (
+              <Typography color="error" align="center" sx={{ marginBottom: 2 }}>
+                {error}
+              </Typography>
+            )}
           </Box>
         </Grid>
       </Grid>

@@ -16,7 +16,7 @@ const LifeStyleMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     description: "",
     webUrl: "",
     visibility: "Public",
-    isOwnWork: "yes",
+    isOwnWork: true,
     ownerEmail: "",
     tags: [],
   });
@@ -76,7 +76,7 @@ const LifeStyleMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         <DescriptionField value={formValues.description} error={errors.description} onChange={(value) => handleInputChange("description", value)} />
         <VisibilityField value={formValues.visibility} onChange={(value) => handleInputChange("visibility", value)} />
         <IsOwnWorkField value={formValues.isOwnWork} onChange={(value) => handleInputChange("isOwnWork", value)} />
-        {formValues.isOwnWork === "no" && (
+        {!formValues.isOwnWork && (
           <OwnerEmailField value={formValues.ownerEmail} error={errors.ownerEmail} onChange={(value) => handleInputChange("ownerEmail", value)} />
         )}
         <WebUrlField value={formValues.webUrl} error={errors.webUrl} onChange={(value) => handleInputChange("webUrl", value)} />

@@ -9,8 +9,8 @@ const IsOwnWorkField = ({ value, onChange }) => {
       </Typography>
       <FormControl fullWidth>
         <Select
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
+          value={value ? "yes" : "no"}
+          onChange={(e) => onChange(e.target.value === "yes")}
         >
           <MenuItem value="yes">Yes</MenuItem>
           <MenuItem value="no">No</MenuItem>

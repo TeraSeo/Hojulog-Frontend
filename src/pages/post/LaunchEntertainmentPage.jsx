@@ -6,12 +6,11 @@ import {
   Box,
   Button,
 } from "@mui/material";
-import { postEntertainment } from "../../service/PostService";
-import { useParams } from "react-router-dom";
+import { normalizeEmptyStringsToNull, postEntertainment } from "../../service/PostService";
+import { useNavigate, useParams } from "react-router-dom";
 import { logoPrimaryColor } from "../../constant/Color";
 import { normalizeSubCategory } from "../../service/CategoryService";
 import PostStepper from "../../components/bar/PostStepper";
-import EducationPostPreviewDialog from "../../components/dialog/EducationPostPreviewDialog";
 import EntertainmentMainInfoForm from "../../components/forms/post/EntertainmentMainInfoForm";
 import EntertainmentMediaUploadForm from "../../components/forms/post/EntertainmentMediaUploadForm";
 import EntertainmentPostPreviewDialog from "../../components/dialog/EntertainmentPostPreviewDialog";
@@ -22,10 +21,13 @@ const LaunchEntertainmentPage = () => {
   const [mainInfoData, setMainInfoData] = useState({});
   const [mediaData, setMediaData] = useState({});
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const mainInfoRef = useRef(null);
   const mediaUploadRef = useRef(null);
   const submitRef = useRef(null);
+  const navigate = useNavigate();
 
   const { subCategory } = useParams();
 
@@ -51,12 +53,13 @@ const LaunchEntertainmentPage = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const formData = new FormData();
-    const normalizedSubCategory = normalizeSubCategory(subCategory);
+    const normalizedSubCategory = normalizeSubCategory("Entertainment", subCategory);
+    const normalizedMainInfoData = normalizeEmptyStringsToNull(mainInfoData);
 
     const educationData = {
-      ...mainInfoData,
+      ...normalizedMainInfoData,
       "category": "Entertainment",
       "isPortrait": mediaData.isPortrait,
       "subCategory": normalizedSubCategory
@@ -71,7 +74,14 @@ const LaunchEntertainmentPage = () => {
     mediaData.selectedImages.forEach((file) => formData.append("images", file));
     mediaData.selectedVideos.forEach((file) => formData.append("videos", file));
 
-    postEntertainment(formData);
+    setIsLoading(true);
+    const isCreated = await postEntertainment(formData);
+        if (isCreated) {
+            navigate("/");
+        } else {
+          setError("Failed to submit your post. Please try again.");
+          setIsLoading(false);
+        }
   };
 
   const handlePreview = () => {
@@ -127,11 +137,17 @@ const LaunchEntertainmentPage = () => {
               variant="contained"
               sx={{ backgroundColor: logoPrimaryColor, color: "#FFF" }}
               size="large"
-              disabled={!isMainValid || !isMediaValid}
+              disabled={!isMainValid || !isMediaValid || isLoading}
               onClick={handleSubmit}
             >
-              Submit
+              {isLoading ? "Submitting..." : "Submit"}
             </Button>
+
+            {error && (
+              <Typography color="error" align="center" sx={{ marginBottom: 2 }}>
+                {error}
+              </Typography>
+            )}
           </Box>
         </Grid>
       </Grid>

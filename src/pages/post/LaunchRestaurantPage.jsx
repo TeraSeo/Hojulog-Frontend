@@ -7,7 +7,7 @@ import {
   Button,
 } from "@mui/material";
 import { postRestaurant } from "../../service/PostService";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { logoPrimaryColor } from "../../constant/Color";
 import { normalizeSubCategory } from "../../service/CategoryService";
 import PostStepper from "../../components/bar/PostStepper";
@@ -21,6 +21,9 @@ const LaunchRestaurantPage = () => {
   const [mainInfoData, setMainInfoData] = useState({});
   const [mediaData, setMediaData] = useState({});
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const mainInfoRef = useRef(null);
   const mediaUploadRef = useRef(null);
@@ -50,13 +53,13 @@ const LaunchRestaurantPage = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const formData = new FormData();
-    const normalizedSubCategory = normalizeSubCategory(subCategory);
+    const normalizedSubCategory = normalizeSubCategory("Restaurant", subCategory);
 
     const restuarantData = {
       ...mainInfoData,
-      "category": "Restaurnat",
+      "category": "Restaurant",
       "isPortrait": mediaData.isPortrait,
       "subCategory": normalizedSubCategory
     };
@@ -70,7 +73,14 @@ const LaunchRestaurantPage = () => {
     mediaData.selectedImages.forEach((file) => formData.append("images", file));
     mediaData.selectedVideos.forEach((file) => formData.append("videos", file));
 
-    postRestaurant(formData);
+    setIsLoading(true);
+    const isCreated = await postRestaurant(formData);
+        if (isCreated) {
+            navigate("/");
+        } else {
+          setError("Failed to submit your post. Please try again.");
+          setIsLoading(false);
+        }
   };
 
   const handlePreview = () => {
@@ -126,11 +136,17 @@ const LaunchRestaurantPage = () => {
               variant="contained"
               sx={{ backgroundColor: logoPrimaryColor, color: "#FFF" }}
               size="large"
-              disabled={!isMainValid || !isMediaValid}
+              disabled={!isMainValid || !isMediaValid || isLoading}
               onClick={handleSubmit}
             >
-              Submit
+              {isLoading ? "Submitting..." : "Submit"}
             </Button>
+
+            {error && (
+              <Typography color="error" align="center" sx={{ marginBottom: 2 }}>
+                {error}
+              </Typography>
+            )}
           </Box>
         </Grid>
       </Grid>

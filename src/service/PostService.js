@@ -4,18 +4,22 @@ function postTechnology(postData) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
-    axios.post("http://localhost:8080/api/post/create/technology", postData, {
+    return axios.post("http://localhost:8080/api/post/create/technology", postData, {
         headers: {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
-            'refreshToken': refreshToken
+            'refreshToken': refreshToken,
         }
     })
     .then(response => {
-        console.log(response.data);
+        if (response.data) {
+            return true;
+        }
+        return false;
     })
     .catch(error => {
-        console.log(error)
+        console.log(error);
+        return false;
     });    
 }
 
@@ -23,7 +27,7 @@ function postRestaurant(postData) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
-    axios.post("http://localhost:8080/api/post/create/restaurant", postData, {
+    return axios.post("http://localhost:8080/api/post/create/restaurant", postData, {
         headers: {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
@@ -31,10 +35,14 @@ function postRestaurant(postData) {
         }
     })
     .then(response => {
-        console.log(response.data);
+        if (response.data) {
+            return true;
+        }
+        return false;
     })
     .catch(error => {
-        console.log(error)
+        console.log(error);
+        return false;
     });    
 }
 
@@ -42,7 +50,7 @@ function postEducation(postData) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
-    axios.post("http://localhost:8080/api/post/create/education", postData, {
+    return axios.post("http://localhost:8080/api/post/create/education", postData, {
         headers: {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
@@ -50,18 +58,22 @@ function postEducation(postData) {
         }
     })
     .then(response => {
-        console.log(response.data);
+        if (response.data) {
+            return true;
+        }
+        return false;
     })
     .catch(error => {
-        console.log(error)
-    });    
+        console.log(error);
+        return false;
+    });  
 }
 
 function postLifestyle(postData) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
-    axios.post("http://localhost:8080/api/post/create/lifestyle", postData, {
+    return axios.post("http://localhost:8080/api/post/create/lifestyle", postData, {
         headers: {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
@@ -69,18 +81,22 @@ function postLifestyle(postData) {
         }
     })
     .then(response => {
-        console.log(response.data);
+        if (response.data) {
+            return true;
+        }
+        return false;
     })
     .catch(error => {
-        console.log(error)
-    });    
+        console.log(error);
+        return false;
+    });
 }
 
 function postEntertainment(postData) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
-    axios.post("http://localhost:8080/api/post/create/entertainment", postData, {
+    return axios.post("http://localhost:8080/api/post/create/entertainment", postData, {
         headers: {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
@@ -88,11 +104,21 @@ function postEntertainment(postData) {
         }
     })
     .then(response => {
-        console.log(response.data);
+        if (response.data) {
+            return true;
+        }
+        return false;
     })
     .catch(error => {
-        console.log(error)
+        console.log(error);
+        return false;
     });    
 }
 
-export { postTechnology, postRestaurant, postEducation, postLifestyle, postEntertainment };
+const normalizeEmptyStringsToNull = (data) => {
+  return Object.fromEntries(
+    Object.entries(data).map(([key, value]) => [key, value === "" ? null : value])
+  );
+};
+
+export { postTechnology, postRestaurant, postEducation, postLifestyle, postEntertainment, normalizeEmptyStringsToNull };

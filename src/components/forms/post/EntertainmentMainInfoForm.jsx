@@ -8,6 +8,9 @@ import IsOwnWorkField from "../../textfields/IsOwnWorkField";
 import OwnerEmailField from "../../textfields/OwnerEmailField";
 import WebUrlField from "../../textfields/WebUrlField";
 import TagsField from "../../textfields/TagsField";
+import StartEndDateField from "../../textfields/StartEndDateField";
+import LocationField from "../../textfields/LocationField";
+import LocationDialog from "../../dialog/LocationDialog";
 
 const EntertainmentMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
@@ -16,16 +19,22 @@ const EntertainmentMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     description: "",
     webUrl: "",
     visibility: "Public",
-    isOwnWork: "yes",
+    isOwnWork: true,
     ownerEmail: "",
     tags: [],
+    startDateTime: "",
+    endDateTime: "",
+    location: ""
   });
 
   const [errors, setErrors] = useState({});
+  const [mapOpen, setMapOpen] = useState(false);
+  const [selectedLatLng, setSelectedLatLng] = useState(null);
+  const locationPattern = /^https:\/\/(www\.)?google\.[a-z]+\/maps(\?.*|\/.*)?$/;
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, subTitle, description, webUrl, isOwnWork, ownerEmail } = formValues;
+    const { title, subTitle, description, webUrl, isOwnWork, ownerEmail, startDateTime, endDateTime, location } = formValues;
 
     if (!title.trim()) newErrors.title = "Title is required";
     if (!subTitle.trim()) newErrors.subTitle = "Subtitle is required";
@@ -45,6 +54,22 @@ const EntertainmentMainInfoForm = ({ onDataChange, setIsFormValid }) => {
       }
     }
 
+    if (!startDateTime) {
+      newErrors.startDateTime = "Start date is required";
+    }
+
+    if (!endDateTime) {
+      newErrors.endDateTime = "End date is required";
+    } else if (startDateTime && new Date(startDateTime) >= new Date(endDateTime)) {
+      newErrors.endDateTime = "End date must be after start date";
+    }
+
+    if (location.trim()) {
+      if (!locationPattern.test(location)) {
+        newErrors.location = "Invalid Google Maps URL format.";
+      }
+    }
+
     setErrors(newErrors);
     setIsFormValid(Object.keys(newErrors).length === 0);
   };
@@ -61,13 +86,42 @@ const EntertainmentMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     }));
   };
 
+  const handleMapClick = (event) => {
+    const lat = event.latLng.lat();
+    const lng = event.latLng.lng();
+    setSelectedLatLng({ lat, lng });
+  };
+
+  const handleConfirmLocation = () => {
+    if (selectedLatLng) {
+      const googleMapsUrl = `https://www.google.com/maps?q=${selectedLatLng.lat},${selectedLatLng.lng}`;
+      handleInputChange("location", googleMapsUrl);
+      validateLocation(googleMapsUrl);
+    }
+    setMapOpen(false);
+  };
+
+  const validateLocation = (value) => {
+    if (!locationPattern.test(value)) {
+      setErrors((prev) => ({
+        ...prev,
+        location: "Invalid Google Maps URL format.",
+      }));
+    } else {
+      setErrors((prev) => ({
+        ...prev,
+        location: "",
+      }));
+    }
+  };
+
   return (
     <Paper elevation={3} sx={{ padding: 3, borderRadius: 2 }}>
       <Typography variant="h5" gutterBottom>
         Main Information
       </Typography>
       <Typography variant="body2" color="textSecondary" gutterBottom>
-        Enter the details of your product including title, subtitle, description, link.
+        Enter the details of your product including title, subtitle, description, and dates.
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 1 }}>
@@ -76,14 +130,43 @@ const EntertainmentMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         <DescriptionField value={formValues.description} error={errors.description} onChange={(value) => handleInputChange("description", value)} />
         <VisibilityField value={formValues.visibility} onChange={(value) => handleInputChange("visibility", value)} />
         <IsOwnWorkField value={formValues.isOwnWork} onChange={(value) => handleInputChange("isOwnWork", value)} />
-        {formValues.isOwnWork === "no" && (
+        {!formValues.isOwnWork && (
           <OwnerEmailField value={formValues.ownerEmail} error={errors.ownerEmail} onChange={(value) => handleInputChange("ownerEmail", value)} />
         )}
         <WebUrlField value={formValues.webUrl} error={errors.webUrl} onChange={(value) => handleInputChange("webUrl", value)} />
-          
-        <TagsField tags={formValues.tags} onChange={(tags) => handleInputChange("tags", tags)} />
+        <StartEndDateField
+          label="Start Date"
+          value={formValues.startDateTime}
+          error={errors.startDateTime}
+          onChange={(value) => handleInputChange("startDateTime", value)}
+        />
+        <StartEndDateField
+          label="End Date"
+          value={formValues.endDateTime}
+          error={errors.endDateTime}
+          onChange={(value) => handleInputChange("endDateTime", value)}
+        />
 
+        <LocationField
+          location={formValues.location}
+          errors={errors}
+          onLocationChange={(value) => {
+            handleInputChange("location", value);
+            validateLocation(value);
+          }}
+          onMapOpen={() => setMapOpen(true)}
+        />
+
+        <TagsField tags={formValues.tags} onChange={(tags) => handleInputChange("tags", tags)} />
       </Grid>
+
+      <LocationDialog
+        open={mapOpen}
+        onClose={() => setMapOpen(false)}
+        onConfirm={handleConfirmLocation}
+        onMapClick={handleMapClick}
+        selectedLatLng={selectedLatLng}
+      />
     </Paper>
   );
 };

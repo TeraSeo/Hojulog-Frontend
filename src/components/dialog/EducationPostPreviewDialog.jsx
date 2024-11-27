@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dialog, DialogTitle, DialogContent, IconButton, Box, Button } from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, IconButton, Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import PostTitleText from "../../components/texts/PostTitleText";
 import PostMedia from "../../components/media/PostMedia";
@@ -7,7 +7,6 @@ import PostPreviewActions from "../buttons/PostPreviewActions";
 import PostPreviewTab from "../buttons/PostPreviewTab";
 import LikeCountButton from "../buttons/LikeCountButton";
 import DescriptionText from "../texts/DescriptionText";
-import LocationButton from "../buttons/LocationButton";
 import EntertainmentPostPreviewDialog from "./EntertainmentPostPreviewDialog";
 
 const EducationPostPreviewDialog = ({ open, onClose, mainInfoData, mediaData = {} }) => {
@@ -39,7 +38,6 @@ const EducationPostPreviewDialog = ({ open, onClose, mainInfoData, mediaData = {
             <PostTitleText mainInfoData={mainInfoData} mediaData={mediaData} />
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <LikeCountButton count={1223} />
-              <LocationButton location={mainInfoData.location} />
             </Box>
           </Box>
 

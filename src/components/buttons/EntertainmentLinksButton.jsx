@@ -3,6 +3,8 @@ import { Box, Button, Menu, MenuItem } from "@mui/material";
 import webIcon from "../../assets/images/web.png";
 import { logoPrimaryColor } from "../../constant/Color";
 import VisitWebsiteButton from "./VisitWebsiteButton";
+import LocationButton from "./LocationButton";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const EntertainmentLinksButton = ({ mainInfoData }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -45,6 +47,7 @@ const EntertainmentLinksButton = ({ mainInfoData }) => {
       {isWideScreen ? (
         <Box sx={{ display: 'flex', gap: 2 }}>
           <VisitWebsiteButton webUrl={mainInfoData.webUrl} />
+          <LocationButton location={mainInfoData.location} />
         </Box>
       ) : (
         <>
@@ -69,6 +72,13 @@ const EntertainmentLinksButton = ({ mainInfoData }) => {
                 </MenuItem>
                 )
             }
+
+            {mainInfoData.location && (
+              <MenuItem onClick={() => handleMenuItemClick(mainInfoData.location)}>
+                <LocationOnIcon sx={{ marginRight: 1, color: logoPrimaryColor }} />
+                Location
+              </MenuItem>
+            )}
           </Menu>
         </>
       )}
