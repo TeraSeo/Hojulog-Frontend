@@ -3,53 +3,52 @@ import { Typography, Grid, Paper } from "@mui/material";
 import { useDropzone } from "react-dropzone";
 import LogoUploader from "../../media/LogoUploader";
 import ImageUploader from "../../media/ImageUploader";
-import VideoUploader from "../../media/VideoUploader";
 import AspectRatioSelector from "../../media/AspectRatioSelector";
+import YouTubeUploader from "../../media/YouTubeUploader";
 
 const EducationMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
   const [logoImage, setLogoImage] = useState(null);
   const [selectedImages, setSelectedImages] = useState([]);
-  const [selectedVideos, setSelectedVideos] = useState([]);
+  const [youtubeUrl, setYoutubeUrl] = useState("");
   const [errors, setErrors] = useState({});
   const [mediaAspectRatio, setMediaAspectRatio] = useState("16x9");
-
-  const MAX_VIDEO_SIZE_MB = 30;
-  const MAX_VIDEO_SIZE_BYTES = MAX_VIDEO_SIZE_MB * 1024 * 1024;
 
   const validateMedia = () => {
     const newErrors = {};
 
-    // Logo is now optional, so we only validate if a logo is provided
+    // Validate logo
     if (logoImage && !logoImage.type.startsWith("image/")) {
       newErrors.logoImage = "Logo must be a valid image file.";
     }
 
+    // Validate images
     if (selectedImages.length > 5) {
       newErrors.selectedImages = "You can upload up to 5 images only.";
     } else if (selectedImages.some((file) => !file.type.startsWith("image/"))) {
       newErrors.selectedImages = "All files must be valid image files.";
     }
 
-    if (selectedVideos.length > 1) {
-      newErrors.selectedVideos = "You can upload only 1 video.";
-    } else if (
-      selectedVideos.length === 1 &&
-      !selectedVideos[0].type.startsWith("video/")
-    ) {
-      newErrors.selectedVideos = "Video must be a valid video file.";
-    } else if (
-      selectedVideos.length === 1 &&
-      selectedVideos[0].size > MAX_VIDEO_SIZE_BYTES
-    ) {
-      newErrors.selectedVideos = `Video size must be less than ${MAX_VIDEO_SIZE_MB}MB.`;
+    // Validate YouTube URL
+    if (youtubeUrl && !isValidYoutubeUrl(youtubeUrl)) {
+      newErrors.youtubeUrl = "Please enter a valid YouTube URL (standard video or Shorts).";
     }
 
-    if (selectedImages.length === 0 && selectedVideos.length === 0) {
-      newErrors.media = "At least one image or video is required.";
+    // Ensure at least one media item is provided
+    if (selectedImages.length === 0 && !youtubeUrl) {
+      newErrors.media = "At least one image or a YouTube URL is required.";
     }
 
     setErrors(newErrors);
     setIsMediaValid(Object.keys(newErrors).length === 0);
+  };
+
+  const isValidYoutubeUrl = (url) => {
+    const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=[\w-]{11}|embed\/[\w-]{11}|shorts\/[\w-]{11}|v\/[\w-]{11})|youtu\.be\/[\w-]{11})$/;
+    return youtubeRegex.test(url);
+  };
+
+  const handleYoutubeUrlChange = (url) => {
+    setYoutubeUrl(url);
   };
 
   useEffect(() => {
@@ -58,29 +57,24 @@ const EducationMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
     onMediaChange({
       logoImage,
       selectedImages,
-      selectedVideos,
+      youtubeUrl,
       isPortrait,
     });
 
     validateMedia();
-  }, [logoImage, selectedImages, selectedVideos, mediaAspectRatio]);
-
-  const handleAspectRatioChange = (event, newAspectRatio) => {
-    if (newAspectRatio !== null) {
-      setMediaAspectRatio(newAspectRatio);
-    }
-  };
+  }, [logoImage, selectedImages, youtubeUrl, mediaAspectRatio]);
 
   const logoDropzone = useDropzone({
-    onDrop: (acceptedFiles, rejectedFiles) => {
-      if (rejectedFiles.length > 0 || !acceptedFiles[0]?.type.startsWith("image/")) {
+    onDrop: (acceptedFiles) => {
+      const file = acceptedFiles[0];
+      if (!file?.type.startsWith("image/")) {
         setErrors((prev) => ({
           ...prev,
           logoImage: "Logo must be a valid image file.",
         }));
         return;
       }
-      const file = acceptedFiles[0];
+
       const img = new Image();
       img.onload = () => {
         if (img.width !== img.height) {
@@ -100,42 +94,18 @@ const EducationMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
   });
 
   const imagesDropzone = useDropzone({
-    onDrop: (acceptedFiles, rejectedFiles) => {
-      if (rejectedFiles.length > 0) {
+    onDrop: (acceptedFiles) => {
+      const validImages = acceptedFiles.filter((file) => file.type.startsWith("image/"));
+      if (validImages.length + selectedImages.length > 5) {
         setErrors((prev) => ({
           ...prev,
-          invalidFile: "Some files were rejected.",
+          selectedImages: "You can upload up to 5 images only.",
         }));
+      } else {
+        setSelectedImages((prev) => [...prev, ...validImages]);
       }
-
-      const validImages = acceptedFiles.filter((file) => file.type.startsWith("image/"));
-      setSelectedImages((prev) => [...prev, ...validImages]);
     },
     accept: "image/*",
-  });
-
-  const videoDropzone = useDropzone({
-    onDrop: (acceptedFiles, rejectedFiles) => {
-      if (rejectedFiles.length > 0 || !acceptedFiles[0]?.type.startsWith("video/")) {
-        setErrors((prev) => ({
-          ...prev,
-          selectedVideos: "Video must be a valid video file.",
-        }));
-        return;
-      }
-      const videoFile = acceptedFiles[0];
-      if (videoFile.size > MAX_VIDEO_SIZE_BYTES) {
-        setErrors((prev) => ({
-          ...prev,
-          selectedVideos: `Video size must be less than ${MAX_VIDEO_SIZE_MB}MB.`,
-        }));
-        return;
-      }
-      setErrors((prev) => ({ ...prev, selectedVideos: null }));
-      setSelectedVideos([videoFile]);
-    },
-    accept: "video/*",
-    maxFiles: 1,
   });
 
   const removeImage = (index) => {
@@ -143,7 +113,6 @@ const EducationMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
   };
 
   const removeLogo = () => setLogoImage(null);
-  const removeVideo = () => setSelectedVideos([]);
 
   return (
     <Paper elevation={3} sx={{ padding: 4, borderRadius: 3 }}>
@@ -151,7 +120,7 @@ const EducationMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
         Media Upload
       </Typography>
       <Typography variant="body2" color="textSecondary" sx={{ marginBottom: 3 }}>
-        Upload your logo, images, and videos.
+        Upload your logo, images, and YouTube video URL (standard video or Shorts).
       </Typography>
 
       {errors.invalidFile && (
@@ -171,7 +140,9 @@ const EducationMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
 
         <AspectRatioSelector
           mediaAspectRatio={mediaAspectRatio}
-          handleAspectRatioChange={handleAspectRatioChange}
+          handleAspectRatioChange={(event, newAspectRatio) => {
+            if (newAspectRatio) setMediaAspectRatio(newAspectRatio);
+          }}
         />
 
         <ImageUploader
@@ -182,14 +153,20 @@ const EducationMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
           mediaAspectRatio={mediaAspectRatio}
         />
 
-        <VideoUploader
-          videoDropzone={videoDropzone}
-          selectedVideos={selectedVideos}
-          removeVideo={removeVideo}
-          errors={errors}
-          mediaAspectRatio={mediaAspectRatio}
-        />
+        <Grid item xs={12}>
+          <YouTubeUploader
+            youtubeUrl={youtubeUrl}
+            handleYoutubeUrlChange={handleYoutubeUrlChange}
+            error={errors.youtubeUrl}
+          />
+        </Grid>
       </Grid>
+
+      {errors.media && (
+        <Typography color="error" variant="body2" sx={{ mt: 1 }}>
+          {errors.media}
+        </Typography>
+      )}
     </Paper>
   );
 };

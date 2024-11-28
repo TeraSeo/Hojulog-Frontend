@@ -57,12 +57,14 @@ const LaunchTechnologyPage = () => {
     const formData = new FormData();
     const normalizedSubCategory = normalizeSubCategory("Technology", subCategory);
     const normalizedMainInfoData = normalizeEmptyStringsToNull(mainInfoData);
+    const normalizedMediaData = normalizeEmptyStringsToNull(mediaData);
 
     const techPostData = {
       ...normalizedMainInfoData,
       "category": "Technology",
       "isPortrait": mediaData.isPortrait,
-      "subCategory": normalizedSubCategory
+      "subCategory": normalizedSubCategory,
+      "youtubeUrl": normalizedMediaData.youtubeUrl
     };
 
     formData.append(
@@ -72,7 +74,6 @@ const LaunchTechnologyPage = () => {
 
     if (mediaData.logoImage) formData.append("logoImage", mediaData.logoImage);
     mediaData.selectedImages.forEach((file) => formData.append("images", file));
-    mediaData.selectedVideos.forEach((file) => formData.append("videos", file));
 
     setIsLoading(true);
     const isCreated = await postTechnology(formData);
@@ -152,7 +153,6 @@ const LaunchTechnologyPage = () => {
         </Grid>
       </Grid>
 
-      {/* Technology Post Preview Dialog */}
       <TechnologyPostPreviewDialog
         open={isPreviewOpen}
         onClose={handleClosePreview}

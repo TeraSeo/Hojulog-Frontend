@@ -6,7 +6,7 @@ import {
   Box,
   Button,
 } from "@mui/material";
-import { postRestaurant } from "../../service/PostService";
+import { normalizeEmptyStringsToNull, postRestaurant } from "../../service/PostService";
 import { useNavigate, useParams } from "react-router-dom";
 import { logoPrimaryColor } from "../../constant/Color";
 import { normalizeSubCategory } from "../../service/CategoryService";
@@ -56,12 +56,14 @@ const LaunchRestaurantPage = () => {
   const handleSubmit = async () => {
     const formData = new FormData();
     const normalizedSubCategory = normalizeSubCategory("Restaurant", subCategory);
-
+    const normalizedMediaData = normalizeEmptyStringsToNull(mediaData);
+ 
     const restuarantData = {
       ...mainInfoData,
       "category": "Restaurant",
       "isPortrait": mediaData.isPortrait,
-      "subCategory": normalizedSubCategory
+      "subCategory": normalizedSubCategory,
+      "youtubeUrl": normalizedMediaData.youtubeUrl
     };
 
     formData.append(
@@ -71,7 +73,6 @@ const LaunchRestaurantPage = () => {
 
     if (mediaData.logoImage) formData.append("logoImage", mediaData.logoImage);
     mediaData.selectedImages.forEach((file) => formData.append("images", file));
-    mediaData.selectedVideos.forEach((file) => formData.append("videos", file));
 
     setIsLoading(true);
     const isCreated = await postRestaurant(formData);

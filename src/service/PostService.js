@@ -1,5 +1,26 @@
 import axios from 'axios';
 
+function getWholePosts() {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.get("http://localhost:8080/api/post/get/whole", {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            return [];
+        }
+    )
+}
+
 function postTechnology(postData) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
@@ -121,4 +142,4 @@ const normalizeEmptyStringsToNull = (data) => {
   );
 };
 
-export { postTechnology, postRestaurant, postEducation, postLifestyle, postEntertainment, normalizeEmptyStringsToNull };
+export { getWholePosts, postTechnology, postRestaurant, postEducation, postLifestyle, postEntertainment, normalizeEmptyStringsToNull };
