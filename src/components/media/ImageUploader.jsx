@@ -8,7 +8,7 @@ const ImageUploader = ({ imagesDropzone, selectedImages, removeImage, errors, me
     <Card variant="outlined" sx={{ padding: 2, borderColor: "#b0bec5", boxShadow: 3 }}>
       <CardContent>
         <Typography variant="subtitle1" gutterBottom>
-          Product Images (Max: 5)
+          Product Images (Max: 8)
         </Typography>
         <Box
           {...imagesDropzone.getRootProps()}

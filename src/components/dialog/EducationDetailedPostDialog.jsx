@@ -1,13 +1,13 @@
 import React from "react";
-import { Dialog, DialogTitle, DialogContent, IconButton, Typography, Box, Divider } from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, IconButton, Typography, Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import PostTitleText from "../texts/PostTitleText";
 import PostMedia from "../media/PostMedia";
-import PostDetailedPreviewActions from "../buttons/PostDetailedPreviewActions";
 import PostPreviewTab from "../buttons/PostPreviewTab";
 import DescriptionText from "../texts/DescriptionText";
 import PostFooterText from "../texts/PostFooterText";
 import EducationLinksButton from "../buttons/EducationLinksButton";
+import PreviewPostHeader from "../header/PreviewPostHeader";
+import PostActionsInDetailedPreview from "../buttons/PostActionsInDetailedPreview";
 
 const EducationDetailedPostDialog = ({ open, onClose, mainInfoData, mediaData }) => {
   return (
@@ -24,7 +24,7 @@ const EducationDetailedPostDialog = ({ open, onClose, mainInfoData, mediaData })
       </DialogTitle>
       <DialogContent dividers>
         <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 2, marginBottom: 2 }}>
-          <PostTitleText mainInfoData={mainInfoData} mediaData={mediaData} />
+          <PreviewPostHeader mainInfoData={mainInfoData} mediaData={mediaData} />
           <Box sx={{ display: 'flex' }}>
             <EducationLinksButton mainInfoData={mainInfoData} />
           </Box>
@@ -40,7 +40,7 @@ const EducationDetailedPostDialog = ({ open, onClose, mainInfoData, mediaData })
 
         <PostMedia mediaData={mediaData} />
 
-        <PostDetailedPreviewActions mainInfoData={mainInfoData} />
+        <PostActionsInDetailedPreview mainInfoData={mainInfoData} />
 
         <PostFooterText likesCnt={938} commentsCnt={141} dayRank={1} weekRank={3} />
       </DialogContent>

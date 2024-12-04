@@ -3,9 +3,11 @@ import { Box, TextField, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import iconImg from "../../assets/images/icon_img.png";
 import SearchDialog from "../dialog/SearchDialog";
+import { useNavigate } from "react-router-dom";
 
 function AppTitle() {
     const [openDialog, setOpenDialog] = useState(false);
+    const navigate = useNavigate();
 
     const handleOpenDialog = () => {
         setOpenDialog(true);
@@ -18,6 +20,7 @@ function AppTitle() {
     return (
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Box
+                onClick={() => navigate("/")}
                 sx={{
                     height: '36px',
                     width: '18px',

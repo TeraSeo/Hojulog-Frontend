@@ -1,13 +1,13 @@
 import React from "react";
 import { Dialog, DialogTitle, DialogContent, IconButton, Typography, Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import PostMedia from "../media/PostMedia";
-import PostDetailedPreviewActions from "../buttons/PostDetailedPreviewActions";
+import PreviewPostMedia from "../media/PreviewPostMedia";
 import PostPreviewTab from "../buttons/PostPreviewTab";
 import DescriptionText from "../texts/DescriptionText";
 import PostFooterText from "../texts/PostFooterText";
 import EntertainmentLinksButton from "../buttons/EntertainmentLinksButton";
-import PostTitleTextWithTime from "../texts/PostTitleTextWithTime";
+import PostActionsInDetailedPreview from "../buttons/PostActionsInDetailedPreview";
+import PreviewPostHeaderWithTime from "../header/PreviewPostHeaderWithTime";
 
 const EntertainmentDetailedPostDialog = ({ open, onClose, mainInfoData, mediaData }) => {
   return (
@@ -24,7 +24,7 @@ const EntertainmentDetailedPostDialog = ({ open, onClose, mainInfoData, mediaDat
       </DialogTitle>
       <DialogContent dividers>
         <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 2, marginBottom: 2 }}>
-          <PostTitleTextWithTime mainInfoData={mainInfoData} mediaData={mediaData} />
+          <PreviewPostHeaderWithTime mainInfoData={mainInfoData} mediaData={mediaData} />
           <Box sx={{ display: 'flex' }}>
             <EntertainmentLinksButton mainInfoData={mainInfoData} />
           </Box>
@@ -38,9 +38,9 @@ const EntertainmentDetailedPostDialog = ({ open, onClose, mainInfoData, mediaDat
 
         <DescriptionText description={mainInfoData.description} />
 
-        <PostMedia mediaData={mediaData} />
+        <PreviewPostMedia mediaData={mediaData} />
 
-        <PostDetailedPreviewActions mainInfoData={mainInfoData} />
+        <PostActionsInDetailedPreview mainInfoData={mainInfoData} />
 
         <PostFooterText likesCnt={938} commentsCnt={141} dayRank={1} weekRank={3} />
       </DialogContent>

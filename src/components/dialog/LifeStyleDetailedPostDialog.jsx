@@ -1,13 +1,13 @@
 import React from "react";
-import { Dialog, DialogTitle, DialogContent, IconButton, Typography, Box, Divider } from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, IconButton, Typography, Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import PostTitleText from "../texts/PostTitleText";
-import PostMedia from "../media/PostMedia";
-import PostDetailedPreviewActions from "../buttons/PostDetailedPreviewActions";
+import PreviewPostMedia from "../media/PreviewPostMedia";
 import PostPreviewTab from "../buttons/PostPreviewTab";
 import DescriptionText from "../texts/DescriptionText";
 import PostFooterText from "../texts/PostFooterText";
 import LifeStyleLinksButton from "../buttons/LifeStyleLinksButton";
+import PostActionsInDetailedPreview from "../buttons/PostActionsInDetailedPreview";
+import PreviewPostHeader from "../header/PreviewPostHeader";
 
 const LifeStyleDetailedPostDialog = ({ open, onClose, mainInfoData, mediaData }) => {
   return (
@@ -24,7 +24,7 @@ const LifeStyleDetailedPostDialog = ({ open, onClose, mainInfoData, mediaData })
       </DialogTitle>
       <DialogContent dividers>
         <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 2, marginBottom: 2 }}>
-          <PostTitleText mainInfoData={mainInfoData} mediaData={mediaData} />
+          <PreviewPostHeader mainInfoData={mainInfoData} mediaData={mediaData} />
           <Box sx={{ display: 'flex' }}>
             <LifeStyleLinksButton mainInfoData={mainInfoData} />
           </Box>
@@ -38,9 +38,9 @@ const LifeStyleDetailedPostDialog = ({ open, onClose, mainInfoData, mediaData })
 
         <DescriptionText description={mainInfoData.description} />
 
-        <PostMedia mediaData={mediaData} />
+        <PreviewPostMedia mediaData={mediaData} />
 
-        <PostDetailedPreviewActions mainInfoData={mainInfoData} />
+        <PostActionsInDetailedPreview mainInfoData={mainInfoData} />
 
         <PostFooterText likesCnt={938} commentsCnt={141} dayRank={1} weekRank={3} />
       </DialogContent>

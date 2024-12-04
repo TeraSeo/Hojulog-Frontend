@@ -17,6 +17,7 @@ import LaunchTechnologyPage from './pages/post/LaunchTechnologyPage';
 import LaunchEducationPage from './pages/post/LaunchEducationPage';
 import LaunchLifeStylePage from './pages/post/LaunchLifeStylePage';
 import LaunchEntertainmentPage from './pages/post/LaunchEntertainmentPage';
+import { DynamicDetailedPage } from './constant/Components';
 
 const categories = {
   Technology: ["Mobile Application", "Web Application", "AI Application", "Blockchain Application", "IoT Solutions", "Cloud Computing Services", "Cybersecurity Tools", "AR/VR Applications", "Data Analytics Platforms", "E-Commerce Solutions", "DevOps Tools", "Machine Learning Models", "Game Development", "SaaS Platforms", "Robotics Solutions", "3D Printing Solutions", "Big Data Applications", "Networking Tools", "Quantum Computing Applications", "Digital Twins", "Etc"],
@@ -95,6 +96,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="home" element={<HomePage />} />
             <Route path="launch" element={<SelectCategoryPage />} />
+            <Route path=":category/:formattedTitle/details" element={<DynamicDetailedPage />} />
 
             {generateDynamicRoutes()}
           </Route>

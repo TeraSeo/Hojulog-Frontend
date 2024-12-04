@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Dialog, DialogTitle, DialogContent, IconButton, Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import PostTitleText from "../../components/texts/PostTitleText";
-import PostMedia from "../../components/media/PostMedia";
-import PostPreviewActions from "../buttons/PostPreviewActions";
+import PreviewPostMedia from "../media/PreviewPostMedia";
 import PostPreviewTab from "../buttons/PostPreviewTab";
-import LikeCountButton from "../buttons/LikeCountButton";
 import DescriptionText from "../texts/DescriptionText";
-import EntertainmentPostPreviewDialog from "./EntertainmentPostPreviewDialog";
+import PostActionsInPreview from "../buttons/PostActionsInPreview";
+import PreviewPostHeader from "../header/PreviewPostHeader";
+import EducationDetailedPostDialog from "./EducationDetailedPostDialog";
 
 const EducationPostPreviewDialog = ({ open, onClose, mainInfoData, mediaData = {} }) => {
   const [detailedDialogOpen, setDetailedDialogOpen] = useState(false);
@@ -35,19 +34,16 @@ const EducationPostPreviewDialog = ({ open, onClose, mainInfoData, mediaData = {
         </DialogTitle>
         <DialogContent dividers>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 2 }}>
-            <PostTitleText mainInfoData={mainInfoData} mediaData={mediaData} />
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <LikeCountButton count={1223} />
-            </Box>
+            <PreviewPostHeader mainInfoData={mainInfoData} mediaData={mediaData} />
           </Box>
 
           <PostPreviewTab />
           <DescriptionText description={mainInfoData.description} />
-          <PostMedia mediaData={mediaData} />
-          <PostPreviewActions mainInfoData={mainInfoData} onViewDetailsClick={handleViewDetailsClick} />
+          <PreviewPostMedia mediaData={mediaData} />
+          <PostActionsInPreview mainInfoData={mainInfoData} onViewDetailsClick={handleViewDetailsClick} />
         </DialogContent>
       </Dialog>
-      <EntertainmentPostPreviewDialog
+      <EducationDetailedPostDialog
         open={detailedDialogOpen}
         onClose={handleDetailedDialogClose}
         mainInfoData={mainInfoData}

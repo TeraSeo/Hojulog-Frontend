@@ -96,10 +96,10 @@ const EntertainmentMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
   const imagesDropzone = useDropzone({
     onDrop: (acceptedFiles) => {
       const validImages = acceptedFiles.filter((file) => file.type.startsWith("image/"));
-      if (validImages.length + selectedImages.length > 5) {
+      if (validImages.length + selectedImages.length > 8) {
         setErrors((prev) => ({
           ...prev,
-          selectedImages: "You can upload up to 5 images only.",
+          selectedImages: "You can upload up to 8 images only.",
         }));
       } else {
         setSelectedImages((prev) => [...prev, ...validImages]);

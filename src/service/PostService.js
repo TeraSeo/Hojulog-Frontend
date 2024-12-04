@@ -1,14 +1,15 @@
 import axios from 'axios';
 
-function getWholePosts() {
-    const accessToken = localStorage.getItem('accessToken');
-    const refreshToken = localStorage.getItem('refreshToken');
-
-    return axios.get("http://localhost:8080/api/post/get/whole", {
+function getPostsByPageNCondition(page, condition) {
+    return axios.get("http://localhost:8080/api/post/get/whole-by-page-n-condition", {
         headers: {
-            "Content-Type": "multipart/form-data",
-            'accessToken': accessToken,
-            'refreshToken': refreshToken,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "condition": condition
         }
     })
     .then((response) => {
@@ -16,6 +17,28 @@ function getWholePosts() {
         }
     )
     .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getSpecificPost(postId) {
+    return axios.get("http://localhost:8080/api/post/get/specific", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "postId": postId,
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
             return [];
         }
     )
@@ -142,4 +165,4 @@ const normalizeEmptyStringsToNull = (data) => {
   );
 };
 
-export { getWholePosts, postTechnology, postRestaurant, postEducation, postLifestyle, postEntertainment, normalizeEmptyStringsToNull };
+export { getPostsByPageNCondition, getSpecificPost, postTechnology, postRestaurant, postEducation, postLifestyle, postEntertainment, normalizeEmptyStringsToNull };

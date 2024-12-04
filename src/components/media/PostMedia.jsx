@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { Box, Card, CardMedia, Typography } from "@mui/material";
 
-const PostMedia = ({ mediaData }) => {
-  const mediaAspectRatio = mediaData.isPortrait
+const PostMedia = ({ postData }) => {
+  const mediaAspectRatio = postData.isPortrait
     ? { width: 180, height: 320 }
     : { width: 320, height: 180 };
 
-  const selectedImages = mediaData.selectedImages || [];
-  const youtubeUrl = mediaData.youtubeUrl;
+  const images = postData.imageUrls || [];
+  const youtubeUrl = postData.youtubeUrl;
 
   const [youtubeError, setYoutubeError] = useState(false);
 
   const getYoutubeEmbedUrl = (url) => {
-    // Update regex to match both standard YouTube video URLs and Shorts
     const videoIdMatch = url?.match(
       /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed|shorts)?)\/|\S*?[?&]v=)|youtu\.be\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/
     );
@@ -30,21 +29,25 @@ const PostMedia = ({ mediaData }) => {
         position: "relative",
       }}
     >
-      {/* Display YouTube video or Shorts if embed URL is valid */}
       {embedUrl && !youtubeError && (
         <Card
           sx={{
             minWidth: mediaAspectRatio.width,
             height: mediaAspectRatio.height,
-            borderRadius: 2,
+            borderRadius: "12px",
             overflow: "hidden",
-            aspectRatio: mediaData.isPortrait ? "9 / 16" : "16 / 9",
+            aspectRatio: postData.isPortrait ? "9 / 16" : "16 / 9",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
           }}
         >
           <CardMedia
             component="iframe"
             src={embedUrl}
-            sx={{ width: "100%", height: "100%", border: 0 }}
+            sx={{
+              width: "100%",
+              height: "100%",
+              border: 0,
+            }}
             onError={() => setYoutubeError(true)}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -53,37 +56,40 @@ const PostMedia = ({ mediaData }) => {
         </Card>
       )}
 
-      {/* Fallback message for YouTube embedding errors */}
       {youtubeError && (
-        <Typography variant="body2" color="error">
+        <Typography variant="body2" color="error" sx={{ textAlign: "center" }}>
           Unable to load YouTube video. Please check your internet connection or URL.
         </Typography>
       )}
 
-      {/* Display selected images */}
-      {selectedImages.map((file, index) => (
+      {images.map((url, index) => (
         <Card
           key={`media-${index}`}
           sx={{
             minWidth: mediaAspectRatio.width,
             height: mediaAspectRatio.height,
-            borderRadius: 2,
+            borderRadius: "12px",
             overflow: "hidden",
-            aspectRatio: mediaData.isPortrait ? "9 / 16" : "16 / 9",
+            aspectRatio: postData.isPortrait ? "9 / 16" : "16 / 9",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
           }}
         >
           <CardMedia
             component="img"
-            src={URL.createObjectURL(file)}
-            sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+            src={url}
+            sx={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              imageRendering: "auto",
+            }}
             alt={`Media ${index + 1}`}
           />
         </Card>
       ))}
 
-      {/* If no media is present */}
-      {!embedUrl && selectedImages.length === 0 && (
-        <Typography variant="body2" color="textSecondary">
+      {!embedUrl && images.length === 0 && (
+        <Typography variant="body2" color="textSecondary" sx={{ textAlign: "center" }}>
           No media to display.
         </Typography>
       )}

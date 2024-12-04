@@ -15,7 +15,7 @@ function HeaderNavigationMenuItems() {
                     fontWeight: "400",
                     fontSize: "16px",
                     "&:hover": {
-                        color: "#555", // Slightly darker shade on hover
+                        color: "#555",
                     },
                 }}
             >
@@ -29,7 +29,7 @@ function HeaderNavigationMenuItems() {
                     fontWeight: "400",
                     fontSize: "16px",
                     "&:hover": {
-                        color: "#555", // Slightly darker shade on hover
+                        color: "#555",
                     },
                 }}
             >

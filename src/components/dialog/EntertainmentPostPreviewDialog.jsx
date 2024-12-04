@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { Dialog, DialogTitle, DialogContent, IconButton, Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import PostMedia from "../../components/media/PostMedia";
-import PostPreviewActions from "../buttons/PostPreviewActions";
+import PreviewPostMedia from "../media/PreviewPostMedia";
 import PostPreviewTab from "../buttons/PostPreviewTab";
-import LikeCountButton from "../buttons/LikeCountButton";
 import DescriptionText from "../texts/DescriptionText";
 import LocationButton from "../buttons/LocationButton";
 import EntertainmentDetailedPostDialog from "./EntertainmentDetailedPostDialog";
-import PostTitleTextWithTime from "../texts/PostTitleTextWithTime";
+import PostActionsInPreview from "../buttons/PostActionsInPreview";
+import PreviewPostHeaderWithTime from "../header/PreviewPostHeaderWithTime";
 
 const EntertainmentPostPreviewDialog = ({ open, onClose, mainInfoData, mediaData = {} }) => {
   const [detailedDialogOpen, setDetailedDialogOpen] = useState(false);
@@ -36,17 +35,16 @@ const EntertainmentPostPreviewDialog = ({ open, onClose, mainInfoData, mediaData
         </DialogTitle>
         <DialogContent dividers>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 2 }}>
-            <PostTitleTextWithTime mainInfoData={mainInfoData} mediaData={mediaData} />
+            <PreviewPostHeaderWithTime mainInfoData={mainInfoData} mediaData={mediaData} />
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <LikeCountButton count={1223} />
               <LocationButton location={mainInfoData.location} />
             </Box>
           </Box>
 
           <PostPreviewTab />
           <DescriptionText description={mainInfoData.description} />
-          <PostMedia mediaData={mediaData} />
-          <PostPreviewActions mainInfoData={mainInfoData} onViewDetailsClick={handleViewDetailsClick} />
+          <PreviewPostMedia mediaData={mediaData} />
+          <PostActionsInPreview mainInfoData={mainInfoData} onViewDetailsClick={handleViewDetailsClick} />
         </DialogContent>
       </Dialog>
       <EntertainmentDetailedPostDialog

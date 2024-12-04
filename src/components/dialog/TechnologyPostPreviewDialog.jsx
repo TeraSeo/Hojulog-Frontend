@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Dialog, DialogTitle, DialogContent, IconButton, Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import PostTitleText from "../../components/texts/PostTitleText";
-import PostMedia from "../../components/media/PostMedia";
-import PostPreviewActions from "../buttons/PostPreviewActions";
+import PreviewPostMedia from "../media/PreviewPostMedia";
 import TechnologyDetailedPostDialog from "./TechnologyDetailedPostDialog";
 import PostPreviewTab from "../buttons/PostPreviewTab";
-import LikeCountButton from "../buttons/LikeCountButton";
 import DescriptionText from "../texts/DescriptionText";
+import PostActionsInPreview from "../buttons/PostActionsInPreview";
+import PreviewPostHeader from "../header/PreviewPostHeader";
 
 const TechnologyPostPreviewDialog = ({ open, onClose, mainInfoData, mediaData = {} }) => {
   const [detailedDialogOpen, setDetailedDialogOpen] = useState(false);
@@ -35,14 +34,13 @@ const TechnologyPostPreviewDialog = ({ open, onClose, mainInfoData, mediaData = 
         </DialogTitle>
         <DialogContent dividers>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 2 }}>
-            <PostTitleText mainInfoData={mainInfoData} mediaData={mediaData} />
-            <LikeCountButton count={1223} />
+            <PreviewPostHeader mainInfoData={mainInfoData} mediaData={mediaData} />
           </Box>
 
           <PostPreviewTab />
           <DescriptionText description={mainInfoData.description} />
-          <PostMedia mediaData={mediaData} />
-          <PostPreviewActions mainInfoData={mainInfoData} onViewDetailsClick={handleViewDetailsClick} />
+          <PreviewPostMedia mediaData={mediaData} />
+          <PostActionsInPreview mainInfoData={mainInfoData} onViewDetailsClick={handleViewDetailsClick} />
         </DialogContent>
       </Dialog>
       <TechnologyDetailedPostDialog

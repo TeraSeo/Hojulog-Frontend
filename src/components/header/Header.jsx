@@ -24,7 +24,6 @@ function Header() {
             const isValid = await validateToken();
             setIsAuthenticated(isValid);
 
-            // Redirect to login if unauthenticated and route not allowed
             const allowedRoutes = ["/", "/about", "/contact"];
             if (!isValid && !allowedRoutes.includes(location.pathname)) {
                 navigate("/login");
@@ -47,6 +46,7 @@ function Header() {
                 padding: "10px 20px",
                 backgroundColor: "#ffffff",
                 boxShadow: "0px 2px 2px rgba(0, 0, 0, 0.1)",
+                px: "40px"
             }}
         >
             <Grid container alignItems="center" justifyContent="space-between">
@@ -54,7 +54,6 @@ function Header() {
                     <AppTitle />
                 </Grid>
 
-                {/* Show Navigation and Menu Items only on md and up */}
                 <Grid item md={4} sx={{ display: { xs: "none", md: "flex" } }}>
                     <HeaderNavigationMenuItems />
                 </Grid>
@@ -66,7 +65,6 @@ function Header() {
                     />
                 </Grid>
 
-                {/* Menu icon for small screens */}
                 <Grid item xs={4} sx={{ display: { xs: "flex", md: "none" }, justifyContent: "flex-end" }}>
                     <IconButton onClick={toggleDrawer(true)}>
                         <MenuIcon />
@@ -74,7 +72,6 @@ function Header() {
                 </Grid>
             </Grid>
 
-            {/* Drawer for small screens */}
             <Drawer
                 anchor="left"
                 open={drawerOpen}

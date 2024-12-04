@@ -126,4 +126,25 @@ function validateToken() {
     });
 }
 
-export { login, register, sendOtp, checkIsOtpCorrect, validateToken };
+function getSpecificSummarisedUser(userId) {
+    return axios.get("http://localhost:8080/api/user/get/summarised/specific", {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        },
+        params: {
+            "userId": userId,
+        }
+    })
+    .then((response) => {
+            const data = typeof response.data === "string" ? JSON.parse(response.data) : response.data;
+            return data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+export { login, register, sendOtp, checkIsOtpCorrect, validateToken, getSpecificSummarisedUser };
