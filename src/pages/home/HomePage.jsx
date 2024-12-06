@@ -24,7 +24,7 @@ function HomePage() {
                             {pageData.posts.map((post, index) => (
                                 <Grid item xs={12} key={index}>
                                     {post.category === "Technology" ? (
-                                        <TechnologyPostBox technologyPostData={post} />
+                                        <TechnologyPostBox postData={post} />
                                     ) : (
                                         <Box
                                             sx={{

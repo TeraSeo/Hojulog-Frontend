@@ -6,16 +6,28 @@ import SummarisedProfileBox from "../../components/box/SummarisedProfileBox";
 import PostCommentBox from "../../components/box/PostCommentsBox";
 import { getCommentsByPostId } from "../../service/CommentService";
 import { useLocation } from "react-router-dom";
+import { getSpecificPost } from "../../service/PostService";
 
 function DetailedTechnologyPostPage() {
     const location = useLocation();
-    const { post } = location.state || {};
+    const { postId } = location.state || {};
 
     const [comments, setComments] = useState([]);
+    const [post, setPost] = useState(null);
+
+    const fetchPost = () => {
+        if (postId) {
+            getSpecificPost(postId)
+            .then((data) => setPost(data || {}))
+            .catch((error) => {
+                console.error("Error fetching post:", error);
+            });
+        }
+      };
 
     const fetchComments = () => {
-      if (post?.postId) {
-        getCommentsByPostId(post.postId)
+      if (postId) {
+        getCommentsByPostId(postId)
           .then((data) => setComments(data || {}))
           .catch((error) => {
             console.error("Error fetching comments:", error);
@@ -25,8 +37,9 @@ function DetailedTechnologyPostPage() {
     };
   
     useEffect(() => {
+      fetchPost();
       fetchComments();
-    }, [post]);
+    }, [postId]);
 
     if (!post) {
         return <div>Post data not available.</div>;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Typography, Divider } from "@mui/material";
 import AddCommentBox from "./AddCommentBox";
 import { createComment } from "../../service/CommentService";
+import SingleCommentBox from "./SingleCommentBox";
 
 const PostCommentBox = ({ comments = {}, postId, fetchComments }) => {
   const [comment, setComment] = useState("");
@@ -25,13 +26,8 @@ const PostCommentBox = ({ comments = {}, postId, fetchComments }) => {
         {wholeCommentsLength} Comments
       </Typography>
 
-      {summarizedComments.map((comment, index) => (
-        <Box key={index} sx={{ marginBottom: 4 }}>
-          <Typography variant="body2" sx={{ color: "#555", lineHeight: 1.6 }}>
-            {comment.content}
-          </Typography>
-          {index !== summarizedComments.length - 1 && <Divider sx={{ marginTop: 3 }} />}
-        </Box>
+      {summarizedComments.map((comment) => (
+        <SingleCommentBox comment={comment} />
       ))}
 
       <Divider sx={{ marginY: 4 }} />

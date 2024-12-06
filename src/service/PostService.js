@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 function getPostsByPageNCondition(page, condition) {
+    const userId = localStorage.getItem('userId');
+
     return axios.get("http://localhost:8080/api/post/get/whole-by-page-n-condition", {
         headers: {
             'Accept': 'application/json',
@@ -9,7 +11,8 @@ function getPostsByPageNCondition(page, condition) {
         params: {
             "page": page,
             "size": 10,
-            "condition": condition
+            "condition": condition,
+            "userId": userId
         }
     })
     .then((response) => {
@@ -24,6 +27,8 @@ function getPostsByPageNCondition(page, condition) {
 }
 
 function getSpecificPost(postId) {
+    const userId = localStorage.getItem('userId');
+
     return axios.get("http://localhost:8080/api/post/get/specific", {
         headers: {
             'Accept': 'application/json',
@@ -31,6 +36,7 @@ function getSpecificPost(postId) {
         },
         params: {
             "postId": postId,
+            "userId": userId
         }
     })
     .then((response) => {

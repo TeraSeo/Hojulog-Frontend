@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import PostMedia from "../media/PostMedia";
 import DescriptionText from "../texts/DescriptionText";
@@ -8,6 +8,9 @@ import PostActionsInDetailedPage from "../buttons/PostActionsInDetailedPage";
 import PostHeader from "../header/PostHeader";
 
 const TechnologyDetailedPostBox = ({ postData, wholeCommentsLength }) => {
+    const [ wholeLikesCount, setWholeLikesCount ] = useState(postData.likedUserCount);
+    const [ isLiked, setIsLiked ] = useState(postData.isCurrentUserLiked);
+
     return (
         <Box
             sx={{
@@ -32,12 +35,12 @@ const TechnologyDetailedPostBox = ({ postData, wholeCommentsLength }) => {
             </Box>
 
             <Box marginTop={0}>
-                <PostActionsInDetailedPage postData={postData} />
+                <PostActionsInDetailedPage postData={postData} wholeLikesCount={wholeLikesCount} setWholeLikesCount={setWholeLikesCount} isLiked={isLiked} setIsLiked={setIsLiked} />
             </Box>
 
             <Box marginTop={2}>
                 <PostFooterText
-                    likesCnt={postData.likedUserCount || 0}
+                    likesCnt={wholeLikesCount || 0}
                     commentsCnt={wholeCommentsLength || 0}
                     dayRank={postData.dayRank || 0}
                     weekRank={postData.weekRank || 0}

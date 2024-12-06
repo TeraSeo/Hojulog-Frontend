@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Avatar, Link, Divider } from "@mui/material";
-import defaultProfilePicture from "../../assets/images/user.png";
 import { getSpecificSummarisedUser } from "../../service/UserService";
 
 const SummarisedProfileBox = ({ userId }) => {
@@ -31,7 +30,7 @@ const SummarisedProfileBox = ({ userId }) => {
     return <Typography variant="body1">User data not available.</Typography>;
   }
 
-  const profilePicture = user.profilePicture || defaultProfilePicture;
+  const profilePicture = user.profilePicture || "";
 
   const getTruncatedDescription = (description) => {
     if (!description || description.length <= 150) {
@@ -88,10 +87,8 @@ const SummarisedProfileBox = ({ userId }) => {
             src={profilePicture}
             alt={user.username || "User"}
             sx={{
-              width: 32,
-              height: 32,
-              padding: 0.5,
-              border: "1px solid",
+              width: 48,
+              height: 48,
             }}
           />
           <Box>

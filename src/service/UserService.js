@@ -105,16 +105,18 @@ function validateToken() {
     })
     .then(response => {
         if (response.status === 200) {
-            
-            // Update tokens if they are returned in response headers
             const newAccessToken = response.headers['accesstoken'];
             const newRefreshToken = response.headers['refreshtoken'];
+            const userId = response.headers['userid'];
 
             if (newAccessToken != null) {
                 localStorage.setItem('accessToken', newAccessToken);
             }
             if (newRefreshToken != null) {
                 localStorage.setItem('refreshToken', newRefreshToken);
+            }
+            if (userId != null) {
+                localStorage.setItem('userId', userId);
             }
             return true;
         } else if (response.status === 401) {

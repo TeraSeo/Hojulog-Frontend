@@ -6,7 +6,8 @@ import PostActions from "../buttons/PostActions";
 import PostTab from "../buttons/PostTab";
 import PostHeader from "../header/PostHeader";
 
-const TechnologyPostBox = ({ technologyPostData }) => {
+const TechnologyPostBox = ({ postData }) => {
+
     const handleTabChange = (selectedTab) => {
         console.log(`Tab selected: ${selectedTab}`);
         switch (selectedTab) {
@@ -34,12 +35,12 @@ const TechnologyPostBox = ({ technologyPostData }) => {
                 marginBottom: 2,
             }}
         >
-            <PostHeader postData={technologyPostData} />
+            <PostHeader postData={postData} />
 
             <PostTab onTabChange={handleTabChange} />
-            <DescriptionText description={technologyPostData.description} />
-            <PostMedia postData={technologyPostData} />
-            <PostActions postData={technologyPostData} />
+            <DescriptionText description={postData.description} />
+            <PostMedia postData={postData} />
+            <PostActions postData={postData} />
         </Box>
     );
 };
