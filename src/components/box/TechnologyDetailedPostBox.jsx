@@ -10,6 +10,7 @@ import PostHeader from "../header/PostHeader";
 const TechnologyDetailedPostBox = ({ postData, wholeCommentsLength }) => {
     const [ wholeLikesCount, setWholeLikesCount ] = useState(postData.likedUserCount);
     const [ isLiked, setIsLiked ] = useState(postData.isCurrentUserLiked);
+    const [ isBookmarked, setIsBookmarked ] = useState(postData.isCurrentUserBookmarked);
 
     return (
         <Box
@@ -35,7 +36,7 @@ const TechnologyDetailedPostBox = ({ postData, wholeCommentsLength }) => {
             </Box>
 
             <Box marginTop={0}>
-                <PostActionsInDetailedPage postData={postData} wholeLikesCount={wholeLikesCount} setWholeLikesCount={setWholeLikesCount} isLiked={isLiked} setIsLiked={setIsLiked} />
+                <PostActionsInDetailedPage postData={postData} wholeLikesCount={wholeLikesCount} setWholeLikesCount={setWholeLikesCount} isLiked={isLiked} setIsLiked={setIsLiked} isBookmarked={isBookmarked} setIsBookmarked={setIsBookmarked} />
             </Box>
 
             <Box marginTop={2}>

@@ -3,16 +3,19 @@ import { Box, IconButton, Typography } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 import NotesIcon from "@mui/icons-material/Notes";
 import TagsText from "../texts/TagsText";
 import { logoPrimaryColor } from "../../constant/Color";
 import OwnerText from "../texts/OwnerText";
 import { useNavigate } from "react-router-dom";
 import { addPostLike, removePostLike } from "../../service/PostLikeService";
+import { addPostBookmark, removePostBookmark } from "../../service/PostBookmarkService";
 
 const  PostActions = ({ postData }) => {
   const [ wholeLikesCount, setWholeLikesCount ] = useState(postData.likedUserCount);
   const [ isLiked, setIsLiked ] = useState(postData.isCurrentUserLiked);
+  const [ isBookmarked, setIsBookmarked ] = useState(postData.isCurrentUserBookmarked);
 
   const navigate = useNavigate();
 
@@ -34,17 +37,25 @@ const  PostActions = ({ postData }) => {
     }
   }
 
+  const handleBookmarkClicked = async () => {
+    if (!isBookmarked) {
+      const isCreated = await addPostBookmark(postData.postId);
+      if (isCreated) setIsBookmarked(true);
+    }
+    else {
+      const isDeleted = await removePostBookmark(postData.postId);
+      if (isDeleted) setIsBookmarked(false);
+    }
+  }
+
   return (
     <>
-      {/* Tags and Owner */}
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 2 }}>
         <TagsText tags={postData.tags} />
         <OwnerText ownerEmail={postData.ownerEmail} />
       </Box>
 
-      {/* Actions */}
       <Box sx={{ display: "flex", mt: 2, alignItems: "center", justifyContent: "space-between" }}>
-        {/* Like Button */}
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <IconButton
             sx={{
@@ -56,9 +67,9 @@ const  PostActions = ({ postData }) => {
             onClick={handleLikeClicked}
           >
             {isLiked ? (
-              <FavoriteIcon fontSize="medium" /> // Filled icon
+              <FavoriteIcon fontSize="medium" />
             ) : (
-              <FavoriteBorderIcon fontSize="medium" /> // Outlined icon
+              <FavoriteBorderIcon fontSize="medium" />
             )}
           </IconButton>
           <Typography
@@ -73,7 +84,6 @@ const  PostActions = ({ postData }) => {
           </Typography>
         </Box>
 
-        {/* Notes and Bookmark Buttons */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
           <IconButton
             sx={{
@@ -92,8 +102,13 @@ const  PostActions = ({ postData }) => {
               padding: 0,
               fontSize: "24px",
             }}
+            onClick={handleBookmarkClicked}
           >
-            <BookmarkBorderIcon fontSize="medium" />
+            {isBookmarked ? (
+              <BookmarkIcon fontSize="medium" />
+            ) : (
+              <BookmarkBorderIcon fontSize="medium" />
+            )}
           </IconButton>
         </Box>
       </Box>
