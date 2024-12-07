@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography, Grid } from "@mui/material";
 import { getPostsByPageNCondition } from "../../service/PostService";
-import TechnologyPostBox from "../../components/box/TechnologyPostBox";
+import TechnologyPostBox from "../../components/box/post/TechnologyPostBox";
 import CategorySidebar from "../../components/bar/CategorySidebar";
 
 function HomePage() {

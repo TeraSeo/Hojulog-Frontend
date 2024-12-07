@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Avatar, Link, Divider } from "@mui/material";
-import { getSpecificSummarisedUser } from "../../service/UserService";
+import { getSpecificSummarisedUser } from "../../../service/UserService";
 
 const SummarisedProfileBox = ({ userId }) => {
   const [user, setUser] = useState(null);
@@ -57,7 +57,6 @@ const SummarisedProfileBox = ({ userId }) => {
         sx={{
           paddingBottom: 1,
           paddingX: 2,
-          paddingY: 1,
         }}
       >
         Publisher
@@ -73,6 +72,7 @@ const SummarisedProfileBox = ({ userId }) => {
           flexDirection: "column",
           gap: 2,
           flexGrow: 1,
+          marginBottom: 1
         }}
       >
         <Box

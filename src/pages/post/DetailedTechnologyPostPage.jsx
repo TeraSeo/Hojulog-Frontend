@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Box, Container } from "@mui/material";
-import TechnologyDetailedPostBox from "../../components/box/TechnologyDetailedPostBox";
-import RecentLaunchesBox from "../../components/box/RecentLaunchesBox";
-import SummarisedProfileBox from "../../components/box/SummarisedProfileBox";
-import PostCommentBox from "../../components/box/PostCommentsBox";
-import { getCommentsByPostId } from "../../service/CommentService";
+import TechnologyDetailedPostBox from "../../components/box/post/TechnologyDetailedPostBox";
+import RecentLaunchesBox from "../../components/box/post/RecentLaunchesBox";
+import SummarisedProfileBox from "../../components/box/profile/SummarisedProfileBox";
+import PostCommentBox from "../../components/box/comment/PostCommentsBox";
 import { useLocation } from "react-router-dom";
 import { getSpecificPost } from "../../service/PostService";
 
@@ -12,36 +11,23 @@ function DetailedTechnologyPostPage() {
     const location = useLocation();
     const { postId } = location.state || {};
 
-    const [comments, setComments] = useState([]);
-    const [post, setPost] = useState(null);
+    const [postData, setPostData] = useState(null);
 
     const fetchPost = () => {
         if (postId) {
             getSpecificPost(postId)
-            .then((data) => setPost(data || {}))
+            .then((data) => setPostData(data || {}))
             .catch((error) => {
-                console.error("Error fetching post:", error);
+                console.error("Error fetching post data:", error);
             });
         }
       };
-
-    const fetchComments = () => {
-      if (postId) {
-        getCommentsByPostId(postId)
-          .then((data) => setComments(data || {}))
-          .catch((error) => {
-            console.error("Error fetching comments:", error);
-            setComments({});
-          });
-      }
-    };
   
     useEffect(() => {
       fetchPost();
-      fetchComments();
     }, [postId]);
 
-    if (!post) {
+    if (!postData) {
         return <div>Post data not available.</div>;
     }
 
@@ -54,7 +40,7 @@ function DetailedTechnologyPostPage() {
             }}
         >
             <Box sx={{ marginBottom: 4 }}>
-                <TechnologyDetailedPostBox postData={post} wholeCommentsLength={comments.wholeCommentsLength} />
+                <TechnologyDetailedPostBox postData={postData} wholeCommentsLength={postData.wholeCommentsLength} />
             </Box>
 
             <Box
@@ -66,7 +52,7 @@ function DetailedTechnologyPostPage() {
                 }}
             >
                 <Box sx={{ flex: 2, minWidth: 0 }}>
-                    <RecentLaunchesBox postIds={post.recentLaunchedPostIds} />
+                    <RecentLaunchesBox postIds={postData.recentLaunchedPostIds} />
                 </Box>
 
                 <Box
@@ -75,13 +61,12 @@ function DetailedTechnologyPostPage() {
                         minWidth: 0,
                     }}
                 >
-                    <SummarisedProfileBox userId={post.userId} />
+                    <SummarisedProfileBox userId={postData.userId} />
                 </Box>
             </Box>
 
             <Box sx={{ marginTop: 4 }}>
-                {/* Render the comments */}
-                <PostCommentBox comments={comments} postId={post.postId} fetchComments={fetchComments} />
+                <PostCommentBox postId={postData.postId} />
             </Box>
         </Container>
     );

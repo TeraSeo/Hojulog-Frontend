@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getSpecificPost } from "../../service/PostService";
+import { getSpecificPost } from "../../../service/PostService";
 import { Box, Typography } from "@mui/material";
 import SummarisePostBox from "./SummarisePostBox";
 
@@ -21,7 +21,7 @@ const RecentLaunchesBox = ({ postIds }) => {
 
   return (
     <Box>
-      <Typography variant="h6" sx={{ px: 2, py: 1 }}>
+      <Typography variant="h6" sx={{ px: 2 }} gutterBottom>
         Recent launches
       </Typography>
       {recentPosts.length > 0 ? (

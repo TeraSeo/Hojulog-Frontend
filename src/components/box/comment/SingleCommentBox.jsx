@@ -1,13 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography, Avatar, IconButton } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { logoPrimaryColor } from "../../constant/Color";
-import CreatedAtText from "../texts/CreatedAtText";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { logoPrimaryColor } from "../../../constant/Color";
+import CreatedAtText from "../../texts/CreatedAtText";
+import { addCommentLike, removeCommentLike } from "../../../service/CommentLikeService";
 
 const SingleCommentBox = ({ comment }) => {
   const { username, profilePicture } = comment.summarizedUserDto;
-  const { content, wholeLikedUserLength, createdAt } = comment;
+  const { commentId, content, wholeLikedUserLength, isCurrentUserLiked, createdAt } = comment;
   const profilePictureUrl = profilePicture || "";
+
+  const [ wholeLikesCount, setWholeLikesCount ] = useState(wholeLikedUserLength);
+  const [ isLiked, setIsLiked ] = useState(isCurrentUserLiked);
+
+  const handleLikeClicked = async () => {
+    if (!isLiked) {
+      const wholeLikes = await addCommentLike(commentId);
+      setWholeLikesCount(wholeLikes);
+      setIsLiked(true);
+    }
+    else {
+      const wholeLikes = await removeCommentLike(commentId);
+      setWholeLikesCount(wholeLikes);
+      setIsLiked(false);
+    }
+  }
 
   return (
     <Box sx={{ marginBottom: 4 }}>
@@ -57,19 +75,25 @@ const SingleCommentBox = ({ comment }) => {
           <IconButton
             aria-label="favorite"
             sx={{
-              color: logoPrimaryColor,
-              padding: "4px", 
+              color: isLiked ? "red" : logoPrimaryColor,
+              padding: "4px"
             }}
+            onClick={handleLikeClicked}
           >
-            <FavoriteBorderIcon sx={{ fontSize: "18px" }} />
+            {isLiked ? (
+              <FavoriteIcon sx={{ fontSize: "18px" }} />
+            ) : (
+              <FavoriteBorderIcon sx={{ fontSize: "18px" }} />
+            )}
           </IconButton>
+
           <Typography
             sx={{
               fontSize: "11px",
               color: "#666",
             }}
           >
-            {wholeLikedUserLength}
+            {wholeLikesCount}
           </Typography>
         </Box>
       </Box>

@@ -25,13 +25,15 @@ function createComment(content, postId) {
 }
 
 function getCommentsByPostId(postId) {
+    const userId = localStorage.getItem('userId');
+
     return axios
     .get("http://localhost:8080/api/comment/get/specific", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        params: { postId },
+        params: { postId, userId },
     })
     .then((response) => {
         return response.data;

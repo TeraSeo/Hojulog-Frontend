@@ -1,19 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Tabs, Tab } from "@mui/material";
 
-function PostTab({ onTabChange }) {
-    const [selectedTab, setSelectedTab] = useState(0);
+function PostTab({ currentTab, setCurrentTab }) {
 
     const handleTabChange = (event, newValue) => {
-        setSelectedTab(newValue);
-        if (onTabChange) {
-            onTabChange(newValue); 
-        }
+        setCurrentTab(newValue);
     };
 
     return (
         <Tabs
-            value={selectedTab}
+            value={currentTab}
             onChange={handleTabChange}
             aria-label="product navigation tabs"
             variant="scrollable"
@@ -27,10 +23,19 @@ function PostTab({ onTabChange }) {
                 '& .MuiTab-root': {
                     textTransform: 'none',
                     fontWeight: 400, 
-                    fontSize: '14px', 
-                    minWidth: 90, 
+                    fontSize: {
+                        xs: '10px', 
+                        sm: '14px', 
+                    },
+                    minWidth: {
+                        xs: 60, 
+                        sm: 90, 
+                    },
+                    padding: {
+                        xs: '4px 4px',
+                        sm: '4px 8px',
+                    },
                     color: '#6c6c6c', 
-                    padding: '4px 8px',
                     borderRadius: '8px',
                     margin: '4px',
                     minHeight: 32,

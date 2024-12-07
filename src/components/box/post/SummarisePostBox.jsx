@@ -1,9 +1,9 @@
 import React from "react";
 import { Box } from "@mui/material";
-import PostTitleText from "../texts/PostTitleText";
-import PostSubtitleText from "../texts/PostSubtitleText";
-import CreatedAtText from "../texts/CreatedAtText";
-import PostSingleMedia from "../media/PostSingleMedia";
+import PostTitleText from "../../texts/PostTitleText";
+import PostSubtitleText from "../../texts/PostSubtitleText";
+import CreatedAtText from "../../texts/CreatedAtText";
+import PostSingleMedia from "../../media/PostSingleMedia";
 
 const SummarisePostBox = ({ post }) => {
   return (
