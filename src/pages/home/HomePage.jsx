@@ -3,6 +3,7 @@ import { Box, Typography, Grid } from "@mui/material";
 import { getPostsByPageNCondition } from "../../service/PostService";
 import TechnologyPostBox from "../../components/box/post/TechnologyPostBox";
 import CategorySidebar from "../../components/bar/CategorySidebar";
+import RestaurantPostBox from "../../components/box/post/RestaurantPostBox";
 
 function HomePage() {
     const [pageData, setPageData] = useState({ posts: [], pageSize: 0, currentPage: 0, currentPagePostsCount: 0 });
@@ -23,25 +24,9 @@ function HomePage() {
                         <Grid container spacing={3}>
                             {pageData.posts.map((post, index) => (
                                 <Grid item xs={12} key={index}>
-                                    {post.category === "Technology" ? (
-                                        <TechnologyPostBox postData={post} />
-                                    ) : (
-                                        <Box
-                                            sx={{
-                                                border: "1px solid #ddd",
-                                                borderRadius: "8px",
-                                                padding: 2,
-                                                marginBottom: 2,
-                                            }}
-                                        >
-                                            <Typography variant="h6" gutterBottom>
-                                                {post.category}
-                                            </Typography>
-                                            <Typography variant="body2" color="textSecondary">
-                                                {post.description}
-                                            </Typography>
-                                        </Box>
-                                    )}
+                                    { post.category === "Technology" ? <TechnologyPostBox postData={post} /> :
+                                      post.category === "Restaurant" ? <RestaurantPostBox postData={post} /> : <Box></Box>
+                                    }
                                 </Grid>
                             ))}
                         </Grid>

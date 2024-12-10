@@ -19,13 +19,10 @@ const TechnologyPostBox = ({ postData }) => {
                 flexDirection: "column",
             }}
         >
-            {/* Header */}
             <PostHeader postData={postData} />
 
-            {/* Tabs */}
             <PostTab currentTab={currentTab} setCurrentTab={setCurrentTab} />
 
-            {/* Scrollable Content */}
             <Box
                 sx={{
                     flexGrow: 1, 

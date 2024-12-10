@@ -152,7 +152,6 @@ const LaunchRestaurantPage = () => {
         </Grid>
       </Grid>
 
-      {/* Technology Post Preview Dialog */}
       <RestaurantPostPreviewDialog
         open={isPreviewOpen}
         onClose={handleClosePreview}

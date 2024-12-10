@@ -18,7 +18,7 @@ const TechnologyDetailedPostBox = ({ postData, wholeCommentsLength }) => {
         >
             <Box display="flex" alignItems="center" justifyContent="space-between" marginBottom={2}>
                 <PostHeader postData={postData} logoUrl={postData.logoUrl} />
-                <TechnologyPostLinksButton mainInfoData={postData} />
+                <TechnologyPostLinksButton postData={postData} />
             </Box>
 
             <Typography variant="h6" gutterBottom>

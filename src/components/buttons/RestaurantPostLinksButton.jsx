@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Menu, MenuItem } from "@mui/material";
-import appStoreIcon from "../../assets/images/app-store.png";
-import playStoreIcon from "../../assets/images/play-store.png";
 import webIcon from "../../assets/images/web.png";
 import { logoPrimaryColor } from "../../constant/Color";
+import LocationButton from "./LocationButton";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import VisitWebsiteButton from "./VisitWebsiteButton";
-import AppStoreLinkButton from "./AppStoreLinkButton";
-import PlayStoreLinkButton from "./PlayStoreLinkButton";
 
-const TechnologyPostLinksButton = ({ postData }) => {
+const RestaurantPostLinksButton = ({ postData }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isWideScreen, setIsWideScreen] = useState(false);
 
@@ -38,7 +36,7 @@ const TechnologyPostLinksButton = ({ postData }) => {
     setAnchorEl(null);
   };
 
-  const hasLinks = postData.playStoreUrl || postData.appStoreUrl || postData.webUrl;
+  const hasLinks = postData.webUrl || postData.location;
 
   if (!hasLinks) {
     return null;
@@ -48,12 +46,11 @@ const TechnologyPostLinksButton = ({ postData }) => {
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 1 }}>
       {isWideScreen ? (
         <Box sx={{ display: 'flex', gap: 2 }}>
-          <PlayStoreLinkButton playStoreUrl={postData.playStoreUrl} />
-          <AppStoreLinkButton appStoreUrl={postData.appStoreUrl} />
           <VisitWebsiteButton webUrl={postData.webUrl} />
+          <LocationButton location={postData.location} />
         </Box>
       ) : (
-        <>
+        <> 
           <Button
             variant="contained"
             color="secondary"
@@ -68,22 +65,18 @@ const TechnologyPostLinksButton = ({ postData }) => {
             onClose={handleMenuClose}
             sx={{ '& .MuiPaper-root': { borderRadius: 2, boxShadow: '0 4px 20px rgba(0,0,0,0.1)' } }}
           >
-            {postData.playStoreUrl && (
-              <MenuItem onClick={() => handleMenuItemClick(postData.playStoreUrl)}>
-                <img src={playStoreIcon} alt="Play Store" style={{ width: 24, height: 24, marginRight: 8 }} />
-                Play Store
-              </MenuItem>
-            )}
-            {postData.appStoreUrl && (
-              <MenuItem onClick={() => handleMenuItemClick(postData.appStoreUrl)}>
-                <img src={appStoreIcon} alt="App Store" style={{ width: 24, height: 24, marginRight: 8 }} />
-                App Store
-              </MenuItem>
-            )}
             {postData.webUrl && (
-              <MenuItem onClick={() => handleMenuItemClick(postData.webUrl)}>
+                <MenuItem onClick={() => handleMenuItemClick(postData.webUrl)}>
                 <img src={webIcon} alt="Website" style={{ width: 24, height: 24, marginRight: 8 }} />
                 Visit Website
+                </MenuItem>
+                )
+            }
+
+            {postData.location && (
+              <MenuItem onClick={() => handleMenuItemClick(postData.location)}>
+                <LocationOnIcon sx={{ marginRight: 1, color: logoPrimaryColor }} />
+                Location
               </MenuItem>
             )}
           </Menu>
@@ -93,4 +86,4 @@ const TechnologyPostLinksButton = ({ postData }) => {
   );
 };
 
-export default TechnologyPostLinksButton;
+export default RestaurantPostLinksButton;

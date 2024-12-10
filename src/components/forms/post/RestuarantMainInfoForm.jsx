@@ -26,7 +26,6 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
 
   const [errors, setErrors] = useState({});
   const [mapOpen, setMapOpen] = useState(false);
-  const [selectedLatLng, setSelectedLatLng] = useState(null);
 
   const locationPattern = /^https:\/\/(www\.)?google\.[a-z]+\/maps(\?.*|\/.*)?$/;
 
@@ -88,19 +87,11 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     }));
   };
 
-  const handleMapClick = (event) => {
-    const lat = event.latLng.lat();
-    const lng = event.latLng.lng();
-    setSelectedLatLng({ lat, lng });
-  };
-
-  const handleConfirmLocation = () => {
-    if (selectedLatLng) {
-      const googleMapsUrl = `https://www.google.com/maps?q=${selectedLatLng.lat},${selectedLatLng.lng}`;
-      handleInputChange("location", googleMapsUrl);
-      validateLocation(googleMapsUrl);
-    }
-    setMapOpen(false);
+  const handleLocationSelected = (url) => {
+    setFormValues((prev) => ({
+      ...prev,
+      location: url
+    }));
   };
 
   return (
@@ -125,7 +116,6 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           
         <TagsField tags={formValues.tags} onChange={(tags) => handleInputChange("tags", tags)} />
 
-        {/* Location Field */}
         <LocationField
           location={formValues.location}
           errors={errors}
@@ -136,13 +126,13 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           onMapOpen={() => setMapOpen(true)}
         />
       </Grid>
-      {/* Google Map Dialog */}
+
       <LocationDialog
         open={mapOpen}
         onClose={() => setMapOpen(false)}
-        onConfirm={handleConfirmLocation}
-        onMapClick={handleMapClick}
-        selectedLatLng={selectedLatLng}
+        onConfirm={() => setMapOpen(false)}
+        onLocationSelected={handleLocationSelected}
+        googleMapsApiKey = "AIzaSyAbpOOHTMEZeY_WNnQjuROdIUCAPpwM45Q"
       />
     </Paper>
   );

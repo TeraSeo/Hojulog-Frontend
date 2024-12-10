@@ -86,21 +86,6 @@ const EntertainmentMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     }));
   };
 
-  const handleMapClick = (event) => {
-    const lat = event.latLng.lat();
-    const lng = event.latLng.lng();
-    setSelectedLatLng({ lat, lng });
-  };
-
-  const handleConfirmLocation = () => {
-    if (selectedLatLng) {
-      const googleMapsUrl = `https://www.google.com/maps?q=${selectedLatLng.lat},${selectedLatLng.lng}`;
-      handleInputChange("location", googleMapsUrl);
-      validateLocation(googleMapsUrl);
-    }
-    setMapOpen(false);
-  };
-
   const validateLocation = (value) => {
     if (!locationPattern.test(value)) {
       setErrors((prev) => ({
@@ -113,6 +98,13 @@ const EntertainmentMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         location: "",
       }));
     }
+  };
+
+  const handleLocationSelected = (url) => {
+    setFormValues((prev) => ({
+      ...prev,
+      location: url
+    }));
   };
 
   return (
@@ -163,9 +155,9 @@ const EntertainmentMainInfoForm = ({ onDataChange, setIsFormValid }) => {
       <LocationDialog
         open={mapOpen}
         onClose={() => setMapOpen(false)}
-        onConfirm={handleConfirmLocation}
-        onMapClick={handleMapClick}
-        selectedLatLng={selectedLatLng}
+        onConfirm={() => setMapOpen(false)}
+        onLocationSelected={handleLocationSelected}
+        googleMapsApiKey = "AIzaSyAbpOOHTMEZeY_WNnQjuROdIUCAPpwM45Q"
       />
     </Paper>
   );
