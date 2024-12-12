@@ -1,32 +1,28 @@
 import React from "react";
 import { Typography, TextField, Grid, InputAdornment } from "@mui/material";
-import SubtitlesIcon from "@mui/icons-material/Subtitles";
+import EmailIcon from "@mui/icons-material/Email";
 
-const MAX_LENGTH = 60;
-
-const SubtitleField = ({ value, error, onChange }) => {
+const EmailField = ({ value, error, onChange }) => {
   const handleChange = (e) => {
-    if (e.target.value.length <= MAX_LENGTH) {
-      onChange(e.target.value);
-    }
+    onChange(e.target.value);
   };
 
   return (
     <Grid item xs={12}>
       <Typography variant="subtitle1" sx={{ color: "#001f5b" }} gutterBottom>
-        Subtitle
+        이메일 주소
       </Typography>
       <TextField
         fullWidth
         value={value}
         onChange={handleChange}
-        placeholder="Enter subtitle"
+        placeholder="이메일 주소를 입력하세요"
         error={!!error}
-        helperText={error || `${value.length}/${MAX_LENGTH} ${value.length >= MAX_LENGTH ? "(Maximum length reached)" : ""}`}
+        helperText={error || ""}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <SubtitlesIcon />
+              <EmailIcon />
             </InputAdornment>
           ),
         }}
@@ -35,4 +31,4 @@ const SubtitleField = ({ value, error, onChange }) => {
   );
 };
 
-export default SubtitleField;
+export default EmailField;

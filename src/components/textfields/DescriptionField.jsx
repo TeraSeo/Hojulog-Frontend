@@ -14,7 +14,7 @@ const DescriptionField = ({ value, error, onChange }) => {
   return (
     <Grid item xs={12}>
       <Typography variant="subtitle1" sx={{ color: "#001f5b" }} gutterBottom>
-        Description
+        상세 설명
       </Typography>
       <TextField
         fullWidth
@@ -22,9 +22,14 @@ const DescriptionField = ({ value, error, onChange }) => {
         rows={6}
         value={value}
         onChange={handleChange}
-        placeholder="Describe your product in detail"
+        placeholder="제품에 대해 자세히 설명해주세요"
         error={!!error}
-        helperText={error || `${value.length}/${MAX_LENGTH} ${value.length >= MAX_LENGTH ? "(Maximum length reached)" : ""}`}
+        helperText={
+          error ||
+          `${value.length}/${MAX_LENGTH} ${
+            value.length >= MAX_LENGTH ? "(최대 길이에 도달했습니다)" : ""
+          }`
+        }
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

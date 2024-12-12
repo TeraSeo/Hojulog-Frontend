@@ -50,6 +50,75 @@ function getSpecificPost(postId) {
     )
 }
 
+function postProperty(postData) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.post("http://localhost:8080/api/post/create/property", postData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        }
+    })
+    .then(response => {
+        if (response.data) {
+            return true;
+        }
+        return false;
+    })
+    .catch(error => {
+        console.log(error);
+        return false;
+    });    
+}
+
+function postJob(postData) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.post("http://localhost:8080/api/post/create/job", postData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        }
+    })
+    .then(response => {
+        if (response.data) {
+            return true;
+        }
+        return false;
+    })
+    .catch(error => {
+        console.log(error);
+        return false;
+    });    
+}
+
+function postTransaction(postData) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.post("http://localhost:8080/api/post/create/transaction", postData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        }
+    })
+    .then(response => {
+        if (response.data) {
+            return true;
+        }
+        return false;
+    })
+    .catch(error => {
+        console.log(error);
+        return false;
+    });    
+}
+
 function postTechnology(postData) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
@@ -171,4 +240,4 @@ const normalizeEmptyStringsToNull = (data) => {
   );
 };
 
-export { getPostsByPageNCondition, getSpecificPost, postTechnology, postRestaurant, postEducation, postLifestyle, postEntertainment, normalizeEmptyStringsToNull };
+export { getPostsByPageNCondition, getSpecificPost, postProperty, postJob, postTransaction, postTechnology, postRestaurant, postEducation, postLifestyle, postEntertainment, normalizeEmptyStringsToNull };

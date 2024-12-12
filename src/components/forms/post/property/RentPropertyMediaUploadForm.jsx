@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Grid, Paper } from "@mui/material";
 import { useDropzone } from "react-dropzone";
-import ImageUploader from "../../media/ImageUploader";
-import AspectRatioSelector from "../../media/AspectRatioSelector";
+import ImageUploader from "../../../media/ImageUploader";
+import AspectRatioSelector from "../../../media/AspectRatioSelector";
 
-const LifeStyleMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
+const RentPropertyMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
   const [selectedImages, setSelectedImages] = useState([]);
   const [errors, setErrors] = useState({});
   const [mediaAspectRatio, setMediaAspectRatio] = useState("16x9");
@@ -16,10 +16,6 @@ const LifeStyleMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
       newErrors.selectedImages = "이미지는 최대 6개까지 업로드할 수 있습니다.";
     } else if (selectedImages.some((file) => !file.type.startsWith("image/"))) {
       newErrors.selectedImages = "유효하지 않은 이미지 파일입니다.";
-    }
-
-    if (selectedImages.length === 0) {
-      newErrors.media = "한 개 이상의 이미지를 제공해야 합니다.";
     }
 
     setErrors(newErrors);
@@ -91,4 +87,4 @@ const LifeStyleMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
   );
 };
 
-export default LifeStyleMediaUploadForm;
+export default RentPropertyMediaUploadForm;

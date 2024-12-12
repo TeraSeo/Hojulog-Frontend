@@ -8,7 +8,7 @@ const ImageUploader = ({ imagesDropzone, selectedImages, removeImage, errors, me
     <Card variant="outlined" sx={{ padding: 2, borderColor: "#b0bec5", boxShadow: 3 }}>
       <CardContent>
         <Typography variant="subtitle1" gutterBottom>
-          Product Images (Max: 8)
+          이미지 업로드 (최대: 6장)
         </Typography>
         <Box
           {...imagesDropzone.getRootProps()}
@@ -25,10 +25,11 @@ const ImageUploader = ({ imagesDropzone, selectedImages, removeImage, errors, me
           <input {...imagesDropzone.getInputProps()} />
           <Typography variant="body2">
             <PhotoCameraIcon sx={{ marginRight: 1 }} />
-            Drag & drop your images here, or{" "}
+            이미지를 여기로 드래그하거나{" "}
             <Button variant="text" sx={{ color: "#001f5b" }} component="span">
-              Browse
+              여기
             </Button>
+            를 클릭하세요.
           </Typography>
         </Box>
         {selectedImages.length > 0 && (
@@ -49,7 +50,7 @@ const ImageUploader = ({ imagesDropzone, selectedImages, removeImage, errors, me
                 <CardMedia
                   component="img"
                   image={URL.createObjectURL(file)}
-                  alt={`Preview ${index + 1}`}
+                  alt={`미리보기 ${index + 1}`}
                   sx={{
                     width: "100%",
                     height: "100%",
@@ -66,6 +67,7 @@ const ImageUploader = ({ imagesDropzone, selectedImages, removeImage, errors, me
                   }}
                   size="small"
                   onClick={() => removeImage(index)}
+                  aria-label={`이미지 삭제 ${index + 1}`}
                 >
                   <DeleteIcon fontSize="small" />
                 </IconButton>

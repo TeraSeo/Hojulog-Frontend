@@ -19,7 +19,7 @@ function HeaderNavigationMenuItems() {
                     },
                 }}
             >
-                Home
+                부동산
             </Button>
             <Button
                 variant="text"
@@ -33,7 +33,7 @@ function HeaderNavigationMenuItems() {
                     },
                 }}
             >
-                Launch
+                구인구직
             </Button>
             <Button
                 variant="text"
@@ -47,7 +47,7 @@ function HeaderNavigationMenuItems() {
                     },
                 }}
             >
-                About
+                사고팔기
             </Button>
             <Button
                 variant="text"
@@ -61,7 +61,35 @@ function HeaderNavigationMenuItems() {
                     },
                 }}
             >
-                Contact
+                동호회
+            </Button>
+            <Button
+                variant="text"
+                onClick={() => navigate("/contact")}
+                sx={{
+                    color: "black",
+                    fontWeight: "400",
+                    fontSize: "16px",
+                    "&:hover": {
+                        color: "#555",
+                    },
+                }}
+            >
+                여행
+            </Button>
+            <Button
+                variant="text"
+                onClick={() => navigate("/contact")}
+                sx={{
+                    color: "black",
+                    fontWeight: "400",
+                    fontSize: "16px",
+                    "&:hover": {
+                        color: "#555",
+                    },
+                }}
+            >
+                유학
             </Button>
         </Box>
     );

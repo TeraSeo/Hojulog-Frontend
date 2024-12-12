@@ -12,22 +12,25 @@ import HomePage from './pages/home/HomePage';
 import ProtectedRoute from './ProtectedRoute';
 import Layout from './components/layout/Layout';
 import SelectCategoryPage from './pages/post/SelectCategoryPage';
-import LaunchRestaurantPage from './pages/post/LaunchRestaurantPage';
-import LaunchTechnologyPage from './pages/post/LaunchTechnologyPage';
-import LaunchEducationPage from './pages/post/LaunchEducationPage';
-import LaunchLifeStylePage from './pages/post/LaunchLifeStylePage';
-import LaunchEntertainmentPage from './pages/post/LaunchEntertainmentPage';
 import { DynamicDetailedPage } from './constant/Components';
+import { categories } from './constant/Categories';
+import LaunchSharePropertyPage from './pages/post/property/LaunchSharePropertyPage';
+import LaunchRentPropertyPage from './pages/post/property/LaunchRentPropertyPage';
+import LaunchTransactionPropertyPage from './pages/post/property/LaunchTransactionPropertyPage';
+import LaunchJobSeekingPage from './pages/post/job/LaunchJobSeekingPage';
+import LaunchRecruitmentPage from './pages/post/job/LaunchRecruitmentPage';
+import LaunchTutoringPage from './pages/post/job/LaunchTutoringPage';
+import LaunchCarTransactionPage from './pages/post/transaction/LaunchCarTransactionPage';
+import LaunchEtcTransactionPage from './pages/post/transaction/LaunchEtcTransactionPage';
+import LaunchNecessitiesTransactionPage from './pages/post/transaction/LaunchNecessitiesTransactionPage';
+import LaunchProductRentTransactionPage from './pages/post/transaction/LaunchProductRentTransactionPage';
 
-const categories = {
-  Technology: ["Mobile Application", "Web Application", "AI Application", "Blockchain Application", "IoT Solutions", "Cloud Computing Services", "Cybersecurity Tools", "AR/VR Applications", "Data Analytics Platforms", "E-Commerce Solutions", "DevOps Tools", "Machine Learning Models", "Game Development", "SaaS Platforms", "Robotics Solutions", "3D Printing Solutions", "Big Data Applications", "Networking Tools", "Quantum Computing Applications", "Digital Twins", "Etc"],
-  Restaurant: ["Italian", "French", "Japanese", "Chinese", "Indian", "Mexican", "American", "Korean", "Thai", "Spanish", "Fast Food", "Desserts", "Café", "Etc"],
-  Education: ["Online Courses", "Learning Management System", "Tutoring Services", "Etc"],
-  Lifestyle: ["Fitness and Wellness", "Travel and Tourism", "Personal Finance", "Etc"],
-  Entertainment: ["Movie", "Drama", "Music", "Concerts and Live Events", "Video Streaming Services", "Stand-up Comedy", "YouTube Channels", "Museums and Exhibits", "Sports Events", "Art Exhibitions", "Etc"],
+const normalize = (str) => {
+  if (str === "레스토랑(카페,펍)") {
+    return "레스토랑";
+  }
+  return str.toLowerCase().replace(/\s+/g, '-');
 };
-
-const normalize = (str) => str.toLowerCase().replace(/\s+/g, '-');
 
 const normalizedCategories = Object.keys(categories).reduce((acc, category) => {
   acc[normalize(category)] = categories[category].map((subCategory) => normalize(subCategory));
@@ -44,35 +47,50 @@ const RouteValidator = ({ category, componentMap }) => {
   const normalizedSubCategory = normalize(subCategory);
 
   if (!validateCategory(normalizedCategory, normalizedSubCategory)) {
-    return (
-      <div>Page not found</div>
-    );
+    return <div>Page not found</div>;
   }
 
-  const Component = componentMap[category];
+  const Component = componentMap[normalizedCategory]?.[normalizedSubCategory];
+  if (!Component) {
+    return <div>Page not found</div>;
+  }
+
   return <Component />;
 };
 
 function App() {
   const generateDynamicRoutes = () => {
-    return Object.keys(categories).map((category) => (
-      <Route
-        key={`launch-${category.toLowerCase()}`}
-        path={`launch/${normalize(category)}/:subCategory`}
-        element={
-          <RouteValidator
-            category={category}
-            componentMap={{
-              Technology: LaunchTechnologyPage,
-              Restaurant: LaunchRestaurantPage,
-              Education: LaunchEducationPage,
-              Lifestyle: LaunchLifeStylePage,
-              Entertainment: LaunchEntertainmentPage,
-            }}
-          />
-        }
-      />
-    ));
+    return Object.entries(categories).flatMap(([category, subCategories]) =>
+      subCategories.map((subCategory) => (
+        <Route
+          key={`launch-${normalize(category)}-${normalize(subCategory)}`}
+          path={`launch/${normalize(category)}/:subCategory`}
+          element={
+            <RouteValidator
+              category={category}
+              componentMap={{
+                부동산: {
+                  쉐어: LaunchSharePropertyPage,
+                  렌트: LaunchRentPropertyPage,
+                  매매: LaunchTransactionPropertyPage,
+                },
+                구인구직: {
+                  구인: LaunchRecruitmentPage,
+                  구직: LaunchJobSeekingPage,
+                  과외: LaunchTutoringPage,
+                },
+                사고팔기: {
+                  자동차: LaunchCarTransactionPage,
+                  생활용품: LaunchNecessitiesTransactionPage,
+                  기타: LaunchEtcTransactionPage,
+                  대여: LaunchProductRentTransactionPage
+                }
+              }}
+            />
+          }
+        />
+      ))
+    );
   };
 
   return (

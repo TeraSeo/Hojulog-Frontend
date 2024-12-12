@@ -1,64 +1,79 @@
 import React from "react";
 import { Box, Typography, List, ListItem, ListItemIcon, ListItemText, Divider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import HomeIcon from "@mui/icons-material/Home";
-import CampaignIcon from "@mui/icons-material/Campaign";
-import InfoIcon from "@mui/icons-material/Info";
-import ContactMailIcon from "@mui/icons-material/ContactMail";
+import WorkIcon from "@mui/icons-material/Work";
+import StoreIcon from "@mui/icons-material/Store";
+import GroupIcon from "@mui/icons-material/Group";
+import FlightIcon from "@mui/icons-material/Flight";
+import SchoolIcon from "@mui/icons-material/School";
+import ApartmentIcon from "@mui/icons-material/Apartment";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
 
-function DrawerMenuItems({ isAuthenticated, handleClose }) {
+function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout }) {
     const navigate = useNavigate();
 
     const handleNavigate = (path) => {
         navigate(path);
-        handleClose(); // Close the drawer
+        handleClose();
     };
 
     return (
         <Box>
             <Typography variant="subtitle1" sx={{ color: "#ff5757", fontWeight: "bold", mb: 2 }}>
-                Main
+                카테고리
             </Typography>
             <List>
-                <ListItem button onClick={() => handleNavigate("/")}>
-                    <ListItemIcon><HomeIcon /></ListItemIcon>
-                    <ListItemText primary="Home" secondary="Discover latest projects and updates" />
+                <ListItem button onClick={() => handleNavigate("/realestate")}>
+                    <ListItemIcon><ApartmentIcon /></ListItemIcon>
+                    <ListItemText primary="부동산" secondary="부동산 매물 정보 확인하기" />
                 </ListItem>
-                <ListItem button onClick={() => handleNavigate("/launch")}>
-                    <ListItemIcon><CampaignIcon /></ListItemIcon>
-                    <ListItemText 
-                        primary="Launch Your Advertisement" 
-                        secondary="Promote your project to reach a wider audience" 
-                    />
+                <ListItem button onClick={() => handleNavigate("/jobs")}>
+                    <ListItemIcon><WorkIcon /></ListItemIcon>
+                    <ListItemText primary="구인구직" secondary="구직 또는 구인 정보 찾기" />
                 </ListItem>
-                <ListItem button onClick={() => handleNavigate("/about")}>
-                    <ListItemIcon><InfoIcon /></ListItemIcon>
-                    <ListItemText primary="About" secondary="Learn more about our mission" />
+                <ListItem button onClick={() => handleNavigate("/marketplace")}>
+                    <ListItemIcon><StoreIcon /></ListItemIcon>
+                    <ListItemText primary="사고팔기" secondary="중고 물품 사고팔기" />
                 </ListItem>
-                <ListItem button onClick={() => handleNavigate("/contact")}>
-                    <ListItemIcon><ContactMailIcon /></ListItemIcon>
-                    <ListItemText primary="Contact" secondary="Get in touch with us" />
+                <ListItem button onClick={() => handleNavigate("/community")}>
+                    <ListItemIcon><GroupIcon /></ListItemIcon>
+                    <ListItemText primary="동호회" secondary="관심 있는 동호회 참여하기" />
+                </ListItem>
+                <ListItem button onClick={() => handleNavigate("/travel")}>
+                    <ListItemIcon><FlightIcon /></ListItemIcon>
+                    <ListItemText primary="여행" secondary="여행 정보 및 항공권 예약" />
+                </ListItem>
+                <ListItem button onClick={() => handleNavigate("/studyabroad")}>
+                    <ListItemIcon><SchoolIcon /></ListItemIcon>
+                    <ListItemText primary="유학" secondary="유학 및 학업 관련 정보" />
                 </ListItem>
             </List>
 
             <Divider sx={{ my: 2 }} />
 
-            {isAuthenticated && (
+            {isAuthenticated ? (
                 <List>
-                    <ListItem button onClick={() => handleNavigate("/myposts")}>
+                    <ListItem button onClick={() => handleNavigate("/launch")}>
                         <ListItemIcon><NoteAltIcon /></ListItemIcon>
-                        <ListItemText primary="My Posts" />
+                        <ListItemText primary="등록하기" />
                     </ListItem>
-                    <ListItem button onClick={() => handleNavigate("/notifications")}>
-                        <ListItemIcon><NotificationsIcon /></ListItemIcon>
-                        <ListItemText primary="Notifications" />
+                    <ListItem button onClick={() => handleLogout()}>
+                        <ListItemIcon><LogoutIcon /></ListItemIcon>
+                        <ListItemText primary="로그아웃" />
                     </ListItem>
-                    <ListItem button onClick={() => handleNavigate("/profile")}>
-                        <ListItemIcon><AccountCircle /></ListItemIcon>
-                        <ListItemText primary="Profile" />
+                </List>
+            ) : (
+                <List>
+                    <ListItem button onClick={() => handleNavigate("/register")}>
+                        <ListItemIcon><PersonAddIcon /></ListItemIcon>
+                        <ListItemText primary="회원가입" />
+                    </ListItem>
+                    <ListItem button onClick={() => handleNavigate("/login")}>
+                        <ListItemIcon><LockOpenIcon /></ListItemIcon>
+                        <ListItemText primary="로그인" />
                     </ListItem>
                 </List>
             )}

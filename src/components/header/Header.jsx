@@ -43,26 +43,32 @@ function Header() {
     return (
         <Box
             sx={{
-                padding: "10px 20px",
                 backgroundColor: "#ffffff",
                 boxShadow: "0px 2px 2px rgba(0, 0, 0, 0.1)",
-                px: "40px"
             }}
         >
-            <Grid container alignItems="center" justifyContent="space-between">
+            <Box
+                sx={{
+                    display: { xs: "none", md: "flex" },
+                    justifyContent: "flex-end",
+                    alignItems: "center",
+                    padding: "0px 15px",
+                    backgroundColor: "#f0f0f0",
+                }}
+            >
+                <HeaderMenuItems
+                    isAuthenticated={isAuthenticated}
+                    handleLogout={handleLogout}
+                />
+            </Box>
+
+            <Grid container alignItems="center" justifyContent="space-between" sx={{ padding: "10px 20px" }}>
                 <Grid item xs={8} sm={8} md={4}>
                     <AppTitle />
                 </Grid>
 
-                <Grid item md={4} sx={{ display: { xs: "none", md: "flex" } }}>
+                <Grid item md={8} sx={{ display: { xs: "none", md: "flex" } }}>
                     <HeaderNavigationMenuItems />
-                </Grid>
-
-                <Grid item md={4} sx={{ display: { xs: "none", md: "flex" }, justifyContent: "flex-end" }}>
-                    <HeaderMenuItems
-                        isAuthenticated={isAuthenticated}
-                        handleLogout={handleLogout}
-                    />
                 </Grid>
 
                 <Grid item xs={4} sx={{ display: { xs: "flex", md: "none" }, justifyContent: "flex-end" }}>
@@ -84,12 +90,13 @@ function Header() {
                     <IconButton onClick={toggleDrawer(false)}>
                         <CloseIcon />
                     </IconButton>
-                    <Typography variant="h6">Menu</Typography>
+                    <Typography variant="h6">메뉴</Typography>
                 </Box>
 
                 <DrawerMenuItems
                     isAuthenticated={isAuthenticated}
                     handleClose={toggleDrawer(false)}
+                    handleLogout={handleLogout}
                 />
             </Drawer>
         </Box>

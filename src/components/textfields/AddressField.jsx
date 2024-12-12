@@ -1,23 +1,22 @@
 import React from "react";
 import { Typography, TextField, Grid } from "@mui/material";
 
-const StartEndDateField = ({ label, value, error, onChange }) => {
+const AddressField = ({ value, error, onChange }) => {
   return (
-    <Grid item xs={12} sm={6}>
-      <Typography variant="subtitle1" gutterBottom>
-        {label}
+    <Grid item xs={12}>
+      <Typography variant="subtitle1" sx={{ color: "#001f5b" }} gutterBottom>
+        주소
       </Typography>
       <TextField
         fullWidth
-        type="datetime-local"
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        placeholder="주소를 입력하세요"
         error={!!error}
         helperText={error || ""}
-        InputLabelProps={{ shrink: true }}
       />
     </Grid>
   );
 };
 
-export default StartEndDateField;
+export default AddressField;

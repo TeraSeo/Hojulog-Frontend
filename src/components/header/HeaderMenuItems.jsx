@@ -1,40 +1,74 @@
 import React from "react";
-import { Box, IconButton, Button, Badge } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { useNavigate } from "react-router-dom";
 
 function HeaderMenuItems({ isAuthenticated, handleLogout }) {
     const navigate = useNavigate();
 
     return (
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             {isAuthenticated ? (
                 <>
-                    {/* Authenticated User Menu */}
-                    <IconButton size="large" color="default">
-                        <Badge badgeContent={0} color="primary">
-                            <NoteAltIcon />
-                        </Badge>
-                    </IconButton>
-                    <IconButton size="large" color="default">
-                        <Badge badgeContent={0} color="error">
-                            <NotificationsIcon />
-                        </Badge>
-                    </IconButton>
-                    <IconButton size="large" color="default">
-                        <AccountCircle />
-                    </IconButton>
-                    <IconButton size="large" color="default" onClick={handleLogout}>
-                        <LogoutIcon />
-                    </IconButton>
+                    <Button
+                        variant="text"
+                        startIcon={<NoteAltIcon />}
+                        sx={{
+                            color: "#666",
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                            textTransform: "none",
+                        }}
+                        onClick={() => navigate("/launch")}
+                    >
+                        등록하기
+                    </Button>
+                    <Button
+                        variant="text"
+                        startIcon={<LogoutIcon />}
+                        sx={{
+                            color: "#666",
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                            textTransform: "none",
+                        }}
+                        onClick={handleLogout}
+                    >
+                        로그아웃
+                    </Button>
                 </>
             ) : (
-                <Button variant="outlined" color="primary" onClick={() => navigate("/login")}>
-                    Login
-                </Button>
+                <>
+                    <Button
+                        variant="text"
+                        startIcon={<PersonAddIcon />}
+                        sx={{
+                            color: "#666",
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                            textTransform: "none",
+                        }}
+                        onClick={() => navigate("/register")}
+                    >
+                        회원가입
+                    </Button>
+                    <Button
+                        variant="text"
+                        startIcon={<LockOpenIcon />}
+                        sx={{
+                            color: "#666",
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                            textTransform: "none",
+                        }}
+                        onClick={() => navigate("/login")}
+                    >
+                        로그인
+                    </Button>
+                </>
             )}
         </Box>
     );
