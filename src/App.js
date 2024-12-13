@@ -24,6 +24,14 @@ import LaunchCarTransactionPage from './pages/post/transaction/LaunchCarTransact
 import LaunchEtcTransactionPage from './pages/post/transaction/LaunchEtcTransactionPage';
 import LaunchNecessitiesTransactionPage from './pages/post/transaction/LaunchNecessitiesTransactionPage';
 import LaunchProductRentTransactionPage from './pages/post/transaction/LaunchProductRentTransactionPage';
+import LaunchHobbyPage from './pages/post/society/LaunchHobbyPage';
+import LaunchFriendshipPage from './pages/post/society/LaunchFriendshipPage';
+import LaunchShareInfoPage from './pages/post/society/LaunchShareInfoPage';
+import LaunchCoursePage from './pages/post/travel/LaunchCoursePage';
+import LaunchTravelPage from './pages/post/travel/LaunchTravelPage';
+import LaunchRestaurantPage from './pages/post/travel/LaunchRestaurantPage';
+import LaunchSchoolPage from './pages/post/study/LaunchSchoolPage';
+import LaunchMajorPage from './pages/post/study/LaunchMajorPage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -84,6 +92,20 @@ function App() {
                   생활용품: LaunchNecessitiesTransactionPage,
                   기타: LaunchEtcTransactionPage,
                   대여: LaunchProductRentTransactionPage
+                },
+                동호회: {
+                  취미: LaunchHobbyPage,
+                  친목: LaunchFriendshipPage,
+                  정보공유: LaunchShareInfoPage
+                },
+                여행: {
+                  코스: LaunchCoursePage,
+                  여행지: LaunchTravelPage,
+                  레스토랑: LaunchRestaurantPage
+                },
+                유학: {
+                  학교후기: LaunchSchoolPage,
+                  전공후기: LaunchMajorPage
                 }
               }}
             />

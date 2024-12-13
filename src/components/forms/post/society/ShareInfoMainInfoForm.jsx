@@ -5,26 +5,20 @@ import DescriptionField from "../../../textfields/DescriptionField";
 import ContactField from "../../../textfields/ContactField";
 import EmailField from "../../../textfields/EmailField";
 import { isValidPhoneNumber } from "libphonenumber-js";
-import TransactionTypeField from "../../../textfields/TransactionTypeField";
-import IsFreeField from "../../../textfields/IsFreeField";
-import PriceField from "../../../textfields/PriceField";
 
-const EtcTransactionMainInfoForm = ({ onDataChange, setIsFormValid }) => {
+const ShareInfoMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
     title: "",
     description: "",
     contact: "",
     email: "",
-    transactionType: "판매",
-    priceType: "유료",
-    price: "",
   });
 
   const [errors, setErrors] = useState({});
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, priceType, price } = formValues;
+    const { title, description, contact, email } = formValues;
   
     if (!title?.trim()) newErrors.title = "제목은 필수 입력 항목입니다.";
     if (!description?.trim()) newErrors.description = "설명은 필수 입력 항목입니다.";
@@ -42,10 +36,6 @@ const EtcTransactionMainInfoForm = ({ onDataChange, setIsFormValid }) => {
       newErrors.email = "유효하지 않은 이메일 주소입니다.";
     }
 
-    if (priceType === "유료" && (!price || isNaN(price) || parseFloat(price) <= 0)) {
-      newErrors.price = "유효한 가격을 입력하세요.";
-    }
-  
     setErrors(newErrors);
     setIsFormValid(Object.keys(newErrors).length === 0);
   };  
@@ -68,7 +58,7 @@ const EtcTransactionMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         주요 정보 입력
       </Typography>
       <Typography variant="body2" color="textSecondary" gutterBottom>
-        제목, 설명, 연락처, 이메일, 가격 등 정보를 입력하세요.
+        제목, 설명, 연락처, 이메일 등 정보를 입력하세요.
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 1 }}>
@@ -93,26 +83,9 @@ const EtcTransactionMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           onChange={(value) => handleInputChange("email", value)}
         />
 
-        <TransactionTypeField
-          value={formValues.transactionType}
-          onChange={(value) => handleInputChange("transactionType", value)}
-        />
-
-        <IsFreeField
-          value={formValues.priceType}
-          onChange={(value) => handleInputChange("priceType", value)}
-        />
-        {formValues.priceType === "유료" && (
-          <PriceField
-            value={formValues.price}
-            error={errors.price}
-            onChange={(value) => handleInputChange("price", value)}
-            smSize={12}
-          />
-        )}
       </Grid>
     </Paper>
   );
 };
 
-export default EtcTransactionMainInfoForm;
+export default ShareInfoMainInfoForm;

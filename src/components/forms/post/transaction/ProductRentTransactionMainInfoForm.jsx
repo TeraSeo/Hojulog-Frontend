@@ -68,7 +68,7 @@ const ProductRentTransactionMainInfoForm = ({ onDataChange, setIsFormValid }) =>
         주요 정보 입력
       </Typography>
       <Typography variant="body2" color="textSecondary" gutterBottom>
-        제목, 설명, 연락처, 이메일 등 정보를 입력하세요.
+        제목, 설명, 연락처, 이메일, 가격 등 정보를 입력하세요.
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 1 }}>

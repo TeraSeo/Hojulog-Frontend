@@ -4,51 +4,43 @@ import TitleField from "../../../textfields/TitleField";
 import DescriptionField from "../../../textfields/DescriptionField";
 import ContactField from "../../../textfields/ContactField";
 import EmailField from "../../../textfields/EmailField";
+import SchoolField from "../../../textfields/SchoolField";
+import MajorField from "../../../textfields/MajorField";
 import { isValidPhoneNumber } from "libphonenumber-js";
-import TransactionTypeField from "../../../textfields/TransactionTypeField";
-import IsFreeField from "../../../textfields/IsFreeField";
-import PriceField from "../../../textfields/PriceField";
 
-const EtcTransactionMainInfoForm = ({ onDataChange, setIsFormValid }) => {
+const MajorReviewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
     title: "",
     description: "",
     contact: "",
     email: "",
-    transactionType: "판매",
-    priceType: "유료",
-    price: "",
+    school: "",
+    major: "",
   });
 
   const [errors, setErrors] = useState({});
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, priceType, price } = formValues;
-  
+    const { title, description, contact, email, school, major } = formValues;
+
     if (!title?.trim()) newErrors.title = "제목은 필수 입력 항목입니다.";
     if (!description?.trim()) newErrors.description = "설명은 필수 입력 항목입니다.";
-  
-    if (!contact?.trim() && !email?.trim()) {
-      newErrors.contact = "휴대폰 번호나 이메일 주소 중 하나는 필수입니다.";
-      newErrors.email = "휴대폰 번호나 이메일 주소 중 하나는 필수입니다.";
-    }
-  
+
     if (contact?.trim() && !isValidPhoneNumber(contact)) {
       newErrors.contact = "유효하지 않은 휴대폰 번호입니다.";
     }
-  
+
     if (email?.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       newErrors.email = "유효하지 않은 이메일 주소입니다.";
     }
 
-    if (priceType === "유료" && (!price || isNaN(price) || parseFloat(price) <= 0)) {
-      newErrors.price = "유효한 가격을 입력하세요.";
-    }
-  
+    if (!school?.trim()) newErrors.school = "학교 이름은 필수 입력 항목입니다.";
+    if (!major?.trim()) newErrors.major = "전공은 필수 입력 항목입니다.";
+
     setErrors(newErrors);
     setIsFormValid(Object.keys(newErrors).length === 0);
-  };  
+  };
 
   useEffect(() => {
     checkFormValidity();
@@ -68,7 +60,7 @@ const EtcTransactionMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         주요 정보 입력
       </Typography>
       <Typography variant="body2" color="textSecondary" gutterBottom>
-        제목, 설명, 연락처, 이메일, 가격 등 정보를 입력하세요.
+        제목, 설명, 학교 이름, 전공, 연락처, 이메일 등 정보를 입력하세요.
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 1 }}>
@@ -82,6 +74,7 @@ const EtcTransactionMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           error={errors.description}
           onChange={(value) => handleInputChange("description", value)}
         />
+        
         <ContactField
           value={formValues.contact}
           error={errors.contact}
@@ -93,26 +86,19 @@ const EtcTransactionMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           onChange={(value) => handleInputChange("email", value)}
         />
 
-        <TransactionTypeField
-          value={formValues.transactionType}
-          onChange={(value) => handleInputChange("transactionType", value)}
+        <SchoolField
+          value={formValues.school}
+          error={errors.school}
+          onChange={(value) => handleInputChange("school", value)}
         />
-
-        <IsFreeField
-          value={formValues.priceType}
-          onChange={(value) => handleInputChange("priceType", value)}
+        <MajorField
+          value={formValues.major}
+          error={errors.major}
+          onChange={(value) => handleInputChange("major", value)}
         />
-        {formValues.priceType === "유료" && (
-          <PriceField
-            value={formValues.price}
-            error={errors.price}
-            onChange={(value) => handleInputChange("price", value)}
-            smSize={12}
-          />
-        )}
       </Grid>
     </Paper>
   );
 };
 
-export default EtcTransactionMainInfoForm;
+export default MajorReviewMainInfoForm;
