@@ -8,6 +8,8 @@ import FlightIcon from "@mui/icons-material/Flight";
 import SchoolIcon from "@mui/icons-material/School";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import HeadsetMicIcon from "@mui/icons-material/HeadsetMic";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
@@ -55,10 +57,18 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout }) {
             <Divider sx={{ my: 2 }} />
 
             {isAuthenticated ? (
-                <List>
+                <List sx={{ mb: 4 }}>
                     <ListItem button onClick={() => handleNavigate("/launch")}>
                         <ListItemIcon><NoteAltIcon /></ListItemIcon>
                         <ListItemText primary="등록하기" />
+                    </ListItem>
+                    <ListItem button onClick={() => handleNavigate("/mypage")}>
+                        <ListItemIcon><AccountCircleIcon sx={{ color: "#666" }} /></ListItemIcon>
+                        <ListItemText primary="마이페이지" sx={{ color: "#666", fontWeight: "bold" }} />
+                    </ListItem>
+                    <ListItem button onClick={() => handleNavigate("/customer-center")}>
+                        <ListItemIcon><HeadsetMicIcon sx={{ color: "#666" }} /></ListItemIcon>
+                        <ListItemText primary="고객센터" sx={{ color: "#666", fontWeight: "bold" }} />
                     </ListItem>
                     <ListItem button onClick={() => handleLogout()}>
                         <ListItemIcon><LogoutIcon /></ListItemIcon>
@@ -66,7 +76,7 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout }) {
                     </ListItem>
                 </List>
             ) : (
-                <List>
+                <List sx={{ mb: 4 }}>
                     <ListItem button onClick={() => handleNavigate("/register")}>
                         <ListItemIcon><PersonAddIcon /></ListItemIcon>
                         <ListItemText primary="회원가입" />

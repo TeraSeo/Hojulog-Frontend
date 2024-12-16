@@ -3,7 +3,6 @@ import { Box, Grid, IconButton, Drawer, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import AppTitle from "../texts/AppTitle";
-import HeaderNavigationMenuItems from "./HeaderNavigationMenuItems";
 import HeaderMenuItems from "./HeaderMenuItems";
 import DrawerMenuItems from "../drawer/DrawerMenuItems";
 import { validateToken } from "../../service/UserService";
@@ -62,16 +61,16 @@ function Header() {
                 />
             </Box>
 
-            <Grid container alignItems="center" justifyContent="space-between" sx={{ padding: "10px 20px" }}>
+            <Grid container alignItems="center" justifyContent="space-between" sx={{ py: "10px", px: {md: "140px", sm: "60px", xs: "20px"} }}>
                 <Grid item xs={8} sm={8} md={4}>
                     <AppTitle />
                 </Grid>
 
-                <Grid item md={8} sx={{ display: { xs: "none", md: "flex" } }}>
+                {/* <Grid item md={8} sx={{ display: { xs: "none", md: "flex" } }}>
                     <HeaderNavigationMenuItems />
-                </Grid>
+                </Grid> */}
 
-                <Grid item xs={4} sx={{ display: { xs: "flex", md: "none" }, justifyContent: "flex-end" }}>
+                <Grid item xs={4} sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <IconButton onClick={toggleDrawer(true)}>
                         <MenuIcon />
                     </IconButton>

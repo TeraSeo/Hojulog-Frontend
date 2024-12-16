@@ -87,7 +87,7 @@ const LaunchProductRentTransactionPage = () => {
       sx={{ padding: 4, margin: 4, maxWidth: 800, mx: "auto", backgroundColor: "#f7f9fc" }}
     >
       <Typography variant="h4" gutterBottom align="center" sx={{ color: logoPrimaryColor }}>
-        자동차 매물 등록하기
+        대여 매물 등록하기
       </Typography>
       <Typography variant="subtitle1" align="center" color="textSecondary" sx={{ marginBottom: 4 }}>
         필요한 모든 정보를 입력해주세요

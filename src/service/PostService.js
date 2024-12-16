@@ -26,6 +26,29 @@ function getPostsByPageNCondition(page, condition) {
     )
 }
 
+function getRecent5SummarizedPostsByCategory(category) {
+    const userId = localStorage.getItem('userId');
+
+    return axios.get("http://localhost:8080/api/post/get/recent-5-post/by/category", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "category": category
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
 function getSpecificPost(postId) {
     const userId = localStorage.getItem('userId');
 
@@ -309,4 +332,4 @@ const normalizeEmptyStringsToNull = (data) => {
   );
 };
 
-export { getPostsByPageNCondition, getSpecificPost, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy, postTechnology, postRestaurant, postEducation, postLifestyle, postEntertainment, normalizeEmptyStringsToNull };
+export { getPostsByPageNCondition, getRecent5SummarizedPostsByCategory, getSpecificPost, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy, postTechnology, postRestaurant, postEducation, postLifestyle, postEntertainment, normalizeEmptyStringsToNull };

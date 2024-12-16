@@ -6,6 +6,7 @@ import ContactField from "../../../textfields/ContactField";
 import EmailField from "../../../textfields/EmailField";
 import SchoolField from "../../../textfields/SchoolField";
 import { isValidPhoneNumber } from "libphonenumber-js";
+import SuburbField from "../../../textfields/SuburbField";
 
 const SchoolReivewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
@@ -13,14 +14,15 @@ const SchoolReivewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     description: "",
     contact: "",
     email: "",
-    school: "", // Add school to the form values
+    school: "",
+    suburb: ""
   });
 
   const [errors, setErrors] = useState({});
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, school } = formValues;
+    const { title, description, contact, email, school, suburb } = formValues;
 
     if (!title?.trim()) newErrors.title = "제목은 필수 입력 항목입니다.";
     if (!description?.trim()) newErrors.description = "설명은 필수 입력 항목입니다.";
@@ -34,6 +36,10 @@ const SchoolReivewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     }
 
     if (!school?.trim()) newErrors.school = "학교 이름은 필수 입력 항목입니다.";
+
+    if (!suburb?.trim()) {
+      newErrors.suburb = "지역을 선택하세요.";
+    }
 
     setErrors(newErrors);
     setIsFormValid(Object.keys(newErrors).length === 0);
@@ -57,7 +63,7 @@ const SchoolReivewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         주요 정보 입력
       </Typography>
       <Typography variant="body2" color="textSecondary" gutterBottom>
-        제목, 설명, 학교 이름, 연락처, 이메일 등 정보를 입력하세요.
+        제목, 설명, 학교 이름, 연락처, 이메일, 지역 등 정보를 입력하세요.
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 1 }}>
@@ -85,6 +91,11 @@ const SchoolReivewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           value={formValues.school}
           error={errors.school}
           onChange={(value) => handleInputChange("school", value)}
+        />
+        <SuburbField
+          value={formValues.suburb}
+          error={errors.suburb}
+          onChange={(value) => handleInputChange("suburb", value)}
         />
       </Grid>
     </Paper>

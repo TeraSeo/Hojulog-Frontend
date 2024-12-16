@@ -51,7 +51,7 @@ const CategorySidebar = () => {
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "space-between",
-                                padding: "8px 16px",
+                                padding: "8px 8px",
                                 borderRadius: "4px",
                                 "&:hover": { backgroundColor: "#f5f5f5" },
                             }}
@@ -76,7 +76,7 @@ const CategorySidebar = () => {
                                     <ListItem
                                         key={index}
                                         sx={{
-                                            padding: "8px 32px",
+                                            padding: "8px 8px",
                                             "&:hover": { backgroundColor: "#f9f9f9" },
                                         }}
                                     >

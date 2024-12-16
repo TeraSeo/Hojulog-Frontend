@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography, TextField, Grid, InputAdornment } from "@mui/material";
-import SchoolIcon from "@mui/icons-material/School"; 
+import LocalLibraryIcon from "@mui/icons-material/LocalLibrary"; 
 
 const MAX_LENGTH = 100;
 
@@ -31,7 +31,7 @@ const MajorField = ({ value, error, onChange }) => {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <SchoolIcon />
+              <LocalLibraryIcon />
             </InputAdornment>
           ),
         }}

@@ -4,13 +4,15 @@ import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle"; 
+import HeadsetMicIcon from "@mui/icons-material/HeadsetMic";
 import { useNavigate } from "react-router-dom";
 
 function HeaderMenuItems({ isAuthenticated, handleLogout }) {
     const navigate = useNavigate();
 
     return (
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2, px: "130px" }}>
             {isAuthenticated ? (
                 <>
                     <Button
@@ -25,6 +27,34 @@ function HeaderMenuItems({ isAuthenticated, handleLogout }) {
                         onClick={() => navigate("/launch")}
                     >
                         등록하기
+                    </Button>
+
+                    <Button
+                        variant="text"
+                        startIcon={<AccountCircleIcon />}
+                        sx={{
+                            color: "#666",
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                            textTransform: "none",
+                        }}
+                        onClick={() => navigate("/mypage")}
+                    >
+                        마이페이지
+                    </Button>
+
+                    <Button
+                        variant="text"
+                        startIcon={<HeadsetMicIcon />}
+                        sx={{
+                            color: "#666",
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                            textTransform: "none",
+                        }}
+                        onClick={() => navigate("/customer-center")}
+                    >
+                        고객센터
                     </Button>
                     <Button
                         variant="text"

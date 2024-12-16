@@ -4,8 +4,9 @@ import TitleField from "../../../textfields/TitleField";
 import DescriptionField from "../../../textfields/DescriptionField";
 import ContactField from "../../../textfields/ContactField";
 import EmailField from "../../../textfields/EmailField";
-import { isValidPhoneNumber } from "libphonenumber-js";
 import JobTypeField from "../../../textfields/JobTypeField";
+import SuburbField from "../../../textfields/SuburbField";
+import { isValidPhoneNumber } from "libphonenumber-js";
 
 const RecruitmentMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
@@ -13,27 +14,28 @@ const RecruitmentMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     description: "",
     contact: "",
     email: "",
-    jobType: ""
+    jobType: "",
+    suburb: ""
   });
 
   const [errors, setErrors] = useState({});
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, jobType } = formValues;
-  
+    const { title, description, contact, email, jobType, suburb } = formValues;
+
     if (!title?.trim()) newErrors.title = "제목은 필수 입력 항목입니다.";
     if (!description?.trim()) newErrors.description = "설명은 필수 입력 항목입니다.";
-  
+
     if (!contact?.trim() && !email?.trim()) {
       newErrors.contact = "휴대폰 번호나 이메일 주소 중 하나는 필수입니다.";
       newErrors.email = "휴대폰 번호나 이메일 주소 중 하나는 필수입니다.";
     }
-  
+
     if (contact?.trim() && !isValidPhoneNumber(contact)) {
       newErrors.contact = "유효하지 않은 휴대폰 번호입니다.";
     }
-  
+
     if (email?.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       newErrors.email = "유효하지 않은 이메일 주소입니다.";
     }
@@ -41,10 +43,14 @@ const RecruitmentMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     if (!jobType?.trim()) {
       newErrors.jobType = "근무 형태를 선택하세요.";
     }
-  
+
+    if (!suburb?.trim()) {
+      newErrors.suburb = "지역을 선택하세요.";
+    }
+
     setErrors(newErrors);
     setIsFormValid(Object.keys(newErrors).length === 0);
-  };  
+  };
 
   useEffect(() => {
     checkFormValidity();
@@ -64,7 +70,7 @@ const RecruitmentMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         주요 정보 입력
       </Typography>
       <Typography variant="body2" color="textSecondary" gutterBottom>
-        제목, 설명, 연락처, 이메일 등 정보를 입력하세요.
+        제목, 설명, 연락처, 이메일, 근무 형태, 지역 등 정보를 입력하세요.
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 1 }}>
@@ -88,11 +94,15 @@ const RecruitmentMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           error={errors.email}
           onChange={(value) => handleInputChange("email", value)}
         />
-
         <JobTypeField
           value={formValues.jobType}
           error={errors.jobType}
           onChange={(value) => handleInputChange("jobType", value)}
+        />
+        <SuburbField
+          value={formValues.suburb}
+          error={errors.suburb}
+          onChange={(value) => handleInputChange("suburb", value)}
         />
       </Grid>
     </Paper>

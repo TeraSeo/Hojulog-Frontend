@@ -7,6 +7,7 @@ import EmailField from "../../../textfields/EmailField";
 import AddressField from "../../../textfields/AddressField";
 import CountrySelectField from "../../../textfields/CountrySelectField";
 import { isValidPhoneNumber } from "libphonenumber-js";
+import SuburbField from "../../../textfields/SuburbField";
 
 const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
@@ -16,13 +17,14 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     email: "",
     address: "",
     country: "호주",
+    suburb: ""
   });
 
   const [errors, setErrors] = useState({});
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, country } = formValues;
+    const { title, description, contact, email, country, suburb } = formValues;
 
     if (!title?.trim()) newErrors.title = "제목은 필수 입력 항목입니다.";
     if (!description?.trim()) newErrors.description = "설명은 필수 입력 항목입니다.";
@@ -39,6 +41,10 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     }
 
     if (!country) newErrors.country = "나라를 선택해주세요.";
+
+    if (!suburb?.trim()) {
+      newErrors.suburb = "지역을 선택하세요.";
+    }
 
     setErrors(newErrors);
     setIsFormValid(Object.keys(newErrors).length === 0);
@@ -62,7 +68,7 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         주요 정보 입력
       </Typography>
       <Typography variant="body2" color="textSecondary" gutterBottom>
-        제목, 설명, 연락처, 이메일, 나라 등 정보를 입력하세요.
+        제목, 설명, 연락처, 이메일, 나라, 지역 등 정보를 입력하세요.
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 1 }}>
@@ -97,6 +103,12 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           value={formValues.address}
           error={errors.address}
           onChange={(value) => handleInputChange("address", value)}
+        />
+
+        <SuburbField
+          value={formValues.suburb}
+          error={errors.suburb}
+          onChange={(value) => handleInputChange("suburb", value)}
         />
       </Grid>
     </Paper>
