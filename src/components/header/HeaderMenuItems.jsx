@@ -19,7 +19,7 @@ function HeaderMenuItems({ isAuthenticated, handleLogout }) {
                         variant="text"
                         startIcon={<NoteAltIcon />}
                         sx={{
-                            color: "#666",
+                            color: "#FFFFFF", // 666
                             fontSize: "14px",
                             fontWeight: "bold",
                             textTransform: "none",
@@ -33,7 +33,7 @@ function HeaderMenuItems({ isAuthenticated, handleLogout }) {
                         variant="text"
                         startIcon={<AccountCircleIcon />}
                         sx={{
-                            color: "#666",
+                            color: "#FFFFFF",
                             fontSize: "14px",
                             fontWeight: "bold",
                             textTransform: "none",
@@ -47,7 +47,7 @@ function HeaderMenuItems({ isAuthenticated, handleLogout }) {
                         variant="text"
                         startIcon={<HeadsetMicIcon />}
                         sx={{
-                            color: "#666",
+                            color: "#FFFFFF",
                             fontSize: "14px",
                             fontWeight: "bold",
                             textTransform: "none",
@@ -60,7 +60,7 @@ function HeaderMenuItems({ isAuthenticated, handleLogout }) {
                         variant="text"
                         startIcon={<LogoutIcon />}
                         sx={{
-                            color: "#666",
+                            color: "#FFFFFF",
                             fontSize: "14px",
                             fontWeight: "bold",
                             textTransform: "none",
@@ -76,7 +76,7 @@ function HeaderMenuItems({ isAuthenticated, handleLogout }) {
                         variant="text"
                         startIcon={<PersonAddIcon />}
                         sx={{
-                            color: "#666",
+                            color: "#FFFFFF",
                             fontSize: "14px",
                             fontWeight: "bold",
                             textTransform: "none",
@@ -89,7 +89,7 @@ function HeaderMenuItems({ isAuthenticated, handleLogout }) {
                         variant="text"
                         startIcon={<LockOpenIcon />}
                         sx={{
-                            color: "#666",
+                            color: "#FFFFFF",
                             fontSize: "14px",
                             fontWeight: "bold",
                             textTransform: "none",

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import HomeContainerBox from "./HomeContainerBox";
-import { getRecent5SummarizedPostsByCategory } from "../../../service/PostService";
+import { getRecent5TransactionPosts } from "../../../service/PostService";
 import { Box } from "@mui/material";
 import HomeSummarizedTransactionPropertyBox from "../post/transaction/HomeSummarizedTransactionPropertyBox";
 
@@ -8,7 +8,7 @@ const HomeTransactionPosts = () => {
     const [summarizedTransactionPostData, setSummarizedTransactionPostData] = useState([]);
 
     useEffect(() => {
-        getRecent5SummarizedPostsByCategory("사고팔기")
+        getRecent5TransactionPosts()
             .then((data) => setSummarizedTransactionPostData(data))
             .catch((error) => console.error("Error fetching posts:", error));
     }, []);

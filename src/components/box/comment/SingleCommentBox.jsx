@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, Typography, Avatar, IconButton } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { logoPrimaryColor } from "../../../constant/Color";
+import { primaryColor } from "../../../constant/Color";
 import CreatedAtText from "../../texts/CreatedAtText";
 import { addCommentLike, removeCommentLike } from "../../../service/CommentLikeService";
 
@@ -75,7 +75,7 @@ const SingleCommentBox = ({ comment }) => {
           <IconButton
             aria-label="favorite"
             sx={{
-              color: isLiked ? "red" : logoPrimaryColor,
+              color: isLiked ? "red" : primaryColor,
               padding: "4px"
             }}
             onClick={handleLikeClicked}

@@ -1,2 +1,2 @@
-export const logoPrimaryColor = "#001f5b";
-export const logoAccentColor = "#ffb300";
+export const primaryColor = "#001f5b";
+export const secondaryColor = "#FF9F43";

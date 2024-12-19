@@ -1,6 +1,6 @@
 import { Box, IconButton } from "@mui/material";
 import React from "react";
-import { logoPrimaryColor } from "../../constant/Color";
+import { primaryColor } from "../../constant/Color";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { addPostBookmark, removePostBookmark } from "../../service/PostBookmarkService";
@@ -22,7 +22,7 @@ const PostBookmarkButton = ({ postData, isBookmarked, setIsBookmarked }) => {
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <IconButton
                 sx={{
-                color: logoPrimaryColor,
+                color: primaryColor,
                 padding: 0,
                 fontSize: "24px",
                 }}

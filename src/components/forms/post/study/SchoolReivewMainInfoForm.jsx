@@ -7,6 +7,7 @@ import EmailField from "../../../textfields/EmailField";
 import SchoolField from "../../../textfields/SchoolField";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import SuburbField from "../../../textfields/SuburbField";
+import { contactRequiredError, descriptionRequiredError, emailRequiredError, schoolRequiredError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
 
 const SchoolReivewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
@@ -24,21 +25,21 @@ const SchoolReivewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     const newErrors = {};
     const { title, description, contact, email, school, suburb } = formValues;
 
-    if (!title?.trim()) newErrors.title = "제목은 필수 입력 항목입니다.";
-    if (!description?.trim()) newErrors.description = "설명은 필수 입력 항목입니다.";
+    if (!title?.trim()) newErrors.title = titleRequiredError;
+    if (!description?.trim()) newErrors.description = descriptionRequiredError;
 
     if (contact?.trim() && !isValidPhoneNumber(contact)) {
-      newErrors.contact = "유효하지 않은 휴대폰 번호입니다.";
+      newErrors.contact = contactRequiredError;
     }
 
     if (email?.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = "유효하지 않은 이메일 주소입니다.";
+      newErrors.email = emailRequiredError;
     }
 
-    if (!school?.trim()) newErrors.school = "학교 이름은 필수 입력 항목입니다.";
+    if (!school?.trim()) newErrors.school = schoolRequiredError;
 
     if (!suburb?.trim()) {
-      newErrors.suburb = "지역을 선택하세요.";
+      newErrors.suburb = suburbRequiredError;
     }
 
     setErrors(newErrors);

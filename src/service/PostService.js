@@ -26,17 +26,12 @@ function getPostsByPageNCondition(page, condition) {
     )
 }
 
-function getRecent5SummarizedPostsByCategory(category) {
-    const userId = localStorage.getItem('userId');
-
-    return axios.get("http://localhost:8080/api/post/get/recent-5-post/by/category", {
+function getRecent5JobPosts() {
+    return axios.get("http://localhost:8080/api/post/get/recent-5/job/post", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        params: {
-            "category": category
-        }
     })
     .then((response) => {
             return response.data;
@@ -47,6 +42,96 @@ function getRecent5SummarizedPostsByCategory(category) {
             return [];
         }
     )
+}
+
+function getRecent5PropertyPosts() {
+    return axios.get("http://localhost:8080/api/post/get/recent-5/property/post", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getRecent5TransactionPosts() {
+    return axios.get("http://localhost:8080/api/post/get/recent-5/transaction/post", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getRecent5SocietyPosts() {
+    return axios.get("http://localhost:8080/api/post/get/recent-5/society/post", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getRecent5TravelPosts() {
+    return axios.get("http://localhost:8080/api/post/get/recent-5/travel/post", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+      }
+    )  
+}
+
+function getRecent5StudyPosts() {
+    return axios.get("http://localhost:8080/api/post/get/recent-5/study/post", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+      }
+    )  
 }
 
 function getSpecificPost(postId) {
@@ -332,4 +417,4 @@ const normalizeEmptyStringsToNull = (data) => {
   );
 };
 
-export { getPostsByPageNCondition, getRecent5SummarizedPostsByCategory, getSpecificPost, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy, postTechnology, postRestaurant, postEducation, postLifestyle, postEntertainment, normalizeEmptyStringsToNull };
+export { getPostsByPageNCondition, getRecent5JobPosts, getRecent5PropertyPosts, getRecent5TransactionPosts, getRecent5SocietyPosts, getRecent5TravelPosts, getRecent5StudyPosts, getSpecificPost, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy, postTechnology, postRestaurant, postEducation, postLifestyle, postEntertainment, normalizeEmptyStringsToNull };

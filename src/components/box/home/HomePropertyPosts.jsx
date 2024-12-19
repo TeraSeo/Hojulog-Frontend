@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import HomeSummarizedPropertyPostBox from "../post/property/HomeSummarizedPropertyPostBox";
 import HomeContainerBox from "./HomeContainerBox";
-import { getRecent5SummarizedPostsByCategory } from "../../../service/PostService";
+import { getRecent5PropertyPosts } from "../../../service/PostService";
 
 const HomePropertyPosts = () => {
     const [summarizedPropertyPostData, setSummarizedPropertyPostData] = useState([]);
 
     useEffect(() => {
-        getRecent5SummarizedPostsByCategory("부동산")
+        getRecent5PropertyPosts()
             .then((data) => setSummarizedPropertyPostData(data))
             .catch((error) => console.error("Error fetching posts:", error));
     }, []);

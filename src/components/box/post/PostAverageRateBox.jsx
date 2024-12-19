@@ -12,16 +12,18 @@ const PostAverageRateBox = ({ averageRate }) => {
                 readOnly
                 size="small"
             />
-            <Typography
-                variant="body2"
-                sx={{
-                    ml: 1,
-                    fontWeight: "500",
-                    color: "text.secondary",
-                }}
-            >
-                {formattedRate}
-            </Typography>
+            <Box sx={{ width: "30px"}}>
+                <Typography
+                    variant="body2"
+                    sx={{
+                        ml: 1,
+                        fontWeight: "500",
+                        color: "text.secondary",
+                    }}
+                >
+                    {formattedRate}
+                </Typography>
+            </Box>
         </Box>
     );
 };

@@ -2,9 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { Paper, Typography, Grid,Box, Button } from "@mui/material";
 import { postTransaction } from "../../../service/PostService";
 import { useNavigate } from "react-router-dom";
-import { logoPrimaryColor } from "../../../constant/Color";
+import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
-import LifeStylePostPreviewDialog from "../../../components/dialog/LifeStylePostPreviewDialog";
 import NecessitiesTransactionMainInfoForm from "../../../components/forms/post/transaction/NecessitiesTransactionMainInfoForm";
 import NecessitiesTransactionMediaUploadForm from "../../../components/forms/post/transaction/NecessitiesTransactionMediaUploadForm";
 
@@ -86,7 +85,7 @@ const LaunchNecessitiesTransactionPage = () => {
       elevation={3}
       sx={{ padding: 4, margin: 4, maxWidth: 800, mx: "auto", backgroundColor: "#f7f9fc" }}
     >
-      <Typography variant="h4" gutterBottom align="center" sx={{ color: logoPrimaryColor }}>
+      <Typography variant="h4" gutterBottom align="center" sx={{ color: primaryColor }}>
         생활용품 매물 등록하기
       </Typography>
       <Typography variant="subtitle1" align="center" color="textSecondary" sx={{ marginBottom: 4 }}>
@@ -115,7 +114,7 @@ const LaunchNecessitiesTransactionPage = () => {
             <Button
               type="button"
               variant="outlined"
-              sx={{ marginRight: 2, color: logoPrimaryColor, borderColor: logoPrimaryColor }}
+              sx={{ marginRight: 2, color: primaryColor, borderColor: primaryColor }}
               size="large"
               onClick={handlePreview}
             >
@@ -124,7 +123,7 @@ const LaunchNecessitiesTransactionPage = () => {
             <Button
               type="submit"
               variant="contained"
-              sx={{ backgroundColor: logoPrimaryColor, color: "#FFF" }}
+              sx={{ backgroundColor: primaryColor, color: "#FFF" }}
               size="large"
               disabled={!isMainValid || !isMediaValid || isLoading}
               onClick={handleSubmit}
@@ -140,13 +139,6 @@ const LaunchNecessitiesTransactionPage = () => {
           </Box>
         </Grid>
       </Grid>
-
-      <LifeStylePostPreviewDialog
-        open={isPreviewOpen}
-        onClose={handleClosePreview}
-        mainInfoData={mainInfoData}
-        mediaData={mediaData}
-      />
     </Paper>
   );
 };

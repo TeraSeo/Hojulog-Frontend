@@ -1,19 +1,19 @@
 import React from "react";
 import { Box, Typography, Link, Grid, IconButton } from "@mui/material";
 import { Facebook, Twitter, Instagram, LinkedIn } from "@mui/icons-material";
+import { primaryColor, secondaryColor } from "../../constant/Color";
 
 function Footer() {
     return (
         <Box
             sx={{
-                backgroundColor: "#1A2E5B", // Navy blue color matching the header
+                backgroundColor: primaryColor,
                 color: "#ffffff",
                 padding: "40px 20px",
                 textAlign: "center",
             }}
         >
             <Grid container spacing={4} justifyContent="center">
-                {/* Quick Links Section */}
                 <Grid item xs={12} sm={4}>
                     <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
                         Quick Links
@@ -32,7 +32,6 @@ function Footer() {
                     </Link>
                 </Grid>
 
-                {/* Contact Section */}
                 <Grid item xs={12} sm={4}>
                     <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
                         Contact Us
@@ -43,7 +42,6 @@ function Footer() {
                     <Typography variant="body2">Phone: (123) 456-7890</Typography>
                 </Grid>
 
-                {/* Social Media Section */}
                 <Grid item xs={12} sm={4}>
                     <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
                         Follow Us
@@ -52,28 +50,28 @@ function Footer() {
                         <IconButton
                             href="https://facebook.com"
                             target="_blank"
-                            sx={{ color: "#FFA726" }} // Orange color for icons
+                            sx={{ color: secondaryColor }}
                         >
                             <Facebook />
                         </IconButton>
                         <IconButton
                             href="https://twitter.com"
                             target="_blank"
-                            sx={{ color: "#FFA726" }}
+                            sx={{ color: secondaryColor }}
                         >
                             <Twitter />
                         </IconButton>
                         <IconButton
                             href="https://instagram.com"
                             target="_blank"
-                            sx={{ color: "#FFA726" }}
+                            sx={{ color: secondaryColor }}
                         >
                             <Instagram />
                         </IconButton>
                         <IconButton
                             href="https://linkedin.com"
                             target="_blank"
-                            sx={{ color: "#FFA726" }}
+                            sx={{ color: secondaryColor }}
                         >
                             <LinkedIn />
                         </IconButton>

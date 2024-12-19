@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, IconButton, Typography } from "@mui/material";
-import { logoPrimaryColor } from "../../constant/Color";
+import { primaryColor } from "../../constant/Color";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { addPostLike, removePostLike } from "../../service/PostLikeService";
@@ -24,7 +24,7 @@ const PostLikeButton = ({ postId, wholeLikesCount, setWholeLikesCount, isLiked, 
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <IconButton
             sx={{
-              color: isLiked ? "red" : logoPrimaryColor,
+              color: isLiked ? "red" : primaryColor,
               padding: 0,
               fontSize: "24px",
               marginRight: "8px",
@@ -41,7 +41,7 @@ const PostLikeButton = ({ postId, wholeLikesCount, setWholeLikesCount, isLiked, 
             variant="body2"
             sx={{
               fontWeight: "bold",
-              color: logoPrimaryColor,
+              color: primaryColor,
               fontSize: "14px",
             }}
           >

@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
 import appStoreIcon from "../../assets/images/app-store.png";
-import { logoPrimaryColor } from "../../constant/Color";
+import { primaryColor } from "../../constant/Color";
 
 const AppStoreLinkButton = ({ appStoreUrl }) => {
     const navigateToAppStore = (url) => {
@@ -15,7 +15,7 @@ const AppStoreLinkButton = ({ appStoreUrl }) => {
                 variant="outlined"
                 color="secondary"
                 onClick={() => navigateToAppStore(appStoreUrl)}
-                sx={{ textTransform: 'none', display: 'flex', alignItems: 'center', gap: 1, borderColor: logoPrimaryColor, color: logoPrimaryColor }}
+                sx={{ textTransform: 'none', display: 'flex', alignItems: 'center', gap: 1, borderColor: primaryColor, color: primaryColor }}
                 >
                 <img src={appStoreIcon} alt="App Store" style={{ width: 24, height: 24 }} />
                 App Store

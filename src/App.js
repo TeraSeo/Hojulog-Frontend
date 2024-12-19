@@ -32,6 +32,12 @@ import LaunchTravelPage from './pages/post/travel/LaunchTravelPage';
 import LaunchRestaurantPage from './pages/post/travel/LaunchRestaurantPage';
 import LaunchSchoolPage from './pages/post/study/LaunchSchoolPage';
 import LaunchMajorPage from './pages/post/study/LaunchMajorPage';
+import WholePropertyPostPage from './pages/post/property/WholePropertyPostPage';
+import WholeJobPostPage from './pages/post/job/WholeJobPostPage';
+import WholeTransactionPostPage from './pages/post/transaction/WholeTransactionPostPage';
+import WholeSocietyPostPage from './pages/post/society/WholeSocietyPostPage';
+import WholeTravelPostPage from './pages/post/travel/WholeTravelPostPage';
+import WholeStudyPostPage from './pages/post/study/WholeStudyPostPage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -135,6 +141,14 @@ function App() {
           <Route element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="home" element={<HomePage />} />
+
+            <Route path="realestate" element={<WholePropertyPostPage />} />
+            <Route path="jobs" element={<WholeJobPostPage />} />
+            <Route path="marketplace" element={<WholeTransactionPostPage />} />
+            <Route path="community" element={<WholeSocietyPostPage />} />
+            <Route path="travel" element={<WholeTravelPostPage />} />
+            <Route path="studyabroad" element={<WholeStudyPostPage />} />
+
             <Route path="launch" element={<SelectCategoryPage />} />
             <Route path=":category/:formattedTitle/details" element={<DynamicDetailedPage />} />
 

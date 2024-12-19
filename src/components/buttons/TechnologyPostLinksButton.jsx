@@ -3,7 +3,7 @@ import { Box, Button, Menu, MenuItem } from "@mui/material";
 import appStoreIcon from "../../assets/images/app-store.png";
 import playStoreIcon from "../../assets/images/play-store.png";
 import webIcon from "../../assets/images/web.png";
-import { logoPrimaryColor } from "../../constant/Color";
+import { primaryColor } from "../../constant/Color";
 import VisitWebsiteButton from "./VisitWebsiteButton";
 import AppStoreLinkButton from "./AppStoreLinkButton";
 import PlayStoreLinkButton from "./PlayStoreLinkButton";
@@ -58,7 +58,7 @@ const TechnologyPostLinksButton = ({ postData }) => {
             variant="contained"
             color="secondary"
             onClick={handleVisitClick}
-            sx={{ textTransform: 'none', fontWeight: 'bold', backgroundColor: logoPrimaryColor }}
+            sx={{ textTransform: 'none', fontWeight: 'bold', backgroundColor: primaryColor }}
           >
             Visit
           </Button>

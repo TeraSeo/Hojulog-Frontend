@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import React from "react";
-import { logoPrimaryColor } from "../../constant/Color";
+import { primaryColor } from "../../constant/Color";
 import webIcon from "../../assets/images/web.png";
 
 const VisitWebsiteButton = ({ webUrl }) => {
@@ -15,7 +15,7 @@ const VisitWebsiteButton = ({ webUrl }) => {
                     variant="outlined"
                     color="secondary"
                     onClick={() => naviageteToWebSite(webUrl)}
-                    sx={{ textTransform: 'none', display: 'flex', alignItems: 'center', gap: 1, borderColor: logoPrimaryColor, color: logoPrimaryColor, borderRadius: '8px' }}
+                    sx={{ textTransform: 'none', display: 'flex', alignItems: 'center', gap: 1, borderColor: primaryColor, color: primaryColor, borderRadius: '8px' }}
                 >
                     <img src={webIcon} alt="Website" style={{ width: 24, height: 24 }} />
                     Visit Website

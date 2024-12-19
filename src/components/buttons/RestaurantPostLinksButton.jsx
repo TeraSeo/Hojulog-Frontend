@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Menu, MenuItem } from "@mui/material";
 import webIcon from "../../assets/images/web.png";
-import { logoPrimaryColor } from "../../constant/Color";
+import { primaryColor } from "../../constant/Color";
 import LocationButton from "./LocationButton";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import VisitWebsiteButton from "./VisitWebsiteButton";
@@ -55,7 +55,7 @@ const RestaurantPostLinksButton = ({ postData }) => {
             variant="contained"
             color="secondary"
             onClick={handleVisitClick}
-            sx={{ textTransform: 'none', fontWeight: 'bold', backgroundColor: logoPrimaryColor }}
+            sx={{ textTransform: 'none', fontWeight: 'bold', backgroundColor: primaryColor }}
           >
             Visit
           </Button>
@@ -75,7 +75,7 @@ const RestaurantPostLinksButton = ({ postData }) => {
 
             {postData.location && (
               <MenuItem onClick={() => handleMenuItemClick(postData.location)}>
-                <LocationOnIcon sx={{ marginRight: 1, color: logoPrimaryColor }} />
+                <LocationOnIcon sx={{ marginRight: 1, color: primaryColor }} />
                 Location
               </MenuItem>
             )}

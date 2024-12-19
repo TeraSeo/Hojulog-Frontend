@@ -9,6 +9,7 @@ import TransactionTypeField from "../../../textfields/TransactionTypeField";
 import IsFreeField from "../../../textfields/IsFreeField";
 import PriceField from "../../../textfields/PriceField";
 import SuburbField from "../../../textfields/SuburbField";
+import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, priceFormatError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
 
 const NecessitiesTransactionMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
@@ -28,28 +29,28 @@ const NecessitiesTransactionMainInfoForm = ({ onDataChange, setIsFormValid }) =>
     const newErrors = {};
     const { title, description, contact, email, priceType, price, suburb } = formValues;
   
-    if (!title?.trim()) newErrors.title = "제목은 필수 입력 항목입니다.";
-    if (!description?.trim()) newErrors.description = "설명은 필수 입력 항목입니다.";
+    if (!title?.trim()) newErrors.title = titleRequiredError;
+    if (!description?.trim()) newErrors.description = descriptionRequiredError;
   
     if (!contact?.trim() && !email?.trim()) {
-      newErrors.contact = "휴대폰 번호나 이메일 주소 중 하나는 필수입니다.";
-      newErrors.email = "휴대폰 번호나 이메일 주소 중 하나는 필수입니다.";
+      newErrors.contact = contactRequiredError;
+      newErrors.email = emailRequiredError;
     }
   
     if (contact?.trim() && !isValidPhoneNumber(contact)) {
-      newErrors.contact = "유효하지 않은 휴대폰 번호입니다.";
+      newErrors.contact = contactFormatError;
     }
   
     if (email?.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = "유효하지 않은 이메일 주소입니다.";
+      newErrors.email = emailFormatError;
     }
 
     if (priceType === "유료" && (!price || isNaN(price) || parseFloat(price) <= 0)) {
-      newErrors.price = "유효한 가격을 입력하세요.";
+      newErrors.price = priceFormatError;
     }
 
     if (!suburb?.trim()) {
-      newErrors.suburb = "지역을 선택하세요.";
+      newErrors.suburb = suburbRequiredError;
     }
   
     setErrors(newErrors);

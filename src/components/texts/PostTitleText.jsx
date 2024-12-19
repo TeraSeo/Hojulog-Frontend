@@ -1,10 +1,10 @@
 import React from "react";
 import { Typography } from "@mui/material";
-import { logoPrimaryColor } from "../../constant/Color";
+import { primaryColor } from "../../constant/Color";
 
 const PostTitleText = ({ title }) => {
   return (
-    <Typography variant="h6" sx={{ color: logoPrimaryColor }}>
+    <Typography variant="h6" sx={{ color: primaryColor }}>
       {title || "Product Title"}
     </Typography>
   );

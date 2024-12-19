@@ -7,6 +7,7 @@ import HeaderMenuItems from "./HeaderMenuItems";
 import DrawerMenuItems from "../drawer/DrawerMenuItems";
 import { validateToken } from "../../service/UserService";
 import { useLocation, useNavigate } from "react-router-dom";
+import { secondaryColor } from "../../constant/Color";
 
 function Header() {
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -52,7 +53,7 @@ function Header() {
                     justifyContent: "flex-end",
                     alignItems: "center",
                     padding: "0px 15px",
-                    backgroundColor: "#f0f0f0",
+                    backgroundColor: secondaryColor,
                 }}
             >
                 <HeaderMenuItems

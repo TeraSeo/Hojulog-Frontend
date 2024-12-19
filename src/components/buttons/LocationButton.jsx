@@ -1,7 +1,7 @@
 import React from "react";
-import { Button } from "@mui/material";
-import { logoPrimaryColor } from "../../constant/Color";
+import { IconButton } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { primaryColor, secondaryColor } from "../../constant/Color";
 
 const LocationButton = ({ location }) => {
   const handleLocationClick = () => {
@@ -13,25 +13,22 @@ const LocationButton = ({ location }) => {
   return (
     <>
       {location && (
-        <Button
-          variant="contained"
+        <IconButton
           onClick={handleLocationClick}
-          startIcon={<LocationOnIcon />}
           sx={{
-            textTransform: 'none',
-            color: '#fff', // Ensure text color contrasts with logoPrimaryColor background
-            backgroundColor: logoPrimaryColor,
-            borderColor: logoPrimaryColor,
-            padding: '6px 12px',
-            borderRadius: '8px',
-            height: '40px',
-            '&:hover': {
-              backgroundColor: '#003399', // Darker shade for hover effect
+            color: "#fff",
+            backgroundColor: primaryColor, 
+            width: "36px", 
+            height: "36px", 
+            padding: "6px", 
+            borderRadius: "12px",
+            "&:hover": {
+              backgroundColor: secondaryColor, 
             },
           }}
         >
-          Location
-        </Button>
+          <LocationOnIcon fontSize="small" />
+        </IconButton>
       )}
     </>
   );

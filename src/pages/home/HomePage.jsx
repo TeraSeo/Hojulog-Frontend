@@ -4,6 +4,9 @@ import CategorySidebar from "../../components/bar/CategorySidebar";
 import HomePropertyPosts from "../../components/box/home/HomePropertyPosts";
 import HomeJobPosts from "../../components/box/home/HomeJobPosts";
 import HomeTransactionPosts from "../../components/box/home/HomeTransactionPosts";
+import HomeSocietyPosts from "../../components/box/home/HomeSocietyPosts";
+import HomeTravelPosts from "../../components/box/home/HomeTravelPosts";
+import HomeStudyPosts from "../../components/box/home/HomeStudyPosts";
 
 function HomePage() {
 
@@ -25,6 +28,18 @@ function HomePage() {
 
                     <Box sx={{ mb: 4 }}>
                         <HomeTransactionPosts />
+                    </Box>
+
+                    <Box sx={{ mb: 4 }}>
+                        <HomeSocietyPosts />
+                    </Box>
+
+                    <Box sx={{ mb: 4 }}>
+                        <HomeTravelPosts />
+                    </Box>
+
+                    <Box sx={{ mb: 4 }}>
+                        <HomeStudyPosts />
                     </Box>
                 </Grid>
             </Grid>

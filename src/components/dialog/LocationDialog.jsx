@@ -8,7 +8,7 @@ const LocationDialog = ({
   googleMapsApiKey,
   onLocationSelected,
 }) => {
-  const [mapCenter, setMapCenter] = useState({ lat: 37.5665, lng: 126.978 }); 
+  const [mapCenter, setMapCenter] = useState({ lat: -33.8688, lng: 151.2093 }); 
   const [searchResults, setSearchResults] = useState([]);
   const [selectedPlace, setSelectedPlace] = useState(null); 
   const mapRef = useRef(null);
@@ -17,27 +17,38 @@ const LocationDialog = ({
   const handleSearch = () => {
     const placesService = new window.google.maps.places.PlacesService(mapRef.current);
     const query = searchBoxRef.current.value;
-
+  
     const request = {
       query,
       fields: ["geometry", "place_id", "name", "formatted_address", "types"],
       locationBias: { lat: mapCenter.lat, lng: mapCenter.lng },
     };
-
+  
     placesService.textSearch(request, (results, status) => {
-      if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
-        setSearchResults(results);
-        if (results[0].geometry.location) {
-          setMapCenter({
-            lat: results[0].geometry.location.lat(),
-            lng: results[0].geometry.location.lng(),
-          });
-        }
+      if (status === window.google.maps.places.PlacesServiceStatus.OK && results.length > 0) {
+        const firstResult = results[0];
+        setMapCenter({
+          lat: firstResult.geometry.location.lat(),
+          lng: firstResult.geometry.location.lng(),
+        });
+        setSelectedPlace({
+          name: firstResult.name,
+          formatted_address: firstResult.formatted_address,
+          geometry: {
+            location: {
+              lat: firstResult.geometry.location.lat,
+              lng: firstResult.geometry.location.lng,
+            },
+          },
+          place_id: firstResult.place_id,
+          types: firstResult.types,
+        });
       } else {
-        console.error("Error retrieving search results:", status);
+        console.error("Search failed:", status);
+        setSelectedPlace(null); // Reset if search fails
       }
     });
-  };
+  };  
 
   const handleMapClick = (event) => {
     const lat = event.latLng.lat();
@@ -48,29 +59,23 @@ const LocationDialog = ({
       if (status === window.google.maps.GeocoderStatus.OK && results.length > 0) {
         const place = results[0];
         setSelectedPlace({
-          name: place.formatted_address, 
-          formatted_address: place.formatted_address,
+          name: place.formatted_address || "Unknown Location",
+          formatted_address: place.formatted_address || "Address information not available",
           geometry: {
             location: {
-              lat: place.geometry.location.lat(),
-              lng: place.geometry.location.lng(),
+              lat: () => lat,
+              lng: () => lng,
             },
           },
-          place_id: place.place_id,
-          types: place.types,
+          place_id: place.place_id || null,
+          types: place.types || [],
         });
       } else {
-        console.error("Geocoder failed due to:", status);
-        setSelectedPlace({
-          name: "Unknown Location",
-          formatted_address: "Address information not available.",
-          geometry: { location: { lat, lng } },
-          place_id: null,
-        });
+        console.error("Geocoder failed:", status);
+        setSelectedPlace(null); // Reset if geocoding fails
       }
     });
-  };
-  
+  };  
 
   const handleConfirm = () => {
     if (selectedPlace) {
@@ -105,7 +110,7 @@ const LocationDialog = ({
             center={mapCenter}
             zoom={14}
             onLoad={(map) => (mapRef.current = map)}
-            onClick={handleMapClick} 
+            onClick={handleMapClick}
           >
             {searchResults.map((place, index) => (
               <Marker
@@ -118,25 +123,30 @@ const LocationDialog = ({
               />
             ))}
 
-            {selectedPlace && (
-              <InfoWindow
-                position={{
-                  lat: selectedPlace.geometry.location.lat,
-                  lng: selectedPlace.geometry.location.lng,
-                }}
-                onCloseClick={() => setSelectedPlace(null)}
-              >
-                <div>
-                  <Typography variant="subtitle1">{selectedPlace.name}</Typography>
-                  <Typography variant="body2">{selectedPlace.formatted_address}</Typography>
-                  {selectedPlace.types && (
-                    <Typography variant="body2" color="textSecondary">
-                      {`Place Types: ${selectedPlace.types.join(", ")}`}
-                    </Typography>
-                  )}
-                </div>
-              </InfoWindow>
+            {selectedPlace &&
+              selectedPlace.geometry &&
+              selectedPlace.geometry.location &&
+              typeof selectedPlace.geometry.location.lat === "function" &&
+              typeof selectedPlace.geometry.location.lng === "function" && (
+                <InfoWindow
+                  position={{
+                    lat: selectedPlace.geometry.location.lat(),
+                    lng: selectedPlace.geometry.location.lng(),
+                  }}
+                  onCloseClick={() => setSelectedPlace(null)}
+                >
+                  <div>
+                    <Typography variant="subtitle1">{selectedPlace.name}</Typography>
+                    <Typography variant="body2">{selectedPlace.formatted_address}</Typography>
+                    {selectedPlace.types && (
+                      <Typography variant="body2" color="textSecondary">
+                        {`Place Types: ${selectedPlace.types.join(", ")}`}
+                      </Typography>
+                    )}
+                  </div>
+                </InfoWindow>
             )}
+
           </GoogleMap>
         </LoadScript>
         <Box display="flex" justifyContent="space-between" mt={2}>

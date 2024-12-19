@@ -6,6 +6,9 @@ import ContactField from "../../../textfields/ContactField";
 import EmailField from "../../../textfields/EmailField";
 import SuburbField from "../../../textfields/SuburbField";
 import { isValidPhoneNumber } from "libphonenumber-js";
+import LocationField from "../../../textfields/LocationField";
+import LocationDialog from "../../../dialog/LocationDialog";
+import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, locationFormatError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
 
 const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
@@ -13,33 +16,63 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     description: "",
     contact: "",
     email: "",
-    suburb: ""
+    suburb: "",
+    location: ""
   });
 
   const [errors, setErrors] = useState({});
+  const [mapOpen, setMapOpen] = useState(false);
+    
+  const locationPattern = /^https:\/\/(www\.)?google\.[a-z]+\/maps(\?.*|\/.*)?$/;
+
+  const validateLocation = (value) => {
+    if (!locationPattern.test(value)) {
+      setErrors((prev) => ({
+        ...prev,
+        location: locationFormatError,
+      }));
+    } else {
+      setErrors((prev) => ({
+        ...prev,
+        location: "",
+      }));
+    }
+  };
+
+  const handleLocationSelected = (url) => {
+    setFormValues((prev) => ({
+      ...prev,
+      location: url
+    }));
+  };
+  
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, suburb } = formValues;
+    const { title, description, contact, email, suburb, location } = formValues;
 
-    if (!title?.trim()) newErrors.title = "제목은 필수 입력 항목입니다.";
-    if (!description?.trim()) newErrors.description = "설명은 필수 입력 항목입니다.";
+    if (!title?.trim()) newErrors.title = titleRequiredError;
+    if (!description?.trim()) newErrors.description = descriptionRequiredError;
 
     if (!contact?.trim() && !email?.trim()) {
-      newErrors.contact = "휴대폰 번호나 이메일 주소 중 하나는 필수입니다.";
-      newErrors.email = "휴대폰 번호나 이메일 주소 중 하나는 필수입니다.";
+      newErrors.contact = contactRequiredError;
+      newErrors.email = emailRequiredError;
     }
 
     if (contact?.trim() && !isValidPhoneNumber(contact)) {
-      newErrors.contact = "유효하지 않은 휴대폰 번호입니다.";
+      newErrors.contact = contactFormatError;
     }
 
     if (email?.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = "유효하지 않은 이메일 주소입니다.";
+      newErrors.email = emailFormatError;
     }
 
     if (!suburb?.trim()) {
-      newErrors.suburb = "지역을 선택하세요.";
+      newErrors.suburb = suburbRequiredError;
+    }
+
+    if (location?.trim() && !locationPattern.test(location)) {
+      newErrors.location = locationFormatError;
     }
 
     setErrors(newErrors);
@@ -93,7 +126,24 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           error={errors.suburb}
           onChange={(value) => handleInputChange("suburb", value)}
         />
+        <LocationField
+          location={formValues.location}
+          errors={errors}
+          onLocationChange={(value) => {
+            handleInputChange("location", value);
+            validateLocation(value);
+          }}
+          onMapOpen={() => setMapOpen(true)}
+        />
       </Grid>
+
+      <LocationDialog
+        open={mapOpen}
+        onClose={() => setMapOpen(false)}
+        onConfirm={() => setMapOpen(false)}
+        onLocationSelected={handleLocationSelected}
+        googleMapsApiKey = "AIzaSyAbpOOHTMEZeY_WNnQjuROdIUCAPpwM45Q"
+      />
     </Paper>
   );
 };
