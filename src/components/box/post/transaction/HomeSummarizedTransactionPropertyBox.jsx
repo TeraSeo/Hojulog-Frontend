@@ -4,6 +4,7 @@ import PostAverageRateBox from "../PostAverageRateBox";
 import SummarizedPostTitleText from "../../../texts/SummarizedPostTitleText";
 import SummarizedPostImageBox from "../SummarizedPostImageBox";
 import CreatedAtText from "../../../texts/CreatedAtText";
+import PriceText from "../../../texts/PriceText";
 
 const HomeSummarizedTransactionPropertyBox = ({ post }) => {
     return (
@@ -14,27 +15,14 @@ const HomeSummarizedTransactionPropertyBox = ({ post }) => {
                 <SummarizedPostTitleText title={post.title} />
 
                 <Typography
-                    variant="body2"
                     sx={{
-                        pt: 2,
+                        pt: 0.5,
                         px: 1,
-                        fontWeight: "500",
                         textAlign: "start",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        transition: "color 0.3s, transform 0.3s",
-                        "&:hover": {
-                            color: "primary.main",
-                            textDecoration: "underline",
-                            transform: "scale(1.02)",
-                            cursor: "pointer",
-                        },
                     }}
                 >
-                    {post.username || "No username Available"}
+                    <PriceText price={post.price} />
                 </Typography>
-                <PostAverageRateBox averageRate={post.averageRate} />
                 
                 <CreatedAtText createdAt={post.createdAt} />
             </Box>

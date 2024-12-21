@@ -8,6 +8,7 @@ import DrawerMenuItems from "../drawer/DrawerMenuItems";
 import { validateToken } from "../../service/UserService";
 import { useLocation, useNavigate } from "react-router-dom";
 import { secondaryColor } from "../../constant/Color";
+import { allowedRoutesWitoutVerification } from "../../constant/Routes";
 
 function Header() {
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -24,7 +25,7 @@ function Header() {
             const isValid = await validateToken();
             setIsAuthenticated(isValid);
 
-            const allowedRoutes = ["/", "/about", "/contact"];
+            const allowedRoutes = allowedRoutesWitoutVerification;
             if (!isValid && !allowedRoutes.includes(location.pathname)) {
                 navigate("/login");
             }

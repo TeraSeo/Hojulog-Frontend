@@ -1,9 +1,18 @@
-import { Box, Grid } from "@mui/material";
-import React from "react";
+import { Box, Grid, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../../components/bar/CategorySidebar";
-import HomeJobPosts from "../../../components/box/home/HomeJobPosts";
+import { getJobPostsByPage } from "../../../service/PostService";
+import JobPostBox from "../../../components/box/post/job/JobPostBox";
 
 function WholeJobPostPage() {
+    const [jobPageData, setJobPageData] = useState({ posts: [], pageSize: 0, currentPage: 0, currentPagePostsCount: 0 });
+
+    useEffect(() => {
+        getJobPostsByPage(1)
+            .then((data) => setJobPageData(data))
+            .catch((error) => console.error("Error fetching posts:", error));
+    }, []);
+
     return (
         <Box sx={{ py: "10px", px: {md: "120px", sm: "40px", xs: "0px"} }}>
             <Grid container spacing={3}>
@@ -12,9 +21,15 @@ function WholeJobPostPage() {
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <Box sx={{ mb: 4 }}>
-                        <HomeJobPosts />
-                    </Box>
+                    <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
+                        구인구직
+                    </Typography>
+                    
+                    {jobPageData.posts.map((post, index) => (
+                        <Box key={index}>
+                            <JobPostBox post={post} />
+                        </Box>
+                    ))}
                 </Grid>
             </Grid>
         </Box>

@@ -1,12 +1,12 @@
 import React from "react";
 import { Typography } from "@mui/material";
 
-const SummarizedPostTitleText = ({ title, pl = 1 }) => {
+const PropertyTypeText = ({ propertyType }) => {
     return <Typography
         variant="body2"
         sx={{
             pt: 1,
-            pl: pl,
+            pl: 1,
             fontWeight: "600",
             textAlign: "start",
             whiteSpace: "nowrap",
@@ -21,8 +21,8 @@ const SummarizedPostTitleText = ({ title, pl = 1 }) => {
             },
         }}
     >
-        {title || "No Title Available"}
+        {propertyType + " | " || ""}
     </Typography>;
 }
 
-export default SummarizedPostTitleText;
+export default PropertyTypeText;

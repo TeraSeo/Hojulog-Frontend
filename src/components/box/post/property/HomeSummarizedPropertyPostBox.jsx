@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Box } from "@mui/material";
+import { Box } from "@mui/material";
 import PostAverageRateBox from "../PostAverageRateBox";
 import LocationButton from "../../../buttons/LocationButton";
 import SummarizedPostTitleText from "../../../texts/SummarizedPostTitleText";

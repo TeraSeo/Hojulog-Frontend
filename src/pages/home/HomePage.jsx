@@ -9,7 +9,6 @@ import HomeTravelPosts from "../../components/box/home/HomeTravelPosts";
 import HomeStudyPosts from "../../components/box/home/HomeStudyPosts";
 
 function HomePage() {
-
     return (
         <Box sx={{ py: "10px", px: {md: "120px", sm: "40px", xs: "0px"} }}>
             <Grid container spacing={3}>

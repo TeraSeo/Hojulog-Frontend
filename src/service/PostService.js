@@ -26,6 +26,81 @@ function getPostsByPageNCondition(page, condition) {
     )
 }
 
+function getPropertyPostsByPage(page) {
+    const userId = localStorage.getItem('userId');
+
+    return axios.get("http://localhost:8080/api/post/get/pageable/recent/property", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "userId": userId
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getJobPostsByPage(page) {
+    const userId = localStorage.getItem('userId');
+
+    return axios.get("http://localhost:8080/api/post/get/pageable/recent/job", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "userId": userId
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getTransactionPostsByPage(page) {
+    const userId = localStorage.getItem('userId');
+
+    return axios.get("http://localhost:8080/api/post/get/pageable/recent/transaction", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "userId": userId
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
 function getRecent5JobPosts() {
     return axios.get("http://localhost:8080/api/post/get/recent-5/job/post", {
         headers: {
@@ -417,4 +492,4 @@ const normalizeEmptyStringsToNull = (data) => {
   );
 };
 
-export { getPostsByPageNCondition, getRecent5JobPosts, getRecent5PropertyPosts, getRecent5TransactionPosts, getRecent5SocietyPosts, getRecent5TravelPosts, getRecent5StudyPosts, getSpecificPost, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy, postTechnology, postRestaurant, postEducation, postLifestyle, postEntertainment, normalizeEmptyStringsToNull };
+export { getPostsByPageNCondition, getPropertyPostsByPage, getJobPostsByPage, getTransactionPostsByPage, getRecent5JobPosts, getRecent5PropertyPosts, getRecent5TransactionPosts, getRecent5SocietyPosts, getRecent5TravelPosts, getRecent5StudyPosts, getSpecificPost, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy, postTechnology, postRestaurant, postEducation, postLifestyle, postEntertainment, normalizeEmptyStringsToNull };

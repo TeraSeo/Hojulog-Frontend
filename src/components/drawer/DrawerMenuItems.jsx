@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography, List, ListItem, ListItemIcon, ListItemText, Divider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
 import WorkIcon from "@mui/icons-material/Work";
 import StoreIcon from "@mui/icons-material/Store";
 import GroupIcon from "@mui/icons-material/Group";
@@ -24,6 +25,16 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout }) {
 
     return (
         <Box>
+            {/* Home Button */}
+            <List>
+                <ListItem button onClick={() => handleNavigate("/")}>
+                    <ListItemIcon><HomeIcon /></ListItemIcon>
+                    <ListItemText primary="홈" secondary="메인 페이지로 이동" />
+                </ListItem>
+            </List>
+
+            <Divider sx={{ my: 2 }} />
+
             <Typography variant="subtitle1" sx={{ color: "#ff5757", fontWeight: "bold", mb: 2 }}>
                 카테고리
             </Typography>

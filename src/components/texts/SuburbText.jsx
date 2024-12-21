@@ -1,9 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import { formatTimeDifference } from "../../service/TimeService";
 
-const CreatedAtText = ({ createdAt }) => {
-  const formattedTime = formatTimeDifference(createdAt);
+const SuburbText = ({ suburb }) => {
 
   return (
     <Box sx={{ pl: 1 }}>
@@ -14,10 +12,10 @@ const CreatedAtText = ({ createdAt }) => {
           fontStyle: "italic",
         }}
       >
-        {formattedTime}
+        {suburb || ""}
       </Typography>
     </Box>
   );
 };
 
-export default CreatedAtText;
+export default SuburbText;
