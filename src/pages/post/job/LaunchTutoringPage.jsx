@@ -50,7 +50,7 @@ const LaunchTutoringPage = () => {
     const jobData = {
       ...mainInfoData,
       "category": "구인구직",
-      "isPortrait": mediaData.isPortrait,
+      // "isPortrait": mediaData.isPortrait,
       "subCategory": "과외",
       "userId": userId
     };

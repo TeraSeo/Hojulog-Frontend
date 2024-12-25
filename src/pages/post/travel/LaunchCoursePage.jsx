@@ -50,7 +50,7 @@ const LaunchCoursePage = () => {
     const travelData = {
       ...mainInfoData,
       "category": "여행",
-      "isPortrait": mediaData.isPortrait,
+      // "isPortrait": mediaData.isPortrait,
       "subCategory": "코스",
       "userId": userId
     };

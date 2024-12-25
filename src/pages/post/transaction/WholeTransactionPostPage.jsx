@@ -3,20 +3,37 @@ import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../../components/bar/CategorySidebar";
 import { getTransactionPostsByPage } from "../../../service/PostService";
 import TransactionPostBox from "../../../components/box/post/transaction/TransactionPostBox";
+import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
+import { getPaginationRange } from "../../../service/PageService";
 
 function WholeTransactionPostPage() {
     const [transactionPageData, setTransactionPageData] = useState({
         posts: [],
         pageSize: 0,
-        currentPage: 0,
-        currentPagePostsCount: 0
+        currentPage: 0
     });
 
     useEffect(() => {
-        getTransactionPostsByPage(1)
-            .then((data) => setTransactionPageData(data))
-            .catch((error) => console.error("Error fetching posts:", error));
+        fetchPageData(1);
     }, []);
+
+    const fetchPageData = (page) => {
+        getTransactionPostsByPage(page)
+            .then((data) => {
+                setTransactionPageData({
+                    posts: data.posts,
+                    pageSize: data.pageSize,
+                    currentPage: page
+                });
+            })
+            .catch((error) => console.error("Error fetching posts:", error));
+    };
+
+    const handlePageChange = (event, value) => {
+        fetchPageData(value);
+    };
+
+    const [startPage, endPage] = getPaginationRange(transactionPageData.currentPage, transactionPageData.pageSize);
 
     return (
         <Box sx={{ py: "10px", px: { md: "120px", sm: "40px", xs: "0px" } }}>
@@ -40,6 +57,8 @@ function WholeTransactionPostPage() {
                             )}
                         </React.Fragment>
                     ))}
+
+                    <PostPaginationBox totalPage={endPage - startPage + 1} currentPage={transactionPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>
             </Grid>
         </Box>

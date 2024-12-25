@@ -12,7 +12,7 @@ const HomeSummarizedPropertyPostBox = ({ post }) => {
             <SummarizedPostImageBox imageUrl={post.imageUrl} title={post.title} />
 
             <Box sx={{ width: "200px" }}>
-                <SummarizedPostTitleText title={post.title} />
+                <SummarizedPostTitleText title={post.title} postId={post.postId} category={"property"} />
 
                 <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "start", pt: 0.5 }}>
                     <Box>

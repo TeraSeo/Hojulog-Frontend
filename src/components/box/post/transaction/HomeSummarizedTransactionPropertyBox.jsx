@@ -1,6 +1,5 @@
 import React from "react";
 import { Typography, Box } from "@mui/material";
-import PostAverageRateBox from "../PostAverageRateBox";
 import SummarizedPostTitleText from "../../../texts/SummarizedPostTitleText";
 import SummarizedPostImageBox from "../SummarizedPostImageBox";
 import CreatedAtText from "../../../texts/CreatedAtText";
@@ -12,7 +11,7 @@ const HomeSummarizedTransactionPropertyBox = ({ post }) => {
             <SummarizedPostImageBox imageUrl={post.imageUrl} title={post.title} />
 
             <Box sx={{ width: "200px" }}>
-                <SummarizedPostTitleText title={post.title} />
+                <SummarizedPostTitleText title={post.title} postId={post.postId} category={"property"} />
 
                 <Typography
                     sx={{

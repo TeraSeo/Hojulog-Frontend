@@ -6,7 +6,7 @@ import AppTitle from "../texts/AppTitle";
 import HeaderMenuItems from "./HeaderMenuItems";
 import DrawerMenuItems from "../drawer/DrawerMenuItems";
 import { validateToken } from "../../service/UserService";
-import { useLocation, useNavigate } from "react-router-dom";
+import { matchPath, useLocation, useNavigate } from "react-router-dom";
 import { secondaryColor } from "../../constant/Color";
 import { allowedRoutesWitoutVerification } from "../../constant/Routes";
 
@@ -26,7 +26,7 @@ function Header() {
             setIsAuthenticated(isValid);
 
             const allowedRoutes = allowedRoutesWitoutVerification;
-            if (!isValid && !allowedRoutes.includes(location.pathname)) {
+            if (!isValid && !allowedRoutes.some((route) => matchPath({ path: route, end: true }, location.pathname))) {
                 navigate("/login");
             }
         };

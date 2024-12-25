@@ -3,11 +3,10 @@ import React from "react";
 import SummarizedPostTitleText from "../../../texts/SummarizedPostTitleText";
 import PostAverageRateBox from "../PostAverageRateBox";
 import CreatedAtText from "../../../texts/CreatedAtText";
-import LocationButton from "../../../buttons/LocationButton";
 import SuburbText from "../../../texts/SuburbText";
-import ViewCountsText from "../../../texts/ViewCountsText";
+import LocationButton from "../../../buttons/LocationButton";
 
-const JobPostBox = ({ post }) => {
+const TravelPostBox = ({ post }) => {
     return (
         <Box
             sx={{
@@ -54,8 +53,6 @@ const JobPostBox = ({ post }) => {
                                 <SuburbText suburb={post.suburb} />
                                 <CreatedAtText createdAt={post.createdAt} />
                             </Box>
-
-                            <ViewCountsText viewCounts={post.viewCounts} />
                         </Box>
                     </Box>
                 </Box>
@@ -64,4 +61,4 @@ const JobPostBox = ({ post }) => {
     );
 };
 
-export default JobPostBox;
+export default TravelPostBox;

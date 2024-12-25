@@ -50,7 +50,7 @@ const LaunchSchoolPage = () => {
     const studyData = {
       ...mainInfoData,
       "category": "유학",
-      "isPortrait": mediaData.isPortrait,
+      // "isPortrait": mediaData.isPortrait,
       "subCategory": "학교후기",
       "userId": userId
     };

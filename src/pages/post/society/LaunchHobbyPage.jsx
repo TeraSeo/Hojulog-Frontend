@@ -50,7 +50,7 @@ const LaunchHobbyPage = () => {
     const societyData = {
       ...mainInfoData,
       "category": "동호회",
-      "isPortrait": mediaData.isPortrait,
+      // "isPortrait": mediaData.isPortrait,
       "subCategory": "취미",
       "userId": userId
     };

@@ -50,7 +50,7 @@ const LaunchProductRentTransactionPage = () => {
     const transactionData = {
       ...mainInfoData,
       "category": "사고팔기",
-      "isPortrait": mediaData.isPortrait,
+      // "isPortrait": mediaData.isPortrait,
       "subCategory": "대여",
       "userId": userId
     };

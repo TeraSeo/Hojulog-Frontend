@@ -50,7 +50,7 @@ const LaunchRestaurantPage = () => {
     const travelData = {
       ...mainInfoData,
       "category": "여행",
-      "isPortrait": mediaData.isPortrait,
+      // "isPortrait": mediaData.isPortrait,
       "subCategory": "레스토랑",
       "userId": userId
     };

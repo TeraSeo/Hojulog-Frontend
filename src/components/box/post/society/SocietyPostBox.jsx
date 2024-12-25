@@ -3,11 +3,10 @@ import React from "react";
 import SummarizedPostTitleText from "../../../texts/SummarizedPostTitleText";
 import PostAverageRateBox from "../PostAverageRateBox";
 import CreatedAtText from "../../../texts/CreatedAtText";
-import LocationButton from "../../../buttons/LocationButton";
 import SuburbText from "../../../texts/SuburbText";
 import ViewCountsText from "../../../texts/ViewCountsText";
 
-const JobPostBox = ({ post }) => {
+const SocietyPostBox = ({ post }) => {
     return (
         <Box
             sx={{
@@ -34,13 +33,9 @@ const JobPostBox = ({ post }) => {
                     }}
                 >
                     <Box>
-                        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                            <Box sx={{whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",}}>
-                                <SummarizedPostTitleText title={post.title} postId={post.postId} category={"property"} />
-                                <PostAverageRateBox averageRate={post.averageRate} />
-                            </Box>
-
-                            <LocationButton location={post.location} />
+                        <Box sx={{whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",}}>
+                            <SummarizedPostTitleText title={post.title} postId={post.postId} category={"property"} />
+                            <PostAverageRateBox averageRate={post.averageRate} />
                         </Box>
 
                         <Box
@@ -48,6 +43,7 @@ const JobPostBox = ({ post }) => {
                                 pt: 1,
                                 display: "flex",
                                 textOverflow: "ellipsis",
+                                justifyContent: "space-between"
                             }}
                         >
                             <Box sx={{ display: "flex", pr: 1 }}>
@@ -64,4 +60,4 @@ const JobPostBox = ({ post }) => {
     );
 };
 
-export default JobPostBox;
+export default SocietyPostBox;

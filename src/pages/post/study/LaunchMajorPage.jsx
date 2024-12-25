@@ -50,7 +50,7 @@ const LaunchMajorPage = () => {
     const studyData = {
       ...mainInfoData,
       "category": "유학",
-      "isPortrait": mediaData.isPortrait,
+      // "isPortrait": mediaData.isPortrait,
       "subCategory": "전공후기",
       "userId": userId
     };

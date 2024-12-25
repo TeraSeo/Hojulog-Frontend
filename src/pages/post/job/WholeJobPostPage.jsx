@@ -3,15 +3,37 @@ import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../../components/bar/CategorySidebar";
 import { getJobPostsByPage } from "../../../service/PostService";
 import JobPostBox from "../../../components/box/post/job/JobPostBox";
+import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
+import { getPaginationRange } from "../../../service/PageService";
 
 function WholeJobPostPage() {
-    const [jobPageData, setJobPageData] = useState({ posts: [], pageSize: 0, currentPage: 0, currentPagePostsCount: 0 });
+    const [jobPageData, setJobPageData] = useState({ 
+        posts: [], 
+        pageSize: 1, 
+        currentPage: 1 
+    });
 
     useEffect(() => {
-        getJobPostsByPage(1)
-            .then((data) => setJobPageData(data))
-            .catch((error) => console.error("Error fetching posts:", error));
+        fetchPageData(1);
     }, []);
+
+    const fetchPageData = (page) => {
+        getJobPostsByPage(page)
+            .then((data) => {
+                setJobPageData({
+                    posts: data.posts,
+                    pageSize: data.pageSize,
+                    currentPage: page
+                });
+            })
+            .catch((error) => console.error("Error fetching posts:", error));
+    };
+
+    const handlePageChange = (event, value) => {
+        fetchPageData(value);
+    };
+
+    const [startPage, endPage] = getPaginationRange(jobPageData.currentPage, jobPageData.pageSize);
 
     return (
         <Box sx={{ py: "10px", px: {md: "120px", sm: "40px", xs: "0px"} }}>
@@ -30,6 +52,8 @@ function WholeJobPostPage() {
                             <JobPostBox post={post} />
                         </Box>
                     ))}
+
+                    <PostPaginationBox totalPage={endPage - startPage + 1} currentPage={jobPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>
             </Grid>
         </Box>

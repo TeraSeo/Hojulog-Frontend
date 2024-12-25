@@ -57,7 +57,7 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout }) {
                 </ListItem>
                 <ListItem button onClick={() => handleNavigate("/travel")}>
                     <ListItemIcon><FlightIcon /></ListItemIcon>
-                    <ListItemText primary="여행" secondary="여행 정보 및 항공권 예약" />
+                    <ListItemText primary="여행" secondary="여행 정보 찾기" />
                 </ListItem>
                 <ListItem button onClick={() => handleNavigate("/studyabroad")}>
                     <ListItemIcon><SchoolIcon /></ListItemIcon>

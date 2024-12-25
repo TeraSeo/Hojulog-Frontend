@@ -6,10 +6,12 @@ import CreatedAtText from "../../../texts/CreatedAtText";
 import LocationButton from "../../../buttons/LocationButton";
 import SuburbText from "../../../texts/SuburbText";
 import PriceText from "../../../texts/PriceText";
-import ViewCountsText from "../../../texts/ViewCountsText";
 import NormalPostImageBox from "../NormalPostImageBox";
 import PeriodText from "../../../texts/PeriodText";
 import PropertyTypeText from "../../../texts/PropertyTypeText";
+import RoomCountsText from "../../../texts/RoomCountsText";
+import BathRoomTypeText from "../../../texts/BathRoomTypeText";
+import ParkAvailabilityText from "../../../texts/ParkAvailabilityText";
 
 const PropertyPostBox = ({ post }) => {
     return (
@@ -33,9 +35,14 @@ const PropertyPostBox = ({ post }) => {
                     }}
                 >
                     <Box>
-                        <Box sx={{ display: "flex" }}>
-                            <PropertyTypeText propertyType={post.subCategory} />
-                            <SummarizedPostTitleText title={post.title} pl={0.5} />
+                        <Box sx={{ display: "flex", "&:hover": {
+                            color: "primary.main",
+                            textDecoration: "underline",
+                            transform: "scale(1.02)",
+                            cursor: "pointer",
+                        }, }}>
+                            <PropertyTypeText propertyType={post.subCategory} postId={post.postId} category={"property"} />
+                            <SummarizedPostTitleText title={post.title} pl={0.5} postId={post.postId} category={"property"} />
                         </Box>
                         <Box
                             sx={{
@@ -48,8 +55,14 @@ const PropertyPostBox = ({ post }) => {
                             <SuburbText suburb={post.suburb} />
                             <CreatedAtText createdAt={post.createdAt} />
                         </Box>
+                        
+                        <Box sx={{ display: "flex", alignItems: "center", gap: 1, pl: 1, pt: 0.5 }}>
+                            <RoomCountsText roomCount={post.roomCount} />
+                            <BathRoomTypeText bathroomType={post.bathroomType} />
+                            <ParkAvailabilityText isParkable={post.isParkable} />
+                        </Box>
+
                         <PostAverageRateBox averageRate={post.averageRate} />
-                        <Box sx={{ pt: 1 }}><ViewCountsText viewCounts={post.viewCounts} /></Box>
                     </Box>
 
                     <Box sx={{ display: "flex", px: 1, pb: 1 }}>

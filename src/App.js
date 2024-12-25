@@ -12,7 +12,6 @@ import HomePage from './pages/home/HomePage';
 import ProtectedRoute from './ProtectedRoute';
 import Layout from './components/layout/Layout';
 import SelectCategoryPage from './pages/post/SelectCategoryPage';
-import { DynamicDetailedPage } from './constant/Components';
 import { categories } from './constant/Categories';
 import LaunchSharePropertyPage from './pages/post/property/LaunchSharePropertyPage';
 import LaunchRentPropertyPage from './pages/post/property/LaunchRentPropertyPage';
@@ -38,6 +37,7 @@ import WholeTransactionPostPage from './pages/post/transaction/WholeTransactionP
 import WholeSocietyPostPage from './pages/post/society/WholeSocietyPostPage';
 import WholeTravelPostPage from './pages/post/travel/WholeTravelPostPage';
 import WholeStudyPostPage from './pages/post/study/WholeStudyPostPage';
+import PropertyPostDetailePage from './pages/post/property/PropertyPostDetailePage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -150,9 +150,10 @@ function App() {
             <Route path="studyabroad" element={<WholeStudyPostPage />} />
 
             <Route path="launch" element={<SelectCategoryPage />} />
-            <Route path=":category/:formattedTitle/details" element={<DynamicDetailedPage />} />
 
             {generateDynamicRoutes()}
+
+            <Route path="post/property/detail/:postId" element={<PropertyPostDetailePage />} />
           </Route>
         </Routes>
       </BrowserRouter>

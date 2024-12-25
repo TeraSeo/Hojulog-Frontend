@@ -23,11 +23,11 @@ const JobSeekingMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
   };
 
   useEffect(() => {
-    const isPortrait = mediaAspectRatio === "9x16";
+    // const isPortrait = mediaAspectRatio === "9x16";
 
     onMediaChange({
       selectedImages,
-      isPortrait,
+      // isPortrait,
     });
 
     validateMedia();
@@ -62,12 +62,12 @@ const JobSeekingMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
       </Typography>
 
       <Grid container spacing={4}>
-        <AspectRatioSelector
+        {/* <AspectRatioSelector
           mediaAspectRatio={mediaAspectRatio}
           handleAspectRatioChange={(event, newAspectRatio) => {
             if (newAspectRatio) setMediaAspectRatio(newAspectRatio);
           }}
-        />
+        /> */}
 
         <ImageUploader
           imagesDropzone={imagesDropzone}
