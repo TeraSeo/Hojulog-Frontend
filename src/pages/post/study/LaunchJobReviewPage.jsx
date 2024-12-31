@@ -4,10 +4,10 @@ import { postStudy } from "../../../service/PostService";
 import { useNavigate } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
-import MajorReviewMainInfoForm from "../../../components/forms/post/study/MajorReviewMainInfoForm";
-import MajorReviewMediaUploadForm from "../../../components/forms/post/study/MajorReviewMediaUploadForm";
+import JobReviewMediaUploadForm from "../../../components/forms/post/study/JobReviewMediaUploadForm";
+import JobReviewMainInfoForm from "../../../components/forms/post/study/JobReviewMainInfoForm";
 
-const LaunchMajorPage = () => {
+const LaunchJobReviewPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
   const [isMediaValid, setIsMediaValid] = useState(false);
   const [mainInfoData, setMainInfoData] = useState({});
@@ -47,17 +47,17 @@ const LaunchMajorPage = () => {
     const userId = localStorage.getItem('userId');
     const formData = new FormData();
 
-    const studyData = {
+    const jobData = {
       ...mainInfoData,
       "category": "유학",
       // "isPortrait": mediaData.isPortrait,
-      "subCategory": "전공후기",
+      "subCategory": "취업후기",
       "userId": userId
     };
 
     formData.append(
       "studyPostDto",
-      new Blob([JSON.stringify(studyData)], { type: "application/json" })
+      new Blob([JSON.stringify(jobData)], { type: "application/json" })
     );
 
     mediaData.selectedImages.forEach((file) => formData.append("images", file));
@@ -86,7 +86,7 @@ const LaunchMajorPage = () => {
       sx={{ padding: 4, margin: 4, maxWidth: 800, mx: "auto", backgroundColor: "#f7f9fc" }}
     >
       <Typography variant="h4" gutterBottom align="center" sx={{ color: primaryColor }}>
-        전공후기 정보 등록하기
+        취업 후기 등록하기
       </Typography>
       <Typography variant="subtitle1" align="center" color="textSecondary" sx={{ marginBottom: 4 }}>
         필요한 모든 정보를 입력해주세요
@@ -96,14 +96,14 @@ const LaunchMajorPage = () => {
 
       <Grid container spacing={4}>
         <Grid item xs={12} ref={mainInfoRef}>
-          <MajorReviewMainInfoForm
+          <JobReviewMainInfoForm
             onDataChange={(data) => setMainInfoData(data)}
             setIsFormValid={setIsMainValid}
           />
         </Grid>
         <Grid item xs={12} ref={mediaUploadRef}>
           <Grid item xs={12}>
-            <MajorReviewMediaUploadForm
+            <JobReviewMediaUploadForm
               onMediaChange={(media) => setMediaData(media)}
               setIsMediaValid={setIsMediaValid}
             />
@@ -143,4 +143,4 @@ const LaunchMajorPage = () => {
   );
 };
 
-export default LaunchMajorPage;
+export default LaunchJobReviewPage;

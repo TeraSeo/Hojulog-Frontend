@@ -1,11 +1,11 @@
 import React from "react";
 import { Typography, Box, Rating } from "@mui/material";
 
-const PostAverageRateBox = ({ averageRate }) => {
-    const formattedRate = (averageRate || 0.0).toFixed(1);
+const PostRateBox = ({ rate, px=1 }) => {
+    const formattedRate = (rate || 0.0).toFixed(1);
 
     return (
-        <Box sx={{ display: "flex", alignItems: "center", px: 1, pt: 0.3 }}>
+        <Box sx={{ display: "flex", alignItems: "center", px: px, pt: 0.3 }}>
             <Rating
                 value={parseFloat(formattedRate)}
                 precision={0.1}
@@ -28,4 +28,4 @@ const PostAverageRateBox = ({ averageRate }) => {
     );
 };
 
-export default PostAverageRateBox;
+export default PostRateBox;

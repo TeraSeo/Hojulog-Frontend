@@ -44,7 +44,7 @@ function WholeSocietyPostPage() {
 
                 <Grid item xs={12} md={9}>
                     <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-                        동호회
+                        생활
                     </Typography>
 
                     {societyPageData.posts.map((post, index) => (

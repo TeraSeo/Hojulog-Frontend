@@ -45,7 +45,7 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout }) {
                 </ListItem>
                 <ListItem button onClick={() => handleNavigate("/jobs")}>
                     <ListItemIcon><WorkIcon /></ListItemIcon>
-                    <ListItemText primary="구인구직" secondary="구직 또는 구인 정보 찾기" />
+                    <ListItemText primary="구인구직" secondary="구직 또는 구인 정보, 후기 찾기" />
                 </ListItem>
                 <ListItem button onClick={() => handleNavigate("/marketplace")}>
                     <ListItemIcon><StoreIcon /></ListItemIcon>
@@ -53,7 +53,7 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout }) {
                 </ListItem>
                 <ListItem button onClick={() => handleNavigate("/community")}>
                     <ListItemIcon><GroupIcon /></ListItemIcon>
-                    <ListItemText primary="동호회" secondary="관심 있는 동호회 참여하기" />
+                    <ListItemText primary="생활" secondary="라이프스타일 정보 찾기" />
                 </ListItem>
                 <ListItem button onClick={() => handleNavigate("/travel")}>
                     <ListItemIcon><FlightIcon /></ListItemIcon>
@@ -61,7 +61,7 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout }) {
                 </ListItem>
                 <ListItem button onClick={() => handleNavigate("/studyabroad")}>
                     <ListItemIcon><SchoolIcon /></ListItemIcon>
-                    <ListItemText primary="유학" secondary="유학 및 학업 관련 정보" />
+                    <ListItemText primary="유학" secondary="유학 및 학업 관련 후기 찾기" />
                 </ListItem>
             </List>
 

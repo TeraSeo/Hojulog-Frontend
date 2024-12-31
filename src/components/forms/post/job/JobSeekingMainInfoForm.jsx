@@ -10,6 +10,7 @@ import LocationField from "../../../textfields/LocationField";
 import LocationDialog from "../../../dialog/LocationDialog";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, jobTypeRequiredError, locationFormatError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
+import EmbeddedMap from "../../../box/post/EmbeddedMap";
 
 const JobSeekingMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
@@ -155,6 +156,8 @@ const JobSeekingMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         onLocationSelected={handleLocationSelected}
         googleMapsApiKey = "AIzaSyAbpOOHTMEZeY_WNnQjuROdIUCAPpwM45Q"
       />
+
+      {formValues.location && <EmbeddedMap embedUrl={formValues.location} />}
     </Paper>
   );
 };

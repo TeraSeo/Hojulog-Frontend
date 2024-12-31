@@ -5,11 +5,22 @@ import DescriptionField from "../../../textfields/DescriptionField";
 import ContactField from "../../../textfields/ContactField";
 import EmailField from "../../../textfields/EmailField";
 import CountrySelectField from "../../../textfields/CountrySelectField";
+import RatingField from "../../../textfields/RatingField";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import SuburbField from "../../../textfields/SuburbField";
-import { contactFormatError, contactRequiredError, countryRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, locationFormatError, locationRequiredError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
 import LocationField from "../../../textfields/LocationField";
 import LocationDialog from "../../../dialog/LocationDialog";
+import {
+  contactFormatError,
+  countryRequiredError,
+  descriptionRequiredError,
+  emailFormatError,
+  locationFormatError,
+  locationRequiredError,
+  suburbRequiredError,
+  titleRequiredError,
+} from "../../../../constant/ErrorMsg";
+import EmbeddedMap from "../../../box/post/EmbeddedMap";
 
 const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
@@ -19,50 +30,41 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     email: "",
     country: "호주",
     suburb: "",
-    location: ""
+    location: "",
+    rate: 0.0
   });
 
   const [errors, setErrors] = useState({});
   const [mapOpen, setMapOpen] = useState(false);
-    
-      const locationPattern = /^https:\/\/(www\.)?google\.[a-z]+\/maps(\?.*|\/.*)?$/;
-    
-      const validateLocation = (value) => {
-        if (!locationPattern.test(value)) {
-          setErrors((prev) => ({
-            ...prev,
-            location: locationFormatError,
-          }));
-        } else {
-          setErrors((prev) => ({
-            ...prev,
-            location: "",
-          }));
-        }
-      };
-    
-      const handleLocationSelected = (url) => {
-        setFormValues((prev) => ({
-          ...prev,
-          location: url
-        }));
-      };
+
+  const locationPattern = /^https:\/\/(www\.)?google\.[a-z]+\/maps(\?.*|\/.*)?$/;
+
+  const validateLocation = (value) => {
+    if (!locationPattern.test(value)) {
+      setErrors((prev) => ({
+        ...prev,
+        location: locationFormatError,
+      }));
+    } else {
+      setErrors((prev) => ({
+        ...prev,
+        location: "",
+      }));
+    }
+  };
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, country, suburb, location } = formValues;
+    const { title, description, contact, email, country, suburb, location, rate } = formValues;
 
     if (!title?.trim()) newErrors.title = titleRequiredError;
     if (!description?.trim()) newErrors.description = descriptionRequiredError;
-    
+
     if (contact?.trim() && !isValidPhoneNumber(contact)) {
       newErrors.contact = contactFormatError;
     }
 
-    if (
-      email?.trim() &&
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-    ) {
+    if (email?.trim() && !/^[^\s@]+@[^\s@]+$/.test(email)) {
       newErrors.email = emailFormatError;
     }
 
@@ -76,6 +78,10 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
       newErrors.location = locationRequiredError;
     } else if (!locationPattern.test(location)) {
       newErrors.location = locationFormatError;
+    }
+
+    if (rate < 0.0 || rate > 5.0) {
+      newErrors.rate = "평점은 0.0에서 5.0 사이여야 합니다.";
     }
 
     setErrors(newErrors);
@@ -109,6 +115,11 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           error={errors.title}
           onChange={(value) => handleInputChange("title", value)}
         />
+        <RatingField
+          value={formValues.rate}
+          error={errors.rate}
+          onChange={(value) => handleInputChange("rate", value)}
+        />
         <DescriptionField
           value={formValues.description}
           error={errors.description}
@@ -124,36 +135,36 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           error={errors.email}
           onChange={(value) => handleInputChange("email", value)}
         />
-
         <CountrySelectField
           value={formValues.country}
           error={errors.country}
           onChange={(value) => handleInputChange("country", value)}
         />
-
         <SuburbField
           value={formValues.suburb}
           error={errors.suburb}
           onChange={(value) => handleInputChange("suburb", value)}
         />
         <LocationField
-            location={formValues.location}
-            errors={errors}
-            onLocationChange={(value) => {
-              handleInputChange("location", value);
-              validateLocation(value);
-            }}
-            onMapOpen={() => setMapOpen(true)}
-          />
-        </Grid>
-
-        <LocationDialog
-          open={mapOpen}
-          onClose={() => setMapOpen(false)}
-          onConfirm={() => setMapOpen(false)}
-          onLocationSelected={handleLocationSelected}
-          googleMapsApiKey = "AIzaSyAbpOOHTMEZeY_WNnQjuROdIUCAPpwM45Q"
+          location={formValues.location}
+          errors={errors}
+          onLocationChange={(value) => {
+            handleInputChange("location", value);
+            validateLocation(value);
+          }}
+          onMapOpen={() => setMapOpen(true)}
         />
+      </Grid>
+
+      <LocationDialog
+        open={mapOpen}
+        onClose={() => setMapOpen(false)}
+        onConfirm={() => setMapOpen(false)}
+        onLocationSelected={(url) => handleInputChange("location", url)}
+        googleMapsApiKey="AIzaSyAbpOOHTMEZeY_WNnQjuROdIUCAPpwM45Q"
+      />
+
+      {formValues.location && <EmbeddedMap embedUrl={formValues.location} />}
     </Paper>
   );
 };

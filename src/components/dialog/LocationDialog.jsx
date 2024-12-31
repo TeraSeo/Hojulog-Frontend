@@ -77,13 +77,22 @@ const LocationDialog = ({
     });
   };  
 
+  // const handleConfirm = () => {
+  //   if (selectedPlace) {
+  //     const locationUrl = selectedPlace.place_id
+  //       ? `https://www.google.com/maps/place/?q=place_id:${selectedPlace.place_id}`
+  //       : `https://www.google.com/maps?q=${selectedPlace.geometry.location.lat},${selectedPlace.geometry.location.lng}`;
+  //     onLocationSelected(locationUrl); 
+  //     onClose(); 
+  //   }
+  // };
+
   const handleConfirm = () => {
     if (selectedPlace) {
-      const locationUrl = selectedPlace.place_id
-        ? `https://www.google.com/maps/place/?q=place_id:${selectedPlace.place_id}`
-        : `https://www.google.com/maps?q=${selectedPlace.geometry.location.lat},${selectedPlace.geometry.location.lng}`;
-      onLocationSelected(locationUrl); 
-      onClose(); 
+      const { lat, lng } = selectedPlace.geometry.location;
+      const embedUrl = `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${lat()},${lng()}&zoom=14`;
+      onLocationSelected(embedUrl);
+      onClose();
     }
   };
 

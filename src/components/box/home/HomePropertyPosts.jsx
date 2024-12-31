@@ -3,8 +3,10 @@ import { Box } from "@mui/material";
 import HomeSummarizedPropertyPostBox from "../post/property/HomeSummarizedPropertyPostBox";
 import HomeContainerBox from "./HomeContainerBox";
 import { getRecent5PropertyPosts } from "../../../service/PostService";
+import { useNavigate } from "react-router-dom";
 
 const HomePropertyPosts = () => {
+    const navigate = useNavigate();
     const [summarizedPropertyPostData, setSummarizedPropertyPostData] = useState([]);
 
     useEffect(() => {
@@ -13,8 +15,12 @@ const HomePropertyPosts = () => {
             .catch((error) => console.error("Error fetching posts:", error));
     }, []);
 
+    const handleNavigate = (path) => {
+        navigate(path);
+    };
+
     return (
-        <HomeContainerBox title="부동산" onDetailClicked={() => {}}>
+        <HomeContainerBox title="부동산" onDetailClicked={() => { handleNavigate("/realestate") }}>
             <Box
                 sx={{
                     display: "flex",

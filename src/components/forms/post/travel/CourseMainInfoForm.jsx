@@ -6,9 +6,11 @@ import ContactField from "../../../textfields/ContactField";
 import EmailField from "../../../textfields/EmailField";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import SuburbField from "../../../textfields/SuburbField";
-import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, locationFormatError, locationRequiredError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
+import { contactFormatError, descriptionRequiredError, emailFormatError, locationFormatError, locationRequiredError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
 import LocationField from "../../../textfields/LocationField";
 import LocationDialog from "../../../dialog/LocationDialog";
+import RatingField from "../../../textfields/RatingField";
+import EmbeddedMap from "../../../box/post/EmbeddedMap";
 
 const CourseMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
@@ -17,7 +19,8 @@ const CourseMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     contact: "",
     email: "",
     suburb: "",
-    location: ""
+    location: "",
+    rate: 0.0
   });
 
   const [errors, setErrors] = useState({});
@@ -48,7 +51,7 @@ const CourseMainInfoForm = ({ onDataChange, setIsFormValid }) => {
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, suburb, location } = formValues;
+    const { title, description, contact, email, suburb, location, rate } = formValues;
 
     if (!title?.trim()) newErrors.title = titleRequiredError;
     if (!description?.trim()) newErrors.description = descriptionRequiredError;
@@ -72,6 +75,10 @@ const CourseMainInfoForm = ({ onDataChange, setIsFormValid }) => {
       newErrors.location = locationRequiredError;
     } else if (!locationPattern.test(location)) {
       newErrors.location = locationFormatError;
+    }
+
+    if (rate < 0.0 || rate > 5.0) {
+      newErrors.rate = "평점은 0.0에서 5.0 사이여야 합니다.";
     }
 
     setErrors(newErrors);
@@ -104,6 +111,11 @@ const CourseMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           value={formValues.title}
           error={errors.title}
           onChange={(value) => handleInputChange("title", value)}
+        />
+        <RatingField
+          value={formValues.rate}
+          error={errors.rate}
+          onChange={(value) => handleInputChange("rate", value)}
         />
         <DescriptionField
           value={formValues.description}
@@ -144,6 +156,8 @@ const CourseMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           onLocationSelected={handleLocationSelected}
           googleMapsApiKey = "AIzaSyAbpOOHTMEZeY_WNnQjuROdIUCAPpwM45Q"
         />
+
+        {formValues.location && <EmbeddedMap embedUrl={formValues.location} />}
     </Paper>
   );
 };

@@ -1,8 +1,19 @@
+import React, { useState } from "react";
 import { Box, IconButton, InputBase, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import React from "react";
 
-const AddCommentBox = ({ comment, setComment, handleCommentSubmit }) => {
+const AddCommentBox = () => {
+  const [comment, setComment] = useState(""); // Local state for comment
+
+  const handleCommentSubmit = () => {
+    if (comment.trim() !== "") {
+      console.log("Comment submitted:", comment); // Replace with your submit logic
+      setComment(""); // Clear the input field after submission
+    } else {
+      console.log("Comment is empty.");
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -13,7 +24,7 @@ const AddCommentBox = ({ comment, setComment, handleCommentSubmit }) => {
       }}
     >
       <Typography variant="h7" sx={{ fontWeight: "bold" }}>
-        Write a Comment
+        댓글 쓰기
       </Typography>
       <Box
         sx={{
@@ -26,7 +37,7 @@ const AddCommentBox = ({ comment, setComment, handleCommentSubmit }) => {
         }}
       >
         <InputBase
-          placeholder="Write your comment here..."
+          placeholder="여기에 댓글을 입력하세요..."
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           sx={{

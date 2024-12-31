@@ -1,12 +1,13 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import CommentIcon from "@mui/icons-material/Comment";
+import { primaryColor } from "../../constant/Color";
 
-const CommentsCountsText = ({ commentsCounts }) => {
+const CommentsCountsText = ({ commentsCounts, pl = 1 }) => {
     return (
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-            <CommentIcon sx={{ color: "grey", pr: 0.5, width: "20px", height: "20px" }} />
-            <Typography variant="caption">
+        <Box sx={{ display: "flex", alignItems: "center", pl: pl }}>
+            <CommentIcon sx={{ color: primaryColor, pr: 0.3, width: "25px", height: "25px" }} />
+            <Typography variant="caption" sx={{ fontSize: "13px" }} >
                 { commentsCounts + 3 }
             </Typography>
         </Box>

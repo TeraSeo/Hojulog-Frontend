@@ -2,11 +2,11 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import { formatTimeDifference } from "../../service/TimeService";
 
-const CreatedAtText = ({ createdAt }) => {
+const CreatedAtText = ({ createdAt, pl=1 }) => {
   const formattedTime = formatTimeDifference(createdAt);
 
   return (
-    <Box sx={{ pl: 1 }}>
+    <Box sx={{ pl: pl }}>
       <Typography
         variant="caption"
         sx={{

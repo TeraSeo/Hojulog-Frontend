@@ -4,7 +4,7 @@ import { useDropzone } from "react-dropzone";
 import ImageUploader from "../../../media/ImageUploader";
 import AspectRatioSelector from "../../../media/AspectRatioSelector";
 
-const MajorReviewMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
+const JobReviewMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
   const [selectedImages, setSelectedImages] = useState([]);
   const [errors, setErrors] = useState({});
   const [mediaAspectRatio, setMediaAspectRatio] = useState("16x9");
@@ -87,4 +87,4 @@ const MajorReviewMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
   );
 };
 
-export default MajorReviewMediaUploadForm;
+export default JobReviewMediaUploadForm;

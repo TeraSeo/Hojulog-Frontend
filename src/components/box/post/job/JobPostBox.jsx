@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
 import React from "react";
 import SummarizedPostTitleText from "../../../texts/SummarizedPostTitleText";
-import PostAverageRateBox from "../PostAverageRateBox";
 import CreatedAtText from "../../../texts/CreatedAtText";
 import LocationButton from "../../../buttons/LocationButton";
 import SuburbText from "../../../texts/SuburbText";
@@ -36,8 +35,7 @@ const JobPostBox = ({ post }) => {
                     <Box>
                         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                             <Box sx={{whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",}}>
-                                <SummarizedPostTitleText title={post.title} postId={post.postId} category={"property"} />
-                                <PostAverageRateBox averageRate={post.averageRate} />
+                                <SummarizedPostTitleText title={post.title} postId={post.postId} category={"job"} />
                             </Box>
 
                             <LocationButton location={post.location} />

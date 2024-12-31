@@ -1,7 +1,7 @@
 import React from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Button, Typography } from "@mui/material";
-import { logoPrimaryColor } from "../../constant/Color";
+import { primaryColor } from "../../constant/Color";
 
 const LikeCountButton = ({ count }) => {
   return (
@@ -10,14 +10,14 @@ const LikeCountButton = ({ count }) => {
       startIcon={<FavoriteBorderIcon />}
       sx={{
         textTransform: 'none',
-        color: logoPrimaryColor,
-        borderColor: logoPrimaryColor,
+        color: primaryColor,
+        borderColor: primaryColor,
         padding: '6px 12px',
         borderRadius: '8px',
-        height: '40px', // Consistent height with location button
+        height: '40px',
       }}
     >
-      <Typography variant="body2" sx={{ fontWeight: 'bold', color: logoPrimaryColor }}>
+      <Typography variant="body2" sx={{ fontWeight: 'bold', color: primaryColor }}>
         {count}
       </Typography>
     </Button>

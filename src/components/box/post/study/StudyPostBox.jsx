@@ -1,10 +1,11 @@
 import { Box } from "@mui/material";
 import React from "react";
 import SummarizedPostTitleText from "../../../texts/SummarizedPostTitleText";
-import PostAverageRateBox from "../PostAverageRateBox";
 import CreatedAtText from "../../../texts/CreatedAtText";
 import SuburbText from "../../../texts/SuburbText";
 import ViewCountsText from "../../../texts/ViewCountsText";
+import PostRateBox from "../PostRateBox";
+import SummarizedDescriptionText from "../../../texts/SummarizedDescriptionText";
 
 const StudyPostBox = ({ post }) => {
     return (
@@ -34,8 +35,9 @@ const StudyPostBox = ({ post }) => {
                 >
                     <Box>
                         <Box sx={{whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",}}>
-                            <SummarizedPostTitleText title={post.title} postId={post.postId} category={"property"} />
-                            <PostAverageRateBox averageRate={post.averageRate} />
+                            <SummarizedPostTitleText title={post.title} postId={post.postId} category={"study"} />
+                            <SummarizedDescriptionText description={post.description} />
+                            <PostRateBox rate={post.rate} />
                         </Box>
 
                         <Box

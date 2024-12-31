@@ -3,8 +3,10 @@ import { Box } from "@mui/material";
 import HomeContainerBox from "./HomeContainerBox";
 import { getRecent5StudyPosts } from "../../../service/PostService";
 import HomeSummarizedStudyPostBox from "../post/study/HomeSummarizedStudyPostBox";
+import { useNavigate } from "react-router-dom";
 
 const HomeStudyPosts = () => {
+const navigate = useNavigate();
     const [summarizedStudyPostData, setSummarizedStudyPostData] = useState([]);
 
     useEffect(() => {
@@ -13,8 +15,12 @@ const HomeStudyPosts = () => {
             .catch((error) => console.error("Error fetching posts:", error));
     }, []);
 
+    const handleNavigate = (path) => {
+        navigate(path);
+    };
+
     return (
-        <HomeContainerBox title="유학" onDetailClicked={() => {}}>
+        <HomeContainerBox title="유학" onDetailClicked={() => { handleNavigate("/studyabroad") }}>
             <Box
                 sx={{
                     gap: "16px",
@@ -28,7 +34,7 @@ const HomeStudyPosts = () => {
                 }}
             >
                 {summarizedStudyPostData.map((post, index) => (
-                    <Box key={index}>
+                    <Box key={index} sx={{ mb: 2 }} >
                         <HomeSummarizedStudyPostBox post={post} />
                     </Box>
                 ))}

@@ -9,14 +9,14 @@ const PostCommentBox = ({ postId }) => {
   const [comment, setComment] = useState("");
 
   const fetchComments = () => {
-    if (postId) {
-      getCommentsByPostId(postId)
-        .then((data) => setCommentsData(data || {}))
-        .catch((error) => {
-          console.error("Error fetching comments:", error);
-          setCommentsData({});
-        });
-    }
+    // if (postId) {
+    //   getCommentsByPostId(postId)
+    //     .then((data) => setCommentsData(data || {}))
+    //     .catch((error) => {
+    //       console.error("Error fetching comments:", error);
+    //       setCommentsData({});
+    //     });
+    // }
   };
 
   useEffect(() => {
@@ -39,13 +39,12 @@ const PostCommentBox = ({ postId }) => {
   return (
     <Box sx={{ px: 2 }}>
       <Typography variant="h6" gutterBottom>
-        {wholeCommentsLength} Comments
+        댓글 {wholeCommentsLength}개
       </Typography>
 
       {/* Show "No comments" message if there are no comments */}
       {summarizedComments.length === 0 ? (
         <Typography variant="body2" sx={{ color: "gray", textAlign: "center", marginY: 2 }}>
-          There are no comments yet. Be the first to comment!
         </Typography>
       ) : (
         summarizedComments.map((comment, index) => (

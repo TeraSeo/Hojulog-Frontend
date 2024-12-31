@@ -16,6 +16,7 @@ import RoomCountField from "../../../textfields/RoomCountField";
 import BathroomTypeField from "../../../textfields/BathroomTypeField";
 import ParkableField from "../../../textfields/ParkableField";
 import BillIncludedField from "../../../textfields/BillIncludedField";
+import EmbeddedMap from "../../../box/post/EmbeddedMap";
 
 const SharePropertyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
@@ -208,6 +209,8 @@ const SharePropertyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         onLocationSelected={handleLocationSelected}
         googleMapsApiKey = "AIzaSyAbpOOHTMEZeY_WNnQjuROdIUCAPpwM45Q"
       />
+
+      {formValues.location && <EmbeddedMap embedUrl={formValues.location} />}
     </Paper>
   );
 };

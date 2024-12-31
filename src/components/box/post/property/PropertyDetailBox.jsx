@@ -1,136 +1,72 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { Box, IconButton } from '@mui/material';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import React from 'react';
+import { Box, Divider, Typography } from '@mui/material';
+import ScrollableImageGallery from '../ScrollableImageGallery';
+import ContactText from '../../../texts/ContactText';
+import RoomCountsText from '../../../texts/RoomCountsText';
+import BathRoomTypeText from '../../../texts/BathRoomTypeText';
+import ParkAvailabilityText from '../../../texts/ParkAvailabilityText';
+import PriceCard from '../../../texts/PriceCard';
+import PropertyDetailText from '../../../texts/PropertyDetailText';
+import DetailedPostTitleText from '../../../texts/DetailedPostTitleText';
+import CreatedAtText from '../../../texts/CreatedAtText';
 
-const PropertyDetailBox = ({ imageUrls, description, price, period, roomCount, bathroomType, location, title }) => {
-  const [showScrollButtons, setShowScrollButtons] = useState(false);
-  const scrollContainerRef = useRef(null);
-
-  useEffect(() => {
-    checkIfScrollable();
-    window.addEventListener('resize', checkIfScrollable);
-    return () => window.removeEventListener('resize', checkIfScrollable);
-  }, [imageUrls]);
-
-  const checkIfScrollable = () => {
-    if (scrollContainerRef.current) {
-      const isScrollable =
-        scrollContainerRef.current.scrollWidth > scrollContainerRef.current.clientWidth;
-      setShowScrollButtons(isScrollable);
-    }
-  };
-
-  const scrollLeft = () => {
-    scrollContainerRef.current.scrollBy({
-      left: -300,
-      behavior: 'smooth',
-    });
-  };
-
-  const scrollRight = () => {
-    scrollContainerRef.current.scrollBy({
-      left: 300,
-      behavior: 'smooth',
-    });
-  };
-
+const PropertyDetailBox = ({ imageUrls, description, price, period, roomCount, bathroomType, isParkable, title, subCategory, postId, contact, email, isBillIncluded, availableTime, createdAt }) => {
   return (
     <Box>
-      <Box sx={{ mb: 3 }}>
-        <h1>{title}</h1>
-      </Box>
+      <ScrollableImageGallery imageUrls={imageUrls} />
 
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          position: 'relative',
-        }}
-      >
-        {showScrollButtons && (
-          <IconButton
-            onClick={scrollLeft}
-            sx={{
-              position: 'absolute',
-              left: 8,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              zIndex: 2,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'rgba(255, 255, 255, 0.8)',
-              '&:hover': {
-                backgroundColor: 'rgba(255, 255, 255, 1)',
-              },
-              height: '40px',
-              width: '40px',
-            }}
-          >
-            <ArrowBackIosIcon sx={{ margin: 'auto', pl: 1.3 }} />
-          </IconButton>
-        )}
+      <Box sx={{ mt: imageUrls.length > 0 ? 3 : 0 }}>
 
-        <Box
-          ref={scrollContainerRef}
-          sx={{
-            display: 'flex',
-            overflowX: 'auto',
-            scrollBehavior: 'smooth',
-            gap: 2,
-            padding: 1,
-            scrollSnapType: 'x mandatory',
-            '&::-webkit-scrollbar': { display: 'none' },
-          }}
-        >
-          {imageUrls.map((url, index) => (
-            <Box
-              key={index}
-              sx={{
-                minWidth: '300px',
-                aspectRatio: '16 / 13',
-                backgroundImage: `url(${url})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                borderRadius: '8px',
-                flexShrink: 0,
-              }}
-            />
-          ))}
+        <Box sx={{ pl: 1 }}>
+            <DetailedPostTitleText subCategory={subCategory} title={title} />
+            
+            <ContactText contact={contact} email={email} />
+
+            <Divider sx={{ my: 2.5 }} />
+
+            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <Box sx={{ display: "flex", gap: 2 }}>
+                  <PriceCard price={price} period={period} isBillIncluded={isBillIncluded} />
+                  <RoomCountsText roomCount={roomCount} width={25} height={25} fontSize={11} />
+                  <BathRoomTypeText bathroomType={bathroomType} width={25} height={25} fontSize={11} />
+                  <ParkAvailabilityText isParkable={isParkable} width={25} height={25} fontSize={11} />
+                </Box>
+
+            </Box>
+
+            <Divider sx={{ my: 2.5 }} />
+
+            <Typography
+                variant="body2"
+                sx={{
+                    fontWeight: "600",
+                    textAlign: "start",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    fontSize: "14px"
+                }}
+            >
+              설명
+            </Typography>
+            
+            <Typography
+                variant="body2"
+                sx={{
+                    fontWeight: "400",
+                    textAlign: "start",
+                    pt: 1.5,
+                    whiteSpace: "pre-line"
+                }}
+            >
+              { description }
+            </Typography>
+
+            <CreatedAtText createdAt={createdAt} pl={0} />
+
+            <Divider sx={{ my: 2.5 }} />
+            <PropertyDetailText price={price} period={period} isBillIncluded={isBillIncluded} availableTime={availableTime} bathroomType={bathroomType} isParkable={isParkable} roomCount={roomCount} />
+
         </Box>
-
-        {showScrollButtons && (
-          <IconButton
-            onClick={scrollRight}
-            sx={{
-              position: 'absolute',
-              right: 0,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              zIndex: 2,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'rgba(255, 255, 255, 0.8)',
-              '&:hover': {
-                backgroundColor: 'rgba(255, 255, 255, 1)',
-              },
-              height: '40px',
-              width: '40px',
-            }}
-          >
-            <ArrowForwardIosIcon sx={{ margin: 'auto' }} />
-          </IconButton>
-        )}
-      </Box>
-
-      <Box sx={{ mt: 3 }}>
-        <p>{description}</p>
-        <p>Price: ${price} per {period}</p>
-        <p>Room Count: {roomCount}</p>
-        <p>Bathroom Type: {bathroomType}</p>
-        <p>Location: {location}</p>
       </Box>
     </Box>
   );

@@ -30,14 +30,21 @@ import LaunchCoursePage from './pages/post/travel/LaunchCoursePage';
 import LaunchTravelPage from './pages/post/travel/LaunchTravelPage';
 import LaunchRestaurantPage from './pages/post/travel/LaunchRestaurantPage';
 import LaunchSchoolPage from './pages/post/study/LaunchSchoolPage';
-import LaunchMajorPage from './pages/post/study/LaunchMajorPage';
 import WholePropertyPostPage from './pages/post/property/WholePropertyPostPage';
 import WholeJobPostPage from './pages/post/job/WholeJobPostPage';
 import WholeTransactionPostPage from './pages/post/transaction/WholeTransactionPostPage';
 import WholeSocietyPostPage from './pages/post/society/WholeSocietyPostPage';
 import WholeTravelPostPage from './pages/post/travel/WholeTravelPostPage';
 import WholeStudyPostPage from './pages/post/study/WholeStudyPostPage';
-import PropertyPostDetailePage from './pages/post/property/PropertyPostDetailePage';
+import LaunchJobReviewPage from './pages/post/study/LaunchJobReviewPage';
+import LaunchLanguageStudyPage from './pages/post/study/LaunchLanguageStudyPage';
+import LaunchWorkingHolidayPage from './pages/post/study/LaunchWorkingHolidayPage';
+import PropertyPostDetailPage from './pages/post/property/PropertyPostDetailPage';
+import JobPostDetailPage from './pages/post/job/JobPostDetailPage';
+import TransactionPostDetailPage from './pages/post/transaction/TransactionPostDetailPage';
+import SocietyPostDetailPage from './pages/post/society/SocietyPostDetailPage';
+import TravelPostDetailedPage from './pages/post/travel/TravelPostDetailedPage';
+import StudyPostDetailPage from './pages/post/study/StudyPostDetailPage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -99,10 +106,10 @@ function App() {
                   기타: LaunchEtcTransactionPage,
                   대여: LaunchProductRentTransactionPage
                 },
-                동호회: {
-                  취미: LaunchHobbyPage,
+                생활: {
+                  동호회: LaunchHobbyPage,
                   친목: LaunchFriendshipPage,
-                  정보공유: LaunchShareInfoPage
+                  라이프스타일: LaunchShareInfoPage
                 },
                 여행: {
                   코스: LaunchCoursePage,
@@ -111,7 +118,9 @@ function App() {
                 },
                 유학: {
                   학교후기: LaunchSchoolPage,
-                  전공후기: LaunchMajorPage
+                  워홀후기: LaunchWorkingHolidayPage,
+                  어학연수후기: LaunchLanguageStudyPage,
+                  취업후기: LaunchJobReviewPage
                 }
               }}
             />
@@ -153,7 +162,12 @@ function App() {
 
             {generateDynamicRoutes()}
 
-            <Route path="post/property/detail/:postId" element={<PropertyPostDetailePage />} />
+            <Route path="post/property/detail/:postId" element={<PropertyPostDetailPage />} />
+            <Route path="post/job/detail/:postId" element={<JobPostDetailPage />} />
+            <Route path="post/transaction/detail/:postId" element={<TransactionPostDetailPage />} />
+            <Route path="post/society/detail/:postId" element={<SocietyPostDetailPage />} />
+            <Route path="post/travel/detail/:postId" element={<TravelPostDetailedPage />} />
+            <Route path="post/study/detail/:postId" element={<StudyPostDetailPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

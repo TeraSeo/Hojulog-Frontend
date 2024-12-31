@@ -1,1 +1,1 @@
-export const allowedRoutesWitoutVerification = ["/", "/about", "/contact", "/realestate", "/jobs", "/marketplace", "/community", "/travel", "/studyabroad", "/post/property/detail/:postId"];
+export const allowedRoutesWitoutVerification = ["/", "/about", "/contact", "/realestate", "/jobs", "/marketplace", "/community", "/travel", "/studyabroad", "/post/property/detail/:postId", "/post/job/detail/:postId", "/post/transaction/detail/:postId", "/post/society/detail/:postId", "/post/travel/detail/:postId", "/post/study/detail/:postId"];

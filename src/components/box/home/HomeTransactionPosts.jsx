@@ -3,8 +3,10 @@ import HomeContainerBox from "./HomeContainerBox";
 import { getRecent5TransactionPosts } from "../../../service/PostService";
 import { Box } from "@mui/material";
 import HomeSummarizedTransactionPropertyBox from "../post/transaction/HomeSummarizedTransactionPropertyBox";
+import { useNavigate } from "react-router-dom";
 
 const HomeTransactionPosts = () => {
+    const navigate = useNavigate();
     const [summarizedTransactionPostData, setSummarizedTransactionPostData] = useState([]);
 
     useEffect(() => {
@@ -13,8 +15,12 @@ const HomeTransactionPosts = () => {
             .catch((error) => console.error("Error fetching posts:", error));
     }, []);
 
+    const handleNavigate = (path) => {
+        navigate(path);
+    };
+
    return (
-        <HomeContainerBox title="사고팔기" onDetailClicked={() => {}}>
+        <HomeContainerBox title="사고팔기" onDetailClicked={() => { handleNavigate("/marketplace") }}>
             <Box
                 sx={{
                     display: "flex",

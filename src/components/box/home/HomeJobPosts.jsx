@@ -3,8 +3,10 @@ import { Box } from "@mui/material";
 import HomeContainerBox from "./HomeContainerBox";
 import { getRecent5JobPosts } from "../../../service/PostService";
 import HomeSummarizedJobBox from "../post/job/HomeSummarizedJobBox";
+import { useNavigate } from "react-router-dom";
 
 const HomeJobPosts = () => {
+    const navigate = useNavigate();
     const [summarizedJobPostData, setSummarizedJobPostData] = useState([]);
 
     useEffect(() => {
@@ -13,8 +15,12 @@ const HomeJobPosts = () => {
             .catch((error) => console.error("Error fetching posts:", error));
     }, []);
 
+    const handleNavigate = (path) => {
+        navigate(path);
+    };
+
     return (
-        <HomeContainerBox title="구인구직" onDetailClicked={() => {}}>
+        <HomeContainerBox title="구인구직" onDetailClicked={() => { handleNavigate("/jobs") }}>
             <Box
                 sx={{
                     gap: "16px",
@@ -28,7 +34,7 @@ const HomeJobPosts = () => {
                 }}
             >
                 {summarizedJobPostData.map((post, index) => (
-                    <Box key={index}>
+                    <Box key={index} sx={{ mb: 2 }} >
                         <HomeSummarizedJobBox post={post} />
                     </Box>
                 ))}

@@ -4,45 +4,44 @@ import TitleField from "../../../textfields/TitleField";
 import DescriptionField from "../../../textfields/DescriptionField";
 import ContactField from "../../../textfields/ContactField";
 import EmailField from "../../../textfields/EmailField";
-import SchoolField from "../../../textfields/SchoolField";
-import MajorField from "../../../textfields/MajorField";
-import { isValidPhoneNumber } from "libphonenumber-js";
 import SuburbField from "../../../textfields/SuburbField";
-import { contactRequiredError, descriptionRequiredError, emailRequiredError, majorRequiredError, schoolRequiredError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
+import { isValidPhoneNumber } from "libphonenumber-js";
+import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
+import RatingField from "../../../textfields/RatingField";
 
-const MajorReviewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
+const JobReviewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
     title: "",
     description: "",
-    contact: "",
+    contact: "", 
     email: "",
-    school: "",
-    major: "",
-    suburb: ""
+    suburb: "",
+    rate: 0.0
   });
 
   const [errors, setErrors] = useState({});
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, school, major, suburb } = formValues;
+    const { title, description, contact, email, suburb, rate } = formValues;
 
     if (!title?.trim()) newErrors.title = titleRequiredError;
     if (!description?.trim()) newErrors.description = descriptionRequiredError;
 
     if (contact?.trim() && !isValidPhoneNumber(contact)) {
-      newErrors.contact = contactRequiredError;
+      newErrors.contact = contactFormatError;
     }
 
     if (email?.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = emailRequiredError;
+      newErrors.email = emailFormatError;
     }
-
-    if (!school?.trim()) newErrors.school = schoolRequiredError;
-    if (!major?.trim()) newErrors.major = majorRequiredError;
 
     if (!suburb?.trim()) {
       newErrors.suburb = suburbRequiredError;
+    }
+
+    if (rate < 0.0 || rate > 5.0) {
+      newErrors.rate = "평점은 0.0에서 5.0 사이여야 합니다.";
     }
 
     setErrors(newErrors);
@@ -67,7 +66,7 @@ const MajorReviewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         주요 정보 입력
       </Typography>
       <Typography variant="body2" color="textSecondary" gutterBottom>
-        제목, 설명, 학교 이름, 전공, 연락처, 이메일, 지역 등 정보를 입력하세요.
+        제목, 설명, 연락처, 이메일, 근무 형태, 지역 등 정보를 입력하세요.
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 1 }}>
@@ -76,12 +75,16 @@ const MajorReviewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           error={errors.title}
           onChange={(value) => handleInputChange("title", value)}
         />
+        <RatingField
+          value={formValues.rate}
+          error={errors.rate}
+          onChange={(value) => handleInputChange("rate", value)}
+        />
         <DescriptionField
           value={formValues.description}
           error={errors.description}
           onChange={(value) => handleInputChange("description", value)}
         />
-        
         <ContactField
           value={formValues.contact}
           error={errors.contact}
@@ -91,17 +94,6 @@ const MajorReviewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           value={formValues.email}
           error={errors.email}
           onChange={(value) => handleInputChange("email", value)}
-        />
-
-        <SchoolField
-          value={formValues.school}
-          error={errors.school}
-          onChange={(value) => handleInputChange("school", value)}
-        />
-        <MajorField
-          value={formValues.major}
-          error={errors.major}
-          onChange={(value) => handleInputChange("major", value)}
         />
         <SuburbField
           value={formValues.suburb}
@@ -113,4 +105,4 @@ const MajorReviewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   );
 };
 
-export default MajorReviewMainInfoForm;
+export default JobReviewMainInfoForm;

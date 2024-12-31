@@ -16,7 +16,7 @@ const CategorySidebar = () => {
     const [expandedCategories, setExpandedCategories] = useState(() => {
         const initialExpandedState = {};
         Object.keys(categories).forEach((category) => {
-            initialExpandedState[category] = true;
+            initialExpandedState[category] = false;
         });
         return initialExpandedState;
     });
@@ -38,7 +38,7 @@ const CategorySidebar = () => {
             }}
         >
             <Typography variant="h6" sx={{ marginBottom: 2, fontWeight: "bold" }}>
-                Categories
+                카테고리
             </Typography>
             <List>
                 {Object.keys(categories).map((category) => (
