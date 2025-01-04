@@ -43,11 +43,11 @@ const SocietyPostDetailPage = () => {
       </Grid>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
-          <LikeCountsText likeCounts={22} pl={0} />
+          <LikeCountsText initialLikes={societyPostData.likeCounts} initialIsLiked={societyPostData.isUserLiked} pl={0} postId={societyPostData.postId} />
           <Box sx={{ cursor: "pointer" }}>
-              <CommentsCountsText commentsCounts={10} />
+              <CommentsCountsText commentsCounts={societyPostData.commentCounts} />
           </Box>
-          <ViewCountsText viewCounts={220} />
+          <ViewCountsText viewCounts={societyPostData.viewCounts} />
       </Box>
 
       { societyPostData.location ? <EmbeddedMap mapUrl={societyPostData.location} /> : <></> }

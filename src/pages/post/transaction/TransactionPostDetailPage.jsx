@@ -42,11 +42,11 @@ const TravelPostDetailedPage = () => {
       </Grid>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
-          <LikeCountsText likeCounts={22} pl={0} />
+          <LikeCountsText initialLikes={transactionPostData.likeCounts} initialIsLiked={transactionPostData.isUserLiked} pl={0} postId={transactionPostData.postId} />
           <Box sx={{ cursor: "pointer" }}>
-              <CommentsCountsText commentsCounts={10} />
+              <CommentsCountsText commentsCounts={transactionPostData.commentCounts} />
           </Box>
-          <ViewCountsText viewCounts={220} />
+          <ViewCountsText viewCounts={transactionPostData.viewCounts} />
       </Box>
 
       <Box sx={{ mt: 8, mb: 15 }}>

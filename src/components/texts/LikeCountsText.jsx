@@ -2,14 +2,23 @@ import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { addPostLike, removePostLike } from "../../service/PostLikeService";
 
-const LikeCountsText = ({ initialLikes=0, initialIsLiked=false, pl = 1 }) => {
+const LikeCountsText = ({ initialLikes=0, initialIsLiked=false, pl = 1, postId }) => {
   const [likeCounts, setLikeCounts] = useState(initialLikes);
   const [isLiked, setIsLiked] = useState(initialIsLiked);
 
-  const handleToggleLike = () => {
-    setIsLiked(!isLiked);
-    setLikeCounts(isLiked ? likeCounts - 1 : likeCounts + 1);
+  const handleToggleLike = async () => {
+    if (isLiked) {
+      const likeCounts = await removePostLike(postId);
+      setIsLiked(false);
+      setLikeCounts(likeCounts);
+    }
+    else {
+      const likeCounts = await addPostLike(postId);
+      setIsLiked(true);
+      setLikeCounts(likeCounts);
+    }
   };
 
   return (

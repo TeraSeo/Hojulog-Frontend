@@ -22,6 +22,7 @@ const PropertyPostDetailPage = () => {
     getSpecificPropertyPost(postId)
       .then((data) => {
         setPropertyPostData(data);
+        alert(propertyPostData.isUserLiked);
       })
       .catch((error) => console.error("Error fetching posts:", error));
   };
@@ -43,9 +44,9 @@ const PropertyPostDetailPage = () => {
       </Grid>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
-          <LikeCountsText likeCounts={22} pl={0} />
+          <LikeCountsText initialLikes={propertyPostData.likeCounts} initialIsLiked={propertyPostData.isUserLiked} pl={0} postId={propertyPostData.postId} />
           <Box sx={{ cursor: "pointer" }}>
-              <CommentsCountsText commentsCounts={10} />
+              <CommentsCountsText commentsCounts={propertyPostData.commentCounts} />
           </Box>
           <ViewCountsText viewCounts={propertyPostData.viewCounts} />
       </Box>

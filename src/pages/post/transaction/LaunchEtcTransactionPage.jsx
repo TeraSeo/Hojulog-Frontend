@@ -50,7 +50,6 @@ const LaunchEtcTransactionPage = () => {
     const transactionData = {
       ...mainInfoData,
       "category": "사고팔기",
-      // "isPortrait": mediaData.isPortrait,
       "subCategory": "기타",
       "userId": userId
     };

@@ -49,9 +49,8 @@ const LaunchShareInfoPage = () => {
 
     const societyData = {
       ...mainInfoData,
-      "category": "동호회",
-      "isPortrait": mediaData.isPortrait,
-      "subCategory": "정보공유",
+      "category": "생활",
+      "subCategory": "라이프스타일",
       "userId": userId
     };
 

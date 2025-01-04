@@ -1,18 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, IconButton, InputBase, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 
-const AddCommentBox = () => {
-  const [comment, setComment] = useState(""); // Local state for comment
-
-  const handleCommentSubmit = () => {
-    if (comment.trim() !== "") {
-      console.log("Comment submitted:", comment); // Replace with your submit logic
-      setComment(""); // Clear the input field after submission
-    } else {
-      console.log("Comment is empty.");
-    }
-  };
+const AddCommentBox = ({ comment, setComment, handleCommentSubmit }) => {
 
   return (
     <Box

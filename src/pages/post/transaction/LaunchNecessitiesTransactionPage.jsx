@@ -50,7 +50,6 @@ const LaunchNecessitiesTransactionPage = () => {
     const transactionData = {
       ...mainInfoData,
       "category": "사고팔기",
-      // "isPortrait": mediaData.isPortrait,
       "subCategory": "생활용품",
       "userId": userId
     };

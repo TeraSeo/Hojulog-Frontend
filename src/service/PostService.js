@@ -294,6 +294,7 @@ function getSpecificPropertyPost(postId) {
         },
         params: {
             "postId": postId,
+            "userId": userId
         }
     })
     .then((response) => {
@@ -317,6 +318,7 @@ function getSpecificJobPost(postId) {
         },
         params: {
             "postId": postId,
+            "userId": userId
         }
     })
     .then((response) => {
@@ -340,6 +342,7 @@ function getSpecificTransactionPost(postId) {
         },
         params: {
             "postId": postId,
+            "userId": userId
         }
     })
     .then((response) => {
@@ -363,6 +366,7 @@ function getSpecificSocietyPost(postId) {
         },
         params: {
             "postId": postId,
+            "userId": userId
         }
     })
     .then((response) => {
@@ -386,6 +390,7 @@ function getSpecificTravelPost(postId) {
         },
         params: {
             "postId": postId,
+            "userId": userId
         }
     })
     .then((response) => {
@@ -409,6 +414,7 @@ function getSpecificStudyPost(postId) {
         },
         params: {
             "postId": postId,
+            "userId": userId
         }
     })
     .then((response) => {

@@ -1,37 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Grid, Paper } from "@mui/material";
 import TitleField from "../../../textfields/TitleField";
-import DescriptionField from "../../../textfields/DescriptionField";
-import ContactField from "../../../textfields/ContactField";
-import EmailField from "../../../textfields/EmailField";
 import CountrySelectField from "../../../textfields/CountrySelectField";
 import RatingField from "../../../textfields/RatingField";
-import { isValidPhoneNumber } from "libphonenumber-js";
-import SuburbField from "../../../textfields/SuburbField";
 import LocationField from "../../../textfields/LocationField";
 import LocationDialog from "../../../dialog/LocationDialog";
 import {
-  contactFormatError,
   countryRequiredError,
-  descriptionRequiredError,
-  emailFormatError,
   locationFormatError,
   locationRequiredError,
-  suburbRequiredError,
   titleRequiredError,
 } from "../../../../constant/ErrorMsg";
-import EmbeddedMap from "../../../box/post/EmbeddedMap";
+import ContentBlockManager from "../ContentBlockManager";
 
 const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
     title: "",
-    description: "",
-    contact: "",
-    email: "",
     country: "호주",
-    suburb: "",
     location: "",
-    rate: 0.0
+    rate: 0.0,
+    blogContents: [],
   });
 
   const [errors, setErrors] = useState({});
@@ -55,24 +43,11 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, country, suburb, location, rate } = formValues;
+    const { title, country, location, rate } = formValues;
 
     if (!title?.trim()) newErrors.title = titleRequiredError;
-    if (!description?.trim()) newErrors.description = descriptionRequiredError;
-
-    if (contact?.trim() && !isValidPhoneNumber(contact)) {
-      newErrors.contact = contactFormatError;
-    }
-
-    if (email?.trim() && !/^[^\s@]+@[^\s@]+$/.test(email)) {
-      newErrors.email = emailFormatError;
-    }
 
     if (!country) newErrors.country = countryRequiredError;
-
-    if (!suburb?.trim()) {
-      newErrors.suburb = suburbRequiredError;
-    }
 
     if (!location.trim()) {
       newErrors.location = locationRequiredError;
@@ -106,7 +81,7 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         주요 정보 입력
       </Typography>
       <Typography variant="body2" color="textSecondary" gutterBottom>
-        제목, 설명, 연락처, 이메일, 나라, 지역 등 정보를 입력하세요.
+        제목, 평점, 나라 등 정보를 입력하세요.
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 1 }}>
@@ -120,30 +95,10 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           error={errors.rate}
           onChange={(value) => handleInputChange("rate", value)}
         />
-        <DescriptionField
-          value={formValues.description}
-          error={errors.description}
-          onChange={(value) => handleInputChange("description", value)}
-        />
-        <ContactField
-          value={formValues.contact}
-          error={errors.contact}
-          onChange={(value) => handleInputChange("contact", value)}
-        />
-        <EmailField
-          value={formValues.email}
-          error={errors.email}
-          onChange={(value) => handleInputChange("email", value)}
-        />
         <CountrySelectField
           value={formValues.country}
           error={errors.country}
           onChange={(value) => handleInputChange("country", value)}
-        />
-        <SuburbField
-          value={formValues.suburb}
-          error={errors.suburb}
-          onChange={(value) => handleInputChange("suburb", value)}
         />
         <LocationField
           location={formValues.location}
@@ -154,6 +109,12 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           }}
           onMapOpen={() => setMapOpen(true)}
         />
+
+        <Grid item xs={12}>
+          <ContentBlockManager
+            onChange={(blocks) => handleInputChange("blogContents", blocks)}
+          />
+        </Grid>
       </Grid>
 
       <LocationDialog
@@ -163,8 +124,6 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         onLocationSelected={(url) => handleInputChange("location", url)}
         googleMapsApiKey="AIzaSyAbpOOHTMEZeY_WNnQjuROdIUCAPpwM45Q"
       />
-
-      {formValues.location && <EmbeddedMap embedUrl={formValues.location} />}
     </Paper>
   );
 };

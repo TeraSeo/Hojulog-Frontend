@@ -50,7 +50,6 @@ const LaunchRecruitmentPage = () => {
     const jobData = {
       ...mainInfoData,
       "category": "구인구직",
-      // "isPortrait": mediaData.isPortrait,
       "subCategory": "구직",
       "userId": userId
     };

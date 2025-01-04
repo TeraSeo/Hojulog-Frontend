@@ -50,7 +50,6 @@ const LaunchCarTransactionPage = () => {
     const transactionData = {
       ...mainInfoData,
       "category": "사고팔기",
-      // "isPortrait": mediaData.isPortrait,
       "subCategory": "자동차",
       "userId": userId
     };

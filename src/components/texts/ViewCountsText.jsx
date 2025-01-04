@@ -7,7 +7,7 @@ const ViewCountsText = ({ viewCounts, pl=1 }) => {
         <Box sx={{ display: "flex", alignItems: "center", pl: pl }}>
             <VisibilityIcon sx={{ color: "grey", pr: 0.3, width: "25px", height: "25px" }} />
             <Typography variant="caption" sx={{ fontSize: "13px" }} >
-                { viewCounts + 5 }
+                { viewCounts }
             </Typography>
         </Box>
     );

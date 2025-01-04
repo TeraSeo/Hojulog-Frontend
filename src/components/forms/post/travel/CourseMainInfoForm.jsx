@@ -1,26 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Grid, Paper } from "@mui/material";
 import TitleField from "../../../textfields/TitleField";
-import DescriptionField from "../../../textfields/DescriptionField";
-import ContactField from "../../../textfields/ContactField";
-import EmailField from "../../../textfields/EmailField";
-import { isValidPhoneNumber } from "libphonenumber-js";
-import SuburbField from "../../../textfields/SuburbField";
-import { contactFormatError, descriptionRequiredError, emailFormatError, locationFormatError, locationRequiredError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
+import { countryRequiredError, locationFormatError, locationRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
 import LocationField from "../../../textfields/LocationField";
 import LocationDialog from "../../../dialog/LocationDialog";
 import RatingField from "../../../textfields/RatingField";
-import EmbeddedMap from "../../../box/post/EmbeddedMap";
+import CountrySelectField from "../../../textfields/CountrySelectField";
+import ContentBlockManager from "../ContentBlockManager";
 
 const CourseMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
     title: "",
-    description: "",
-    contact: "",
-    email: "",
-    suburb: "",
+    country: "호주",
     location: "",
-    rate: 0.0
+    rate: 0.0,
+    blogContents: []
   });
 
   const [errors, setErrors] = useState({});
@@ -51,25 +45,11 @@ const CourseMainInfoForm = ({ onDataChange, setIsFormValid }) => {
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, suburb, location, rate } = formValues;
+    const { title, country, location, rate } = formValues;
 
     if (!title?.trim()) newErrors.title = titleRequiredError;
-    if (!description?.trim()) newErrors.description = descriptionRequiredError;
 
-    if (contact?.trim() && !isValidPhoneNumber(contact)) {
-      newErrors.contact = contactFormatError;
-    }
-
-    if (
-      email?.trim() &&
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-    ) {
-      newErrors.email = emailFormatError;
-    }
-
-    if (!suburb?.trim()) {
-      newErrors.suburb = suburbRequiredError;
-    }
+    if (!country) newErrors.country = countryRequiredError;
 
     if (!location.trim()) {
       newErrors.location = locationRequiredError;
@@ -117,26 +97,10 @@ const CourseMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           error={errors.rate}
           onChange={(value) => handleInputChange("rate", value)}
         />
-        <DescriptionField
-          value={formValues.description}
-          error={errors.description}
-          onChange={(value) => handleInputChange("description", value)}
-        />
-        <ContactField
-          value={formValues.contact}
-          error={errors.contact}
-          onChange={(value) => handleInputChange("contact", value)}
-        />
-        <EmailField
-          value={formValues.email}
-          error={errors.email}
-          onChange={(value) => handleInputChange("email", value)}
-        />
-
-        <SuburbField
-          value={formValues.suburb}
-          error={errors.suburb}
-          onChange={(value) => handleInputChange("suburb", value)}
+        <CountrySelectField
+          value={formValues.country}
+          error={errors.country}
+          onChange={(value) => handleInputChange("country", value)}
         />
         <LocationField
             location={formValues.location}
@@ -147,6 +111,12 @@ const CourseMainInfoForm = ({ onDataChange, setIsFormValid }) => {
             }}
             onMapOpen={() => setMapOpen(true)}
           />
+
+          <Grid item xs={12}>
+            <ContentBlockManager
+              onChange={(blocks) => handleInputChange("blogContents", blocks)}
+            />
+          </Grid>
         </Grid>
 
         <LocationDialog
@@ -156,8 +126,6 @@ const CourseMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           onLocationSelected={handleLocationSelected}
           googleMapsApiKey = "AIzaSyAbpOOHTMEZeY_WNnQjuROdIUCAPpwM45Q"
         />
-
-        {formValues.location && <EmbeddedMap embedUrl={formValues.location} />}
     </Paper>
   );
 };

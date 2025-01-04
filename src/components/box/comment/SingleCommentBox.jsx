@@ -67,7 +67,7 @@ const SingleCommentBox = ({ comment }) => {
               {content}
             </Typography>
 
-            <CreatedAtText createdAt={createdAt} />
+            <CreatedAtText createdAt={createdAt} pl={0} />
           </Box>
         </Box>
     

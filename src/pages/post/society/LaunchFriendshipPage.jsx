@@ -49,8 +49,7 @@ const LaunchFriendshipPage = () => {
 
     const societyData = {
       ...mainInfoData,
-      "category": "동호회",
-      // "isPortrait": mediaData.isPortrait,
+      "category": "생활",
       "subCategory": "친목",
       "userId": userId
     };

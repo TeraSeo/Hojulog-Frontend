@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import React from "react";
 import SummarizedPostTitleText from "../../../texts/SummarizedPostTitleText";
 import CreatedAtText from "../../../texts/CreatedAtText";
-import SuburbText from "../../../texts/SuburbText";
 import LocationButton from "../../../buttons/LocationButton";
 import PostRateBox from "../PostRateBox";
 import SummarizedDescriptionText from "../../../texts/SummarizedDescriptionText";
@@ -52,7 +51,6 @@ const TravelPostBox = ({ post }) => {
                             }}
                         >
                             <Box sx={{ display: "flex", pr: 1 }}>
-                                <SuburbText suburb={post.suburb} />
                                 <CreatedAtText createdAt={post.createdAt} />
                             </Box>
                         </Box>

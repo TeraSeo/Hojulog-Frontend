@@ -3,45 +3,25 @@ import { Paper, Typography, Grid,Box, Button } from "@mui/material";
 import { postTravel } from "../../../service/PostService";
 import { useNavigate } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
-import PostStepper from "../../../components/bar/PostStepper";
 import RestaurantMainInfoForm from "../../../components/forms/post/travel/RestaurantMainInfoForm";
-import RestaurantMediaUploadForm from "../../../components/forms/post/travel/RestaurantMediaUploadForm";
+import TravelPostPreviewDialog from "../../../components/preview/TravelPostPreviewDialog";
 
 const LaunchRestaurantPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
-  const [isMediaValid, setIsMediaValid] = useState(false);
   const [mainInfoData, setMainInfoData] = useState({});
-  const [mediaData, setMediaData] = useState({});
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const mainInfoRef = useRef(null);
-  const mediaUploadRef = useRef(null);
   const submitRef = useRef(null);
 
   useEffect(() => {
     if (isPreviewOpen) {
       handlePreview();
     }
-  }, [mediaData]);
-
-  const handleStepClick = (step) => {
-    switch (step) {
-      case 0:
-        mainInfoRef.current.scrollIntoView({ behavior: "smooth" });
-        break;
-      case 1:
-        mediaUploadRef.current.scrollIntoView({ behavior: "smooth" });
-        break;
-      case 2:
-        submitRef.current.scrollIntoView({ behavior: "smooth" });
-        break;
-      default:
-        break;
-    }
-  };
+  }, []);
 
   const handleSubmit = async () => {
     const userId = localStorage.getItem('userId');
@@ -50,9 +30,24 @@ const LaunchRestaurantPage = () => {
     const travelData = {
       ...mainInfoData,
       "category": "여행",
-      // "isPortrait": mediaData.isPortrait,
       "subCategory": "레스토랑",
-      "userId": userId
+      "userId": userId,
+      "blogContents": mainInfoData.blogContents.map((blog) => {
+        if (blog.type === "image") {
+          return {
+            type: "image", 
+            imageUrl: blog.file.name, 
+          };
+        } else if (blog.type === "description") {
+          return {
+            type: "description", 
+            content: blog.content, 
+            fontSize: blog.fontSize || 16, 
+            fontWeight: blog.fontWeight || 400, 
+          };
+        }
+        return blog;
+      }),
     };
 
     formData.append(
@@ -60,7 +55,11 @@ const LaunchRestaurantPage = () => {
       new Blob([JSON.stringify(travelData)], { type: "application/json" })
     );
 
-    mediaData.selectedImages.forEach((file) => formData.append("images", file));
+    mainInfoData.blogContents
+      .filter((blog) => blog.type === "image" && blog.file)
+      .forEach((imageBlog) => {
+        formData.append("images", imageBlog.file);
+      });
 
     setIsLoading(true);
     const isCreated = await postTravel(formData);
@@ -85,14 +84,9 @@ const LaunchRestaurantPage = () => {
       elevation={3}
       sx={{ padding: 4, margin: 4, maxWidth: 800, mx: "auto", backgroundColor: "#f7f9fc" }}
     >
-      <Typography variant="h4" gutterBottom align="center" sx={{ color: primaryColor }}>
+      <Typography variant="h4" gutterBottom align="center" sx={{ color: primaryColor, mb: 2 }}>
         레스토랑(카페, 펍) 정보 등록하기
       </Typography>
-      <Typography variant="subtitle1" align="center" color="textSecondary" sx={{ marginBottom: 4 }}>
-        필요한 모든 정보를 입력해주세요
-      </Typography>
-
-      <PostStepper isMainValid={isMainValid} isMediaValid={isMediaValid} handleStepClick={handleStepClick}/>
 
       <Grid container spacing={4}>
         <Grid item xs={12} ref={mainInfoRef}>
@@ -100,14 +94,6 @@ const LaunchRestaurantPage = () => {
             onDataChange={(data) => setMainInfoData(data)}
             setIsFormValid={setIsMainValid}
           />
-        </Grid>
-        <Grid item xs={12} ref={mediaUploadRef}>
-          <Grid item xs={12}>
-            <RestaurantMediaUploadForm
-              onMediaChange={(media) => setMediaData(media)}
-              setIsMediaValid={setIsMediaValid}
-            />
-          </Grid>
         </Grid>
         <Grid item xs={12} ref={submitRef}>
           <Box textAlign="right">
@@ -125,7 +111,7 @@ const LaunchRestaurantPage = () => {
               variant="contained"
               sx={{ backgroundColor: primaryColor, color: "#FFF" }}
               size="large"
-              disabled={!isMainValid || !isMediaValid || isLoading}
+              disabled={!isMainValid || isLoading}
               onClick={handleSubmit}
             >
               {isLoading ? "제출중..." : "제출"}
@@ -139,6 +125,12 @@ const LaunchRestaurantPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <TravelPostPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        travelPostData={mainInfoData}
+      />
     </Paper>
   );
 };

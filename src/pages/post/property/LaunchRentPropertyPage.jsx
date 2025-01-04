@@ -50,7 +50,6 @@ const LaunchRentPropertyPage = () => {
     const propertyData = {
       ...mainInfoData,
       "category": "부동산",
-      // "isPortrait": mediaData.isPortrait,
       "subCategory": "렌트",
       "userId": userId
     };

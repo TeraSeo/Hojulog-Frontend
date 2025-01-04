@@ -50,7 +50,6 @@ const LaunchSharePropertyPage = () => {
     const propertyData = {
       ...mainInfoData,
       "category": "부동산",
-      // "isPortrait": mediaData.isPortrait,
       "subCategory": "쉐어",
       "userId": userId
     };

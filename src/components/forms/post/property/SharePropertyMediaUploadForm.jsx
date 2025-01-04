@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Typography, Grid, Paper } from "@mui/material";
 import { useDropzone } from "react-dropzone";
 import ImageUploader from "../../../media/ImageUploader";
-import AspectRatioSelector from "../../../media/AspectRatioSelector";
 
 const SharePropertyMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
   const [selectedImages, setSelectedImages] = useState([]);
   const [errors, setErrors] = useState({});
-  const [mediaAspectRatio, setMediaAspectRatio] = useState("16x9");
-
+  
   const validateMedia = () => {
     const newErrors = {};
 
@@ -23,15 +21,13 @@ const SharePropertyMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
   };
 
   useEffect(() => {
-    // const isPortrait = mediaAspectRatio === "9x16";
 
     onMediaChange({
       selectedImages,
-      // isPortrait,
     });
 
     validateMedia();
-  }, [selectedImages, mediaAspectRatio]);
+  }, [selectedImages]);
 
   const imagesDropzone = useDropzone({
     onDrop: (acceptedFiles) => {
@@ -62,19 +58,11 @@ const SharePropertyMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
       </Typography>
 
       <Grid container spacing={4}>
-        {/* <AspectRatioSelector
-          mediaAspectRatio={mediaAspectRatio}
-          handleAspectRatioChange={(event, newAspectRatio) => {
-            if (newAspectRatio) setMediaAspectRatio(newAspectRatio);
-          }}
-        /> */}
-
         <ImageUploader
           imagesDropzone={imagesDropzone}
           selectedImages={selectedImages}
           removeImage={removeImage}
           errors={errors}
-          mediaAspectRatio={mediaAspectRatio}
         />
       </Grid>
 

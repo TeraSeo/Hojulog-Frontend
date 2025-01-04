@@ -145,8 +145,6 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         onLocationSelected={handleLocationSelected}
         googleMapsApiKey = "AIzaSyAbpOOHTMEZeY_WNnQjuROdIUCAPpwM45Q"
       />
-
-      {formValues.location && <EmbeddedMap embedUrl={formValues.location} />}
     </Paper>
   );
 };

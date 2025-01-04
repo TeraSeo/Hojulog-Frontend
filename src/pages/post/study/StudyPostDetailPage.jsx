@@ -38,16 +38,16 @@ const StudyPostDetailPage = () => {
         </Grid>
 
         <Grid item xs={12} md={9}>
-            <StudyDetailBox imageUrls={studyPostData.imageUrls} description={studyPostData.description} title={studyPostData.title} subCategory={studyPostData.subCategory} postId={studyPostData.postId} contact={studyPostData.contact} email={studyPostData.email} school={studyPostData.school} major={studyPostData.major} rate={studyPostData.rate} createdAt={studyPostData.createdAt} />
+            <StudyDetailBox description={studyPostData.description} title={studyPostData.title} subCategory={studyPostData.subCategory} postId={studyPostData.postId} school={studyPostData.school} major={studyPostData.major} rate={studyPostData.rate} createdAt={studyPostData.createdAt} blogContents={studyPostData.blogContents} />
         </Grid>
       </Grid>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
-          <LikeCountsText likeCounts={22} pl={0} />
+          <LikeCountsText initialLikes={studyPostData.likeCounts} initialIsLiked={studyPostData.isUserLiked} pl={0} postId={studyPostData.postId} />
           <Box sx={{ cursor: "pointer" }}>
-              <CommentsCountsText commentsCounts={10} />
+              <CommentsCountsText commentsCounts={studyPostData.commentCounts} />
           </Box>
-          <ViewCountsText viewCounts={220} />
+          <ViewCountsText viewCounts={studyPostData.viewCounts} />
       </Box>
 
       { studyPostData.location ? <EmbeddedMap mapUrl={studyPostData.location} /> : <></> }

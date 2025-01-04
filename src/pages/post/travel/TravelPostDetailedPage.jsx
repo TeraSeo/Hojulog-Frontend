@@ -38,16 +38,16 @@ const TravelPostDetailedPage = () => {
         </Grid>
 
         <Grid item xs={12} md={9}>
-            <TravelDetailBox imageUrls={travelPostData.imageUrls} description={travelPostData.description} title={travelPostData.title} subCategory={travelPostData.subCategory} postId={travelPostData.postId} contact={travelPostData.contact} email={travelPostData.email} createdAt={travelPostData.createdAt} price={travelPostData.price} rate={travelPostData.rate} createdDate={travelPostData.createdAt} />
+            <TravelDetailBox title={travelPostData.title} subCategory={travelPostData.subCategory} postId={travelPostData.postId} createdAt={travelPostData.createdAt} price={travelPostData.price} rate={travelPostData.rate} createdDate={travelPostData.createdAt} blogContents={travelPostData.blogContents} />
         </Grid>
       </Grid>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
-          <LikeCountsText likeCounts={22} pl={0} />
+          <LikeCountsText initialLikes={travelPostData.likeCounts} initialIsLiked={travelPostData.isUserLiked} pl={0} postId={travelPostData.postId} />
           <Box sx={{ cursor: "pointer" }}>
-              <CommentsCountsText commentsCounts={10} />
+              <CommentsCountsText commentsCounts={travelPostData.commentCounts} />
           </Box>
-          <ViewCountsText viewCounts={220} />
+          <ViewCountsText viewCounts={travelPostData.viewCounts} />
       </Box>
 
       { travelPostData.location ? <EmbeddedMap mapUrl={travelPostData.location} /> : <></> }

@@ -3,7 +3,7 @@ import { Box, Card, CardContent, CardMedia, Typography, IconButton, Button, Grid
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const ImageUploader = ({ imagesDropzone, selectedImages, removeImage, errors, mediaAspectRatio }) => (
+const ImageUploader = ({ imagesDropzone, selectedImages, removeImage, errors }) => (
   <Grid item xs={12}>
     <Card variant="outlined" sx={{ padding: 2, borderColor: "#b0bec5", boxShadow: 3 }}>
       <CardContent>
@@ -39,8 +39,8 @@ const ImageUploader = ({ imagesDropzone, selectedImages, removeImage, errors, me
                 key={index}
                 sx={{
                   position: "relative",
-                  aspectRatio: mediaAspectRatio === "9x16" ? "9 / 16" : "16 / 9",
-                  width: mediaAspectRatio === "9x16" ? "81px" : "144px",
+                  width: '100px',
+                  aspectRatio: '16 / 13',
                   overflow: "hidden",
                   borderRadius: 3,
                   border: "1px solid #b0bec5",

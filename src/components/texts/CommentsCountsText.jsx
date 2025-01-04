@@ -8,7 +8,7 @@ const CommentsCountsText = ({ commentsCounts, pl = 1 }) => {
         <Box sx={{ display: "flex", alignItems: "center", pl: pl }}>
             <CommentIcon sx={{ color: primaryColor, pr: 0.3, width: "25px", height: "25px" }} />
             <Typography variant="caption" sx={{ fontSize: "13px" }} >
-                { commentsCounts + 3 }
+                { commentsCounts }
             </Typography>
         </Box>
     );
