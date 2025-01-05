@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 
-const PriceCard = ({ price, period, isBillIncluded }) => {
+const PriceCard = ({ price, period, isBillIncluded=null }) => {
   return (
     <Box
       sx={{
@@ -12,9 +12,9 @@ const PriceCard = ({ price, period, isBillIncluded }) => {
         py: 0.7,
         border: '1px solid #E0E0E0',
         borderRadius: '8px',
-        width: '80px',
         textAlign: 'center',
         backgroundColor: '#FFFFFF',
+        px: 1
       }}
     >
       <Typography
@@ -27,6 +27,7 @@ const PriceCard = ({ price, period, isBillIncluded }) => {
         }}
       >
         ${price}
+        {period && (
         <Typography
           component="span"
           sx={{
@@ -36,19 +37,21 @@ const PriceCard = ({ price, period, isBillIncluded }) => {
           }}
         >
           /{period}
-        </Typography>
+        </Typography>) }
       </Typography>
 
-      <Typography
-        variant="body2"
-        sx={{
-          fontWeight: 400,
-          fontSize: '9px',
-          color: '#001f5b',
-        }}
-      >
-        {isBillIncluded ? 'Bills included' : 'Bills not inc.'}
-      </Typography>
+      {isBillIncluded !== null && (
+        <Typography
+          variant="body2"
+          sx={{
+            fontWeight: 400,
+            fontSize: '9px',
+            color: '#001f5b',
+          }}
+        >
+          {isBillIncluded ? 'Bills included' : 'Bills not inc.'}
+        </Typography>
+      )}
     </Box>
   );
 };

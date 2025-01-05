@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSpecificTravelPost } from '../../../service/PostService';
 import { Box, Grid } from '@mui/material';
@@ -13,6 +13,7 @@ import EmbeddedMap from '../../../components/box/post/EmbeddedMap';
 const TravelPostDetailedPage = () => {
   const { postId } = useParams();
   const [travelPostData, setTravelPostData] = useState();
+  const commentBoxRef = useRef(null);
 
   useEffect(() => {
     fetchPostData(postId);
@@ -25,6 +26,11 @@ const TravelPostDetailedPage = () => {
       })
       .catch((error) => console.error("Error fetching posts:", error));
   };
+
+  const handleScrollToComments = () => {
+    commentBoxRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
 
   if (!travelPostData) {
     return <div>Loading...</div>;
@@ -44,7 +50,7 @@ const TravelPostDetailedPage = () => {
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
           <LikeCountsText initialLikes={travelPostData.likeCounts} initialIsLiked={travelPostData.isUserLiked} pl={0} postId={travelPostData.postId} />
-          <Box sx={{ cursor: "pointer" }}>
+          <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
               <CommentsCountsText commentsCounts={travelPostData.commentCounts} />
           </Box>
           <ViewCountsText viewCounts={travelPostData.viewCounts} />
@@ -52,7 +58,7 @@ const TravelPostDetailedPage = () => {
 
       { travelPostData.location ? <EmbeddedMap mapUrl={travelPostData.location} /> : <></> }
 
-      <Box sx={{ mt: 8, mb: 15 }}>
+      <Box sx={{ mt: 8, mb: 15 }} ref={commentBoxRef}>
           <PostCommentBox postId={postId} />
       </Box>
     </Box>

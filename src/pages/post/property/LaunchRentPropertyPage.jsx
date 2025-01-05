@@ -6,6 +6,7 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import RentPropertyMainInfoForm from "../../../components/forms/post/property/RentPropertyMainInfoForm";
 import RentPropertyMediaUploadForm from "../../../components/forms/post/property/RentPropertyMediaUploadForm";
+import PropertyPostPreviewDialog from "../../../components/preview/PropertyPostPreviewDialog";
 
 const LaunchRentPropertyPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
@@ -138,6 +139,14 @@ const LaunchRentPropertyPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <PropertyPostPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        propertyPostData={mainInfoData}
+        mediaData={mediaData}
+        subCategory={"렌트"}
+      />
     </Paper>
   );
 };

@@ -9,7 +9,7 @@ export const formatTimeDifference = (createdAt) => {
     const secondsInWeek = 604800;
     const secondsInYear = 31536000;
 
-    if (createdAt === "" || createdAt === null) return '';
+    if (createdAt === "" || createdAt === null || createdAt === undefined) return '0초전';
 
     if (diffInSeconds < secondsInMinute) {
         return `${diffInSeconds}초전`;

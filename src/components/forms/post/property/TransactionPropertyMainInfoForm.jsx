@@ -12,10 +12,7 @@ import LocationField from "../../../textfields/LocationField";
 import LocationDialog from "../../../dialog/LocationDialog";
 import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, locationFormatError, locationRequiredError, periodRequiredError, priceFormatError, priceRequiredError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
 import RoomCountField from "../../../textfields/RoomCountField";
-import BathroomTypeField from "../../../textfields/BathroomTypeField";
 import ParkableField from "../../../textfields/ParkableField";
-import BillIncludedField from "../../../textfields/BillIncludedField";
-import EmbeddedMap from "../../../box/post/EmbeddedMap";
 
 const TransactionPropertyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
@@ -28,9 +25,7 @@ const TransactionPropertyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     suburb: "",
     location: "",
     roomCount: "Studio+",
-    bathroomType: "개인",
     isParkable: false,
-    isBillIncluded: false
   });
 
   const [errors, setErrors] = useState({});
@@ -155,20 +150,10 @@ const TransactionPropertyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           error={errors.roomCount}
           onChange={(value) => handleInputChange("roomCount", value)}
         />
-        <BathroomTypeField
-          value={formValues.bathroomType}
-          error={errors.bathroomType}
-          onChange={(value) => handleInputChange("bathroomType", value)}
-        />
         <ParkableField
           value={formValues.isParkable}
           error={errors.isParkable}
           onChange={(value) => handleInputChange("isParkable", value)}
-        />
-        <BillIncludedField
-          value={formValues.isBillIncluded}
-          error={errors.isBillIncluded}
-          onChange={(value) => handleInputChange("isBillIncluded", value)}
         />
         <AvailableTimeField
           value={formValues.availableTime}

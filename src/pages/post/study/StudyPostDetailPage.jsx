@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSpecificStudyPost } from '../../../service/PostService';
 import { Box, Grid } from '@mui/material';
@@ -13,6 +13,7 @@ import StudyDetailBox from '../../../components/box/post/study/StudyDetailBox';
 const StudyPostDetailPage = () => {
   const { postId } = useParams();
   const [studyPostData, setStudyPostData] = useState();
+  const commentBoxRef = useRef(null);
 
   useEffect(() => {
     fetchPostData(postId);
@@ -24,6 +25,10 @@ const StudyPostDetailPage = () => {
         setStudyPostData(data);
       })
       .catch((error) => console.error("Error fetching posts:", error));
+  };
+
+  const handleScrollToComments = () => {
+    commentBoxRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   if (!studyPostData) {
@@ -44,7 +49,7 @@ const StudyPostDetailPage = () => {
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
           <LikeCountsText initialLikes={studyPostData.likeCounts} initialIsLiked={studyPostData.isUserLiked} pl={0} postId={studyPostData.postId} />
-          <Box sx={{ cursor: "pointer" }}>
+          <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
               <CommentsCountsText commentsCounts={studyPostData.commentCounts} />
           </Box>
           <ViewCountsText viewCounts={studyPostData.viewCounts} />
@@ -52,7 +57,7 @@ const StudyPostDetailPage = () => {
 
       { studyPostData.location ? <EmbeddedMap mapUrl={studyPostData.location} /> : <></> }
 
-      <Box sx={{ mt: 8, mb: 15 }}>
+      <Box sx={{ mt: 8, mb: 15 }} ref={commentBoxRef}>
           <PostCommentBox postId={postId} />
       </Box>
     </Box>

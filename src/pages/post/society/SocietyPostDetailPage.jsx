@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSpecificSocietyPost } from '../../../service/PostService';
 import { Box, Grid } from '@mui/material';
@@ -13,6 +13,7 @@ import SoceityDetailBox from '../../../components/box/post/society/SocietyDetail
 const SocietyPostDetailPage = () => {
   const { postId } = useParams();
   const [societyPostData, setSocietyPostData] = useState();
+  const commentBoxRef = useRef(null);
 
   useEffect(() => {
     fetchPostData(postId);
@@ -24,6 +25,10 @@ const SocietyPostDetailPage = () => {
         setSocietyPostData(data);
       })
       .catch((error) => console.error("Error fetching posts:", error));
+  };
+
+  const handleScrollToComments = () => {
+    commentBoxRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   if (!societyPostData) {
@@ -44,7 +49,7 @@ const SocietyPostDetailPage = () => {
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
           <LikeCountsText initialLikes={societyPostData.likeCounts} initialIsLiked={societyPostData.isUserLiked} pl={0} postId={societyPostData.postId} />
-          <Box sx={{ cursor: "pointer" }}>
+          <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
               <CommentsCountsText commentsCounts={societyPostData.commentCounts} />
           </Box>
           <ViewCountsText viewCounts={societyPostData.viewCounts} />
@@ -52,7 +57,7 @@ const SocietyPostDetailPage = () => {
 
       { societyPostData.location ? <EmbeddedMap mapUrl={societyPostData.location} /> : <></> }
 
-      <Box sx={{ mt: 8, mb: 15 }}>
+      <Box sx={{ mt: 8, mb: 15 }} ref={commentBoxRef}>
           <PostCommentBox postId={postId} />
       </Box>
     </Box>

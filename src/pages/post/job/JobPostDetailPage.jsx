@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSpecificJobPost, getSpecificPropertyPost } from '../../../service/PostService';
 import { Box, Grid } from '@mui/material';
@@ -13,6 +13,7 @@ import ViewCountsText from '../../../components/texts/ViewCountsText';
 const JobPostDetailPage = () => {
   const { postId } = useParams();
   const [jobPostData, setJobPostData] = useState();
+  const commentBoxRef = useRef(null);
 
   useEffect(() => {
     fetchPostData(postId);
@@ -24,6 +25,10 @@ const JobPostDetailPage = () => {
         setJobPostData(data);
       })
       .catch((error) => console.error("Error fetching posts:", error));
+  };
+
+  const handleScrollToComments = () => {
+    commentBoxRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   if (!jobPostData) {
@@ -44,7 +49,7 @@ const JobPostDetailPage = () => {
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
           <LikeCountsText initialLikes={jobPostData.likeCounts} initialIsLiked={jobPostData.isUserLiked} pl={0} postId={jobPostData.postId} />
-          <Box sx={{ cursor: "pointer" }}>
+          <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
               <CommentsCountsText commentsCounts={jobPostData.commentCounts} />
           </Box>
           <ViewCountsText viewCounts={jobPostData.viewCounts} />
@@ -52,7 +57,7 @@ const JobPostDetailPage = () => {
 
       { jobPostData.location ? <EmbeddedMap mapUrl={jobPostData.location} /> : <></> }
 
-      <Box sx={{ mt: 8, mb: 15 }}>
+      <Box sx={{ mt: 8, mb: 15 }} ref={commentBoxRef}>
           <PostCommentBox postId={postId} />
       </Box>
     </Box>

@@ -6,6 +6,7 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import SharePropertyMainInfoForm from "../../../components/forms/post/property/SharePropertyMainInfoForm";
 import SharePropertyMediaUploadForm from "../../../components/forms/post/property/SharePropertyMediaUploadForm";
+import PropertyPostPreviewDialog from "../../../components/preview/PropertyPostPreviewDialog";
 
 const LaunchSharePropertyPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
@@ -138,6 +139,14 @@ const LaunchSharePropertyPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <PropertyPostPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        propertyPostData={mainInfoData}
+        mediaData={mediaData}
+        subCategory={"쉐어"}
+      />
     </Paper>
   );
 };

@@ -7,7 +7,7 @@ import BathtubIcon from '@mui/icons-material/Bathtub';
 import LocalParkingIcon from '@mui/icons-material/LocalParking';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 
-const PropertyDetailText = ({ price, period, isBillIncluded, availableTime, bathroomType, isParkable, roomCount }) => {
+const PropertyDetailText = ({ price, period=null, isBillIncluded=null, availableTime, bathroomType=null, isParkable, roomCount }) => {
   return (
     <Box>
       <Typography
@@ -31,14 +31,18 @@ const PropertyDetailText = ({ price, period, isBillIncluded, availableTime, bath
         <Grid item xs={12} sm={6}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <MonetizationOnIcon sx={{ fontSize: '20px' }} />
-            <Box>
+            <Box sx={{ display: "flex "}}>
+              {period !== null && (<Typography variant="body1" sx={{ fontWeight: '400', fontSize: "14px" }}>
+                {period}/
+              </Typography>)}
               <Typography variant="body1" sx={{ fontWeight: '400', fontSize: "14px" }}>
-                {period}/${price}
+                ${price}
               </Typography>
             </Box>
           </Box>
         </Grid>
 
+        {isBillIncluded !== null && (
         <Grid item xs={12} sm={6}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <ReceiptIcon sx={{ fontSize: '20px' }} />
@@ -48,7 +52,7 @@ const PropertyDetailText = ({ price, period, isBillIncluded, availableTime, bath
               </Typography>
             </Box>
           </Box>
-        </Grid>
+        </Grid> )}
 
         <Grid item xs={12} sm={6}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -61,6 +65,7 @@ const PropertyDetailText = ({ price, period, isBillIncluded, availableTime, bath
           </Box>
         </Grid>
 
+        {bathroomType !== null && (
         <Grid item xs={12} sm={6}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <BathtubIcon sx={{ fontSize: '20px' }} />
@@ -70,7 +75,7 @@ const PropertyDetailText = ({ price, period, isBillIncluded, availableTime, bath
               </Typography>
             </Box>
           </Box>
-        </Grid>
+        </Grid>)}
 
         <Grid item xs={12} sm={6}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>

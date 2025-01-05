@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSpecificPropertyPost } from '../../../service/PostService';
 import { Box, Grid } from '@mui/material';
@@ -13,6 +13,7 @@ import PostCommentBox from '../../../components/box/comment/PostCommentsBox';
 const PropertyPostDetailPage = () => {
   const { postId } = useParams();
   const [propertyPostData, setPropertyPostData] = useState();
+  const commentBoxRef = useRef(null);
 
   useEffect(() => {
     fetchPostData(postId);
@@ -25,6 +26,10 @@ const PropertyPostDetailPage = () => {
         alert(propertyPostData.isUserLiked);
       })
       .catch((error) => console.error("Error fetching posts:", error));
+  };
+
+  const handleScrollToComments = () => {
+    commentBoxRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   if (!propertyPostData) {
@@ -45,7 +50,7 @@ const PropertyPostDetailPage = () => {
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
           <LikeCountsText initialLikes={propertyPostData.likeCounts} initialIsLiked={propertyPostData.isUserLiked} pl={0} postId={propertyPostData.postId} />
-          <Box sx={{ cursor: "pointer" }}>
+          <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
               <CommentsCountsText commentsCounts={propertyPostData.commentCounts} />
           </Box>
           <ViewCountsText viewCounts={propertyPostData.viewCounts} />
@@ -53,7 +58,7 @@ const PropertyPostDetailPage = () => {
 
       { propertyPostData.location ? <EmbeddedMap mapUrl={propertyPostData.location} /> : <></> }
 
-      <Box sx={{ mt: 8, mb: 15 }}>
+      <Box sx={{ mt: 8, mb: 15 }} ref={commentBoxRef}>
           <PostCommentBox postId={postId} />
       </Box>
     </Box>

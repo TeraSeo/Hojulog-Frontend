@@ -65,7 +65,6 @@ const PropertyDetailBox = ({ imageUrls, description, price, period, roomCount, b
 
             <Divider sx={{ my: 2.5 }} />
             <PropertyDetailText price={price} period={period} isBillIncluded={isBillIncluded} availableTime={availableTime} bathroomType={bathroomType} isParkable={isParkable} roomCount={roomCount} />
-
         </Box>
       </Box>
     </Box>

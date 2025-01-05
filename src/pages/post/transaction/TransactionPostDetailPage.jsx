@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSpecificTransactionPost } from '../../../service/PostService';
 import { Box, Grid } from '@mui/material';
@@ -12,6 +12,7 @@ import TransactionDetailBox from '../../../components/box/post/transaction/Trans
 const TravelPostDetailedPage = () => {
   const { postId } = useParams();
   const [transactionPostData, setTransactionPostData] = useState();
+  const commentBoxRef = useRef(null);
 
   useEffect(() => {
     fetchPostData(postId);
@@ -23,6 +24,10 @@ const TravelPostDetailedPage = () => {
         setTransactionPostData(data);
       })
       .catch((error) => console.error("Error fetching posts:", error));
+  };
+
+  const handleScrollToComments = () => {
+    commentBoxRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   if (!transactionPostData) {
@@ -43,13 +48,13 @@ const TravelPostDetailedPage = () => {
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
           <LikeCountsText initialLikes={transactionPostData.likeCounts} initialIsLiked={transactionPostData.isUserLiked} pl={0} postId={transactionPostData.postId} />
-          <Box sx={{ cursor: "pointer" }}>
+          <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
               <CommentsCountsText commentsCounts={transactionPostData.commentCounts} />
           </Box>
           <ViewCountsText viewCounts={transactionPostData.viewCounts} />
       </Box>
 
-      <Box sx={{ mt: 8, mb: 15 }}>
+      <Box sx={{ mt: 8, mb: 15 }} ref={commentBoxRef}>
           <PostCommentBox postId={postId} />
       </Box>
     </Box>

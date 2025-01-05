@@ -6,6 +6,7 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import TransactionPropertyMainInfoForm from "../../../components/forms/post/property/TransactionPropertyMainInfoForm";
 import TransactionPropertyMediaUploadForm from "../../../components/forms/post/property/TransactionPropertyMediaUploadForm";
+import PropertyPostPreviewDialog from "../../../components/preview/PropertyPostPreviewDialog";
 
 const LaunchTransactionPropertyPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
@@ -138,6 +139,14 @@ const LaunchTransactionPropertyPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <PropertyPostPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        propertyPostData={mainInfoData}
+        mediaData={mediaData}
+        subCategory={"매매"}
+      />
     </Paper>
   );
 };
