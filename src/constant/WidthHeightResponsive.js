@@ -1,0 +1,1 @@
+export const ButtonWidthSize1 = { md: "110px", sm: "90px", xs: "70px" };

@@ -3,8 +3,34 @@ import axios from 'axios';
 function createComment(content, postId) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
+    const userId = localStorage.getItem('userId');
 
-    return axios.post("http://localhost:8080/api/comment/create", { content, postId }, {
+    return axios.post("http://localhost:8080/api/comment/create", { content, postId, userId }, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        }
+    })
+    .then(response => {
+        if (response.data) {
+            return true;
+        }
+        return false;
+    })
+    .catch(error => {
+        console.log(error);
+        return false;
+    });
+}
+
+function createResponseComment(content, parentCommentId) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+    const userId = localStorage.getItem('userId');
+
+    return axios.post("http://localhost:8080/api/comment/response/create", { content, parentCommentId, userId }, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -44,4 +70,24 @@ function getCommentsByPostId(postId) {
     });
 }
 
-export { createComment, getCommentsByPostId };
+function getResponseComment(responseCommentId) {
+    const userId = localStorage.getItem('userId');
+
+    return axios
+    .get("http://localhost:8080/api/comment/get/response/comment", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: { responseCommentId, userId },
+    })
+    .then((response) => {
+        return response.data;
+    })
+    .catch((error) => {
+        console.error("Error fetching comments:", error);
+        return []; 
+    });
+}
+
+export { createComment, createResponseComment, getCommentsByPostId, getResponseComment };

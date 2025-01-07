@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography, IconButton } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { BoxTitleResponsiveFontSize, SubTitleResponsiveFontSize1 } from "../../../constant/FontSizeResponsive";
 
 const HomeContainerBox = ({ title, onDetailClicked, children }) => {
     return (
@@ -22,13 +23,13 @@ const HomeContainerBox = ({ title, onDetailClicked, children }) => {
                     marginBottom: "13px",
                 }}
             >
-                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                <Typography variant="h6" sx={{ fontWeight: "bold", fontSize: BoxTitleResponsiveFontSize }}>
                     {title}
                 </Typography>
                 <IconButton
                     onClick={onDetailClicked}
                     size="small"
-                    sx={{ color: "#666", fontSize: "14px" }}
+                    sx={{ color: "#666", fontSize: SubTitleResponsiveFontSize1 }}
                 >
                     더보기
                     <ArrowForwardIosIcon sx={{ fontSize: "12px", marginLeft: "4px" }} />

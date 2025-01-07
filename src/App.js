@@ -45,6 +45,8 @@ import TransactionPostDetailPage from './pages/post/transaction/TransactionPostD
 import SocietyPostDetailPage from './pages/post/society/SocietyPostDetailPage';
 import TravelPostDetailedPage from './pages/post/travel/TravelPostDetailedPage';
 import StudyPostDetailPage from './pages/post/study/StudyPostDetailPage';
+import MyProfilePage from './pages/profile/MyProfilePage';
+import UpdateProfilePage from './pages/profile/UpdateProfilePage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -150,6 +152,8 @@ function App() {
           <Route element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="home" element={<HomePage />} />
+            <Route path="mypage" element={<MyProfilePage />} />
+            <Route path="update/mypage" element={<UpdateProfilePage />} />
 
             <Route path="realestate" element={<WholePropertyPostPage />} />
             <Route path="jobs" element={<WholeJobPostPage />} />

@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography, Divider } from "@mui/material";
 import AddCommentBox from "./AddCommentBox";
-import { createComment, getCommentsByPostId } from "../../../service/CommentService";
+import { createComment, createResponseComment, getCommentsByPostId } from "../../../service/CommentService";
 import SingleCommentBox from "./SingleCommentBox";
+import AddResponseCommentBox from "./AddResponseCommentBox";
 
 const PostCommentBox = ({ postId }) => {
   const [commentsData, setCommentsData] = useState([]);
   const [comment, setComment] = useState("");
+  const [isResponseCommentOn, setIsResponseCommentOn] = useState(false);
+  const [parentCommentId, setParentCommentId] = useState();
+  const [parentCommentUsername, setParentCommentUsername] = useState();
 
   const fetchComments = () => {
     if (postId) {
@@ -33,6 +37,16 @@ const PostCommentBox = ({ postId }) => {
     }
   };
 
+  const handleResponseCommentSubmit = async () => {
+    if (comment.trim() && isResponseCommentOn && parentCommentId !== null) {
+      const isCreated = await createResponseComment(comment, parentCommentId);
+      if (isCreated) {
+        setComment("");
+        fetchComments();
+      }
+    }
+  };
+
   const summarizedComments = commentsData.summarizedCommentDtoList || [];
   const wholeCommentsLength = commentsData.wholeCommentsLength || 0;
 
@@ -47,13 +61,16 @@ const PostCommentBox = ({ postId }) => {
         </Typography>
       ) : (
         summarizedComments.map((comment, index) => (
-          <SingleCommentBox key={index} comment={comment} />
+          <SingleCommentBox key={index} comment={comment} setIsResponseCommentOn={setIsResponseCommentOn} setParentCommentId={setParentCommentId} setParentCommentUsername={setParentCommentUsername} />
         ))
       )}
 
       <Divider sx={{ marginY: 4 }} />
 
-      <AddCommentBox comment={comment} setComment={setComment} handleCommentSubmit={handleCommentSubmit} />
+      {isResponseCommentOn ? 
+        <AddResponseCommentBox comment={comment} setComment={setComment} resonseCommentUsername={parentCommentUsername} handleCommentSubmit={handleResponseCommentSubmit} setIsResponseCommentOn={setIsResponseCommentOn} setParentCommentId={setParentCommentId} setParentCommentUsername={setParentCommentUsername} /> :
+        <AddCommentBox comment={comment} setComment={setComment} handleCommentSubmit={handleCommentSubmit} /> 
+      }
     </Box>
   );
 };

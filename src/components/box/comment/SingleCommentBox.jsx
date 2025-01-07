@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Box, Typography, Avatar, IconButton } from "@mui/material";
+import { Box, Typography, Avatar, IconButton, Divider } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { primaryColor } from "../../../constant/Color";
 import CreatedAtText from "../../texts/CreatedAtText";
 import { addCommentLike, removeCommentLike } from "../../../service/CommentLikeService";
+import ResponseCommentsBox from "./ResponseCommentsBox";
 
-const SingleCommentBox = ({ comment }) => {
+const SingleCommentBox = ({ comment, setIsResponseCommentOn, setParentCommentId, setParentCommentUsername }) => {
   const { username, profilePicture } = comment.summarizedUserDto;
-  const { commentId, content, wholeLikedUserLength, isCurrentUserLiked, createdAt } = comment;
+  const { commentId, content, wholeLikedUserLength, isCurrentUserLiked, responseCommentIds, createdAt } = comment;
   const profilePictureUrl = profilePicture || "";
 
   const [ wholeLikesCount, setWholeLikesCount ] = useState(wholeLikedUserLength);
@@ -25,6 +26,12 @@ const SingleCommentBox = ({ comment }) => {
       setWholeLikesCount(wholeLikes);
       setIsLiked(false);
     }
+  }
+
+  const setResponseComment = () => {
+    setIsResponseCommentOn(true);
+    setParentCommentId(commentId);
+    setParentCommentUsername(username);
   }
 
   return (
@@ -97,6 +104,24 @@ const SingleCommentBox = ({ comment }) => {
           </Typography>
         </Box>
       </Box>
+
+      <Box sx={{ mt: 0.5, marginLeft: "68px" }} onClick={() => { setResponseComment(); }}>
+        <Typography
+          sx={{
+            mt: 0.5,
+            fontSize: "12px",
+            color: "#888",
+            cursor: "pointer",
+            whiteSpace: "nowrap",
+          }}
+        >
+          답글쓰기
+        </Typography>
+      </Box>
+
+      {responseCommentIds.length > 0 && (
+          <ResponseCommentsBox responseCommentIds={ responseCommentIds } />
+      )}
     </Box>
   );
 };
