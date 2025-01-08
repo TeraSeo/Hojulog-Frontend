@@ -30,7 +30,7 @@ const TransactionPostBox = ({ post }) => {
                     }}
                 >
                     <Box>
-                        <SummarizedPostTitleText title={post.title} postId={post.postId} category={"transaction"} />
+                        <SummarizedPostTitleText title={post.title} postId={post.postId} category={"사고팔기"} />
                         <Box
                             sx={{
                                 display: "flex",

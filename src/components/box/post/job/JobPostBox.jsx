@@ -35,7 +35,7 @@ const JobPostBox = ({ post }) => {
                     <Box>
                         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                             <Box sx={{whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",}}>
-                                <SummarizedPostTitleText title={post.title} postId={post.postId} category={"job"} />
+                                <SummarizedPostTitleText title={post.title} postId={post.postId} category={"구인구직"} />
                             </Box>
 
                             <LocationButton location={post.location} />

@@ -11,7 +11,7 @@ const HomeSummarizedTransactionPropertyBox = ({ post }) => {
             <SummarizedPostImageBox imageUrl={post.imageUrl} title={post.title} />
 
             <Box sx={{ width: "200px" }}>
-                <SummarizedPostTitleText title={post.title} postId={post.postId} category={"transaction"} />
+                <SummarizedPostTitleText title={post.title} postId={post.postId} category={"사고팔기"} />
 
                 <Typography
                     sx={{

@@ -138,8 +138,8 @@ function getSpecificSummarisedUser(userId) {
         }
     })
     .then((response) => {
-            const data = typeof response.data === "string" ? JSON.parse(response.data) : response.data;
-            return data;
+            // const data = typeof response.data === "string" ? JSON.parse(response.data) : response.data;
+            return response.data;
         }
     )
     .catch((error) => {
@@ -149,4 +149,48 @@ function getSpecificSummarisedUser(userId) {
     )
 }
 
-export { login, register, sendOtp, checkIsOtpCorrect, validateToken, getSpecificSummarisedUser };
+function getSpecificOwnUser() {
+    const userId = localStorage.getItem('userId');
+
+    return axios.get("http://localhost:8080/api/user/get/specific/own/user", {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        },
+        params: {
+            "userId": userId,
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return null;
+        }
+    )
+}
+
+function updateUserInfo(userFormData) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.put("http://localhost:8080/api/user/update/user", userFormData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            'accessToken': accessToken,
+            'refreshToken': refreshToken
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return null;
+        }
+    )
+}
+
+export { login, register, sendOtp, checkIsOtpCorrect, validateToken, getSpecificSummarisedUser, getSpecificOwnUser, updateUserInfo };

@@ -7,7 +7,7 @@ import PostRateBox from "../PostRateBox";
 const HomeSummarizedStudyPostBox = ({ post }) => {
     return <Box sx={{ display: "flex", justifyContent: "space-between", pr: 2 }}>
         <Box>
-            <SummarizedPostTitleText title={post.title} postId={post.postId} category={"study"} />
+            <SummarizedPostTitleText title={post.title} postId={post.postId} category={"유학"} />
             <CreatedAtText createdAt={post.createdAt} />
         </Box>
         <PostRateBox rate={post.rate} />

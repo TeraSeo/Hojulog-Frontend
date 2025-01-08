@@ -21,8 +21,8 @@ const HomeSummarizedPropertyPostBox = ({ post }) => {
                     transform: "scale(1.02)",
                     cursor: "pointer",
                 }, }}>
-                    <SubCatoryText subCategory={post.subCategory} postId={post.postId} category={"property"} />
-                    <SummarizedPostTitleText title={post.title} pl={0.5} postId={post.postId} category={"property"} />
+                    <SubCatoryText subCategory={post.subCategory} postId={post.postId} category={"부동산"} />
+                    <SummarizedPostTitleText title={post.title} pl={0.5} postId={post.postId} category={"부동산"} />
                 </Box>
 
                 <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "start", pt: 0.5 }}>

@@ -153,7 +153,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="home" element={<HomePage />} />
             <Route path="mypage" element={<MyProfilePage />} />
-            <Route path="update/mypage" element={<UpdateProfilePage />} />
+            <Route path="/update/mypage/:userId" element={<UpdateProfilePage />} />
 
             <Route path="realestate" element={<WholePropertyPostPage />} />
             <Route path="jobs" element={<WholeJobPostPage />} />
@@ -166,12 +166,12 @@ function App() {
 
             {generateDynamicRoutes()}
 
-            <Route path="post/property/detail/:postId" element={<PropertyPostDetailPage />} />
-            <Route path="post/job/detail/:postId" element={<JobPostDetailPage />} />
-            <Route path="post/transaction/detail/:postId" element={<TransactionPostDetailPage />} />
-            <Route path="post/society/detail/:postId" element={<SocietyPostDetailPage />} />
-            <Route path="post/travel/detail/:postId" element={<TravelPostDetailedPage />} />
-            <Route path="post/study/detail/:postId" element={<StudyPostDetailPage />} />
+            <Route path="post/부동산/detail/:postId" element={<PropertyPostDetailPage />} />
+            <Route path="post/구인구직/detail/:postId" element={<JobPostDetailPage />} />
+            <Route path="post/사고팔기/detail/:postId" element={<TransactionPostDetailPage />} />
+            <Route path="post/생활/detail/:postId" element={<SocietyPostDetailPage />} />
+            <Route path="post/여행/detail/:postId" element={<TravelPostDetailedPage />} />
+            <Route path="post/유학/detail/:postId" element={<StudyPostDetailPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

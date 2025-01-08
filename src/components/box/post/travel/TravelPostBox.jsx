@@ -35,7 +35,7 @@ const TravelPostBox = ({ post }) => {
                     <Box>
                         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                             <Box sx={{whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",}}>
-                                <SummarizedPostTitleText title={post.title} postId={post.postId} category={"travel"} />
+                                <SummarizedPostTitleText title={post.title} postId={post.postId} category={"여행"} />
                                 <SummarizedDescriptionText description={post.description} />
                                 <PostRateBox rate={post.rate} />
                             </Box>

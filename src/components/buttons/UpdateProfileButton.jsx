@@ -4,7 +4,7 @@ import { ButtonResponsiveFontSize1 } from "../../constant/FontSizeResponsive";
 import { ButtonWidthSize1 } from "../../constant/WidthHeightResponsive";
 import { useNavigate } from "react-router-dom";
 
-const UpdateProfileButton = () => {
+const UpdateProfileButton = ({ userId }) => {
     const navigate = useNavigate();
 
     return <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -19,7 +19,7 @@ const UpdateProfileButton = () => {
                 overflow: "hidden",
                 flexShrink: 0, 
             }}
-            onClick={() => navigate("/update/mypage")}
+            onClick={() => navigate(`/update/mypage/${userId}`)}
         >
             내 정보 수정
         </Button>

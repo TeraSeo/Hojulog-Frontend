@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography, Avatar, IconButton, Divider } from "@mui/material";
+import { Box, Typography, Avatar, IconButton } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { primaryColor } from "../../../constant/Color";
@@ -10,7 +10,7 @@ import ResponseCommentsBox from "./ResponseCommentsBox";
 const SingleCommentBox = ({ comment, setIsResponseCommentOn, setParentCommentId, setParentCommentUsername }) => {
   const { username, profilePicture } = comment.summarizedUserDto;
   const { commentId, content, wholeLikedUserLength, isCurrentUserLiked, responseCommentIds, createdAt } = comment;
-  const profilePictureUrl = profilePicture || "";
+  const profilePictureUrl = profilePicture || ""; 
 
   const [ wholeLikesCount, setWholeLikesCount ] = useState(wholeLikedUserLength);
   const [ isLiked, setIsLiked ] = useState(isCurrentUserLiked);

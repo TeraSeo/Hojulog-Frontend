@@ -6,7 +6,7 @@ import CreatedAtText from "../../../texts/CreatedAtText";
 const HomeSummarizedSocietyPostBox = ({ post }) => {
     return <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center",  pr: 2 }}>
         <Box>
-            <SummarizedPostTitleText title={post.title} postId={post.postId} category={"society"} />
+            <SummarizedPostTitleText title={post.title} postId={post.postId} category={"생활"} />
             <CreatedAtText createdAt={post.createdAt} />
         </Box>
     </Box>;

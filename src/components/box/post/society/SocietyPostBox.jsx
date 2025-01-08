@@ -33,7 +33,7 @@ const SocietyPostBox = ({ post }) => {
                 >
                     <Box>
                         <Box sx={{whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",}}>
-                            <SummarizedPostTitleText title={post.title} postId={post.postId} category={"society"} />
+                            <SummarizedPostTitleText title={post.title} postId={post.postId} category={"생활"} />
                         </Box>
 
                         <Box
