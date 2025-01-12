@@ -11,8 +11,11 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { categories } from "../../constant/Categories";
+import { useNavigate } from "react-router-dom";
 
 const CategorySidebar = () => {
+    const navigate = useNavigate();
+
     const [expandedCategories, setExpandedCategories] = useState(() => {
         const initialExpandedState = {};
         Object.keys(categories).forEach((category) => {
@@ -26,6 +29,15 @@ const CategorySidebar = () => {
             ...prevState,
             [category]: !prevState[category],
         }));
+    };
+
+    const handleSubCategoryClick = (subCategory) => {
+        if (subCategory === "레스토랑(카페,펍)") {
+            navigate("/레스토랑");
+        }
+        else {
+            navigate(`/${subCategory}`);
+        }
     };
 
     return (
@@ -75,6 +87,8 @@ const CategorySidebar = () => {
                                 {categories[category].map((subCategory, index) => (
                                     <ListItem
                                         key={index}
+                                        button
+                                        onClick={() => handleSubCategoryClick(subCategory)}
                                         sx={{
                                             padding: "8px 8px",
                                             "&:hover": { backgroundColor: "#f9f9f9" },

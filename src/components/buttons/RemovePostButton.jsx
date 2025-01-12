@@ -2,23 +2,12 @@ import { Button } from "@mui/material";
 import React from "react";
 import { ButtonWidthSize1 } from "../../constant/WidthHeightResponsive";
 import { ButtonResponsiveFontSize1 } from "../../constant/FontSizeResponsive";
-import { useNavigate } from "react-router-dom";
 
-const LogoutButton = () => {
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        localStorage.removeItem("userId");
-
-        navigate("/login");
-    };
-
+const RemovePostButton = ({ postId }) => {
     return (
         <Button
             variant="contained"
-            color="primary"
+            color="error"
             sx={{
                 width: ButtonWidthSize1,
                 fontSize: ButtonResponsiveFontSize1,
@@ -27,11 +16,10 @@ const LogoutButton = () => {
                 overflow: "hidden",
                 flexShrink: 0
             }}
-            onClick={() => handleLogout()}
         >
-            로그아웃
+            삭제
         </Button>
     );
 }
 
-export default LogoutButton;
+export default RemovePostButton;

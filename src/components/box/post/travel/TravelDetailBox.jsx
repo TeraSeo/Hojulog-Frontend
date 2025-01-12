@@ -1,11 +1,11 @@
 import React from 'react';
-import { Box, Divider, Typography } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import DetailedPostTitleText from '../../../texts/DetailedPostTitleText';
 import PostRateBox from '../PostRateBox';
 import CreatedAtText from '../../../texts/CreatedAtText';
 import BlogContentBox from '../BlogContentBox';
 
-const TravelDetailBox = ({ title, subCategory, postId, rate, createdDate, blogContents }) => {
+const TravelDetailBox = ({ title, subCategory, rate, createdDate, blogContents }) => {
   return (
     <Box>
       <Box>

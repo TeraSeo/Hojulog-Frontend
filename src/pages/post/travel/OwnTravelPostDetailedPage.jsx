@@ -3,18 +3,20 @@ import { useParams } from 'react-router-dom';
 import { getSpecificTravelPost } from '../../../service/PostService';
 import { Box, Grid } from '@mui/material';
 import CategorySidebar from '../../../components/bar/CategorySidebar';
-import LikeCountsText from '../../../components/texts/LikeCountsText';
-import CommentsCountsText from '../../../components/texts/CommentsCountsText';
-import ViewCountsText from '../../../components/texts/ViewCountsText';
 import PostCommentBox from '../../../components/box/comment/PostCommentsBox';
 import TravelDetailBox from '../../../components/box/post/travel/TravelDetailBox';
 import EmbeddedMap from '../../../components/box/post/EmbeddedMap';
+import UpdatePostButton from '../../../components/buttons/UpdatePostButton';
+import RemovePostButton from '../../../components/buttons/RemovePostButton';
+import LikeCountsText from '../../../components/texts/LikeCountsText';
+import CommentsCountsText from '../../../components/texts/CommentsCountsText';
+import ViewCountsText from '../../../components/texts/ViewCountsText';
 
-const TravelPostDetailedPage = () => {
+const OwnTravelPostDetailedPage = () => {
   const { postId } = useParams();
   const [travelPostData, setTravelPostData] = useState();
   const commentBoxRef = useRef(null);
-
+  
   useEffect(() => {
     fetchPostData(postId);
   }, []);
@@ -31,7 +33,6 @@ const TravelPostDetailedPage = () => {
     commentBoxRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-
   if (!travelPostData) {
     return <div>Loading...</div>;
   }
@@ -44,7 +45,7 @@ const TravelPostDetailedPage = () => {
         </Grid>
 
         <Grid item xs={12} md={9}>
-            <TravelDetailBox title={travelPostData.title} subCategory={travelPostData.subCategory} createdAt={travelPostData.createdAt} price={travelPostData.price} rate={travelPostData.rate} createdDate={travelPostData.createdAt} blogContents={travelPostData.blogContents} />
+            <TravelDetailBox title={travelPostData.title} subCategory={travelPostData.subCategory} postId={travelPostData.postId} createdAt={travelPostData.createdAt} price={travelPostData.price} rate={travelPostData.rate} createdDate={travelPostData.createdAt} blogContents={travelPostData.blogContents} />
         </Grid>
       </Grid>
 
@@ -56,6 +57,11 @@ const TravelPostDetailedPage = () => {
           <ViewCountsText viewCounts={travelPostData.viewCounts} />
       </Box>
 
+      <Box sx={{ mt: 5, display: "flex", justifyContent: "end", gap: 1 }}>
+          <UpdatePostButton postId={travelPostData.postId} />
+          <RemovePostButton postId={travelPostData.postId} />
+      </Box>
+
       { travelPostData.location ? <EmbeddedMap mapUrl={travelPostData.location} /> : <></> }
 
       <Box sx={{ mt: 8, mb: 15 }} ref={commentBoxRef}>
@@ -65,4 +71,4 @@ const TravelPostDetailedPage = () => {
   );
 };
 
-export default TravelPostDetailedPage;
+export default OwnTravelPostDetailedPage;

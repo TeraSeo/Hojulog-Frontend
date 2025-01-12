@@ -1,8 +1,9 @@
-import { Box, Grid, TextField, Button, Typography, Avatar, IconButton } from "@mui/material";
+import { Box, Grid, TextField, Button, Typography, Avatar } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../components/bar/CategorySidebar";
 import { useNavigate, useParams } from "react-router-dom";
 import { getSpecificOwnUser, updateUserInfo } from "../../service/UserService";
+import { Logout } from "@mui/icons-material";
 
 const UpdateProfilePage = () => {
     const { userId } = useParams();
@@ -41,7 +42,6 @@ const UpdateProfilePage = () => {
 
     const handleSave = () => {
         const userFormData = new FormData();
-        userFormData.append("userId", userId);
         userFormData.append("username", username);
         userFormData.append("description", description);
         if (profilePicture) {
@@ -51,9 +51,12 @@ const UpdateProfilePage = () => {
             userFormData.append("profilePicture", null);
         }
 
-        updateUserInfo(userFormData).then((isUpdated) => {
+        updateUserInfo(userFormData, userId).then((isUpdated) => {
             if (isUpdated) {
                 navigate("/mypage");
+            }
+            else {
+                Logout();
             }
         });
     };

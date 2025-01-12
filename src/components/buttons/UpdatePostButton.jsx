@@ -4,16 +4,8 @@ import { ButtonWidthSize1 } from "../../constant/WidthHeightResponsive";
 import { ButtonResponsiveFontSize1 } from "../../constant/FontSizeResponsive";
 import { useNavigate } from "react-router-dom";
 
-const LogoutButton = () => {
+const UpdatePostButton = ({ postId }) => {
     const navigate = useNavigate();
-
-    const handleLogout = () => {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        localStorage.removeItem("userId");
-
-        navigate("/login");
-    };
 
     return (
         <Button
@@ -27,11 +19,11 @@ const LogoutButton = () => {
                 overflow: "hidden",
                 flexShrink: 0
             }}
-            onClick={() => handleLogout()}
+            onClick={() => {}}
         >
-            로그아웃
+            수정
         </Button>
     );
 }
 
-export default LogoutButton;
+export default UpdatePostButton;

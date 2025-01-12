@@ -27,8 +27,6 @@ function getPostsByPageNCondition(page, condition) {
 }
 
 function getPropertyPostsByPage(page) {
-    const userId = localStorage.getItem('userId');
-
     return axios.get("http://localhost:8080/api/post/get/pageable/recent/property", {
         headers: {
             'Accept': 'application/json',
@@ -36,8 +34,7 @@ function getPropertyPostsByPage(page) {
         },
         params: {
             "page": page,
-            "size": 10,
-            "userId": userId
+            "size": 10
         }
     })
     .then((response) => {
@@ -52,8 +49,6 @@ function getPropertyPostsByPage(page) {
 }
 
 function getJobPostsByPage(page) {
-    const userId = localStorage.getItem('userId');
-
     return axios.get("http://localhost:8080/api/post/get/pageable/recent/job", {
         headers: {
             'Accept': 'application/json',
@@ -61,8 +56,7 @@ function getJobPostsByPage(page) {
         },
         params: {
             "page": page,
-            "size": 10,
-            "userId": userId
+            "size": 10
         }
     })
     .then((response) => {
@@ -77,8 +71,6 @@ function getJobPostsByPage(page) {
 }
 
 function getTransactionPostsByPage(page) {
-    const userId = localStorage.getItem('userId');
-
     return axios.get("http://localhost:8080/api/post/get/pageable/recent/transaction", {
         headers: {
             'Accept': 'application/json',
@@ -86,8 +78,7 @@ function getTransactionPostsByPage(page) {
         },
         params: {
             "page": page,
-            "size": 10,
-            "userId": userId
+            "size": 10
         }
     })
     .then((response) => {
@@ -102,8 +93,6 @@ function getTransactionPostsByPage(page) {
 }
 
 function getSocietyPostsByPage(page) {
-    const userId = localStorage.getItem('userId');
-
     return axios.get("http://localhost:8080/api/post/get/pageable/recent/society", {
         headers: {
             'Accept': 'application/json',
@@ -111,8 +100,7 @@ function getSocietyPostsByPage(page) {
         },
         params: {
             "page": page,
-            "size": 10,
-            "userId": userId
+            "size": 10
         }
     })
     .then((response) => {
@@ -127,8 +115,6 @@ function getSocietyPostsByPage(page) {
 }
 
 function getTravelPostsByPage(page) {
-    const userId = localStorage.getItem('userId');
-
     return axios.get("http://localhost:8080/api/post/get/pageable/recent/travel", {
         headers: {
             'Accept': 'application/json',
@@ -136,8 +122,7 @@ function getTravelPostsByPage(page) {
         },
         params: {
             "page": page,
-            "size": 10,
-            "userId": userId
+            "size": 10
         }
     })
     .then((response) => {
@@ -152,8 +137,6 @@ function getTravelPostsByPage(page) {
 }
 
 function getStudyPostsByPage(page) {
-    const userId = localStorage.getItem('userId');
-
     return axios.get("http://localhost:8080/api/post/get/pageable/recent/study", {
         headers: {
             'Accept': 'application/json',
@@ -161,8 +144,494 @@ function getStudyPostsByPage(page) {
         },
         params: {
             "page": page,
+            "size": 10
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getSharePostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/property/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
             "size": 10,
+            "subCategory": "쉐어"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getRentPostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/property/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "렌트"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getPropertyTransactionPostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/property/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "매매"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getRecruitmentPostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/job/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "구인"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getJobSeekingPostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/job/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "구직"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getJobTutoringPostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/job/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "과외"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getCarPostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/transaction/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "자동차"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getNecessitiesPostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/transaction/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "생활용품"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getTransactionEtcPostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/transaction/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "기타"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getClubPostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/society/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "동호회"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getLifeStylePostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/society/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "라이프스타일"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getFriendshipPostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/society/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "친목"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getRestaurantPostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/travel/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "레스토랑"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getPlacePostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/travel/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "여행지"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getCoursePostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/travel/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "코스"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getSchoolPostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/study/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "학교후기"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getWorkingHolidayPostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/study/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "워홀후기"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getLanguageStudyPostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/study/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "어학연수후기"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getJobReviewPostsByPage(page) {
+    return axios.get("http://localhost:8080/api/post/get/pageable/study/subcategory", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": "취업후기"
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getWholeOwnPosts(page) {
+    const userId = localStorage.getItem('userId') || "";
+
+    return axios.get("http://localhost:8080/api/post/get/pageable/own/posts", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
             "userId": userId
+        },
+        params: {
+            "page": page,
+            "size": 10,
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getWholeLikedPosts(page) {
+    const userId = localStorage.getItem('userId') || "";
+
+    return axios.get("http://localhost:8080/api/post/get/pageable/own/posts", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "userId": userId
+        },
+        params: {
+            "page": page,
+            "size": 10,
         }
     })
     .then((response) => {
@@ -285,16 +754,16 @@ function getRecent5StudyPosts() {
 }
 
 function getSpecificPropertyPost(postId) {
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId') || "";
 
     return axios.get("http://localhost:8080/api/post/get/specific/property", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'userId': userId
         },
         params: {
             "postId": postId,
-            "userId": userId
         }
     })
     .then((response) => {
@@ -309,16 +778,16 @@ function getSpecificPropertyPost(postId) {
 }
 
 function getSpecificJobPost(postId) {
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId') || "";
 
     return axios.get("http://localhost:8080/api/post/get/specific/job", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'userId': userId
         },
         params: {
-            "postId": postId,
-            "userId": userId
+            "postId": postId
         }
     })
     .then((response) => {
@@ -333,16 +802,16 @@ function getSpecificJobPost(postId) {
 }
 
 function getSpecificTransactionPost(postId) {
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId') || "";
 
     return axios.get("http://localhost:8080/api/post/get/specific/transaction", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'userId': userId
         },
         params: {
-            "postId": postId,
-            "userId": userId
+            "postId": postId
         }
     })
     .then((response) => {
@@ -357,16 +826,16 @@ function getSpecificTransactionPost(postId) {
 }
 
 function getSpecificSocietyPost(postId) {
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId') || "";
 
     return axios.get("http://localhost:8080/api/post/get/specific/society", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'userId': userId
         },
         params: {
-            "postId": postId,
-            "userId": userId
+            "postId": postId
         }
     })
     .then((response) => {
@@ -381,16 +850,16 @@ function getSpecificSocietyPost(postId) {
 }
 
 function getSpecificTravelPost(postId) {
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId') || "";
 
     return axios.get("http://localhost:8080/api/post/get/specific/travel", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'userId': userId
         },
         params: {
-            "postId": postId,
-            "userId": userId
+            "postId": postId
         }
     })
     .then((response) => {
@@ -405,16 +874,16 @@ function getSpecificTravelPost(postId) {
 }
 
 function getSpecificStudyPost(postId) {
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId') || "";
 
     return axios.get("http://localhost:8080/api/post/get/specific/study", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'userId': userId
         },
         params: {
-            "postId": postId,
-            "userId": userId
+            "postId": postId
         }
     })
     .then((response) => {
@@ -588,4 +1057,4 @@ function postStudy(postData) {
 }
 
 
-export { getPostsByPageNCondition, getPropertyPostsByPage, getJobPostsByPage, getTransactionPostsByPage, getSocietyPostsByPage, getTravelPostsByPage, getStudyPostsByPage, getRecent5JobPosts, getRecent5PropertyPosts, getRecent5TransactionPosts, getRecent5SocietyPosts, getRecent5TravelPosts, getRecent5StudyPosts, getSpecificPropertyPost, getSpecificJobPost, getSpecificTransactionPost, getSpecificSocietyPost, getSpecificTravelPost, getSpecificStudyPost, getSpecificPost, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy };
+export { getPostsByPageNCondition, getPropertyPostsByPage, getJobPostsByPage, getTransactionPostsByPage, getSocietyPostsByPage, getTravelPostsByPage, getStudyPostsByPage, getSharePostsByPage, getRentPostsByPage, getPropertyTransactionPostsByPage, getRecruitmentPostsByPage, getJobSeekingPostsByPage, getJobTutoringPostsByPage, getCarPostsByPage, getNecessitiesPostsByPage, getTransactionEtcPostsByPage, getClubPostsByPage, getLifeStylePostsByPage, getFriendshipPostsByPage, getRestaurantPostsByPage, getPlacePostsByPage, getCoursePostsByPage, getSchoolPostsByPage, getWorkingHolidayPostsByPage, getLanguageStudyPostsByPage, getJobReviewPostsByPage, getWholeOwnPosts, getWholeLikedPosts, getRecent5JobPosts, getRecent5PropertyPosts, getRecent5TransactionPosts, getRecent5SocietyPosts, getRecent5TravelPosts, getRecent5StudyPosts, getSpecificPropertyPost, getSpecificJobPost, getSpecificTransactionPost, getSpecificSocietyPost, getSpecificTravelPost, getSpecificStudyPost, getSpecificPost, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy };

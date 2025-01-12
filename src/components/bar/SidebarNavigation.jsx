@@ -2,7 +2,6 @@ import React from "react";
 import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 
 function SidebarNavigation({ sections = [], step, setStep }) {
-  // Log sections for debugging
   console.log("SidebarNavigation sections:", sections);
 
   return (
@@ -37,7 +36,6 @@ function SidebarNavigation({ sections = [], step, setStep }) {
   );
 }
 
-// Add default props for sections
 SidebarNavigation.defaultProps = {
   sections: [],
 };

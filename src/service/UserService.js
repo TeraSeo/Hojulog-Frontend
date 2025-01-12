@@ -90,6 +90,7 @@ function checkIsOtpCorrect(email, code) {
 function validateToken() {
     const accessToken = localStorage.getItem('accessToken'); 
     const refreshToken = localStorage.getItem('refreshToken'); 
+
     if (!accessToken || !refreshToken) {
         return Promise.resolve(false);
     }
@@ -151,14 +152,16 @@ function getSpecificSummarisedUser(userId) {
 
 function getSpecificOwnUser() {
     const userId = localStorage.getItem('userId');
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
 
-    return axios.get("http://localhost:8080/api/user/get/specific/own/user", {
+    return axios.get("http://localhost:8080/api/own/user/get/specific", {
         headers: {
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+            "userId": userId
         },
-        params: {
-            "userId": userId,
-        }
     })
     .then((response) => {
             return response.data;
@@ -171,15 +174,16 @@ function getSpecificOwnUser() {
     )
 }
 
-function updateUserInfo(userFormData) {
+function updateUserInfo(userFormData, userId) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
-    return axios.put("http://localhost:8080/api/user/update/user", userFormData, {
+    return axios.put("http://localhost:8080/api/own/user/update", userFormData, {
         headers: {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
-            'refreshToken': refreshToken
+            'refreshToken': refreshToken,
+            'userId': userId
         }
     })
     .then((response) => {

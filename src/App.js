@@ -47,6 +47,33 @@ import TravelPostDetailedPage from './pages/post/travel/TravelPostDetailedPage';
 import StudyPostDetailPage from './pages/post/study/StudyPostDetailPage';
 import MyProfilePage from './pages/profile/MyProfilePage';
 import UpdateProfilePage from './pages/profile/UpdateProfilePage';
+import OwnPropertyPostDetailPage from './pages/post/property/OwnPropertyPostDetailPage';
+import OwnJobPostDetailPage from './pages/post/job/OwnJobPostDetailPage';
+import OwnTransactionPostDetailPage from './pages/post/transaction/OwnTransactionPostDetailPage';
+import OwnSocietyPostDetailPage from './pages/post/society/OwnSocietyPostDetailPage';
+import OwnTravelPostDetailedPage from './pages/post/travel/OwnTravelPostDetailedPage';
+import OwnStudyPostDetailPage from './pages/post/study/OwnStudyPostDetailPage';
+import UploadedPostPage from './pages/post/UploadedPostPage';
+import LikedPostPage from './pages/post/LikedPostPage';
+import WholeRentPostPage from './pages/post/property/WholeRentPostPage';
+import WholeSharePostPage from './pages/post/property/WholeSharePostPage';
+import WholePropertyTransactionPostPage from './pages/post/property/WholePropertyTransactionPostPage';
+import WholeRecruitmentPostPage from './pages/post/job/WholeRecruitmentPostPage';
+import WholeJobSeekingPostPage from './pages/post/job/WholeJobSeekingPostPage';
+import WholeTutoringPostPage from './pages/post/job/WholeTutoringPostPage';
+import WholeCarPostPage from './pages/post/transaction/WholeCarPostPage';
+import WholeNecessitiesPostPage from './pages/post/transaction/WholeNecessitiesPostPage';
+import WholeTransactionEtcPostPage from './pages/post/transaction/WholeTransactionEtcPostPage';
+import WholeClubPostPage from './pages/post/society/WholeClubPostPage';
+import WholeLifeStylePostPage from './pages/post/society/WholeLifeStylePostPage';
+import WholeFriendshipPostPage from './pages/post/society/WholeFriendshipPostPage';
+import WholeRestaurantPostPage from './pages/post/travel/WholeRestaurantPostPage';
+import WholePlacePostPage from './pages/post/travel/WholePlacePostPage';
+import WholeCoursePostPage from './pages/post/travel/WholeCoursePostPage';
+import WholeSchoolPostPage from './pages/post/study/WholeSchoolPostPage';
+import WholeWorkingHolidayPostPage from './pages/post/study/WholeWorkingHolidayPostPage';
+import WholeLanguageStudyPostPage from './pages/post/study/WholeLanguageStudyPostPage';
+import WholeJobReviewPostPage from './pages/post/study/WholeJobReviewPostPage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -155,14 +182,42 @@ function App() {
             <Route path="mypage" element={<MyProfilePage />} />
             <Route path="/update/mypage/:userId" element={<UpdateProfilePage />} />
 
-            <Route path="realestate" element={<WholePropertyPostPage />} />
-            <Route path="jobs" element={<WholeJobPostPage />} />
-            <Route path="marketplace" element={<WholeTransactionPostPage />} />
-            <Route path="community" element={<WholeSocietyPostPage />} />
-            <Route path="travel" element={<WholeTravelPostPage />} />
-            <Route path="studyabroad" element={<WholeStudyPostPage />} />
+            <Route path="부동산" element={<WholePropertyPostPage />} />
+            <Route path="구인구직" element={<WholeJobPostPage />} />
+            <Route path="사고팔기" element={<WholeTransactionPostPage />} />
+            <Route path="생활" element={<WholeSocietyPostPage />} />
+            <Route path="여행" element={<WholeTravelPostPage />} />
+            <Route path="유학" element={<WholeStudyPostPage />} />
+
+            <Route path="쉐어" element={<WholeSharePostPage />} />
+            <Route path="렌트" element={<WholeRentPostPage />} />
+            <Route path="매매" element={<WholePropertyTransactionPostPage />} />
+
+            <Route path="구인" element={<WholeRecruitmentPostPage />} />
+            <Route path="구직" element={<WholeJobSeekingPostPage />} />
+            <Route path="과외" element={<WholeTutoringPostPage />} />
+
+            <Route path="자동차" element={<WholeCarPostPage />} />
+            <Route path="생활용품" element={<WholeNecessitiesPostPage />} />
+            <Route path="기타" element={<WholeTransactionEtcPostPage />} />
+
+            <Route path="대여" element={<WholeStudyPostPage />} />
+            <Route path="동호회" element={<WholeClubPostPage />} />
+            <Route path="라이프스타일" element={<WholeLifeStylePostPage />} />
+            <Route path="친목" element={<WholeFriendshipPostPage />} />
+
+            <Route path="레스토랑" element={<WholeRestaurantPostPage />} />
+            <Route path="여행지" element={<WholePlacePostPage />} />
+            <Route path="코스" element={<WholeCoursePostPage />} />
+
+            <Route path="학교후기" element={<WholeSchoolPostPage />} />
+            <Route path="워홀후기" element={<WholeWorkingHolidayPostPage />} />
+            <Route path="어학연수후기" element={<WholeLanguageStudyPostPage />} />
+            <Route path="취업후기" element={<WholeJobReviewPostPage />} />
 
             <Route path="launch" element={<SelectCategoryPage />} />
+            <Route path="own/posts" element={<UploadedPostPage />} />
+            <Route path="liked/posts" element={<LikedPostPage />} />
 
             {generateDynamicRoutes()}
 
@@ -172,6 +227,14 @@ function App() {
             <Route path="post/생활/detail/:postId" element={<SocietyPostDetailPage />} />
             <Route path="post/여행/detail/:postId" element={<TravelPostDetailedPage />} />
             <Route path="post/유학/detail/:postId" element={<StudyPostDetailPage />} />
+
+            <Route path="own/post/부동산/detail/:postId" element={<OwnPropertyPostDetailPage />} />
+            <Route path="own/post/구인구직/detail/:postId" element={<OwnJobPostDetailPage />} />
+            <Route path="own/post/사고팔기/detail/:postId" element={<OwnTransactionPostDetailPage />} />
+            <Route path="own/post/생활/detail/:postId" element={<OwnSocietyPostDetailPage />} />
+            <Route path="own/post/여행/detail/:postId" element={<OwnTravelPostDetailedPage />} />
+            <Route path="own/post/유학/detail/:postId" element={<OwnStudyPostDetailPage />} />
+            
           </Route>
         </Routes>
       </BrowserRouter>

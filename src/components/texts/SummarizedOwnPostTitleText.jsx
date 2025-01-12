@@ -2,13 +2,13 @@ import React from "react";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const SummarizedPostTitleText = ({ title, pl = 1, postId, category }) => {
+const SummarizedOwnPostTitleText = ({ title, pl = 1, postId, category }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
         if (postId) {
             // const urlCategory = ConvertCateogryToUrlCategory(category);
-            navigate(`/post/${category}/detail/${postId}`);
+            navigate(`/own/post/${category}/detail/${postId}`);
         }
     };
 
@@ -38,4 +38,4 @@ const SummarizedPostTitleText = ({ title, pl = 1, postId, category }) => {
     );
 };
 
-export default SummarizedPostTitleText;
+export default SummarizedOwnPostTitleText;

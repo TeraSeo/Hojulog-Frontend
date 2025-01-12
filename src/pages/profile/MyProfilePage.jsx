@@ -8,8 +8,11 @@ import RemoveAccountButton from "../../components/buttons/RemoveAccountButton";
 import LogoutButton from "../../components/buttons/LogoutButton";
 import { getSpecificOwnUser } from "../../service/UserService";
 import CommonSummarizedPostBox from "../../components/box/post/CommonSummarizedPostBox";
+import CommonOwnSummarizedPostBox from "../../components/box/post/CommonOwnSummarizedPostBox";
+import { useNavigate } from "react-router-dom";
 
 const MyProfilePage = () => {
+    const navigate = useNavigate();
     const [userData, setUserData] = useState();
     const [profilePictureUrl, setPrrofilePictureUrl] = useState("");
 
@@ -72,17 +75,17 @@ const MyProfilePage = () => {
                     </Box>
 
                     <Box sx={{ my: 3 }}>
-                        <HomeContainerBox title="내가 올린 게시물" onDetailClicked={() => {}}>
+                        <HomeContainerBox title="내가 올린 게시물" onDetailClicked={() => { navigate("/own/posts") }}>
                             {userData.uploadedPostIds.map((uploadedPostId, index) => (
                                 <Box key={index}>
-                                    <CommonSummarizedPostBox postId={uploadedPostId} />
+                                    <CommonOwnSummarizedPostBox postId={uploadedPostId} />
                                 </Box>
                             ))}
                         </HomeContainerBox>
                     </Box>
 
                     <Box sx={{ mt: 3 }}>
-                        <HomeContainerBox title="내가 좋아요 한 게시물" onDetailClicked={() => {}}>
+                        <HomeContainerBox title="내가 좋아요 한 게시물" onDetailClicked={() => { navigate("/liked/posts") }}>
                         {userData.likedPostIds.map((likedPostId, index) => (
                                 <Box key={index}>
                                     <CommonSummarizedPostBox postId={likedPostId} />
