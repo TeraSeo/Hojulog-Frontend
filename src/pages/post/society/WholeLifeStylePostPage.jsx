@@ -5,6 +5,7 @@ import { getLifeStylePostsByPage } from "../../../service/PostService";
 import { getPaginationRange } from "../../../service/PageService";
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import SocietyPostBox from "../../../components/box/post/society/SocietyPostBox";
+import PageTitleText from "../../../components/texts/PageTitleText";
 
 const WholeLifeStylePostPage = () => {
     const [postPageData, setPostPageData] = useState({
@@ -43,9 +44,7 @@ const WholeLifeStylePostPage = () => {
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-                        라이프스타일
-                    </Typography>
+                    <PageTitleText title={"라이프스타일"} />
 
                     {postPageData.posts.map((post, index) => (
                         <Box key={index}>

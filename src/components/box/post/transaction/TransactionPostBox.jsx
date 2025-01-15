@@ -7,30 +7,33 @@ import PriceText from "../../../texts/PriceText";
 import ViewCountsText from "../../../texts/ViewCountsText";
 import NormalPostImageBox from "../NormalPostImageBox";
 import CommentsCountsText from "../../../texts/CommentsCountsText";
+import { PostImageWidthResponiveSize } from "../../../../constant/ComponentSizeResponsive";
+import { PostResponsiveFontSize2 } from "../../../../constant/FontSizeResponsive";
+import { SummarizedPostIconResponsiveSize1 } from "../../../../constant/IconSizeResponsive";
 
 const TransactionPostBox = ({ post }) => {
     return (
         <Box
             sx={{
                 display: "flex",
-                justifyContent: "space-between",
-                mt: 1,
-                overflow: "hidden",
+                mt: 1
             }}
         >
-            <Box sx={{ display: "flex", flex: 1, overflow: "hidden" }}>
+            <Box sx={{ width: PostImageWidthResponiveSize, flexShrink: 0 }}>
                 <NormalPostImageBox imageUrl={post.imageUrl} title={post.title} />
+            </Box>
+
+            <Box sx={{ display: "flex", flex: 1, overflow: "hidden" }}>
                 <Box
                     sx={{
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "space-between",
                         flex: 1,
-                        overflow: "hidden",
                     }}
                 >
                     <Box>
-                        <SummarizedPostTitleText title={post.title} postId={post.postId} category={"사고팔기"} />
+                        <SummarizedPostTitleText title={post.title} postId={post.postId} category={"사고팔기"} pt={0} />
                         <Box
                             sx={{
                                 display: "flex",
@@ -47,9 +50,10 @@ const TransactionPostBox = ({ post }) => {
                             <PriceText price={post.price} />
                         </Box>
                     </Box>
-                    <Box sx={{ pt: 1, display: "flex", justifyContent: "end" }}>
-                        <CommentsCountsText commentsCounts={post.commentCounts} />
-                        <ViewCountsText viewCounts={post.viewCounts} />
+
+                    <Box sx={{ display: "flex", justifyContent: "end" }}>
+                        <CommentsCountsText commentsCounts={post.commentCounts} width={SummarizedPostIconResponsiveSize1} height={SummarizedPostIconResponsiveSize1} fontSize={PostResponsiveFontSize2} />
+                        <ViewCountsText viewCounts={post.viewCounts} width={SummarizedPostIconResponsiveSize1} height={SummarizedPostIconResponsiveSize1} fontSize={PostResponsiveFontSize2} />
                     </Box>
                 </Box>
             </Box>

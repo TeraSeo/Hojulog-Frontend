@@ -20,7 +20,7 @@ const HomeTransactionPosts = () => {
     };
 
    return (
-        <HomeContainerBox title="사고팔기" onDetailClicked={() => { handleNavigate("/marketplace") }}>
+        <HomeContainerBox title="사고팔기" onDetailClicked={() => { handleNavigate("/사고팔기") }}>
             <Box
                 sx={{
                     display: "flex",

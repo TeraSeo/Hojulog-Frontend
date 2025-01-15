@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getSpecificJobPost, getSpecificPropertyPost } from '../../../service/PostService';
+import { getSpecificJobPost } from '../../../service/PostService';
 import { Box, Grid } from '@mui/material';
 import CategorySidebar from '../../../components/bar/CategorySidebar';
 import JobDetailBox from '../../../components/box/post/job/JobDetailBox';
@@ -9,6 +9,8 @@ import PostCommentBox from '../../../components/box/comment/PostCommentsBox';
 import LikeCountsText from '../../../components/texts/LikeCountsText';
 import CommentsCountsText from '../../../components/texts/CommentsCountsText';
 import ViewCountsText from '../../../components/texts/ViewCountsText';
+import { DetailedPostIconResponsiveSize2 } from '../../../constant/IconSizeResponsive';
+import { PostResponsiveFontSize2 } from '../../../constant/FontSizeResponsive';
 
 const JobPostDetailPage = () => {
   const { postId } = useParams();
@@ -48,16 +50,16 @@ const JobPostDetailPage = () => {
       </Grid>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
-          <LikeCountsText initialLikes={jobPostData.likeCounts} initialIsLiked={jobPostData.isUserLiked} pl={0} postId={jobPostData.postId} />
+          <LikeCountsText initialLikes={jobPostData.likeCounts} initialIsLiked={jobPostData.isUserLiked} pl={0} postId={jobPostData.postId} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
-              <CommentsCountsText commentsCounts={jobPostData.commentCounts} />
+              <CommentsCountsText commentsCounts={jobPostData.commentCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           </Box>
-          <ViewCountsText viewCounts={jobPostData.viewCounts} />
+          <ViewCountsText viewCounts={jobPostData.viewCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
       </Box>
 
       { jobPostData.location ? <EmbeddedMap mapUrl={jobPostData.location} /> : <></> }
 
-      <Box sx={{ mt: 8, mb: 15 }} ref={commentBoxRef}>
+      <Box sx={{ my: 5 }} ref={commentBoxRef}>
           <PostCommentBox postId={postId} />
       </Box>
     </Box>

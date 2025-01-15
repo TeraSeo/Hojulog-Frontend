@@ -11,6 +11,8 @@ import RemovePostButton from '../../../components/buttons/RemovePostButton';
 import LikeCountsText from '../../../components/texts/LikeCountsText';
 import CommentsCountsText from '../../../components/texts/CommentsCountsText';
 import ViewCountsText from '../../../components/texts/ViewCountsText';
+import { DetailedPostIconResponsiveSize2 } from '../../../constant/IconSizeResponsive';
+import { PostResponsiveFontSize2 } from '../../../constant/FontSizeResponsive';
 
 const OwnJobPostDetailPage = () => {
   const { postId } = useParams();
@@ -50,11 +52,11 @@ const OwnJobPostDetailPage = () => {
       </Grid>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
-          <LikeCountsText initialLikes={jobPostData.likeCounts} initialIsLiked={jobPostData.isUserLiked} pl={0} postId={jobPostData.postId} />
+          <LikeCountsText initialLikes={jobPostData.likeCounts} initialIsLiked={jobPostData.isUserLiked} pl={0} postId={jobPostData.postId} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
-              <CommentsCountsText commentsCounts={jobPostData.commentCounts} />
+              <CommentsCountsText commentsCounts={jobPostData.commentCounts}width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           </Box>
-          <ViewCountsText viewCounts={jobPostData.viewCounts} />
+          <ViewCountsText viewCounts={jobPostData.viewCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
       </Box>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end", gap: 1 }}>
@@ -64,7 +66,7 @@ const OwnJobPostDetailPage = () => {
 
       { jobPostData.location ? <EmbeddedMap mapUrl={jobPostData.location} /> : <></> }
 
-      <Box sx={{ mt: 8, mb: 15 }} ref={commentBoxRef}>
+      <Box sx={{ my: 5 }} ref={commentBoxRef}>
           <PostCommentBox postId={postId} />
       </Box>
     </Box>

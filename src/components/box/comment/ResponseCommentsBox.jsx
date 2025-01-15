@@ -1,6 +1,9 @@
-import { Avatar, Box, Typography, Button, Divider } from "@mui/material";
+import { Avatar, Box, Typography, Divider } from "@mui/material";
 import React, { useState } from "react";
 import { getResponseComment } from "../../../service/CommentService";
+import { CommentProfileImageHeightResponiveSize } from "../../../constant/ComponentSizeResponsive";
+import CommentUsernameText from "../../texts/CommentUsernameText";
+import CommentContentText from "../../texts/CommentContentText";
 
 const ResponseCommentsBox = ({ responseCommentIds }) => {
     const [responseComments, setResponseComments] = useState([]);
@@ -17,7 +20,7 @@ const ResponseCommentsBox = ({ responseCommentIds }) => {
     };
 
     return (
-        <Box sx={{ mt: 2, marginLeft: "68px" }}>
+        <Box sx={{ mt: 1, marginLeft: "55px" }}>
             {!isCommentsVisible ? (
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                     <Divider sx={{ width: "25px" }} />
@@ -38,31 +41,16 @@ const ResponseCommentsBox = ({ responseCommentIds }) => {
                 responseComments.map((responseComment) => (
                     <Box
                         key={responseComment.commentId}
-                        sx={{ display: "flex", alignItems: "center", gap: 2, mt: 2 }}
+                        sx={{ display: "flex", alignItems: "center", gap: 1.5, mt: 1.5 }}
                     >
                         <Avatar
                             src={responseComment.summarizedUserDto.profilePicture || ""}
                             alt={responseComment.summarizedUserDto.username}
-                            sx={{ width: 32, height: 32 }}
+                            sx={{ width: CommentProfileImageHeightResponiveSize, height: CommentProfileImageHeightResponiveSize }}
                         />
                         <Box>
-                            <Typography
-                                sx={{
-                                    fontWeight: "500",
-                                    fontSize: "12px",
-                                    color: "#333",
-                                }}
-                            >
-                                {responseComment.summarizedUserDto.username}
-                            </Typography>
-                            <Typography
-                                sx={{
-                                    fontSize: "12px",
-                                    color: "#555",
-                                }}
-                            >
-                                {responseComment.content}
-                            </Typography>
+                            <CommentUsernameText username={responseComment.summarizedUserDto.username} />
+                            <CommentContentText content={responseComment.content} />
                         </Box>
                     </Box>
                 ))

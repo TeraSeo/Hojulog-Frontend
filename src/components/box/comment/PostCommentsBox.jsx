@@ -4,6 +4,7 @@ import AddCommentBox from "./AddCommentBox";
 import { createComment, createResponseComment, getCommentsByPostId } from "../../../service/CommentService";
 import SingleCommentBox from "./SingleCommentBox";
 import AddResponseCommentBox from "./AddResponseCommentBox";
+import { TitleResponsiveFontSize1 } from "../../../constant/FontSizeResponsive";
 
 const PostCommentBox = ({ postId }) => {
   const [commentsData, setCommentsData] = useState([]);
@@ -52,7 +53,7 @@ const PostCommentBox = ({ postId }) => {
 
   return (
     <Box sx={{ px: 2 }}>
-      <Typography variant="h6" sx={{ mb: 2 }}>
+      <Typography variant="h6" sx={{ mb: 2, fontSize: TitleResponsiveFontSize1 }}>
         댓글 {wholeCommentsLength}개
       </Typography>
 

@@ -5,6 +5,7 @@ import { getClubPostsByPage } from "../../../service/PostService";
 import { getPaginationRange } from "../../../service/PageService";
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import SocietyPostBox from "../../../components/box/post/society/SocietyPostBox";
+import PageTitleText from "../../../components/texts/PageTitleText";
 
 const WholeClubPostPage = () => {
     const [postPageData, setPostPageData] = useState({
@@ -43,9 +44,7 @@ const WholeClubPostPage = () => {
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-                        동호회
-                    </Typography>
+                    <PageTitleText title={"동호회"} />
 
                     {postPageData.posts.map((post, index) => (
                         <Box key={index}>

@@ -3,14 +3,16 @@ import { Box, Typography } from "@mui/material";
 import SchoolIcon from "@mui/icons-material/School";
 import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 import { primaryColor } from "../../constant/Color";
+import { SubTitleResponsiveFontSize1 } from "../../constant/FontSizeResponsive";
+import { SchoolIconResponsiveSize } from "../../constant/IconSizeResponsive";
 
 const SchoolMajorText = ({ school, major }) => {
   return (
     <Box sx={{ display: "flex", gap: 2 }}>
       {school && (
         <Box sx={{ display: "flex", alignItems: "center", gap: 1, mt: 1 }}>
-          <SchoolIcon sx={{ color: primaryColor, fontSize: 20 }} />
-          <Typography variant="body2" sx={{ fontSize: 14 }}>
+          <SchoolIcon sx={{ color: primaryColor, fontSize: SchoolIconResponsiveSize }} />
+          <Typography variant="body2" sx={{ fontSize: SubTitleResponsiveFontSize1 }}>
             <strong>School: </strong>
             {school}
           </Typography>
@@ -19,8 +21,8 @@ const SchoolMajorText = ({ school, major }) => {
 
       {major && (
         <Box sx={{ display: "flex", alignItems: "center", gap: 1, mt: 1 }}>
-          <ImportContactsIcon sx={{ color: primaryColor, fontSize: 20 }} />
-          <Typography variant="body2" sx={{ fontSize: 14 }}>
+          <ImportContactsIcon sx={{ color: primaryColor, fontSize: SchoolIconResponsiveSize }} />
+          <Typography variant="body2" sx={{ fontSize: SubTitleResponsiveFontSize1 }}>
             <strong>Major: </strong>
             {major}
           </Typography>

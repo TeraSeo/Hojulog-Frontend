@@ -1,10 +1,11 @@
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { Box, Divider, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../../components/bar/CategorySidebar";
 import { getSharePostsByPage } from "../../../service/PostService";
 import PropertyPostBox from "../../../components/box/post/property/PropertyPostBox";
 import { getPaginationRange } from "../../../service/PageService";
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
+import PageTitleText from "../../../components/texts/PageTitleText";
 
 const WholeSharePostPage = () => {
     const [postPageData, setPostPageData] = useState({
@@ -36,16 +37,14 @@ const WholeSharePostPage = () => {
     const [startPage, endPage] = getPaginationRange(postPageData.currentPage, postPageData.pageSize);
 
     return (
-        <Box sx={{ py: "10px", px: { md: "120px", sm: "40px", xs: "0px" } }}>
+        <Box sx={{ px: { md: "120px", sm: "40px", xs: "0px" } }}>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
                     <CategorySidebar />
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-                        쉐어
-                    </Typography>
+                    <PageTitleText title={"쉐어"} />
 
                     {postPageData.posts.map((post, index) => (
                         <React.Fragment key={index}>

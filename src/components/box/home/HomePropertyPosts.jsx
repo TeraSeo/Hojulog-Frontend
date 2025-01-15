@@ -20,7 +20,7 @@ const HomePropertyPosts = () => {
     };
 
     return (
-        <HomeContainerBox title="부동산" onDetailClicked={() => { handleNavigate("/realestate") }}>
+        <HomeContainerBox title="부동산" onDetailClicked={() => { handleNavigate("/부동산") }}>
             <Box
                 sx={{
                     display: "flex",

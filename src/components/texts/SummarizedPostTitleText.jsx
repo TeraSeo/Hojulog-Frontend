@@ -1,8 +1,9 @@
 import React from "react";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { PostResponsiveFontSize1 } from "../../constant/FontSizeResponsive.js";
 
-const SummarizedPostTitleText = ({ title, pl = 1, postId, category }) => {
+const SummarizedPostTitleText = ({ title, pl = 1, pt = 1, postId, category }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -17,7 +18,7 @@ const SummarizedPostTitleText = ({ title, pl = 1, postId, category }) => {
             variant="body2"
             onClick={handleClick}
             sx={{
-                pt: 1,
+                pt: pt,
                 pl: pl,
                 fontWeight: "600",
                 textAlign: "start",
@@ -25,6 +26,7 @@ const SummarizedPostTitleText = ({ title, pl = 1, postId, category }) => {
                 overflow: "hidden",
                 textOverflow: "ellipsis",
                 transition: "color 0.3s, transform 0.3s",
+                fontSize: PostResponsiveFontSize1,
                 "&:hover": {
                     color: "primary.main",
                     textDecoration: "underline",

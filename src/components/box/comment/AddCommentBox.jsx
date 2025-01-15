@@ -1,6 +1,8 @@
 import React from "react";
 import { Box, IconButton, InputBase, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import { SubTitleResponsiveFontSize1, TitleResponsiveFontSize2 } from "../../../constant/FontSizeResponsive";
+import { CommentSubmitIconResponsiveSize } from "../../../constant/IconSizeResponsive";
 
 const AddCommentBox = ({ comment, setComment, handleCommentSubmit }) => {
 
@@ -13,7 +15,7 @@ const AddCommentBox = ({ comment, setComment, handleCommentSubmit }) => {
         marginTop: 2,
       }}
     >
-      <Typography variant="h7" sx={{ fontWeight: "bold" }}>
+      <Typography variant="h7" sx={{ fontWeight: "bold", fontSize: TitleResponsiveFontSize2 }}>
         댓글 쓰기
       </Typography>
       <Box
@@ -22,7 +24,7 @@ const AddCommentBox = ({ comment, setComment, handleCommentSubmit }) => {
           alignItems: "center",
           backgroundColor: "#f9f9f9",
           borderRadius: "24px",
-          padding: "6px 12px",
+          padding: "4px 12px",
           border: "1px solid #ddd",
         }}
       >
@@ -32,7 +34,7 @@ const AddCommentBox = ({ comment, setComment, handleCommentSubmit }) => {
           onChange={(e) => setComment(e.target.value)}
           sx={{
             flex: 1,
-            fontSize: "14px",
+            fontSize: SubTitleResponsiveFontSize1,
             color: "#333",
           }}
         />
@@ -53,7 +55,7 @@ const AddCommentBox = ({ comment, setComment, handleCommentSubmit }) => {
             },
           }}
         >
-          <SendIcon fontSize="small" sx={{ color: "#555" }} />
+          <SendIcon sx={{ color: "#555", fontSize: CommentSubmitIconResponsiveSize }} />
         </IconButton>
       </Box>
     </Box>

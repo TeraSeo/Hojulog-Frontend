@@ -20,7 +20,7 @@ const HomeSocietyPosts = () => {
     };
 
     return (
-        <HomeContainerBox title="생활" onDetailClicked={() => { handleNavigate("/community") }}>
+        <HomeContainerBox title="생활" onDetailClicked={() => { handleNavigate("/생활") }}>
             <Box
                 sx={{
                     gap: "16px",

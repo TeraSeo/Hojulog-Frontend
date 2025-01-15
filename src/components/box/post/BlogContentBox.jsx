@@ -11,7 +11,7 @@ const BlogContentBox = ({ blogContents }) => {
                             <Typography 
                                 variant="body1" 
                                 sx={{ 
-                                    fontSize: `${content.fontSize}px`, 
+                                    fontSize: { "md": `${content.fontSize}px`, "sm" : `${content.fontSiz - 2}px`, "xs": `${content.fontSize - 4}px` }, 
                                     fontWeight: content.fontWeight,
                                     whiteSpace: "pre-wrap"
                                 }}

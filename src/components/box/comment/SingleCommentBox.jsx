@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Box, Typography, Avatar, IconButton } from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import { primaryColor } from "../../../constant/Color";
+import { Box, Typography, Avatar } from "@mui/material";
 import CreatedAtText from "../../texts/CreatedAtText";
 import { addCommentLike, removeCommentLike } from "../../../service/CommentLikeService";
 import ResponseCommentsBox from "./ResponseCommentsBox";
+import { CommentProfileImageHeightResponiveSize } from "../../../constant/ComponentSizeResponsive";
+import { ComponentTextResponsiveFontSize1 } from "../../../constant/FontSizeResponsive";
+import CommentUsernameText from "../../texts/CommentUsernameText";
+import CommentContentText from "../../texts/CommentContentText";
+import CommentLikeButton from "../../buttons/CommentLikeButton";
 
 const SingleCommentBox = ({ comment, setIsResponseCommentOn, setParentCommentId, setParentCommentUsername }) => {
   const { username, profilePicture } = comment.summarizedUserDto;
@@ -41,75 +43,32 @@ const SingleCommentBox = ({ comment, setIsResponseCommentOn, setParentCommentId,
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          mx: 2,
         }}
       >
-    
         <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
           <Avatar
             src={profilePictureUrl}
             alt={username}
             sx={{
-              width: 40,
-              height: 40,
+              width: CommentProfileImageHeightResponiveSize,
+              height: CommentProfileImageHeightResponiveSize,
             }}
           />
           <Box>
-            <Typography
-              sx={{
-                fontWeight: "600",
-                fontSize: "13px", 
-                color: "#333",
-              }}
-            >
-              {username}
-            </Typography>
-            <Typography
-              sx={{
-                color: "#555",
-                lineHeight: 1.4,
-                fontSize: "12px", 
-              }}
-            >
-              {content}
-            </Typography>
+            <CommentUsernameText username={username} />
+            <CommentContentText content={content} />
 
             <CreatedAtText createdAt={createdAt} pl={0} />
           </Box>
         </Box>
-    
-        <Box sx={{ justifyItems: "center", gap: 0.5 }}>
-          <IconButton
-            aria-label="favorite"
-            sx={{
-              color: isLiked ? "red" : primaryColor,
-              padding: "4px"
-            }}
-            onClick={handleLikeClicked}
-          >
-            {isLiked ? (
-              <FavoriteIcon sx={{ fontSize: "18px" }} />
-            ) : (
-              <FavoriteBorderIcon sx={{ fontSize: "18px" }} />
-            )}
-          </IconButton>
-
-          <Typography
-            sx={{
-              fontSize: "11px",
-              color: "#666",
-            }}
-          >
-            {wholeLikesCount}
-          </Typography>
-        </Box>
+        
+        <CommentLikeButton isLiked={isLiked} handleLikeClicked={handleLikeClicked} wholeLikesCount={wholeLikesCount} />
       </Box>
 
-      <Box sx={{ mt: 0.5, marginLeft: "68px" }} onClick={() => { setResponseComment(); }}>
+      <Box sx={{ mt: 1, marginLeft: "55px" }} onClick={() => { setResponseComment(); }}>
         <Typography
           sx={{
-            mt: 0.5,
-            fontSize: "12px",
+            fontSize: ComponentTextResponsiveFontSize1,
             color: "#888",
             cursor: "pointer",
             whiteSpace: "nowrap",

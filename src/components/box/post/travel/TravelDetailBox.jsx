@@ -14,7 +14,7 @@ const TravelDetailBox = ({ title, subCategory, rate, createdDate, blogContents }
 
             <PostRateBox rate={rate} px={0} />
             
-            <Divider sx={{ my: 2.5 }} />
+            <Divider sx={{ my: { "md": 2.5, "sm": 2, "xs": 1.5} }} />
             
             <BlogContentBox blogContents={blogContents} />
 

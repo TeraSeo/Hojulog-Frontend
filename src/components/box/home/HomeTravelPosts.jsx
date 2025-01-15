@@ -20,7 +20,7 @@ const HomeTravelPosts = () => {
     };
 
     return (
-        <HomeContainerBox title="여행" onDetailClicked={() => { handleNavigate("/travel") }}>
+        <HomeContainerBox title="여행" onDetailClicked={() => { handleNavigate("/여행") }}>
             <Box
                 sx={{
                     gap: "16px",

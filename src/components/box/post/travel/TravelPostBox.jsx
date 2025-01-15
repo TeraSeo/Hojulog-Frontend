@@ -17,9 +17,8 @@ const TravelPostBox = ({ post }) => {
                 border: "1px solid #ddd",
                 borderRadius: "8px",
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                pl: 1.5,
-                pr: 2.5,
-                py: 2
+                px: { md: 2.5, xs: 2 },
+                py: { md: 2.5, xs: 1.5 }
             }}
         >
             <Box sx={{ display: "flex", flex: 1, overflow: "hidden" }}>
@@ -35,23 +34,25 @@ const TravelPostBox = ({ post }) => {
                     <Box>
                         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                             <Box sx={{whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",}}>
-                                <SummarizedPostTitleText title={post.title} postId={post.postId} category={"여행"} />
-                                <SummarizedDescriptionText description={post.description} />
-                                <PostRateBox rate={post.rate} />
+                                <SummarizedPostTitleText title={post.title} postId={post.postId} category={"여행"} pl={0} />
+                                <SummarizedDescriptionText description={post.description} pl={0} />
+                                <PostRateBox rate={post.rate} px={0} />
                             </Box>
 
-                            <LocationButton location={post.location} />
+                            <Box sx={{ ml: 1 }}>
+                                <LocationButton location={post.location} />
+                            </Box>
                         </Box>
 
                         <Box
                             sx={{
-                                pt: 1,
+                                pt: 0.5,
                                 display: "flex",
                                 textOverflow: "ellipsis",
                             }}
                         >
                             <Box sx={{ display: "flex", pr: 1 }}>
-                                <CreatedAtText createdAt={post.createdAt} />
+                                <CreatedAtText createdAt={post.createdAt} pl={0} />
                             </Box>
                         </Box>
                     </Box>

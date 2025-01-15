@@ -5,6 +5,7 @@ import { getSocietyPostsByPage } from "../../../service/PostService";
 import SocietyPostBox from "../../../components/box/post/society/SocietyPostBox";
 import { getPaginationRange } from "../../../service/PageService";
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
+import PageTitleText from "../../../components/texts/PageTitleText";
 
 function WholeSocietyPostPage() {
     const [societyPageData, setSocietyPageData] = useState({ 
@@ -43,9 +44,7 @@ function WholeSocietyPostPage() {
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-                        생활
-                    </Typography>
+                    <PageTitleText title={"생활"} />
 
                     {societyPageData.posts.map((post, index) => (
                         <Box key={index}>

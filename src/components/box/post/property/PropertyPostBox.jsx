@@ -12,67 +12,76 @@ import BathRoomTypeText from "../../../texts/BathRoomTypeText";
 import ParkAvailabilityText from "../../../texts/ParkAvailabilityText";
 import BillIncludedText from "../../../texts/BillIncludedText";
 import SubCatoryText from "../../../texts/SubCatoryText";
+import { PostImageWidthResponiveSize } from "../../../../constant/ComponentSizeResponsive";
 
 const PropertyPostBox = ({ post }) => {
     return (
         <Box
             sx={{
                 display: "flex",
-                justifyContent: "space-between",
-                mt: 1,
-                overflow: "hidden",
+                mt: 1
             }}
         >
-            <Box sx={{ display: "flex", flex: 1, overflow: "hidden" }}>
+            <Box sx={{ width: PostImageWidthResponiveSize, flexShrink: 0 }}>
                 <NormalPostImageBox imageUrl={post.imageUrl} title={post.title} />
-                <Box
-                    sx={{
+            </Box>
+
+            <Box sx={{ display: "flex", justifyContent: "space-between", flexGrow: 1, minWidth: 0 }}>
+                    <Box sx={{
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "space-between",
-                        flex: 1,
-                        overflow: "hidden",
-                    }}
-                >
-                    <Box>
-                        <Box sx={{ display: "flex", "&:hover": {
-                            color: "primary.main",
-                            textDecoration: "underline",
-                            transform: "scale(1.02)",
-                            cursor: "pointer",
-                        }, }}>
-                            <SubCatoryText subCategory={post.subCategory} postId={post.postId} category={"부동산"} />
-                            <SummarizedPostTitleText title={post.title} pl={0.5} postId={post.postId} category={"부동산"} />
-                        </Box>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                            }}
-                        >
-                            <SuburbText suburb={post.suburb} />
-                            <CreatedAtText createdAt={post.createdAt} />
-                        </Box>
-                        
-                        <Box sx={{ display: "flex", alignItems: "center", gap: 1, pl: 1, pt: 0.5 }}>
-                            <RoomCountsText roomCount={post.roomCount} />
-                            <BathRoomTypeText bathroomType={post.bathroomType} />
-                            <ParkAvailabilityText isParkable={post.isParkable} />
-                            <BillIncludedText isBillIncluded={post.isBillIncluded} />
-                        </Box>
-                    </Box>
+                        flexGrow: 1,
+                        minWidth: 0
+                    }}>
+                        <Box>
+                            <Box sx={{ display: "flex", "&:hover": { color: "primary.main", textDecoration: "underline", transform: "scale(1.02)", cursor: "pointer" }}}>
+                                <SubCatoryText subCategory={post.subCategory} postId={post.postId} category={"부동산"} pt={0} />
+                                <SummarizedPostTitleText title={post.title} pl={0.5} postId={post.postId} category={"부동산"} pt={0} />
+                            </Box>
 
-                    <Box sx={{ display: "flex", px: 1, pb: 1 }}>
-                        <PeriodText period={post.period} />
-                        <PriceText price={post.price} />
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    whiteSpace: "nowrap",
+                                    overflow: "hidden",
+                                    textOverflow: "ellipsis",
+                                }}
+                            >
+                                <SuburbText suburb={post.suburb} />
+                                <CreatedAtText createdAt={post.createdAt} />
+                            </Box>
+                            
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: 1,
+                                    pl: 1,
+                                    pt: 0.5,
+                                    overflowX: "auto",
+                                    whiteSpace: "nowrap",
+                                    scrollbarWidth: "none",
+                                    "&::-webkit-scrollbar": {
+                                        display: "none"
+                                    },
+                                }}
+                            >
+                                <RoomCountsText roomCount={post.roomCount} />
+                                <BathRoomTypeText bathroomType={post.bathroomType} />
+                                <ParkAvailabilityText isParkable={post.isParkable} />
+                                <BillIncludedText isBillIncluded={post.isBillIncluded} />
+                            </Box>
+                        </Box>
+
+                        <Box sx={{ display: "flex", pl: 1, pt: 1 }}>
+                            <PeriodText period={post.period} />
+                            <PriceText price={post.price} />
+                        </Box>
                     </Box>
+                <Box sx={{ ml: 1 }}>
+                    <LocationButton location={post.location} />
                 </Box>
-            </Box>
-
-            <Box sx={{ mt: 1 }}>
-                <LocationButton location={post.location} />
             </Box>
         </Box>
     );

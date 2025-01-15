@@ -20,7 +20,7 @@ const HomeJobPosts = () => {
     };
 
     return (
-        <HomeContainerBox title="구인구직" onDetailClicked={() => { handleNavigate("/jobs") }}>
+        <HomeContainerBox title="구인구직" onDetailClicked={() => { handleNavigate("/구인구직") }}>
             <Box
                 sx={{
                     gap: "16px",

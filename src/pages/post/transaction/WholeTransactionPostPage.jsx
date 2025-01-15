@@ -1,10 +1,11 @@
-import { Box, Grid, Typography, Divider } from "@mui/material";
+import { Box, Grid, Divider } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../../components/bar/CategorySidebar";
 import { getTransactionPostsByPage } from "../../../service/PostService";
 import TransactionPostBox from "../../../components/box/post/transaction/TransactionPostBox";
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import { getPaginationRange } from "../../../service/PageService";
+import PageTitleText from "../../../components/texts/PageTitleText";
 
 function WholeTransactionPostPage() {
     const [transactionPageData, setTransactionPageData] = useState({
@@ -43,9 +44,7 @@ function WholeTransactionPostPage() {
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-                        사고팔기
-                    </Typography>
+                    <PageTitleText title={"사고팔기"} />
 
                     {transactionPageData.posts.map((post, index) => (
                         <React.Fragment key={index}>

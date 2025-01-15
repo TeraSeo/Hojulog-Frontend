@@ -8,6 +8,8 @@ import CommentsCountsText from '../../../components/texts/CommentsCountsText';
 import ViewCountsText from '../../../components/texts/ViewCountsText';
 import PostCommentBox from '../../../components/box/comment/PostCommentsBox';
 import TransactionDetailBox from '../../../components/box/post/transaction/TransactionDetailBox';
+import { DetailedPostIconResponsiveSize2 } from '../../../constant/IconSizeResponsive';
+import { PostResponsiveFontSize2 } from '../../../constant/FontSizeResponsive';
 
 const TravelPostDetailedPage = () => {
   const { postId } = useParams();
@@ -47,14 +49,14 @@ const TravelPostDetailedPage = () => {
       </Grid>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
-          <LikeCountsText initialLikes={transactionPostData.likeCounts} initialIsLiked={transactionPostData.isUserLiked} pl={0} postId={transactionPostData.postId} />
+          <LikeCountsText initialLikes={transactionPostData.likeCounts} initialIsLiked={transactionPostData.isUserLiked} pl={0} postId={transactionPostData.postId} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
-              <CommentsCountsText commentsCounts={transactionPostData.commentCounts} />
+              <CommentsCountsText commentsCounts={transactionPostData.commentCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           </Box>
-          <ViewCountsText viewCounts={transactionPostData.viewCounts} />
+          <ViewCountsText viewCounts={transactionPostData.viewCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
       </Box>
 
-      <Box sx={{ mt: 8, mb: 15 }} ref={commentBoxRef}>
+      <Box sx={{ my: 5 }} ref={commentBoxRef}>
           <PostCommentBox postId={postId} />
       </Box>
     </Box>

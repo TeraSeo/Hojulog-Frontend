@@ -1,4 +1,10 @@
 export const BoxTitleResponsiveFontSize = { md: "18px", sm: "16px", xs: "14px" };
 export const TitleResponsiveFontSize = { md: "23px", sm: "20px", xs: "17px" };
+export const TitleResponsiveFontSize1 = { md: "20px", sm: "18px", xs: "16px" };
+export const TitleResponsiveFontSize2 = { md: "17px", sm: "15px", xs: "13px" };
 export const SubTitleResponsiveFontSize1 = { md: "14px", sm: "13px", xs: "11px" };
 export const ButtonResponsiveFontSize1 = { md: "14px", sm: "13px", xs: "12px" };
+export const PostTitleFontSize = { xs: "18px", sm: "21px", md: "24px" };
+export const PostResponsiveFontSize1 = { md: "14px", sm: "12px", xs: "10px" };
+export const PostResponsiveFontSize2 = { md: "13px", sm: "11px", xs: "9px" };
+export const ComponentTextResponsiveFontSize1 = { md: "11px", sm: "10px", xs: "9px" };

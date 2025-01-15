@@ -5,6 +5,7 @@ import { getSchoolPostsByPage } from "../../../service/PostService";
 import { getPaginationRange } from "../../../service/PageService";
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import StudyPostBox from "../../../components/box/post/study/StudyPostBox";
+import PageTitleText from "../../../components/texts/PageTitleText";
 
 const WholeSchoolPostPage = () => {
     const [postPageData, setPostPageData] = useState({
@@ -43,9 +44,7 @@ const WholeSchoolPostPage = () => {
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-                        학교후기
-                    </Typography>
+                    <PageTitleText title={"학교후기"} />
 
                     {postPageData.posts.map((post, index) => (
                         <React.Fragment key={index}>

@@ -5,6 +5,7 @@ import { getFriendshipPostsByPage } from "../../../service/PostService";
 import { getPaginationRange } from "../../../service/PageService";
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import SocietyPostBox from "../../../components/box/post/society/SocietyPostBox";
+import PageTitleText from "../../../components/texts/PageTitleText";
 
 const WholeFriendshipPostPage = () => {
     const [postPageData, setPostPageData] = useState({
@@ -43,9 +44,7 @@ const WholeFriendshipPostPage = () => {
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-                        친목
-                    </Typography>
+                    <PageTitleText title={"친목"} />
 
                     {postPageData.posts.map((post, index) => (
                         <Box key={index}>

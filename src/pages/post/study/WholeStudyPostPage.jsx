@@ -5,6 +5,7 @@ import { getPaginationRange } from "../../../service/PageService";
 import StudyPostBox from "../../../components/box/post/study/StudyPostBox";
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import { getStudyPostsByPage } from "../../../service/PostService";
+import PageTitleText from "../../../components/texts/PageTitleText";
 
 function WholeStudyPostPage() {
     const [studyPageData, setStudyPageData] = useState({
@@ -43,9 +44,7 @@ function WholeStudyPostPage() {
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-                        유학
-                    </Typography>
+                    <PageTitleText title={"유학"} />
 
                     {studyPageData.posts.map((post, index) => (
                         <React.Fragment key={index}>

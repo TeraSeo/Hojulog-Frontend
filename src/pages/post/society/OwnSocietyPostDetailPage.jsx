@@ -11,6 +11,8 @@ import RemovePostButton from '../../../components/buttons/RemovePostButton';
 import LikeCountsText from '../../../components/texts/LikeCountsText';
 import CommentsCountsText from '../../../components/texts/CommentsCountsText';
 import ViewCountsText from '../../../components/texts/ViewCountsText';
+import { PostResponsiveFontSize2 } from '../../../constant/FontSizeResponsive';
+import { DetailedPostIconResponsiveSize2 } from '../../../constant/IconSizeResponsive';
 
 const OwnSocietyPostDetailPage = () => {
   const { postId } = useParams();
@@ -50,11 +52,11 @@ const OwnSocietyPostDetailPage = () => {
       </Grid>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
-          <LikeCountsText initialLikes={societyPostData.likeCounts} initialIsLiked={societyPostData.isUserLiked} pl={0} postId={societyPostData.postId} />
+          <LikeCountsText initialLikes={societyPostData.likeCounts} initialIsLiked={societyPostData.isUserLiked} pl={0} postId={societyPostData.postId} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
-              <CommentsCountsText commentsCounts={societyPostData.commentCounts} />
+              <CommentsCountsText commentsCounts={societyPostData.commentCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           </Box>
-          <ViewCountsText viewCounts={societyPostData.viewCounts} />
+          <ViewCountsText viewCounts={societyPostData.viewCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
       </Box>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end", gap: 1 }}>
@@ -64,7 +66,7 @@ const OwnSocietyPostDetailPage = () => {
 
       { societyPostData.location ? <EmbeddedMap mapUrl={societyPostData.location} /> : <></> }
 
-      <Box sx={{ mt: 8, mb: 15 }} ref={commentBoxRef}>
+      <Box sx={{ my: 5 }} ref={commentBoxRef}>
           <PostCommentBox postId={postId} />
       </Box>
     </Box>

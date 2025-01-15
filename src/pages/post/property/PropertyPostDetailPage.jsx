@@ -9,6 +9,8 @@ import LikeCountsText from '../../../components/texts/LikeCountsText';
 import CommentsCountsText from '../../../components/texts/CommentsCountsText';
 import ViewCountsText from '../../../components/texts/ViewCountsText';
 import PostCommentBox from '../../../components/box/comment/PostCommentsBox';
+import { PostResponsiveFontSize2 } from '../../../constant/FontSizeResponsive';
+import { DetailedPostIconResponsiveSize2 } from '../../../constant/IconSizeResponsive';
 
 const PropertyPostDetailPage = () => {
   const { postId } = useParams();
@@ -23,7 +25,6 @@ const PropertyPostDetailPage = () => {
     getSpecificPropertyPost(postId)
       .then((data) => {
         setPropertyPostData(data);
-        alert(propertyPostData.isUserLiked);
       })
       .catch((error) => console.error("Error fetching posts:", error));
   };
@@ -49,16 +50,16 @@ const PropertyPostDetailPage = () => {
       </Grid>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
-          <LikeCountsText initialLikes={propertyPostData.likeCounts} initialIsLiked={propertyPostData.isUserLiked} pl={0} postId={propertyPostData.postId} />
+          <LikeCountsText initialLikes={propertyPostData.likeCounts} initialIsLiked={propertyPostData.isUserLiked} pl={0} postId={propertyPostData.postId} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
-              <CommentsCountsText commentsCounts={propertyPostData.commentCounts} />
+              <CommentsCountsText commentsCounts={propertyPostData.commentCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           </Box>
-          <ViewCountsText viewCounts={propertyPostData.viewCounts} />
+          <ViewCountsText viewCounts={propertyPostData.viewCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
       </Box>
 
       { propertyPostData.location ? <EmbeddedMap mapUrl={propertyPostData.location} /> : <></> }
 
-      <Box sx={{ mt: 8, mb: 15 }} ref={commentBoxRef}>
+      <Box sx={{ my: 5 }} ref={commentBoxRef}>
           <PostCommentBox postId={postId} />
       </Box>
     </Box>

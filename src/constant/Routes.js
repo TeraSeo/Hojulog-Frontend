@@ -1,4 +1,4 @@
-export const allowedRoutesWitoutVerification = ["/", "/about", "/contact", "/realestate", "/jobs", "/marketplace", "/community", "/travel", "/studyabroad", "/post/realestate/detail/:postId", "/post/jobs/detail/:postId", "/post/marketplace/detail/:postId", "/post/community/detail/:postId", "/post/travel/detail/:postId", "/post/studyabroad/detail/:postId"];
+export const allowedRoutesWitoutVerification = ["/", "/about", "/contact", "/부동산", "/구인구직", "/사고팔기", "/생활", "/여행", "/유학", "/post/부동산/detail/:postId", "/post/구인구직/detail/:postId", "/post/사고팔기/detail/:postId", "/post/생활/detail/:postId", "/post/여행/detail/:postId", "/post/유학/detail/:postId"];
 
 const ConvertCateogryToUrlCategory = (category) => {
     if (category === "부동산") {

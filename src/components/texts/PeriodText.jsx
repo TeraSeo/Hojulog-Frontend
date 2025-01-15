@@ -1,12 +1,13 @@
 import React from "react";
 import { Typography } from "@mui/material";
+import { SubTitleResponsiveFontSize1 } from "../../constant/FontSizeResponsive";
 
 const PeriodText = ({ period }) => {
   return (
     <Typography variant="body2"
         sx={{
             fontWeight: "bold",
-            fontSize: "15px",
+            fontSize: SubTitleResponsiveFontSize1,
             textAlign: "start",
         }}>
         {period || ""}/

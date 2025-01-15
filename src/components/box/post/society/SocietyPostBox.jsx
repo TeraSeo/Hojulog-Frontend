@@ -4,6 +4,8 @@ import SummarizedPostTitleText from "../../../texts/SummarizedPostTitleText";
 import CreatedAtText from "../../../texts/CreatedAtText";
 import SuburbText from "../../../texts/SuburbText";
 import ViewCountsText from "../../../texts/ViewCountsText";
+import { PostResponsiveFontSize2 } from "../../../../constant/FontSizeResponsive";
+import { SummarizedPostIconResponsiveSize1 } from "../../../../constant/IconSizeResponsive";
 
 const SocietyPostBox = ({ post }) => {
     return (
@@ -16,9 +18,8 @@ const SocietyPostBox = ({ post }) => {
                 border: "1px solid #ddd",
                 borderRadius: "8px",
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                pl: 1.5,
-                pr: 2.5,
-                py: 2
+                px: { md: 2.5, sm: 2, xs: 1.5 },
+                py: { md: 3, xs: 2.5 }
             }}
         >
             <Box sx={{ display: "flex", flex: 1, overflow: "hidden" }}>
@@ -33,15 +34,16 @@ const SocietyPostBox = ({ post }) => {
                 >
                     <Box>
                         <Box sx={{whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",}}>
-                            <SummarizedPostTitleText title={post.title} postId={post.postId} category={"생활"} />
+                            <SummarizedPostTitleText title={post.title} postId={post.postId} category={"생활"} pt={0} />
                         </Box>
 
                         <Box
                             sx={{
-                                pt: 1,
                                 display: "flex",
                                 textOverflow: "ellipsis",
-                                justifyContent: "space-between"
+                                justifyContent: "space-between",
+                                alignItems: "end",
+                                pt: 0.3
                             }}
                         >
                             <Box sx={{ display: "flex", pr: 1 }}>
@@ -49,7 +51,7 @@ const SocietyPostBox = ({ post }) => {
                                 <CreatedAtText createdAt={post.createdAt} />
                             </Box>
 
-                            <ViewCountsText viewCounts={post.viewCounts} />
+                            <ViewCountsText viewCounts={post.viewCounts} width={SummarizedPostIconResponsiveSize1} height={SummarizedPostIconResponsiveSize1} fontSize={PostResponsiveFontSize2} pl={0} />
                         </Box>
                     </Box>
                 </Box>

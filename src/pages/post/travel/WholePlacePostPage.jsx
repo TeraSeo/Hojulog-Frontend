@@ -1,10 +1,11 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../../components/bar/CategorySidebar";
 import { getPlacePostsByPage } from "../../../service/PostService";
 import { getPaginationRange } from "../../../service/PageService";
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import TravelPostBox from "../../../components/box/post/travel/TravelPostBox";
+import PageTitleText from "../../../components/texts/PageTitleText";
 
 const WholePlacePostPage = () => {
     const [postPageData, setPostPageData] = useState({
@@ -43,9 +44,7 @@ const WholePlacePostPage = () => {
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-                        여행지
-                    </Typography>
+                    <PageTitleText title={"여행지"} />
 
                     {postPageData.posts.map((post, index) => (
                         <Box key={index}>

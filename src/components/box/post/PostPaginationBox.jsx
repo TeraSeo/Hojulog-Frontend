@@ -15,6 +15,9 @@ const PostPaginationBox = ({ totalPage, currentPage, handlePageChange }) => {
             showLastButton
             sx={{
                 ".MuiPaginationItem-root": {
+                    fontSize: { md: "12px", sm: "10px", xs: "8px" }, 
+                    minWidth: { md: "28px", sm: "24px", xs: "20px" }, 
+                    height: { md: "28px", sm: "24px", xs: "20px" },
                     "&.Mui-selected": {
                         backgroundColor: primaryColor,
                         color: "#fff",

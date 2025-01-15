@@ -1,16 +1,17 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
+import { ComponentTextResponsiveFontSize1 } from "../../constant/FontSizeResponsive";
 
-const SummarizedDescriptionText = ({ description }) => {
+const SummarizedDescriptionText = ({ description, pl=1 }) => {
 
   return (
-    <Box sx={{ pl: 1 }}>
+    <Box sx={{ pl: pl }}>
       <Typography
-        variant="caption"
         sx={{
           color: "gray",
           fontStyle: "italic",
-          userSelect: "none"
+          userSelect: "none",
+          fontSize: ComponentTextResponsiveFontSize1
         }}
       >
         {description || ""}

@@ -4,7 +4,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { addPostLike, removePostLike } from "../../service/PostLikeService";
 
-const LikeCountsText = ({ initialLikes=0, initialIsLiked=false, pl = 1, postId }) => {
+const LikeCountsText = ({ initialLikes=0, initialIsLiked=false, pl = 1, postId, width=25, height=25, fontSize=13 }) => {
   const [likeCounts, setLikeCounts] = useState(initialLikes);
   const [isLiked, setIsLiked] = useState(initialIsLiked);
 
@@ -24,11 +24,11 @@ const LikeCountsText = ({ initialLikes=0, initialIsLiked=false, pl = 1, postId }
   return (
     <Box sx={{ display: "flex", alignItems: "center", pl: pl }} onClick={handleToggleLike}>
       {isLiked ? (
-        <FavoriteIcon sx={{ color: "red", pr: 0.3, width: "25px", height: "25px", cursor: "pointer" }} />
+        <FavoriteIcon sx={{ color: "red", pr: 0.3, width: width, height: height, cursor: "pointer" }} />
       ) : (
-        <FavoriteBorderIcon sx={{ color: "red", pr: 0.3, width: "25px", height: "25px", cursor: "pointer" }} />
+        <FavoriteBorderIcon sx={{ color: "red", pr: 0.3, width: width, height: height, cursor: "pointer" }} />
       )}
-      <Typography variant="caption" sx={{ fontSize: "13px" }}>
+      <Typography variant="caption" sx={{ fontSize: fontSize, pl: 0.5 }}>
         {likeCounts}
       </Typography>
     </Box>

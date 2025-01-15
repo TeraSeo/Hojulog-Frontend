@@ -22,12 +22,16 @@ function Header() {
 
     useEffect(() => {
         const checkAuthStatus = async () => {
+            const allowedRoutes = allowedRoutesWitoutVerification;
+            const decodedPath = decodeURIComponent(location.pathname);
+            
             const isValid = await validateToken();
             setIsAuthenticated(isValid);
 
-            const allowedRoutes = allowedRoutesWitoutVerification;
-            if (!isValid && !allowedRoutes.some((route) => matchPath({ path: route, end: true }, location.pathname))) {
-                navigate("/login");
+            if (!isValid) {
+                if (!allowedRoutes.some((route) => matchPath({ path: route, end: true }, decodedPath))) {
+                    navigate("/login");
+                }
             }
         };
 
