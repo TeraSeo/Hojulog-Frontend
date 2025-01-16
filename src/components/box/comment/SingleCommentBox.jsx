@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { Box, Typography, Avatar } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import CreatedAtText from "../../texts/CreatedAtText";
 import { addCommentLike, removeCommentLike } from "../../../service/CommentLikeService";
 import ResponseCommentsBox from "./ResponseCommentsBox";
-import { CommentProfileImageHeightResponiveSize } from "../../../constant/ComponentSizeResponsive";
 import { ComponentTextResponsiveFontSize1 } from "../../../constant/FontSizeResponsive";
 import CommentUsernameText from "../../texts/CommentUsernameText";
 import CommentContentText from "../../texts/CommentContentText";
 import CommentLikeButton from "../../buttons/CommentLikeButton";
+import CommentProfileBox from "./CommentProfileBox";
 
 const SingleCommentBox = ({ comment, setIsResponseCommentOn, setParentCommentId, setParentCommentUsername }) => {
-  const { username, profilePicture } = comment.summarizedUserDto;
+  const { id, username, profilePicture } = comment.summarizedUserDto;
   const { commentId, content, wholeLikedUserLength, isCurrentUserLiked, responseCommentIds, createdAt } = comment;
   const profilePictureUrl = profilePicture || ""; 
 
@@ -46,14 +46,7 @@ const SingleCommentBox = ({ comment, setIsResponseCommentOn, setParentCommentId,
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
-          <Avatar
-            src={profilePictureUrl}
-            alt={username}
-            sx={{
-              width: CommentProfileImageHeightResponiveSize,
-              height: CommentProfileImageHeightResponiveSize,
-            }}
-          />
+          <CommentProfileBox userId={id} profilePictureUrl={profilePictureUrl} username={username} />
           <Box>
             <CommentUsernameText username={username} />
             <CommentContentText content={content} />

@@ -1,9 +1,7 @@
-import { Avatar, Box, Typography, Divider } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Typography, Divider } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { getResponseComment } from "../../../service/CommentService";
-import { CommentProfileImageHeightResponiveSize } from "../../../constant/ComponentSizeResponsive";
-import CommentUsernameText from "../../texts/CommentUsernameText";
-import CommentContentText from "../../texts/CommentContentText";
+import SingleResponseCommentBox from "./SingleResponseCommentBox";
 
 const ResponseCommentsBox = ({ responseCommentIds }) => {
     const [responseComments, setResponseComments] = useState([]);
@@ -18,6 +16,10 @@ const ResponseCommentsBox = ({ responseCommentIds }) => {
         setResponseComments(validComments);
         setIsCommentsVisible(true);
     };
+
+    useEffect(() => {
+        setIsCommentsVisible(false);
+    }, [responseCommentIds]);
 
     return (
         <Box sx={{ mt: 1, marginLeft: "55px" }}>
@@ -39,20 +41,7 @@ const ResponseCommentsBox = ({ responseCommentIds }) => {
                 </Box>
             ) : (
                 responseComments.map((responseComment) => (
-                    <Box
-                        key={responseComment.commentId}
-                        sx={{ display: "flex", alignItems: "center", gap: 1.5, mt: 1.5 }}
-                    >
-                        <Avatar
-                            src={responseComment.summarizedUserDto.profilePicture || ""}
-                            alt={responseComment.summarizedUserDto.username}
-                            sx={{ width: CommentProfileImageHeightResponiveSize, height: CommentProfileImageHeightResponiveSize }}
-                        />
-                        <Box>
-                            <CommentUsernameText username={responseComment.summarizedUserDto.username} />
-                            <CommentContentText content={responseComment.content} />
-                        </Box>
-                    </Box>
+                    <SingleResponseCommentBox responseComment={responseComment} />
                 ))
             )}
         </Box>

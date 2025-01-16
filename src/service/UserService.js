@@ -132,10 +132,9 @@ function validateToken() {
 function getSpecificSummarisedUser(userId) {
     return axios.get("http://localhost:8080/api/user/get/summarised/specific", {
         headers: {
-            "Content-Type": "multipart/form-data"
-        },
-        params: {
-            "userId": userId,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "userId": userId
         }
     })
     .then((response) => {
@@ -150,6 +149,25 @@ function getSpecificSummarisedUser(userId) {
     )
 }
 
+function getSpecificUser(userId) {
+    return axios.get("http://localhost:8080/api/user/get/specific", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "userId": userId
+        },
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return null;
+        }
+    )
+}
+
 function getSpecificOwnUser() {
     const userId = localStorage.getItem('userId');
     const accessToken = localStorage.getItem('accessToken');
@@ -157,7 +175,8 @@ function getSpecificOwnUser() {
 
     return axios.get("http://localhost:8080/api/own/user/get/specific", {
         headers: {
-            "Content-Type": "multipart/form-data",
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
             'accessToken': accessToken,
             'refreshToken': refreshToken,
             "userId": userId
@@ -197,4 +216,4 @@ function updateUserInfo(userFormData, userId) {
     )
 }
 
-export { login, register, sendOtp, checkIsOtpCorrect, validateToken, getSpecificSummarisedUser, getSpecificOwnUser, updateUserInfo };
+export { login, register, sendOtp, checkIsOtpCorrect, validateToken, getSpecificSummarisedUser, getSpecificUser, getSpecificOwnUser, updateUserInfo };

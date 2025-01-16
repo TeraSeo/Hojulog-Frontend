@@ -44,6 +44,7 @@ const PostCommentBox = ({ postId }) => {
       if (isCreated) {
         setComment("");
         fetchComments();
+        setIsResponseCommentOn(false);
       }
     }
   };

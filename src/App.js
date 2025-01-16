@@ -74,6 +74,7 @@ import WholeSchoolPostPage from './pages/post/study/WholeSchoolPostPage';
 import WholeWorkingHolidayPostPage from './pages/post/study/WholeWorkingHolidayPostPage';
 import WholeLanguageStudyPostPage from './pages/post/study/WholeLanguageStudyPostPage';
 import WholeJobReviewPostPage from './pages/post/study/WholeJobReviewPostPage';
+import OtherProfilePage from './pages/profile/OtherProfilePage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -180,6 +181,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="home" element={<HomePage />} />
             <Route path="mypage" element={<MyProfilePage />} />
+            <Route path="otherpage/:userId" element={<OtherProfilePage />} />
             <Route path="/update/mypage/:userId" element={<UpdateProfilePage />} />
 
             <Route path="부동산" element={<WholePropertyPostPage />} />
