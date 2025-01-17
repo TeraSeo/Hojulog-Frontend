@@ -3,7 +3,11 @@ import axios from 'axios';
 function createComment(content, postId) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId') || "";
+
+    if (userId === "") {
+        return false;
+    }
 
     return axios.post("http://localhost:8080/api/comment/create", { content, postId, userId }, {
         headers: {
@@ -28,7 +32,11 @@ function createComment(content, postId) {
 function createResponseComment(content, parentCommentId) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId') || "";
+
+    if (userId === "") {
+        return false;
+    }
 
     return axios.post("http://localhost:8080/api/comment/response/create", { content, parentCommentId, userId }, {
         headers: {
@@ -51,15 +59,16 @@ function createResponseComment(content, parentCommentId) {
 }
 
 function getCommentsByPostId(postId) {
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId') || "";
 
     return axios
     .get("http://localhost:8080/api/comment/get/specific", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'userId': userId
         },
-        params: { postId, userId },
+        params: { postId },
     })
     .then((response) => {
         return response.data;
@@ -71,15 +80,16 @@ function getCommentsByPostId(postId) {
 }
 
 function getResponseComment(responseCommentId) {
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId') || "";
 
     return axios
     .get("http://localhost:8080/api/comment/get/response/comment", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'userId': userId
         },
-        params: { responseCommentId, userId },
+        params: { responseCommentId },
     })
     .then((response) => {
         return response.data;
@@ -90,4 +100,23 @@ function getResponseComment(responseCommentId) {
     });
 }
 
-export { createComment, createResponseComment, getCommentsByPostId, getResponseComment };
+function removeCommentById(commentId) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.delete("http://localhost:8080/api/comment/delete", { params: { commentId }, headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'accessToken': accessToken,
+        'refreshToken': refreshToken,
+    }})
+    .then(response => {
+        return response.data;
+    })
+    .catch(error => {
+        console.log(error);
+        return null;
+    });
+}
+
+export { createComment, createResponseComment, getCommentsByPostId, getResponseComment, removeCommentById };

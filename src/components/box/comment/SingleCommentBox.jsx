@@ -8,8 +8,12 @@ import CommentUsernameText from "../../texts/CommentUsernameText";
 import CommentContentText from "../../texts/CommentContentText";
 import CommentLikeButton from "../../buttons/CommentLikeButton";
 import CommentProfileBox from "./CommentProfileBox";
+import { useNavigate } from "react-router-dom";
+import CommentRemoveButton from "../../buttons/CommentRemoveButton";
 
 const SingleCommentBox = ({ comment, setIsResponseCommentOn, setParentCommentId, setParentCommentUsername }) => {
+  const navigate = useNavigate();
+
   const { id, username, profilePicture } = comment.summarizedUserDto;
   const { commentId, content, wholeLikedUserLength, isCurrentUserLiked, responseCommentIds, createdAt } = comment;
   const profilePictureUrl = profilePicture || ""; 
@@ -20,13 +24,23 @@ const SingleCommentBox = ({ comment, setIsResponseCommentOn, setParentCommentId,
   const handleLikeClicked = async () => {
     if (!isLiked) {
       const wholeLikes = await addCommentLike(commentId);
-      setWholeLikesCount(wholeLikes);
-      setIsLiked(true);
+      if (wholeLikes === null) {
+        navigate("/login");
+      }
+      else {
+        setWholeLikesCount(wholeLikes);
+        setIsLiked(true);
+      }
     }
     else {
       const wholeLikes = await removeCommentLike(commentId);
-      setWholeLikesCount(wholeLikes);
-      setIsLiked(false);
+      if (wholeLikes === null) {
+        navigate("/login");
+      }
+      else {
+        setWholeLikesCount(wholeLikes);
+        setIsLiked(false);
+      }
     }
   }
 
@@ -55,7 +69,10 @@ const SingleCommentBox = ({ comment, setIsResponseCommentOn, setParentCommentId,
           </Box>
         </Box>
         
-        <CommentLikeButton isLiked={isLiked} handleLikeClicked={handleLikeClicked} wholeLikesCount={wholeLikesCount} />
+        <Box sx={{ display: "flex" }}>
+          <CommentLikeButton isLiked={isLiked} handleLikeClicked={handleLikeClicked} wholeLikesCount={wholeLikesCount} />
+          <CommentRemoveButton commentOwnerId={id} commentId={commentId} />
+        </Box>
       </Box>
 
       <Box sx={{ mt: 1, marginLeft: "55px" }} onClick={() => { setResponseComment(); }}>

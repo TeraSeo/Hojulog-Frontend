@@ -4,19 +4,31 @@ import { primaryColor } from "../../constant/Color";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { addPostLike, removePostLike } from "../../service/PostLikeService";
+import { useNavigate } from "react-router-dom";
 
 const PostLikeButton = ({ postId, wholeLikesCount, setWholeLikesCount, isLiked, setIsLiked }) => {
+    const navigate = useNavigate();
 
     const handleLikeClicked = async () => {
       if (!isLiked) {
         const wholeLikes = await addPostLike(postId);
-        setWholeLikesCount(wholeLikes);
-        setIsLiked(true);
+        if (wholeLikes === null) {
+          navigate("/login");
+        }
+        else {
+          setWholeLikesCount(wholeLikes);
+          setIsLiked(true);
+        }
       }
       else {
         const wholeLikes = await removePostLike(postId);
-        setWholeLikesCount(wholeLikes);
-        setIsLiked(false);
+        if (wholeLikes === null) {
+          navigate("/login");
+        }
+        else {
+          setWholeLikesCount(wholeLikes);
+          setIsLiked(false);
+        }
       }
     }
 

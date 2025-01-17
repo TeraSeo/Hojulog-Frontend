@@ -6,8 +6,12 @@ import CreatedAtText from "../../texts/CreatedAtText";
 import { addCommentLike, removeCommentLike } from "../../../service/CommentLikeService";
 import CommentLikeButton from "../../buttons/CommentLikeButton";
 import CommentProfileBox from "./CommentProfileBox";
+import { useNavigate } from "react-router-dom";
+import CommentRemoveButton from "../../buttons/CommentRemoveButton";
 
 const SingleResponseCommentBox = ({ responseComment }) => {
+    const navigate = useNavigate();
+
     const { commentId, content, wholeLikedUserLength, isCurrentUserLiked, createdAt } = responseComment;
     const { id, username, profilePicture } = responseComment.summarizedUserDto;
     const profilePictureUrl = profilePicture || ""; 
@@ -18,13 +22,23 @@ const SingleResponseCommentBox = ({ responseComment }) => {
     const handleLikeClicked = async () => {
         if (!isLiked) {
           const wholeLikes = await addCommentLike(commentId);
-          setWholeLikesCount(wholeLikes);
-          setIsLiked(true);
+          if (wholeLikes === null) {
+            navigate("/login");
+          }
+          else {
+            setWholeLikesCount(wholeLikes);
+            setIsLiked(true);
+          }
         }
         else {
           const wholeLikes = await removeCommentLike(commentId);
-          setWholeLikesCount(wholeLikes);
-          setIsLiked(false);
+          if (wholeLikes === null) {
+            navigate("/login");
+          }
+          else {
+            setWholeLikesCount(wholeLikes);
+            setIsLiked(true);
+          }
         }
       }
 
@@ -52,7 +66,10 @@ const SingleResponseCommentBox = ({ responseComment }) => {
 
             </Box>
 
-            <CommentLikeButton isLiked={isLiked} handleLikeClicked={handleLikeClicked} wholeLikesCount={wholeLikesCount} />
+            <Box sx={{ display: "flex" }}>
+              <CommentLikeButton isLiked={isLiked} handleLikeClicked={handleLikeClicked} wholeLikesCount={wholeLikesCount} />
+              <CommentRemoveButton commentOwnerId={id} commentId={commentId} />
+            </Box>
         </Box>
     );
 }

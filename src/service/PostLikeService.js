@@ -3,7 +3,11 @@ import axios from 'axios';
 function addPostLike(postId) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId') || "";
+
+    if (userId === "") {
+        return null;
+    }
 
     return axios.post("http://localhost:8080/api/post-like/create", { postId, userId }, {
         headers: {
@@ -18,13 +22,18 @@ function addPostLike(postId) {
     })
     .catch(error => {
         console.log(error);
+        return null;
     });
 }
 
 function removePostLike(postId) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId') || "";
+
+    if (userId === "") {
+        return null;
+    }
 
     return axios.delete("http://localhost:8080/api/post-like/delete", { params: { postId, userId }, headers: {
         'Accept': 'application/json',
@@ -37,6 +46,7 @@ function removePostLike(postId) {
     })
     .catch(error => {
         console.log(error);
+        return null;
     });
 }
 

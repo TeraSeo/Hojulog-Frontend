@@ -3,21 +3,33 @@ import { Box, Typography } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { addPostLike, removePostLike } from "../../service/PostLikeService";
+import { useNavigate } from "react-router-dom";
 
 const LikeCountsText = ({ initialLikes=0, initialIsLiked=false, pl = 1, postId, width=25, height=25, fontSize=13 }) => {
+  const navigate = useNavigate();
   const [likeCounts, setLikeCounts] = useState(initialLikes);
   const [isLiked, setIsLiked] = useState(initialIsLiked);
 
   const handleToggleLike = async () => {
     if (isLiked) {
       const likeCounts = await removePostLike(postId);
-      setIsLiked(false);
-      setLikeCounts(likeCounts);
+      if (likeCounts === null) {
+        navigate("/login");
+      }
+      else {
+        setIsLiked(false);
+        setLikeCounts(likeCounts);
+      }
     }
     else {
       const likeCounts = await addPostLike(postId);
-      setIsLiked(true);
-      setLikeCounts(likeCounts);
+      if (likeCounts === null) {
+        navigate("/login");
+      }
+      else {
+        setIsLiked(true);
+        setLikeCounts(likeCounts);
+      }
     }
   };
 

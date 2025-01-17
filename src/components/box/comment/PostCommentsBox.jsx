@@ -5,8 +5,10 @@ import { createComment, createResponseComment, getCommentsByPostId } from "../..
 import SingleCommentBox from "./SingleCommentBox";
 import AddResponseCommentBox from "./AddResponseCommentBox";
 import { TitleResponsiveFontSize1 } from "../../../constant/FontSizeResponsive";
+import { useNavigate } from "react-router-dom";
 
 const PostCommentBox = ({ postId }) => {
+  const navigate = useNavigate();
   const [commentsData, setCommentsData] = useState([]);
   const [comment, setComment] = useState("");
   const [isResponseCommentOn, setIsResponseCommentOn] = useState(false);
@@ -35,6 +37,9 @@ const PostCommentBox = ({ postId }) => {
         setComment("");
         fetchComments();
       }
+      else {
+        navigate("/login");
+      }
     }
   };
 
@@ -45,6 +50,9 @@ const PostCommentBox = ({ postId }) => {
         setComment("");
         fetchComments();
         setIsResponseCommentOn(false);
+      }
+      else {
+        navigate("/login");
       }
     }
   };
