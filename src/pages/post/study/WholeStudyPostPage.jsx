@@ -1,7 +1,6 @@
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { Box, Divider, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../../components/bar/CategorySidebar";
-import { getPaginationRange } from "../../../service/PageService";
 import StudyPostBox from "../../../components/box/post/study/StudyPostBox";
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import { getStudyPostsByPage } from "../../../service/PostService";
@@ -30,11 +29,9 @@ function WholeStudyPostPage() {
             .catch((error) => console.error("Error fetching posts:", error));
     };
 
-    const handlePageChange = (event, value) => {
+    const handlePageChange = (value) => {
         fetchPageData(value);
     };
-
-    const [startPage, endPage] = getPaginationRange(studyPageData.currentPage, studyPageData.pageSize);
 
     return (
         <Box sx={{ py: "10px", px: {md: "120px", sm: "40px", xs: "0px"} }}>
@@ -57,7 +54,7 @@ function WholeStudyPostPage() {
                         </React.Fragment>
                     ))}
                     
-                    <PostPaginationBox totalPage={endPage - startPage + 1} currentPage={studyPageData.currentPage} handlePageChange={handlePageChange} />
+                    <PostPaginationBox totalPage={studyPageData.pageSize} currentPage={studyPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>
             </Grid>
         </Box>

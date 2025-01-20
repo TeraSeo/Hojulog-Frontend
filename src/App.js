@@ -75,6 +75,8 @@ import WholeWorkingHolidayPostPage from './pages/post/study/WholeWorkingHolidayP
 import WholeLanguageStudyPostPage from './pages/post/study/WholeLanguageStudyPostPage';
 import WholeJobReviewPostPage from './pages/post/study/WholeJobReviewPostPage';
 import OtherProfilePage from './pages/profile/OtherProfilePage';
+import OthersUploadedPostPage from './pages/post/OthersUploadedPostPage';
+import CustomerCenterPage from './pages/customer_center/CustomerCenterPage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -181,8 +183,9 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="home" element={<HomePage />} />
             <Route path="mypage" element={<MyProfilePage />} />
+            <Route path="customer/center" element={<CustomerCenterPage />} />
             <Route path="otherpage/:userId" element={<OtherProfilePage />} />
-            <Route path="/update/mypage/:userId" element={<UpdateProfilePage />} />
+            <Route path="update/mypage/:userId" element={<UpdateProfilePage />} />
 
             <Route path="부동산" element={<WholePropertyPostPage />} />
             <Route path="구인구직" element={<WholeJobPostPage />} />
@@ -219,6 +222,7 @@ function App() {
 
             <Route path="launch" element={<SelectCategoryPage />} />
             <Route path="own/posts" element={<UploadedPostPage />} />
+            <Route path="others/posts/:userId/:username" element={<OthersUploadedPostPage />} />
             <Route path="liked/posts" element={<LikedPostPage />} />
 
             {generateDynamicRoutes()}

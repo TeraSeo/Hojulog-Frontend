@@ -4,7 +4,6 @@ import CategorySidebar from "../../../components/bar/CategorySidebar";
 import { getJobPostsByPage } from "../../../service/PostService";
 import JobPostBox from "../../../components/box/post/job/JobPostBox";
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
-import { getPaginationRange } from "../../../service/PageService";
 import PageTitleText from "../../../components/texts/PageTitleText";
 
 function WholeJobPostPage() {
@@ -30,11 +29,9 @@ function WholeJobPostPage() {
             .catch((error) => console.error("Error fetching posts:", error));
     };
 
-    const handlePageChange = (event, value) => {
+    const handlePageChange = (value) => {
         fetchPageData(value);
     };
-
-    const [startPage, endPage] = getPaginationRange(jobPageData.currentPage, jobPageData.pageSize);
 
     return (
         <Box sx={{ px: {md: "120px", sm: "40px", xs: "0px"} }}>
@@ -52,7 +49,7 @@ function WholeJobPostPage() {
                         </Box>
                     ))}
 
-                    <PostPaginationBox totalPage={endPage - startPage + 1} currentPage={jobPageData.currentPage} handlePageChange={handlePageChange} />
+                    <PostPaginationBox totalPage={jobPageData.pageSize} currentPage={jobPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>
             </Grid>
         </Box>

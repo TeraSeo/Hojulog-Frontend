@@ -1,12 +1,14 @@
 import { Box, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../components/bar/CategorySidebar";
-import { getWholeOwnPosts } from "../../service/PostService";
+import { getWholeOthersPosts } from "../../service/PostService";
 import PostPaginationBox from "../../components/box/post/PostPaginationBox";
 import CommonOwnSummarizedPostBoxByPost from "../../components/box/post/CommonOwnSummarizedPostBoxByPost";
+import { useParams } from "react-router-dom";
 
-function UploadedPostPage() {
-    const [uploadedPostPageData, setUploadaedPostPageData] = useState({
+function OthersUploadedPostPage() {
+    const { userId, username } = useParams();
+    const [othersUploadedPostPageData, setOthersUploadaedPostPageData] = useState({
         posts: [],
         pageSize: 1,
         currentPage: 1
@@ -17,9 +19,9 @@ function UploadedPostPage() {
     }, []);
 
     const fetchPageData = (page) => {
-        getWholeOwnPosts(page)
+        getWholeOthersPosts(page, userId)
             .then((data) => {
-                setUploadaedPostPageData({
+                setOthersUploadaedPostPageData({
                     posts: data.posts,
                     pageSize: data.pageSize,
                     currentPage: page
@@ -41,18 +43,18 @@ function UploadedPostPage() {
 
                 <Grid item xs={12} md={9}>
                     <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-                        내가 올린 게시물
+                        {username}님이 올린 게시물
                     </Typography>
 
-                    {uploadedPostPageData.posts.map((post, index) => (
+                    {othersUploadedPostPageData.posts.map((post, index) => (
                         <CommonOwnSummarizedPostBoxByPost post={post} />
                     ))}
                     
-                    <PostPaginationBox totalPage={uploadedPostPageData.pageSize} currentPage={uploadedPostPageData.currentPage} handlePageChange={handlePageChange} />
+                    <PostPaginationBox totalPage={othersUploadedPostPageData.pageSize} currentPage={othersUploadedPostPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>
             </Grid>
         </Box>
     );
 }
 
-export default UploadedPostPage;
+export default OthersUploadedPostPage;

@@ -71,7 +71,7 @@ const OtherProfilePage = () => {
                     </Box>
 
                     <Box sx={{ my: 3 }}>
-                        <HomeContainerBox title={userData.username + "님이 올림 게시물"} onDetailClicked={() => { navigate("/own/posts") }}>
+                        <HomeContainerBox title={userData.username + "님이 올린 게시물"} onDetailClicked={() => { navigate(`/others/posts/${userId}/${userData.username}`) }}>
                             {userData.uploadedPostIds.map((uploadedPostId, index) => (
                                 <Box key={index}>
                                     <CommonOwnSummarizedPostBox postId={uploadedPostId} />

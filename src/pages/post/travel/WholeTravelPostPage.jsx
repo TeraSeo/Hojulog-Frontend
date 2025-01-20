@@ -1,7 +1,6 @@
 import { Box, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../../components/bar/CategorySidebar";
-import { getPaginationRange } from "../../../service/PageService";
 import TravelPostBox from "../../../components/box/post/travel/TravelPostBox";
 import { getTravelPostsByPage } from "../../../service/PostService";
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
@@ -30,11 +29,9 @@ function WholeTravelPostPage() {
             .catch((error) => console.error("Error fetching posts:", error));
     };
 
-    const handlePageChange = (event, value) => {
+    const handlePageChange = (value) => {
         fetchPageData(value);
     };
-
-    const [startPage, endPage] = getPaginationRange(travelPageData.currentPage, travelPageData.pageSize);
 
     return (
         <Box sx={{ py: "10px", px: {md: "120px", sm: "40px", xs: "0px"} }}>
@@ -52,7 +49,7 @@ function WholeTravelPostPage() {
                         </Box>
                     ))}
 
-                    <PostPaginationBox totalPage={endPage - startPage + 1} currentPage={travelPageData.currentPage} handlePageChange={handlePageChange} />
+                    <PostPaginationBox totalPage={travelPageData.pageSize} currentPage={travelPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>
             </Grid>
         </Box>

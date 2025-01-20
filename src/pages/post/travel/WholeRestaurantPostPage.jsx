@@ -2,7 +2,6 @@ import { Box, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../../components/bar/CategorySidebar";
 import { getRestaurantPostsByPage } from "../../../service/PostService";
-import { getPaginationRange } from "../../../service/PageService";
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import TravelPostBox from "../../../components/box/post/travel/TravelPostBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
@@ -30,11 +29,9 @@ const WholeRestaurantPostPage = () => {
             .catch((error) => console.error("Error fetching posts:", error));
     };
 
-    const handlePageChange = (event, value) => {
+    const handlePageChange = (value) => {
         fetchPageData(value);
     };
-
-    const [startPage, endPage] = getPaginationRange(postPageData.currentPage, postPageData.pageSize);
 
     return (
         <Box sx={{ py: "10px", px: { md: "120px", sm: "40px", xs: "0px" } }}>
@@ -52,7 +49,7 @@ const WholeRestaurantPostPage = () => {
                         </Box>
                     ))}
                     
-                    <PostPaginationBox totalPage={endPage - startPage + 1} currentPage={postPageData.currentPage} handlePageChange={handlePageChange} />
+                    <PostPaginationBox totalPage={postPageData.pageSize} currentPage={postPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>
             </Grid>
         </Box>
