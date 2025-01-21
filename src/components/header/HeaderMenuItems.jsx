@@ -74,19 +74,6 @@ function HeaderMenuItems({ isAuthenticated, handleLogout }) {
                 <>
                     <Button
                         variant="text"
-                        startIcon={<HeadsetMicIcon />}
-                        sx={{
-                            color: "#FFFFFF",
-                            fontSize: "14px",
-                            fontWeight: "bold",
-                            textTransform: "none",
-                        }}
-                        onClick={() => navigate("/customer/center")}
-                    >
-                        고객센터
-                    </Button>
-                    <Button
-                        variant="text"
                         startIcon={<PersonAddIcon />}
                         sx={{
                             color: "#FFFFFF",

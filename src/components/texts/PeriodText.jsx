@@ -10,7 +10,7 @@ const PeriodText = ({ period }) => {
             fontSize: SubTitleResponsiveFontSize1,
             textAlign: "start",
         }}>
-        {period || ""}/
+          { (period === null || period === "") ? "" : period + "/" }
     </Typography>
   );
 };

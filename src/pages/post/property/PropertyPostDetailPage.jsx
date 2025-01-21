@@ -45,7 +45,7 @@ const PropertyPostDetailPage = () => {
         </Grid>
 
         <Grid item xs={12} md={9}>
-            <PropertyDetailBox imageUrls={propertyPostData.imageUrls} description={propertyPostData.description} price={propertyPostData.price} period={propertyPostData.period} roomCount={propertyPostData.roomCount} bathroomType={propertyPostData.bathroomType} isParkable={propertyPostData.isParkable} title={propertyPostData.title} subCategory={propertyPostData.subCategory} postId={propertyPostData.postId} contact={propertyPostData.contact} email={propertyPostData.email} isBillIncluded={propertyPostData.isBillIncluded} availableTime={propertyPostData.availableTime} createdAt={propertyPostData.createdAt} />
+            <PropertyDetailBox userId={propertyPostData.userId} imageUrls={propertyPostData.imageUrls} description={propertyPostData.description} price={propertyPostData.price} period={propertyPostData.period} roomCount={propertyPostData.roomCount} bathroomType={propertyPostData.bathroomType} isParkable={propertyPostData.isParkable} title={propertyPostData.title} subCategory={propertyPostData.subCategory} postId={propertyPostData.postId} contact={propertyPostData.contact} email={propertyPostData.email} isBillIncluded={propertyPostData.isBillIncluded} availableTime={propertyPostData.availableTime} createdAt={propertyPostData.createdAt} />
         </Grid>
       </Grid>
 

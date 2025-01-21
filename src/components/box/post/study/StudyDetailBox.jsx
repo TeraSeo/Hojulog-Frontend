@@ -5,15 +5,19 @@ import PostRateBox from '../PostRateBox';
 import SchoolMajorText from '../../../texts/SchoolMajorText';
 import CreatedAtText from '../../../texts/CreatedAtText';
 import BlogContentBox from '../BlogContentBox';
+import PostProfileBox from '../PostProfileBox';
 
 
-const StudyDetailBox = ({ title, subCategory, postId, school, major, rate, createdAt, blogContents }) => {
+const StudyDetailBox = ({ userId, title, subCategory, postId, school, major, rate, createdAt, blogContents }) => {
   return (
     <Box>
       <Box>
         <Box sx={{ pl: 1 }}>
             <DetailedPostTitleText subCategory={subCategory} title={title} />
+
             <PostRateBox rate={rate} px={0} />
+
+            <PostProfileBox userId={userId} />
 
             <SchoolMajorText school={school} major={major} />
 

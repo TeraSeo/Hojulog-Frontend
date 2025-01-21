@@ -4,8 +4,9 @@ import DetailedPostTitleText from '../../../texts/DetailedPostTitleText';
 import PostRateBox from '../PostRateBox';
 import CreatedAtText from '../../../texts/CreatedAtText';
 import BlogContentBox from '../BlogContentBox';
+import PostProfileBox from '../PostProfileBox';
 
-const TravelDetailBox = ({ title, subCategory, rate, createdDate, blogContents }) => {
+const TravelDetailBox = ({ userId, title, subCategory, rate, createdDate, blogContents }) => {
   return (
     <Box>
       <Box>
@@ -13,6 +14,8 @@ const TravelDetailBox = ({ title, subCategory, rate, createdDate, blogContents }
             <DetailedPostTitleText subCategory={subCategory} title={title} />
 
             <PostRateBox rate={rate} px={0} />
+
+            <PostProfileBox userId={userId} />
             
             <Divider sx={{ my: { "md": 2.5, "sm": 2, "xs": 1.5} }} />
             

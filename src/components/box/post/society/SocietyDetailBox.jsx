@@ -5,8 +5,9 @@ import ContactText from '../../../texts/ContactText';
 import DetailedPostTitleText from '../../../texts/DetailedPostTitleText';
 import CreatedAtText from '../../../texts/CreatedAtText';
 import PostDescriptionText from '../../../texts/PostDescriptionText';
+import PostProfileBox from '../PostProfileBox';
 
-const SoceityDetailBox = ({ imageUrls, description, title, subCategory, postId, contact, email, createdAt }) => {
+const SoceityDetailBox = ({ userId, imageUrls, description, title, subCategory, contact, email, createdAt }) => {
   return (
     <Box>
       <ScrollableImageGallery imageUrls={imageUrls} />
@@ -15,6 +16,8 @@ const SoceityDetailBox = ({ imageUrls, description, title, subCategory, postId, 
 
         <Box sx={{ pl: 1 }}>
             <DetailedPostTitleText subCategory={subCategory} title={title} />
+
+            <PostProfileBox userId={userId} />
             
             <ContactText contact={contact} email={email} />
 

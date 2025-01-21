@@ -71,11 +71,7 @@ function Header() {
                 <Grid item xs={8} sm={8} md={4}>
                     <AppTitle />
                 </Grid>
-
-                {/* <Grid item md={8} sx={{ display: { xs: "none", md: "flex" } }}>
-                    <HeaderNavigationMenuItems />
-                </Grid> */}
-
+                
                 <Grid item xs={4} sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <IconButton onClick={toggleDrawer(true)}>
                         <MenuIcon />

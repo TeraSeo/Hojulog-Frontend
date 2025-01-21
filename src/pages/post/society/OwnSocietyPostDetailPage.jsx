@@ -47,7 +47,7 @@ const OwnSocietyPostDetailPage = () => {
         </Grid>
 
         <Grid item xs={12} md={9}>
-            <SoceityDetailBox imageUrls={societyPostData.imageUrls} description={societyPostData.description} title={societyPostData.title} subCategory={societyPostData.subCategory} postId={societyPostData.postId} contact={societyPostData.contact} email={societyPostData.email} createdAt={societyPostData.createdAt} />
+            <SoceityDetailBox userId={societyPostData.userId} imageUrls={societyPostData.imageUrls} description={societyPostData.description} title={societyPostData.title} subCategory={societyPostData.subCategory} postId={societyPostData.postId} contact={societyPostData.contact} email={societyPostData.email} createdAt={societyPostData.createdAt} />
         </Grid>
       </Grid>
 

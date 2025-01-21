@@ -149,6 +149,25 @@ function getSpecificSummarisedUser(userId) {
     )
 }
 
+function getSpecificSummarisedUserProfile(userId) {
+    return axios.get("http://localhost:8080/api/user/get/summarized/specific/profile", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "userId": userId
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
 function getSpecificUser(userId) {
     return axios.get("http://localhost:8080/api/user/get/specific", {
         headers: {
@@ -216,4 +235,4 @@ function updateUserInfo(userFormData, userId) {
     )
 }
 
-export { login, register, sendOtp, checkIsOtpCorrect, validateToken, getSpecificSummarisedUser, getSpecificUser, getSpecificOwnUser, updateUserInfo };
+export { login, register, sendOtp, checkIsOtpCorrect, validateToken, getSpecificSummarisedUser, getSpecificSummarisedUserProfile, getSpecificUser, getSpecificOwnUser, updateUserInfo };

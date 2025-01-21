@@ -10,8 +10,9 @@ import PropertyDetailText from '../../../texts/PropertyDetailText';
 import DetailedPostTitleText from '../../../texts/DetailedPostTitleText';
 import CreatedAtText from '../../../texts/CreatedAtText';
 import PostDescriptionText from '../../../texts/PostDescriptionText';
+import PostProfileBox from '../PostProfileBox';
 
-const PropertyDetailBox = ({ imageUrls, description, price, period, roomCount, bathroomType, isParkable, title, subCategory, postId, contact, email, isBillIncluded, availableTime, createdAt }) => {
+const PropertyDetailBox = ({ userId, imageUrls, description, price, period, roomCount, bathroomType, isParkable, title, subCategory, contact, email, isBillIncluded, availableTime, createdAt }) => {
   return (
     <Box>
       <ScrollableImageGallery imageUrls={imageUrls} />
@@ -20,6 +21,8 @@ const PropertyDetailBox = ({ imageUrls, description, price, period, roomCount, b
 
         <Box sx={{ pl: 1 }}>
             <DetailedPostTitleText subCategory={subCategory} title={title} />
+
+            <PostProfileBox userId={userId} />
             
             <ContactText contact={contact} email={email} />
 
