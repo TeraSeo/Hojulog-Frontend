@@ -24,4 +24,27 @@ function postInquiry(inquiryData) {
     });    
 }
 
-export { postInquiry };
+function getInquiryById(inquiryId) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios
+    .get("http://localhost:8080/api/inquiry/get/specific", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        },
+        params: { inquiryId },
+    })
+    .then((response) => {
+        return response.data;
+    })
+    .catch((error) => {
+        console.error("Error fetching comments:", error);
+        return []; 
+    });
+}
+
+export { postInquiry, getInquiryById };

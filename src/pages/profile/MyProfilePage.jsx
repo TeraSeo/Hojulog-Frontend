@@ -10,6 +10,8 @@ import { getSpecificOwnUser } from "../../service/UserService";
 import CommonSummarizedPostBox from "../../components/box/post/CommonSummarizedPostBox";
 import CommonOwnSummarizedPostBox from "../../components/box/post/CommonOwnSummarizedPostBox";
 import { useNavigate } from "react-router-dom";
+import AdminButton from "../../components/buttons/AdminButton";
+import CommonSummarizedInquiryBox from "../../components/box/customer_center/CommonSummarizedInquiryBox";
 
 const MyProfilePage = () => {
     const navigate = useNavigate();
@@ -35,7 +37,6 @@ const MyProfilePage = () => {
                 <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
                     <CategorySidebar />
                 </Grid>
-
                 <Grid item xs={12} md={9}>
                     <Box
                         sx={{
@@ -73,7 +74,7 @@ const MyProfilePage = () => {
 
                         <UpdateProfileButton userId={ userData.id } />
                     </Box>
-
+                    
                     <Box sx={{ my: 3 }}>
                         <HomeContainerBox title="내가 올린 게시물" onDetailClicked={() => { navigate("/own/posts") }}>
                             {userData.uploadedPostIds.map((uploadedPostId, index) => (
@@ -86,7 +87,7 @@ const MyProfilePage = () => {
 
                     <Box sx={{ mt: 3 }}>
                         <HomeContainerBox title="내가 좋아요 한 게시물" onDetailClicked={() => { navigate("/liked/posts") }}>
-                        {userData.likedPostIds.map((likedPostId, index) => (
+                            {userData.likedPostIds.map((likedPostId, index) => (
                                 <Box key={index}>
                                     <CommonSummarizedPostBox postId={likedPostId} />
                                 </Box>
@@ -96,7 +97,11 @@ const MyProfilePage = () => {
 
                     <Box sx={{ mt: 3 }}>
                         <HomeContainerBox title="고객센터 문의 내역" onDetailClicked={() => {}}>
-                            { userData.requestedIds.length }
+                            {userData.requestedIds.map((requestId, index) => (
+                                <Box key={index}>
+                                    <CommonSummarizedInquiryBox inquiryId={requestId} />
+                                </Box>
+                            ))}
                         </HomeContainerBox>
                     </Box>
 
@@ -108,9 +113,14 @@ const MyProfilePage = () => {
                             justifyContent: "end"
                         }}
                     >
-                        <RemoveAccountButton />
-                        
+                    </Box>
+
+                    <Box sx={{ display: "flex", justifyContent: "end", gap: 1 }}>
+                        {
+                            userData.role === "ADMIN" && <AdminButton />
+                        }
                         <LogoutButton />
+                        <RemoveAccountButton />
                     </Box>
                 </Grid>
             </Grid>

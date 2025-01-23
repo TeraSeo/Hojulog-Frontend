@@ -9,6 +9,7 @@ import { validateToken } from "../../service/UserService";
 import { matchPath, useLocation, useNavigate } from "react-router-dom";
 import { secondaryColor } from "../../constant/Color";
 import { allowedRoutesWitoutVerification } from "../../constant/Routes";
+import { validateIsAdmin } from "../../service/AdminService";
 
 function Header() {
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -31,6 +32,14 @@ function Header() {
             if (!isValid) {
                 if (!allowedRoutes.some((route) => matchPath({ path: route, end: true }, decodedPath))) {
                     navigate("/login");
+                }
+            }
+            else {
+                if (decodedPath.includes("admin")) {
+                    const isAdmin = await validateIsAdmin();
+                    if (!isAdmin) {
+                        navigate("/");
+                    }
                 }
             }
         };

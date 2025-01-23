@@ -77,6 +77,7 @@ import WholeJobReviewPostPage from './pages/post/study/WholeJobReviewPostPage';
 import OtherProfilePage from './pages/profile/OtherProfilePage';
 import OthersUploadedPostPage from './pages/post/OthersUploadedPostPage';
 import CustomerCenterPage from './pages/customer_center/CustomerCenterPage';
+import AdminPage from './pages/admin/AdminPage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -183,6 +184,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="home" element={<HomePage />} />
             <Route path="mypage" element={<MyProfilePage />} />
+            <Route path="admin" element={<AdminPage />} />
             <Route path="customer/center" element={<CustomerCenterPage />} />
             <Route path="otherpage/:userId" element={<OtherProfilePage />} />
             <Route path="update/mypage/:userId" element={<UpdateProfilePage />} />
