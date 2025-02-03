@@ -22,12 +22,6 @@ const TitleField = ({ value, error, onChange }) => {
         onChange={handleChange}
         placeholder="제품의 제목을 입력하세요"
         error={!!error}
-        helperText={
-          error ||
-          `${value.length}/${MAX_LENGTH} ${
-            value.length >= MAX_LENGTH ? "(최대 길이에 도달했습니다)" : ""
-          }`
-        }
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -36,6 +30,11 @@ const TitleField = ({ value, error, onChange }) => {
           ),
         }}
       />
+      {error && (
+        <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+          {error}
+        </Typography>
+      )}
     </Grid>
   );
 };

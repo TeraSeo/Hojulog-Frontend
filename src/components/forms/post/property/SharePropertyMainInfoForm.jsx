@@ -11,12 +11,14 @@ import SuburbField from "../../../textfields/SuburbField";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import LocationField from "../../../textfields/LocationField";
 import LocationDialog from "../../../dialog/LocationDialog";
-import { availableTimeRequiredError, contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, locationFormatError, locationRequiredError, periodRequiredError, priceFormatError, priceRequiredError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
+import { availableTimeRequiredError, contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, keywordOverError, locationFormatError, locationRequiredError, periodRequiredError, priceFormatError, priceRequiredError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
 import RoomCountField from "../../../textfields/RoomCountField";
 import BathroomTypeField from "../../../textfields/BathroomTypeField";
 import ParkableField from "../../../textfields/ParkableField";
 import BillIncludedField from "../../../textfields/BillIncludedField";
-import EmbeddedMap from "../../../box/post/EmbeddedMap";
+import PropertyKeyWordField from "../../../textfields/PropertyKeyWordField";
+import PostVisibleField from "../../../textfields/PostVisibleField";
+import CommentAvailabilityField from "../../../textfields/CommentAvailabilityField";
 
 const SharePropertyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
@@ -32,7 +34,10 @@ const SharePropertyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     roomCount: "Studio+",
     bathroomType: "개인",
     isParkable: false,
-    isBillIncluded: false
+    isBillIncluded: false,
+    selectedKeywords: [],
+    isPublic: true,
+    isCommentAllowed: true
   });
 
   const [errors, setErrors] = useState({});
@@ -63,7 +68,7 @@ const SharePropertyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, period, price, availableTime, suburb, location } = formValues;
+    const { title, description, contact, email, period, price, availableTime, suburb, location, selectedKeywords } = formValues;
 
     if (!title?.trim()) newErrors.title = titleRequiredError;
     if (!description?.trim()) newErrors.description = descriptionRequiredError;
@@ -103,6 +108,10 @@ const SharePropertyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
       newErrors.location = locationRequiredError;
     } else if (!locationPattern.test(location)) {
       newErrors.location = locationFormatError;
+    }
+
+    if (selectedKeywords.length > 12) {
+      newErrors.keyword = keywordOverError;
     }
 
     setErrors(newErrors);
@@ -193,12 +202,28 @@ const SharePropertyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         />
         <LocationField
           location={formValues.location}
-          errors={errors}
+          errors={errors.location}
           onLocationChange={(value) => {
             handleInputChange("location", value);
             validateLocation(value);
           }}
           onMapOpen={() => setMapOpen(true)}
+        />
+
+        <PostVisibleField
+            value={formValues.isPublic} 
+            onChange={(value) => handleInputChange("isPublic", value)} 
+          />
+
+        <CommentAvailabilityField
+          value={formValues.isCommentAllowed} 
+          onChange={(value) => handleInputChange("isCommentAllowed", value)} 
+        />
+
+        <PropertyKeyWordField
+            selectedKeywords={formValues.selectedKeywords} 
+            error={errors.keyword}
+            onChange={(value) => handleInputChange("selectedKeywords", value)} 
         />
       </Grid>
 

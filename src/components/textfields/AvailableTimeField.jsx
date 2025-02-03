@@ -13,8 +13,13 @@ const AvailableTimeField = ({ value, error, onChange }) => {
         onChange={(e) => onChange(e.target.value)}
         placeholder="입주시기를 입력하세요 (예: 2024-01-01)"
         error={!!error}
-        helperText={error || ""}
       />
+
+      {error && (
+              <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+                {error}
+              </Typography>
+            )}
     </Grid>
   );
 };

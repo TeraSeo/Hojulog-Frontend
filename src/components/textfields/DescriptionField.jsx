@@ -24,12 +24,6 @@ const DescriptionField = ({ value, error, onChange }) => {
         onChange={handleChange}
         placeholder="제품에 대해 자세히 설명해주세요"
         error={!!error}
-        helperText={
-          error ||
-          `${value.length}/${MAX_LENGTH} ${
-            value.length >= MAX_LENGTH ? "(최대 길이에 도달했습니다)" : ""
-          }`
-        }
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -38,6 +32,12 @@ const DescriptionField = ({ value, error, onChange }) => {
           ),
         }}
       />
+
+      {error && (
+              <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+                {error}
+              </Typography>
+            )}
     </Grid>
   );
 };

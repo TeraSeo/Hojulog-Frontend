@@ -6,7 +6,10 @@ import ContactField from "../../../textfields/ContactField";
 import EmailField from "../../../textfields/EmailField";
 import SuburbField from "../../../textfields/SuburbField";
 import { isValidPhoneNumber } from "libphonenumber-js";
-import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
+import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, keywordOverError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
+import PostVisibleField from "../../../textfields/PostVisibleField";
+import SocietyKeyWordField from "../../../textfields/SocietyKeyWordField";
+import CommentAvailabilityField from "../../../textfields/CommentAvailabilityField";
 
 const HobbyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
@@ -14,14 +17,17 @@ const HobbyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     description: "",
     contact: "",
     email: "",
-    suburb: ""
+    suburb: "",
+    selectedKeywords: [],
+    isPublic: true,
+    isCommentAllowed: true
   });
 
   const [errors, setErrors] = useState({});
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, suburb } = formValues;
+    const { title, description, contact, email, suburb, selectedKeywords } = formValues;
 
     if (!title?.trim()) newErrors.title = titleRequiredError;
     if (!description?.trim()) newErrors.description = descriptionRequiredError;
@@ -41,6 +47,10 @@ const HobbyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
 
     if (!suburb?.trim()) {
       newErrors.suburb = suburbRequiredError;
+    }
+
+    if (selectedKeywords.length > 12) {
+      newErrors.keyword = keywordOverError;
     }
 
     setErrors(newErrors);
@@ -93,6 +103,22 @@ const HobbyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           value={formValues.suburb}
           error={errors.suburb}
           onChange={(value) => handleInputChange("suburb", value)}
+        />
+
+        <PostVisibleField
+            value={formValues.isPublic} 
+            onChange={(value) => handleInputChange("isPublic", value)} 
+          />
+
+        <CommentAvailabilityField
+          value={formValues.isCommentAllowed} 
+          onChange={(value) => handleInputChange("isCommentAllowed", value)} 
+        />
+
+        <SocietyKeyWordField
+            selectedKeywords={formValues.selectedKeywords} 
+            error={errors.keyword}
+            onChange={(value) => handleInputChange("selectedKeywords", value)} 
         />
       </Grid>
     </Paper>

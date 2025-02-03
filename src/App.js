@@ -78,6 +78,7 @@ import OtherProfilePage from './pages/profile/OtherProfilePage';
 import OthersUploadedPostPage from './pages/post/OthersUploadedPostPage';
 import CustomerCenterPage from './pages/customer_center/CustomerCenterPage';
 import AdminPage from './pages/admin/AdminPage';
+import InquiriesPage from './pages/customer_center/InquiriesPage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -226,6 +227,7 @@ function App() {
             <Route path="own/posts" element={<UploadedPostPage />} />
             <Route path="others/posts/:userId/:username" element={<OthersUploadedPostPage />} />
             <Route path="liked/posts" element={<LikedPostPage />} />
+            <Route path="inquiries" element={<InquiriesPage />} />
 
             {generateDynamicRoutes()}
 

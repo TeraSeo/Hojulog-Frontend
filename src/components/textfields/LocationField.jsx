@@ -3,7 +3,7 @@ import { Typography, TextField, Button, Grid } from "@mui/material";
 
 const LocationField = ({
   location,
-  errors,
+  error,
   onLocationChange,
   onMapOpen,
 }) => {
@@ -19,11 +19,15 @@ const LocationField = ({
         required
         value={location}
         onChange={(e) => onLocationChange(e.target.value)}
-        error={!!errors.location}
-        helperText={errors.location}
-        sx={{ mb: 3 }}
+        error={!!error}
       />
-      <Button variant="outlined" onClick={onMapOpen} sx={{ mb: 3 }}>
+      {error && (
+              <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+                {error}
+              </Typography>
+            )}
+
+      <Button variant="outlined" onClick={onMapOpen} sx={{ mt: 2 }}>
         주소 선택
       </Button>
     </Grid>

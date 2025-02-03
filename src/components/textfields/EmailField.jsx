@@ -18,7 +18,6 @@ const EmailField = ({ value, error, onChange }) => {
         onChange={handleChange}
         placeholder="이메일 주소를 입력하세요"
         error={!!error}
-        helperText={error || ""}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -27,6 +26,11 @@ const EmailField = ({ value, error, onChange }) => {
           ),
         }}
       />
+      {error && (
+              <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+                {error}
+              </Typography>
+            )}
     </Grid>
   );
 };

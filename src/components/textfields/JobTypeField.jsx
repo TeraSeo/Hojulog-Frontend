@@ -18,7 +18,12 @@ const JobTypeField = ({ value, error, onChange }) => {
           <MenuItem value="풀타임">풀타임</MenuItem>
         </Select>
       </FormControl>
-      {error && <Typography color="error">{error}</Typography>}
+      {error && (
+        <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+          {error}
+        </Typography>
+      )}
+      
     </Grid>
   );
 };

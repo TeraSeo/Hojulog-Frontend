@@ -8,8 +8,10 @@ import SuburbField from "../../../textfields/SuburbField";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import LocationField from "../../../textfields/LocationField";
 import LocationDialog from "../../../dialog/LocationDialog";
-import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, locationFormatError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
-import EmbeddedMap from "../../../box/post/EmbeddedMap";
+import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, keywordOverError, locationFormatError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
+import PostVisibleField from "../../../textfields/PostVisibleField";
+import JobKeyWordField from "../../../textfields/JobKeyWordField";
+import CommentAvailabilityField from "../../../textfields/CommentAvailabilityField";
 
 const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
@@ -18,7 +20,10 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     contact: "",
     email: "",
     suburb: "",
-    location: ""
+    location: "",
+    selectedKeywords: [],
+    isPublic: true,
+    isCommentAllowed: true
   });
 
   const [errors, setErrors] = useState({});
@@ -50,7 +55,7 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, suburb, location } = formValues;
+    const { title, description, contact, email, suburb, location, selectedKeywords } = formValues;
 
     if (!title?.trim()) newErrors.title = titleRequiredError;
     if (!description?.trim()) newErrors.description = descriptionRequiredError;
@@ -74,6 +79,10 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
 
     if (location?.trim() && !locationPattern.test(location)) {
       newErrors.location = locationFormatError;
+    }
+
+    if (selectedKeywords.length > 12) {
+      newErrors.keyword = keywordOverError;
     }
 
     setErrors(newErrors);
@@ -129,12 +138,28 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         />
         <LocationField
           location={formValues.location}
-          errors={errors}
+          errors={errors.location}
           onLocationChange={(value) => {
             handleInputChange("location", value);
             validateLocation(value);
           }}
           onMapOpen={() => setMapOpen(true)}
+        />
+
+        <PostVisibleField
+            value={formValues.isPublic} 
+            onChange={(value) => handleInputChange("isPublic", value)} 
+          />
+
+        <CommentAvailabilityField
+          value={formValues.isCommentAllowed} 
+          onChange={(value) => handleInputChange("isCommentAllowed", value)} 
+        />
+
+        <JobKeyWordField
+            selectedKeywords={formValues.selectedKeywords} 
+            error={errors.keyword}
+            onChange={(value) => handleInputChange("selectedKeywords", value)} 
         />
       </Grid>
 

@@ -96,7 +96,7 @@ const MyProfilePage = () => {
                     </Box>
 
                     <Box sx={{ mt: 3 }}>
-                        <HomeContainerBox title="고객센터 문의 내역" onDetailClicked={() => {}}>
+                        <HomeContainerBox title="고객센터 문의 내역" onDetailClicked={() => { navigate("/inquiries") }}>
                             {userData.requestedIds.map((requestId, index) => (
                                 <Box key={index}>
                                     <CommonSummarizedInquiryBox inquiryId={requestId} />

@@ -9,7 +9,10 @@ import TransactionTypeField from "../../../textfields/TransactionTypeField";
 import IsFreeField from "../../../textfields/IsFreeField";
 import PriceField from "../../../textfields/PriceField";
 import SuburbField from "../../../textfields/SuburbField";
-import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, priceFormatError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
+import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, keywordOverError, priceFormatError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
+import PostVisibleField from "../../../textfields/PostVisibleField";
+import TransactionKeyWordField from "../../../textfields/TransactionKeyWordField";
+import CommentAvailabilityField from "../../../textfields/CommentAvailabilityField";
 
 const NecessitiesTransactionMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
@@ -20,14 +23,17 @@ const NecessitiesTransactionMainInfoForm = ({ onDataChange, setIsFormValid }) =>
     transactionType: "판매",
     priceType: "유료",
     price: "",
-    suburb: ""
+    suburb: "",
+    selectedKeywords: [],
+    isPublic: true,
+    isCommentAllowed: true
   });
 
   const [errors, setErrors] = useState({});
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, priceType, price, suburb } = formValues;
+    const { title, description, contact, email, priceType, price, suburb, selectedKeywords } = formValues;
   
     if (!title?.trim()) newErrors.title = titleRequiredError;
     if (!description?.trim()) newErrors.description = descriptionRequiredError;
@@ -51,6 +57,10 @@ const NecessitiesTransactionMainInfoForm = ({ onDataChange, setIsFormValid }) =>
 
     if (!suburb?.trim()) {
       newErrors.suburb = suburbRequiredError;
+    }
+
+    if (selectedKeywords.length > 12) {
+      newErrors.keyword = keywordOverError;
     }
   
     setErrors(newErrors);
@@ -121,6 +131,22 @@ const NecessitiesTransactionMainInfoForm = ({ onDataChange, setIsFormValid }) =>
           value={formValues.suburb}
           error={errors.suburb}
           onChange={(value) => handleInputChange("suburb", value)}
+        />
+
+        <PostVisibleField
+            value={formValues.isPublic} 
+            onChange={(value) => handleInputChange("isPublic", value)} 
+          />
+
+        <CommentAvailabilityField
+          value={formValues.isCommentAllowed} 
+          onChange={(value) => handleInputChange("isCommentAllowed", value)} 
+        />
+
+        <TransactionKeyWordField
+            selectedKeywords={formValues.selectedKeywords} 
+            error={errors.keyword}
+            onChange={(value) => handleInputChange("selectedKeywords", value)} 
         />
       </Grid>
     </Paper>

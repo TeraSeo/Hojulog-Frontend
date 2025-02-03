@@ -13,7 +13,7 @@ function validateIsAdmin() {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'accessToken': accessToken,
-            'refreshToken': refreshToken,
+            'refreshToken': refreshToken
         },
         withCredentials: true
     })
@@ -33,4 +33,35 @@ function validateIsAdmin() {
     });
 }
 
-export { validateIsAdmin };
+function getAdminData(page) {
+    const accessToken = localStorage.getItem('accessToken'); 
+    const refreshToken = localStorage.getItem('refreshToken'); 
+
+    if (!accessToken || !refreshToken) {
+        return Promise.resolve(false);
+    }
+
+    return axios.get("http://localhost:8080/api/admin/get/specific", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken
+        },
+        params: {
+            "page": page,
+            "size": 10
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+export { validateIsAdmin, getAdminData };

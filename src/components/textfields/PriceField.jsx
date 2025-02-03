@@ -13,11 +13,15 @@ const PriceField = ({ value, error, onChange, smSize=6 }) => {
         onChange={(e) => onChange(e.target.value.replace(/[^0-9]/g, ""))}
         placeholder="가격을 입력하세요"
         error={!!error}
-        helperText={error || ""}
         InputProps={{
           startAdornment: <InputAdornment position="start">$</InputAdornment>,
         }}
       />
+      {error && (
+              <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+                {error}
+              </Typography>
+            )}
     </Grid>
   );
 };

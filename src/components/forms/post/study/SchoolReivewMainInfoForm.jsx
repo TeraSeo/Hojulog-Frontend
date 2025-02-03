@@ -2,23 +2,29 @@ import React, { useState, useEffect } from "react";
 import { Typography, Grid, Paper } from "@mui/material";
 import TitleField from "../../../textfields/TitleField";
 import SchoolField from "../../../textfields/SchoolField";
-import { schoolRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
+import { keywordOverError, schoolRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
 import RatingField from "../../../textfields/RatingField";
 import ContentBlockManager from "../ContentBlockManager";
+import PostVisibleField from "../../../textfields/PostVisibleField";
+import StudyKeyWordField from "../../../textfields/StudyKeyWordField";
+import CommentAvailabilityField from "../../../textfields/CommentAvailabilityField";
 
 const SchoolReivewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
     title: "",
     school: "",
     rate: 0.0,
-    blogContents: []
+    blogContents: [],
+    selectedKeywords: [],
+    isPublic: true,
+    isCommentAllowed: true
   });
 
   const [errors, setErrors] = useState({});
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, school, rate } = formValues;
+    const { title, school, rate, selectedKeywords } = formValues;
 
     if (!title?.trim()) newErrors.title = titleRequiredError;
 
@@ -26,6 +32,10 @@ const SchoolReivewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
 
     if (rate < 0.0 || rate > 5.0) {
       newErrors.rate = "평점은 0.0에서 5.0 사이여야 합니다.";
+    }
+
+    if (selectedKeywords.length > 12) {
+      newErrors.keyword = keywordOverError;
     }
 
     setErrors(newErrors);
@@ -68,6 +78,22 @@ const SchoolReivewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           value={formValues.school}
           error={errors.school}
           onChange={(value) => handleInputChange("school", value)}
+        />
+
+        <PostVisibleField
+            value={formValues.isPublic} 
+            onChange={(value) => handleInputChange("isPublic", value)} 
+          />
+
+        <CommentAvailabilityField
+          value={formValues.isCommentAllowed} 
+          onChange={(value) => handleInputChange("isCommentAllowed", value)} 
+        />
+
+        <StudyKeyWordField 
+            selectedKeywords={formValues.selectedKeywords} 
+            error={errors.keyword}
+            onChange={(value) => handleInputChange("selectedKeywords", value)} 
         />
 
           <Grid item xs={12}>

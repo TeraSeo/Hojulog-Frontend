@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Grid, Paper } from "@mui/material";
 import TitleField from "../../../textfields/TitleField";
-import { countryRequiredError, locationFormatError, locationRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
+import { countryRequiredError, keywordOverError, locationFormatError, locationRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
 import LocationField from "../../../textfields/LocationField";
 import LocationDialog from "../../../dialog/LocationDialog";
 import RatingField from "../../../textfields/RatingField";
 import CountrySelectField from "../../../textfields/CountrySelectField";
 import ContentBlockManager from "../ContentBlockManager";
+import PostVisibleField from "../../../textfields/PostVisibleField";
+import TravelKeyWordField from "../../../textfields/TravelKeyWordField";
+import CommentAvailabilityField from "../../../textfields/CommentAvailabilityField";
 
 const CourseMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
@@ -14,7 +17,10 @@ const CourseMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     country: "호주",
     location: "",
     rate: 0.0,
-    blogContents: []
+    blogContents: [],
+    selectedKeywords: [],
+    isPublic: true,
+    isCommentAllowed: true
   });
 
   const [errors, setErrors] = useState({});
@@ -45,7 +51,7 @@ const CourseMainInfoForm = ({ onDataChange, setIsFormValid }) => {
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, country, location, rate } = formValues;
+    const { title, country, location, rate, selectedKeywords } = formValues;
 
     if (!title?.trim()) newErrors.title = titleRequiredError;
 
@@ -59,6 +65,10 @@ const CourseMainInfoForm = ({ onDataChange, setIsFormValid }) => {
 
     if (rate < 0.0 || rate > 5.0) {
       newErrors.rate = "평점은 0.0에서 5.0 사이여야 합니다.";
+    }
+
+    if (selectedKeywords.length > 12) {
+      newErrors.keyword = keywordOverError;
     }
 
     setErrors(newErrors);
@@ -104,13 +114,29 @@ const CourseMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         />
         <LocationField
             location={formValues.location}
-            errors={errors}
+            errors={errors.location}
             onLocationChange={(value) => {
               handleInputChange("location", value);
               validateLocation(value);
             }}
             onMapOpen={() => setMapOpen(true)}
           />
+
+        <PostVisibleField
+            value={formValues.isPublic} 
+            onChange={(value) => handleInputChange("isPublic", value)} 
+          />
+
+        <CommentAvailabilityField
+          value={formValues.isCommentAllowed} 
+          onChange={(value) => handleInputChange("isCommentAllowed", value)} 
+        />
+
+        <TravelKeyWordField
+            selectedKeywords={formValues.selectedKeywords} 
+            error={errors.keyword}
+            onChange={(value) => handleInputChange("selectedKeywords", value)} 
+        />
 
           <Grid item xs={12}>
             <ContentBlockManager

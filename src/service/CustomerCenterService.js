@@ -47,4 +47,33 @@ function getInquiryById(inquiryId) {
     });
 }
 
-export { postInquiry, getInquiryById };
+function getWholeInquiries(page) {
+    const userId = localStorage.getItem('userId') || "";
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.get("http://localhost:8080/api/inquiry/get/pageable/inquiries", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "userId": userId,
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        },
+        params: {
+            "page": page,
+            "size": 10,
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+export { postInquiry, getInquiryById, getWholeInquiries };

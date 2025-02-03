@@ -40,11 +40,11 @@ const CommonSummarizedPostBox = ({ postId }) => {
                 >
                     <Box>
                         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                            <Box sx={{whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",}}>
+                            <Box sx={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                                 <SummarizedPostTitleText title={summarizedOwnPost.title} postId={postId} category={summarizedOwnPost.category} />
                             </Box>
 
-                            <Box sx={{ display: "flex", pr: 1 }}>
+                            <Box sx={{ display: "flex", pr: 1, pt: 1, flexShrink: 0 }}>
                                 <CreatedAtText createdAt={summarizedOwnPost.createdAt} />
                             </Box>
                         </Box>
