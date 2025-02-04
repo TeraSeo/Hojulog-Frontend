@@ -47,7 +47,7 @@ const OwnTravelPostDetailedPage = () => {
         </Grid>
 
         <Grid item xs={12} md={9}>
-            <TravelDetailBox userId={travelPostData.userId} title={travelPostData.title} subCategory={travelPostData.subCategory} postId={travelPostData.postId} createdAt={travelPostData.createdAt} price={travelPostData.price} rate={travelPostData.rate} createdDate={travelPostData.createdAt} blogContents={travelPostData.blogContents} />
+            <TravelDetailBox userId={travelPostData.userId} title={travelPostData.title} subCategory={travelPostData.subCategory} postId={travelPostData.postId} createdAt={travelPostData.createdAt} price={travelPostData.price} rate={travelPostData.rate} createdDate={travelPostData.createdAt} blogContents={travelPostData.blogContents} keywords={travelPostData.keywords} />
         </Grid>
       </Grid>
 

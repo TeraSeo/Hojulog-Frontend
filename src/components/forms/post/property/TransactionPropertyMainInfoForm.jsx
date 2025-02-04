@@ -14,7 +14,6 @@ import { contactFormatError, contactRequiredError, descriptionRequiredError, ema
 import RoomCountField from "../../../textfields/RoomCountField";
 import ParkableField from "../../../textfields/ParkableField";
 import PropertyKeyWordField from "../../../textfields/PropertyKeyWordField";
-import PostVisibleField from "../../../textfields/PostVisibleField";
 import CommentAvailabilityField from "../../../textfields/CommentAvailabilityField";
 
 const TransactionPropertyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
@@ -30,7 +29,6 @@ const TransactionPropertyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     roomCount: "Studio+",
     isParkable: false,
     selectedKeywords: [],
-    isPublic: true,
     isCommentAllowed: true
   });
 
@@ -184,11 +182,6 @@ const TransactionPropertyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           }}
           onMapOpen={() => setMapOpen(true)}
         />
-
-        <PostVisibleField 
-            value={formValues.isPublic} 
-            onChange={(value) => handleInputChange("isPublic", value)} 
-          />
 
         <CommentAvailabilityField
           value={formValues.isCommentAllowed} 

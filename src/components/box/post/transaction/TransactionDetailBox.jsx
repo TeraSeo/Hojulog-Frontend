@@ -7,8 +7,9 @@ import DetailedPostTitleText from '../../../texts/DetailedPostTitleText';
 import TransactionPriceText from '../../../texts/TransactionPriceText';
 import PostDescriptionText from '../../../texts/PostDescriptionText';
 import PostProfileBox from '../PostProfileBox';
+import PostKeywordText from '../../../texts/PostKeywordText';
 
-const TransactionDetailBox = ({ userId, imageUrls, description, title, subCategory, postId, contact, email, price, createdAt }) => {
+const TransactionDetailBox = ({ userId, imageUrls, description, title, subCategory, contact, email, price, createdAt, keywords=[] }) => {
   return (
     <Box>
       <ScrollableImageGallery imageUrls={imageUrls} />
@@ -37,6 +38,13 @@ const TransactionDetailBox = ({ userId, imageUrls, description, title, subCatego
           <PostDescriptionText description={description} />
           
           <CreatedAtText createdAt={createdAt} pl={0} />
+
+          {keywords.length > 0 && (
+              <Box>
+                <Divider sx={{ my: 2.5 }} />
+                <PostKeywordText keywords={keywords} />
+              </Box>
+            )}
         </Box>
       </Box>
     </Box>

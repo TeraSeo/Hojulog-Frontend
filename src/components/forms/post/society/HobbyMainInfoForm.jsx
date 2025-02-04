@@ -1,53 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Grid, Paper } from "@mui/material";
 import TitleField from "../../../textfields/TitleField";
-import DescriptionField from "../../../textfields/DescriptionField";
-import ContactField from "../../../textfields/ContactField";
-import EmailField from "../../../textfields/EmailField";
-import SuburbField from "../../../textfields/SuburbField";
-import { isValidPhoneNumber } from "libphonenumber-js";
-import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, keywordOverError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
+import { keywordOverError, titleRequiredError } from "../../../../constant/ErrorMsg";
 import PostVisibleField from "../../../textfields/PostVisibleField";
 import SocietyKeyWordField from "../../../textfields/SocietyKeyWordField";
 import CommentAvailabilityField from "../../../textfields/CommentAvailabilityField";
+import ContentBlockManager from "../ContentBlockManager";
 
 const HobbyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
     title: "",
-    description: "",
-    contact: "",
-    email: "",
-    suburb: "",
     selectedKeywords: [],
     isPublic: true,
-    isCommentAllowed: true
+    isCommentAllowed: true,
+    blogContents: []
   });
 
   const [errors, setErrors] = useState({});
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, suburb, selectedKeywords } = formValues;
+    const { title, selectedKeywords } = formValues;
 
     if (!title?.trim()) newErrors.title = titleRequiredError;
-    if (!description?.trim()) newErrors.description = descriptionRequiredError;
-
-    if (!contact?.trim() && !email?.trim()) {
-      newErrors.contact = contactRequiredError;
-      newErrors.email = emailRequiredError;
-    }
-
-    if (contact?.trim() && !isValidPhoneNumber(contact)) {
-      newErrors.contact = contactFormatError;
-    }
-
-    if (email?.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = emailFormatError;
-    }
-
-    if (!suburb?.trim()) {
-      newErrors.suburb = suburbRequiredError;
-    }
 
     if (selectedKeywords.length > 12) {
       newErrors.keyword = keywordOverError;
@@ -75,7 +50,7 @@ const HobbyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         주요 정보 입력
       </Typography>
       <Typography variant="body2" color="textSecondary" gutterBottom>
-        제목, 설명, 연락처, 이메일, 지역 등 정보를 입력하세요.
+        제목, 설명 등 정보를 입력하세요.
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 1 }}>
@@ -84,27 +59,6 @@ const HobbyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           error={errors.title}
           onChange={(value) => handleInputChange("title", value)}
         />
-        <DescriptionField
-          value={formValues.description}
-          error={errors.description}
-          onChange={(value) => handleInputChange("description", value)}
-        />
-        <ContactField
-          value={formValues.contact}
-          error={errors.contact}
-          onChange={(value) => handleInputChange("contact", value)}
-        />
-        <EmailField
-          value={formValues.email}
-          error={errors.email}
-          onChange={(value) => handleInputChange("email", value)}
-        />
-        <SuburbField
-          value={formValues.suburb}
-          error={errors.suburb}
-          onChange={(value) => handleInputChange("suburb", value)}
-        />
-
         <PostVisibleField
             value={formValues.isPublic} 
             onChange={(value) => handleInputChange("isPublic", value)} 
@@ -121,6 +75,12 @@ const HobbyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
             onChange={(value) => handleInputChange("selectedKeywords", value)} 
         />
       </Grid>
+
+      <Grid item xs={12}>
+          <ContentBlockManager
+            onChange={(blocks) => handleInputChange("blogContents", blocks)}
+          />
+        </Grid>
     </Paper>
   );
 };

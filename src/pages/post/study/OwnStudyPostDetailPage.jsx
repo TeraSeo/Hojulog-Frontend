@@ -47,7 +47,7 @@ const OwnStudyPostDetailPage = () => {
         </Grid>
 
         <Grid item xs={12} md={9}>
-            <StudyDetailBox userId={studyPostData.userId} description={studyPostData.description} title={studyPostData.title} subCategory={studyPostData.subCategory} postId={studyPostData.postId} school={studyPostData.school} major={studyPostData.major} rate={studyPostData.rate} createdAt={studyPostData.createdAt} blogContents={studyPostData.blogContents} />
+            <StudyDetailBox userId={studyPostData.userId} description={studyPostData.description} title={studyPostData.title} subCategory={studyPostData.subCategory} postId={studyPostData.postId} school={studyPostData.school} major={studyPostData.major} rate={studyPostData.rate} createdAt={studyPostData.createdAt} blogContents={studyPostData.blogContents} keywords={studyPostData.keywords} />
         </Grid>
       </Grid> 
 

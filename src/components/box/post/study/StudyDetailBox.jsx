@@ -6,9 +6,10 @@ import SchoolMajorText from '../../../texts/SchoolMajorText';
 import CreatedAtText from '../../../texts/CreatedAtText';
 import BlogContentBox from '../BlogContentBox';
 import PostProfileBox from '../PostProfileBox';
+import PostKeywordText from '../../../texts/PostKeywordText';
 
 
-const StudyDetailBox = ({ userId, title, subCategory, postId, school, major, rate, createdAt, blogContents }) => {
+const StudyDetailBox = ({ userId, title, subCategory, school, major, rate, createdAt, blogContents=[], keywords=[] }) => {
   return (
     <Box>
       <Box>
@@ -26,6 +27,13 @@ const StudyDetailBox = ({ userId, title, subCategory, postId, school, major, rat
             <BlogContentBox blogContents={blogContents} />
 
             <CreatedAtText createdAt={createdAt} pl={0} />
+
+            {keywords.length > 0 && (
+              <Box>
+                <Divider sx={{ my: 2.5 }} />
+                <PostKeywordText keywords={keywords} />
+              </Box>
+            )}
         </Box>
       </Box>
     </Box>

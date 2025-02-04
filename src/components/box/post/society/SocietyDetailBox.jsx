@@ -1,32 +1,31 @@
 import React from 'react';
 import { Box, Divider } from '@mui/material';
-import ScrollableImageGallery from '../ScrollableImageGallery';
-import ContactText from '../../../texts/ContactText';
 import DetailedPostTitleText from '../../../texts/DetailedPostTitleText';
 import CreatedAtText from '../../../texts/CreatedAtText';
-import PostDescriptionText from '../../../texts/PostDescriptionText';
 import PostProfileBox from '../PostProfileBox';
+import PostKeywordText from '../../../texts/PostKeywordText';
+import BlogContentBox from '../BlogContentBox';
 
-const SoceityDetailBox = ({ userId, imageUrls, description, title, subCategory, contact, email, createdAt }) => {
+const SoceityDetailBox = ({ userId, title, subCategory, createdAt, blogContents=[], keywords=[] }) => {
   return (
     <Box>
-      <ScrollableImageGallery imageUrls={imageUrls} />
+      <Box sx={{ pl: 1 }}>
+          <DetailedPostTitleText subCategory={subCategory} title={title} />
 
-      <Box sx={{ mt: imageUrls.length > 0 ? 3 : 0 }}>
+          <PostProfileBox userId={userId} />
+          
+          <Divider sx={{ my: { "md": 2.5, "sm": 2, "xs": 1.5} }} />
+          
+          <BlogContentBox blogContents={blogContents} />
 
-        <Box sx={{ pl: 1 }}>
-            <DetailedPostTitleText subCategory={subCategory} title={title} />
+          <CreatedAtText createdAt={createdAt} pl={0} />
 
-            <PostProfileBox userId={userId} />
-            
-            <ContactText contact={contact} email={email} />
-
-            <Divider sx={{ my: 2.5 }} />
-
-            <PostDescriptionText description={description} />
-
-            <CreatedAtText createdAt={createdAt} pl={0} />
-        </Box>
+          {keywords.length > 0 && (
+            <Box>
+              <Divider sx={{ my: 2.5 }} />
+              <PostKeywordText keywords={keywords} />
+            </Box>
+          )}
       </Box>
     </Box>
   );

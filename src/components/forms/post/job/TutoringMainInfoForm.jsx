@@ -9,7 +9,6 @@ import { isValidPhoneNumber } from "libphonenumber-js";
 import LocationField from "../../../textfields/LocationField";
 import LocationDialog from "../../../dialog/LocationDialog";
 import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, keywordOverError, locationFormatError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
-import PostVisibleField from "../../../textfields/PostVisibleField";
 import JobKeyWordField from "../../../textfields/JobKeyWordField";
 import CommentAvailabilityField from "../../../textfields/CommentAvailabilityField";
 
@@ -22,7 +21,6 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     suburb: "",
     location: "",
     selectedKeywords: [],
-    isPublic: true,
     isCommentAllowed: true
   });
 
@@ -145,11 +143,6 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           }}
           onMapOpen={() => setMapOpen(true)}
         />
-
-        <PostVisibleField
-            value={formValues.isPublic} 
-            onChange={(value) => handleInputChange("isPublic", value)} 
-          />
 
         <CommentAvailabilityField
           value={formValues.isCommentAllowed} 

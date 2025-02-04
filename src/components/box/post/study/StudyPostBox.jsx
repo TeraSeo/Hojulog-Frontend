@@ -50,8 +50,7 @@ const StudyPostBox = ({ post }) => {
                             }}
                         >
                             <Box sx={{ display: "flex", pr: 1 }}>
-                                <SuburbText suburb={post.suburb} pl={0} />
-                                <CreatedAtText createdAt={post.createdAt} pl={0} />
+                                <CreatedAtText createdAt={post.createdAt} />
                             </Box>
 
                             <ViewCountsText viewCounts={post.viewCounts} width={SummarizedPostIconResponsiveSize1} height={SummarizedPostIconResponsiveSize1} fontSize={PostResponsiveFontSize2} />

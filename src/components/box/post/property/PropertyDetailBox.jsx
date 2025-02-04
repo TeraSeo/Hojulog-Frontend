@@ -11,8 +11,9 @@ import DetailedPostTitleText from '../../../texts/DetailedPostTitleText';
 import CreatedAtText from '../../../texts/CreatedAtText';
 import PostDescriptionText from '../../../texts/PostDescriptionText';
 import PostProfileBox from '../PostProfileBox';
+import PostKeywordText from '../../../texts/PostKeywordText';
 
-const PropertyDetailBox = ({ userId, imageUrls, description, price, period, roomCount, bathroomType, isParkable, title, subCategory, contact, email, isBillIncluded, availableTime, createdAt }) => {
+const PropertyDetailBox = ({ userId, imageUrls, description, price, period, roomCount, bathroomType, isParkable, title, subCategory, contact, email, isBillIncluded, availableTime, createdAt, keywords=[] }) => {
   return (
     <Box>
       <ScrollableImageGallery imageUrls={imageUrls} />
@@ -45,7 +46,15 @@ const PropertyDetailBox = ({ userId, imageUrls, description, price, period, room
             <CreatedAtText createdAt={createdAt} pl={0} />
 
             <Divider sx={{ my: 2.5 }} />
+
             <PropertyDetailText price={price} period={period} isBillIncluded={isBillIncluded} availableTime={availableTime} bathroomType={bathroomType} isParkable={isParkable} roomCount={roomCount} />
+
+            {keywords.length > 0 && (
+              <Box>
+                <Divider sx={{ my: 2.5 }} />
+                <PostKeywordText keywords={keywords} />
+              </Box>
+            )}
         </Box>
       </Box>
     </Box>

@@ -44,7 +44,7 @@ const TravelPostDetailedPage = () => {
         </Grid>
 
         <Grid item xs={12} md={9}>
-            <TransactionDetailBox userId={transactionPostData.userId} imageUrls={transactionPostData.imageUrls} description={transactionPostData.description} title={transactionPostData.title} subCategory={transactionPostData.subCategory} postId={transactionPostData.postId} contact={transactionPostData.contact} email={transactionPostData.email} createdAt={transactionPostData.createdAt} price={transactionPostData.price} />
+            <TransactionDetailBox userId={transactionPostData.userId} imageUrls={transactionPostData.imageUrls} description={transactionPostData.description} title={transactionPostData.title} subCategory={transactionPostData.subCategory} contact={transactionPostData.contact} email={transactionPostData.email} createdAt={transactionPostData.createdAt} price={transactionPostData.price} keywords={transactionPostData.keywords} />
         </Grid>
       </Grid>
 

@@ -5,8 +5,9 @@ import PostRateBox from '../PostRateBox';
 import CreatedAtText from '../../../texts/CreatedAtText';
 import BlogContentBox from '../BlogContentBox';
 import PostProfileBox from '../PostProfileBox';
+import PostKeywordText from '../../../texts/PostKeywordText';
 
-const TravelDetailBox = ({ userId, title, subCategory, rate, createdDate, blogContents }) => {
+const TravelDetailBox = ({ userId, title, subCategory, rate, createdDate, blogContents=[], keywords=[] }) => {
   return (
     <Box>
       <Box>
@@ -22,6 +23,13 @@ const TravelDetailBox = ({ userId, title, subCategory, rate, createdDate, blogCo
             <BlogContentBox blogContents={blogContents} />
 
             <CreatedAtText createdAt={createdDate} pl={0} />
+
+            {keywords.length > 0 && (
+              <Box>
+                <Divider sx={{ my: 2.5 }} />
+                <PostKeywordText keywords={keywords} />
+              </Box>
+            )}
         </Box>
       </Box>
     </Box>

@@ -16,7 +16,6 @@ import RoomCountField from "../../../textfields/RoomCountField";
 import BathroomTypeField from "../../../textfields/BathroomTypeField";
 import ParkableField from "../../../textfields/ParkableField";
 import BillIncludedField from "../../../textfields/BillIncludedField";
-import PostVisibleField from "../../../textfields/PostVisibleField";
 import PropertyKeyWordField from "../../../textfields/PropertyKeyWordField";
 import CommentAvailabilityField from "../../../textfields/CommentAvailabilityField";
 
@@ -36,7 +35,6 @@ const RentPropertyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     isParkable: false,
     isBillIncluded: false,
     selectedKeywords: [],
-    isPublic: true,
     isCommentAllowed: true
   });
 
@@ -209,11 +207,6 @@ const RentPropertyMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           }}
           onMapOpen={() => setMapOpen(true)}
         />
-
-        <PostVisibleField
-            value={formValues.isPublic} 
-            onChange={(value) => handleInputChange("isPublic", value)} 
-          />
 
         <CommentAvailabilityField
           value={formValues.isCommentAllowed} 

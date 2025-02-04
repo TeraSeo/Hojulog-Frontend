@@ -10,7 +10,6 @@ import IsFreeField from "../../../textfields/IsFreeField";
 import PriceField from "../../../textfields/PriceField";
 import SuburbField from "../../../textfields/SuburbField";
 import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, keywordOverError, priceFormatError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
-import PostVisibleField from "../../../textfields/PostVisibleField";
 import TransactionKeyWordField from "../../../textfields/TransactionKeyWordField";
 import CommentAvailabilityField from "../../../textfields/CommentAvailabilityField";
 
@@ -25,7 +24,6 @@ const EtcTransactionMainInfoForm = ({ onDataChange, setIsFormValid }) => {
     price: "",
     suburb: "",
     selectedKeywords: [],
-    isPublic: true,
     isCommentAllowed: true
   });
 
@@ -133,11 +131,6 @@ const EtcTransactionMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           error={errors.suburb}
           onChange={(value) => handleInputChange("suburb", value)}
         />
-
-        <PostVisibleField
-            value={formValues.isPublic} 
-            onChange={(value) => handleInputChange("isPublic", value)} 
-          />
 
         <CommentAvailabilityField
           value={formValues.isCommentAllowed} 

@@ -45,7 +45,7 @@ const JobPostDetailPage = () => {
         </Grid>
 
         <Grid item xs={12} md={9}>
-            <JobDetailBox userId={jobPostData.userId} imageUrls={jobPostData.imageUrls} description={jobPostData.description} title={jobPostData.title} subCategory={jobPostData.subCategory} postId={jobPostData.postId} contact={jobPostData.contact} email={jobPostData.email} jobType={jobPostData.jobType} createdAt={jobPostData.createdAt} />
+            <JobDetailBox userId={jobPostData.userId} imageUrls={jobPostData.imageUrls} description={jobPostData.description} title={jobPostData.title} subCategory={jobPostData.subCategory} postId={jobPostData.postId} contact={jobPostData.contact} email={jobPostData.email} jobType={jobPostData.jobType} createdAt={jobPostData.createdAt} keywords={jobPostData.keywords} />
         </Grid>
       </Grid>
 

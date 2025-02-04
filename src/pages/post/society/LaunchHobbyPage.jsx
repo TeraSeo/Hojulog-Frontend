@@ -3,45 +3,24 @@ import { Paper, Typography, Grid,Box, Button } from "@mui/material";
 import { postSociety } from "../../../service/PostService";
 import { useNavigate } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
-import PostStepper from "../../../components/bar/PostStepper";
 import HobbyMainInfoForm from "../../../components/forms/post/society/HobbyMainInfoForm";
-import HobbyMediaUploadForm from "../../../components/forms/post/society/HobbyMediaUploadForm";
 
 const LaunchHobbyPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
-  const [isMediaValid, setIsMediaValid] = useState(false);
   const [mainInfoData, setMainInfoData] = useState({});
-  const [mediaData, setMediaData] = useState({});
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const mainInfoRef = useRef(null);
-  const mediaUploadRef = useRef(null);
   const submitRef = useRef(null);
 
   useEffect(() => {
     if (isPreviewOpen) {
       handlePreview();
     }
-  }, [mediaData]);
-
-  const handleStepClick = (step) => {
-    switch (step) {
-      case 0:
-        mainInfoRef.current.scrollIntoView({ behavior: "smooth" });
-        break;
-      case 1:
-        mediaUploadRef.current.scrollIntoView({ behavior: "smooth" });
-        break;
-      case 2:
-        submitRef.current.scrollIntoView({ behavior: "smooth" });
-        break;
-      default:
-        break;
-    }
-  };
+  }, []);
 
   const handleSubmit = async () => {
     const userId = localStorage.getItem('userId');
@@ -51,7 +30,23 @@ const LaunchHobbyPage = () => {
       ...mainInfoData,
       "category": "생활",
       "subCategory": "동호회",
-      "userId": userId
+      "userId": userId,
+      "blogContents": mainInfoData.blogContents.map((blog) => {
+        if (blog.type === "image") {
+          return {
+            type: "image", 
+            imageUrl: blog.file.name, 
+          };
+        } else if (blog.type === "description") {
+          return {
+            type: "description", 
+            content: blog.content, 
+            fontSize: blog.fontSize || 16, 
+            fontWeight: blog.fontWeight || 400, 
+          };
+        }
+        return blog;
+      }),
     };
 
     formData.append(
@@ -59,7 +54,12 @@ const LaunchHobbyPage = () => {
       new Blob([JSON.stringify(societyData)], { type: "application/json" })
     );
 
-    mediaData.selectedImages.forEach((file) => formData.append("images", file));
+    mainInfoData.blogContents
+      .filter((blog) => blog.type === "image" && blog.file)
+      .forEach((imageBlog) => {
+        formData.append("images", imageBlog.file);
+      });
+
 
     setIsLoading(true);
     const isCreated = await postSociety(formData);
@@ -87,12 +87,7 @@ const LaunchHobbyPage = () => {
       <Typography variant="h4" gutterBottom align="center" sx={{ color: primaryColor }}>
         동호회 정보 등록하기
       </Typography>
-      <Typography variant="subtitle1" align="center" color="textSecondary" sx={{ marginBottom: 4 }}>
-        필요한 모든 정보를 입력해주세요
-      </Typography>
-
-      <PostStepper isMainValid={isMainValid} isMediaValid={isMediaValid} handleStepClick={handleStepClick}/>
-
+      
       <Grid container spacing={4}>
         <Grid item xs={12} ref={mainInfoRef}>
           <HobbyMainInfoForm
@@ -100,14 +95,7 @@ const LaunchHobbyPage = () => {
             setIsFormValid={setIsMainValid}
           />
         </Grid>
-        <Grid item xs={12} ref={mediaUploadRef}>
-          <Grid item xs={12}>
-            <HobbyMediaUploadForm
-              onMediaChange={(media) => setMediaData(media)}
-              setIsMediaValid={setIsMediaValid}
-            />
-          </Grid>
-        </Grid>
+       
         <Grid item xs={12} ref={submitRef}>
           <Box textAlign="right">
             <Button
@@ -124,7 +112,7 @@ const LaunchHobbyPage = () => {
               variant="contained"
               sx={{ backgroundColor: primaryColor, color: "#FFF" }}
               size="large"
-              disabled={!isMainValid || !isMediaValid || isLoading}
+              disabled={!isMainValid || isLoading}
               onClick={handleSubmit}
             >
               {isLoading ? "제출중..." : "제출"}
