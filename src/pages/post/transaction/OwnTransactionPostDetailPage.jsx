@@ -53,7 +53,7 @@ const OwnTransactionPostDetailPage = () => {
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
           <LikeCountsText initialLikes={transactionPostData.likeCounts} initialIsLiked={transactionPostData.isUserLiked} pl={0} postId={transactionPostData.postId} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
-              <CommentsCountsText commentsCounts={transactionPostData.commentCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
+              <CommentsCountsText isCommentAllowed={transactionPostData.isCommentAllowed} commentsCounts={transactionPostData.commentCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           </Box>
           <ViewCountsText viewCounts={transactionPostData.viewCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
       </Box>
@@ -64,7 +64,12 @@ const OwnTransactionPostDetailPage = () => {
       </Box>
 
       <Box sx={{ my: 5 }} ref={commentBoxRef}>
+        {
+          transactionPostData.isCommentAllowed ? 
           <PostCommentBox postId={postId} />
+          :
+          <Box />
+        }
       </Box>
     </Box>
   );

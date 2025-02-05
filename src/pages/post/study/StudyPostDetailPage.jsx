@@ -52,7 +52,7 @@ const StudyPostDetailPage = () => {
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
           <LikeCountsText initialLikes={studyPostData.likeCounts} initialIsLiked={studyPostData.isUserLiked} pl={0} postId={studyPostData.postId} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
-              <CommentsCountsText commentsCounts={studyPostData.commentCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
+              <CommentsCountsText isCommentAllowed={studyPostData.isCommentAllowed} commentsCounts={studyPostData.commentCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           </Box>
           <ViewCountsText viewCounts={studyPostData.viewCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
       </Box>
@@ -60,7 +60,12 @@ const StudyPostDetailPage = () => {
       { studyPostData.location ? <EmbeddedMap mapUrl={studyPostData.location} /> : <></> }
 
       <Box sx={{ my: 5 }} ref={commentBoxRef}>
+        {
+          studyPostData.isCommentAllowed ? 
           <PostCommentBox postId={postId} />
+          :
+          <Box />
+        }
       </Box>
     </Box>
   );

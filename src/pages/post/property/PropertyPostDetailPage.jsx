@@ -52,7 +52,7 @@ const PropertyPostDetailPage = () => {
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
           <LikeCountsText initialLikes={propertyPostData.likeCounts} initialIsLiked={propertyPostData.isUserLiked} pl={0} postId={propertyPostData.postId} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
-              <CommentsCountsText commentsCounts={propertyPostData.commentCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
+              <CommentsCountsText isCommentAllowed={propertyPostData.isCommentAllowed} commentsCounts={propertyPostData.commentCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           </Box>
           <ViewCountsText viewCounts={propertyPostData.viewCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
       </Box>
@@ -60,7 +60,12 @@ const PropertyPostDetailPage = () => {
       { propertyPostData.location ? <EmbeddedMap mapUrl={propertyPostData.location} /> : <></> }
 
       <Box sx={{ my: 5 }} ref={commentBoxRef}>
+        {
+          propertyPostData.isCommentAllowed ? 
           <PostCommentBox postId={postId} />
+          :
+          <Box />
+        }
       </Box>
     </Box>
   );

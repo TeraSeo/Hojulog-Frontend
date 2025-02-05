@@ -35,7 +35,7 @@ const SocietyPostBox = ({ post }) => {
                     <Box>
                         <Box sx={{whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",}}>
                             <SummarizedPostTitleText title={post.title} postId={post.postId} category={"생활"} pt={0} pl={0} />
-                            <SummarizedDescriptionText description={post.description} pl={0} />
+                            <SummarizedDescriptionText description={post.description} pl={0} isPublic={post.isPublic} />
                         </Box>
 
                         <Box

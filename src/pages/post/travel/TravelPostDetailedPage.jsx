@@ -49,11 +49,10 @@ const TravelPostDetailedPage = () => {
             <TravelDetailBox userId={travelPostData.userId} title={travelPostData.title} subCategory={travelPostData.subCategory} createdAt={travelPostData.createdAt} price={travelPostData.price} rate={travelPostData.rate} createdDate={travelPostData.createdAt} blogContents={travelPostData.blogContents} keywords={travelPostData.keywords} />
         </Grid>
       </Grid>
-
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
           <LikeCountsText initialLikes={travelPostData.likeCounts} initialIsLiked={travelPostData.isUserLiked} pl={0} postId={travelPostData.postId} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
-              <CommentsCountsText commentsCounts={travelPostData.commentCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
+              <CommentsCountsText isCommentAllowed={travelPostData.isCommentAllowed} commentsCounts={travelPostData.commentCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           </Box>
           <ViewCountsText viewCounts={travelPostData.viewCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
       </Box>
@@ -61,7 +60,12 @@ const TravelPostDetailedPage = () => {
       { travelPostData.location ? <EmbeddedMap mapUrl={travelPostData.location} /> : <></> }
 
       <Box sx={{ my: 5 }} ref={commentBoxRef}>
+        {
+          travelPostData.isCommentAllowed ? 
           <PostCommentBox postId={postId} />
+          :
+          <Box />
+        }
       </Box>
     </Box>
   );

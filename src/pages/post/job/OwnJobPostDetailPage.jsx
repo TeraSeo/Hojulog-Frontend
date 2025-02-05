@@ -54,7 +54,7 @@ const OwnJobPostDetailPage = () => {
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
           <LikeCountsText initialLikes={jobPostData.likeCounts} initialIsLiked={jobPostData.isUserLiked} pl={0} postId={jobPostData.postId} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
-              <CommentsCountsText commentsCounts={jobPostData.commentCounts}width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
+              <CommentsCountsText isCommentAllowed={jobPostData.isCommentAllowed} commentsCounts={jobPostData.commentCounts}width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
           </Box>
           <ViewCountsText viewCounts={jobPostData.viewCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
       </Box>
@@ -67,7 +67,12 @@ const OwnJobPostDetailPage = () => {
       { jobPostData.location ? <EmbeddedMap mapUrl={jobPostData.location} /> : <></> }
 
       <Box sx={{ my: 5 }} ref={commentBoxRef}>
+        {
+          jobPostData.isCommentAllowed ? 
           <PostCommentBox postId={postId} />
+          :
+          <Box />
+        }
       </Box>
     </Box>
   );

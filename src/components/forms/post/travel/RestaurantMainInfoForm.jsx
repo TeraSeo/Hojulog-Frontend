@@ -113,7 +113,7 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         />
         <LocationField
           location={formValues.location}
-          errors={errors.location}
+          error={errors.location}
           onLocationChange={(value) => {
             handleInputChange("location", value);
             validateLocation(value);
