@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getSpecificTravelPost } from '../../../service/PostService';
 import { Box, Grid } from '@mui/material';
 import CategorySidebar from '../../../components/bar/CategorySidebar';
@@ -13,11 +13,16 @@ import CommentsCountsText from '../../../components/texts/CommentsCountsText';
 import ViewCountsText from '../../../components/texts/ViewCountsText';
 import { PostResponsiveFontSize2 } from '../../../constant/FontSizeResponsive';
 import { DetailedPostIconResponsiveSize2 } from '../../../constant/IconSizeResponsive';
+import SecretPostDialog from '../../../components/dialog/SecretPostDialog';
 
 const OwnTravelPostDetailedPage = () => {
   const { postId } = useParams();
   const [travelPostData, setTravelPostData] = useState();
   const commentBoxRef = useRef(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const navigate = useNavigate();
+    
   
   useEffect(() => {
     fetchPostData(postId);
@@ -27,12 +32,28 @@ const OwnTravelPostDetailedPage = () => {
     getSpecificTravelPost(postId)
       .then((data) => {
         setTravelPostData(data);
+        if (!data.isPublic) {
+          setDialogOpen(true);
+        }
       })
       .catch((error) => console.error("Error fetching posts:", error));
   };
 
   const handleScrollToComments = () => {
     commentBoxRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleUseCredit = () => {
+    setIsUnlocked(true);
+    setDialogOpen(false);
+  };
+
+  const handleDenyAccess = () => {
+    if (window.history.length > 1) {
+        navigate(-1); 
+    } else {
+        navigate('/'); 
+    }
   };
 
   if (!travelPostData) {
@@ -47,7 +68,9 @@ const OwnTravelPostDetailedPage = () => {
         </Grid>
 
         <Grid item xs={12} md={9}>
+          <Box sx={{ filter: travelPostData.isPublic ? "none" : "blur(5px)", transition: "filter 0.3s ease-in-out" }}>
             <TravelDetailBox userId={travelPostData.userId} title={travelPostData.title} subCategory={travelPostData.subCategory} postId={travelPostData.postId} createdAt={travelPostData.createdAt} price={travelPostData.price} rate={travelPostData.rate} createdDate={travelPostData.createdAt} blogContents={travelPostData.blogContents} keywords={travelPostData.keywords} />
+          </Box>
         </Grid>
       </Grid>
 
@@ -74,6 +97,8 @@ const OwnTravelPostDetailedPage = () => {
           <Box />
         }
       </Box>
+
+      <SecretPostDialog dialogOpen={dialogOpen} handleUseCredit={handleDenyAccess} handleDenyAccess={handleDenyAccess} />
     </Box>
   );
 };

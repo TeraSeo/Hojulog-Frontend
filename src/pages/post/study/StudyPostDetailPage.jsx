@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getSpecificStudyPost } from '../../../service/PostService';
 import { Box, Grid } from '@mui/material';
 import CategorySidebar from '../../../components/bar/CategorySidebar';
@@ -11,11 +11,15 @@ import PostCommentBox from '../../../components/box/comment/PostCommentsBox';
 import StudyDetailBox from '../../../components/box/post/study/StudyDetailBox';
 import { PostResponsiveFontSize2 } from '../../../constant/FontSizeResponsive';
 import { DetailedPostIconResponsiveSize2 } from '../../../constant/IconSizeResponsive';
+import SecretPostDialog from '../../../components/dialog/SecretPostDialog';
 
 const StudyPostDetailPage = () => {
   const { postId } = useParams();
   const [studyPostData, setStudyPostData] = useState();
   const commentBoxRef = useRef(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchPostData(postId);
@@ -25,12 +29,28 @@ const StudyPostDetailPage = () => {
     getSpecificStudyPost(postId)
       .then((data) => {
         setStudyPostData(data);
+        if (!data.isPublic) {
+          setDialogOpen(true);
+        }
       })
       .catch((error) => console.error("Error fetching posts:", error));
   };
 
   const handleScrollToComments = () => {
     commentBoxRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleUseCredit = () => {
+    setIsUnlocked(true);
+    setDialogOpen(false);
+  };
+
+  const handleDenyAccess = () => {
+    if (window.history.length > 1) {
+        navigate(-1); 
+    } else {
+        navigate('/'); 
+    }
   };
 
   if (!studyPostData) {
@@ -45,7 +65,9 @@ const StudyPostDetailPage = () => {
         </Grid>
 
         <Grid item xs={12} md={9}>
+          <Box sx={{ filter: studyPostData.isPublic ? "none" : "blur(5px)", transition: "filter 0.3s ease-in-out" }}>
             <StudyDetailBox userId={studyPostData.userId} description={studyPostData.description} title={studyPostData.title} subCategory={studyPostData.subCategory} postId={studyPostData.postId} school={studyPostData.school} major={studyPostData.major} rate={studyPostData.rate} createdAt={studyPostData.createdAt} blogContents={studyPostData.blogContents} keywords={studyPostData.keywords} />
+          </Box>
         </Grid>
       </Grid>
 
@@ -67,6 +89,8 @@ const StudyPostDetailPage = () => {
           <Box />
         }
       </Box>
+
+      <SecretPostDialog dialogOpen={dialogOpen} handleUseCredit={handleDenyAccess} handleDenyAccess={handleDenyAccess} />
     </Box>
   );
 };

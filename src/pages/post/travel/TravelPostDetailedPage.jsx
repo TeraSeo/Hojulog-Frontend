@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getSpecificTravelPost } from '../../../service/PostService';
 import { Box, Grid } from '@mui/material';
 import CategorySidebar from '../../../components/bar/CategorySidebar';
@@ -11,11 +11,15 @@ import TravelDetailBox from '../../../components/box/post/travel/TravelDetailBox
 import EmbeddedMap from '../../../components/box/post/EmbeddedMap';
 import { PostResponsiveFontSize2 } from '../../../constant/FontSizeResponsive';
 import { DetailedPostIconResponsiveSize2 } from '../../../constant/IconSizeResponsive';
+import SecretPostDialog from '../../../components/dialog/SecretPostDialog';
 
 const TravelPostDetailedPage = () => {
   const { postId } = useParams();
   const [travelPostData, setTravelPostData] = useState();
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [isUnlocked, setIsUnlocked] = useState(false);
   const commentBoxRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchPostData(postId);
@@ -25,6 +29,9 @@ const TravelPostDetailedPage = () => {
     getSpecificTravelPost(postId)
       .then((data) => {
         setTravelPostData(data);
+        if (!data.isPublic) {
+          setDialogOpen(true);
+        }
       })
       .catch((error) => console.error("Error fetching posts:", error));
   };
@@ -33,40 +40,84 @@ const TravelPostDetailedPage = () => {
     commentBoxRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleUseCredit = () => {
+    setIsUnlocked(true);
+    setDialogOpen(false);
+  };
+
+  const handleDenyAccess = () => {
+    if (window.history.length > 1) {
+        navigate(-1); 
+    } else {
+        navigate('/'); 
+    }
+  };
+
 
   if (!travelPostData) {
     return <div>Loading...</div>;
   }
 
   return (
-    <Box sx={{  px: { md: "120px", sm: "40px", xs: "0px" } }}>
+    <Box sx={{ px: { md: "120px", sm: "40px", xs: "0px" }, position: "relative", height: "100vh", overflowY: "auto" }}>
+      {/* Content Section */}
       <Grid container spacing={3}>
         <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
           <CategorySidebar />
         </Grid>
 
         <Grid item xs={12} md={9}>
-            <TravelDetailBox userId={travelPostData.userId} title={travelPostData.title} subCategory={travelPostData.subCategory} createdAt={travelPostData.createdAt} price={travelPostData.price} rate={travelPostData.rate} createdDate={travelPostData.createdAt} blogContents={travelPostData.blogContents} keywords={travelPostData.keywords} />
+          <Box sx={{ filter: travelPostData.isPublic ? "none" : "blur(5px)", transition: "filter 0.3s ease-in-out" }}>
+            <TravelDetailBox
+              userId={travelPostData.userId}
+              title={travelPostData.title}
+              subCategory={travelPostData.subCategory}
+              createdAt={travelPostData.createdAt}
+              price={travelPostData.price}
+              rate={travelPostData.rate}
+              createdDate={travelPostData.createdAt}
+              blogContents={travelPostData.blogContents}
+              keywords={travelPostData.keywords}
+            />
+          </Box>
         </Grid>
       </Grid>
+
+      {/* Interaction Section */}
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
-          <LikeCountsText initialLikes={travelPostData.likeCounts} initialIsLiked={travelPostData.isUserLiked} pl={0} postId={travelPostData.postId} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
-          <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
-              <CommentsCountsText isCommentAllowed={travelPostData.isCommentAllowed} commentsCounts={travelPostData.commentCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
-          </Box>
-          <ViewCountsText viewCounts={travelPostData.viewCounts} width={DetailedPostIconResponsiveSize2} height={DetailedPostIconResponsiveSize2} fontSize={PostResponsiveFontSize2} />
+        <LikeCountsText
+          initialLikes={travelPostData.likeCounts}
+          initialIsLiked={travelPostData.isUserLiked}
+          pl={0}
+          postId={travelPostData.postId}
+          width={DetailedPostIconResponsiveSize2}
+          height={DetailedPostIconResponsiveSize2}
+          fontSize={PostResponsiveFontSize2}
+        />
+        <Box sx={{ cursor: "pointer" }} onClick={handleScrollToComments}>
+          <CommentsCountsText
+            isCommentAllowed={travelPostData.isCommentAllowed}
+            commentsCounts={travelPostData.commentCounts}
+            width={DetailedPostIconResponsiveSize2}
+            height={DetailedPostIconResponsiveSize2}
+            fontSize={PostResponsiveFontSize2}
+          />
+        </Box>
+        <ViewCountsText
+          viewCounts={travelPostData.viewCounts}
+          width={DetailedPostIconResponsiveSize2}
+          height={DetailedPostIconResponsiveSize2}
+          fontSize={PostResponsiveFontSize2}
+        />
       </Box>
 
-      { travelPostData.location ? <EmbeddedMap mapUrl={travelPostData.location} /> : <></> }
+      {travelPostData.location ? <EmbeddedMap mapUrl={travelPostData.location} /> : <></>}
 
       <Box sx={{ my: 5 }} ref={commentBoxRef}>
-        {
-          travelPostData.isCommentAllowed ? 
-          <PostCommentBox postId={postId} />
-          :
-          <Box />
-        }
+        {travelPostData.isCommentAllowed ? <PostCommentBox postId={postId} /> : <Box />}
       </Box>
+
+      <SecretPostDialog dialogOpen={dialogOpen} handleUseCredit={handleDenyAccess} handleDenyAccess={handleDenyAccess} />
     </Box>
   );
 };
