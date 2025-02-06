@@ -5,6 +5,9 @@ import CreatedAtText from "../../../texts/CreatedAtText";
 import LocationButton from "../../../buttons/LocationButton";
 import PostRateBox from "../PostRateBox";
 import SummarizedDescriptionText from "../../../texts/SummarizedDescriptionText";
+import HomePostLikeCountsText from "../../../texts/HomePostLikeCountsText";
+import HomePostCommentCountsText from "../../../texts/HomePostCommentCountsText";
+import HomePostViewCountsText from "../../../texts/HomePostViewCountsText";
 
 const TravelPostBox = ({ post }) => {
     return (
@@ -49,10 +52,17 @@ const TravelPostBox = ({ post }) => {
                                 pt: 0.5,
                                 display: "flex",
                                 textOverflow: "ellipsis",
+                                justifyContent: "space-between"
                             }}
                         >
                             <Box sx={{ display: "flex", pr: 1 }}>
                                 <CreatedAtText createdAt={post.createdAt} pl={0} />
+                            </Box>
+
+                            <Box sx={{ display: "flex", gap: 1 }}>
+                                <HomePostLikeCountsText likeCounts={post.likeCounts} />
+                                <HomePostCommentCountsText isCommentAllowed={post.isCommentAllowed} commentsCounts={post.commentCounts} postId={post.postId} />
+                                <HomePostViewCountsText viewCounts={post.viewCounts} />
                             </Box>
                         </Box>
                     </Box>

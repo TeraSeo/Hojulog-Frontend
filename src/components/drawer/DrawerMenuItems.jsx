@@ -76,7 +76,7 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout }) {
                         <ListItemIcon><AccountCircleIcon sx={{ color: "#666" }} /></ListItemIcon>
                         <ListItemText primary="마이페이지" sx={{ color: "#666", fontWeight: "bold" }} />
                     </ListItem>
-                    <ListItem button onClick={() => handleNavigate("/customer-center")}>
+                    <ListItem button onClick={() => handleNavigate("/customer/center")}>
                         <ListItemIcon><HeadsetMicIcon sx={{ color: "#666" }} /></ListItemIcon>
                         <ListItemText primary="고객센터" sx={{ color: "#666", fontWeight: "bold" }} />
                     </ListItem>

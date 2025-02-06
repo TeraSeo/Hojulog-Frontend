@@ -2,12 +2,11 @@ import { Box } from "@mui/material";
 import React from "react";
 import SummarizedPostTitleText from "../../../texts/SummarizedPostTitleText";
 import CreatedAtText from "../../../texts/CreatedAtText";
-import SuburbText from "../../../texts/SuburbText";
-import ViewCountsText from "../../../texts/ViewCountsText";
 import PostRateBox from "../PostRateBox";
 import SummarizedDescriptionText from "../../../texts/SummarizedDescriptionText";
-import { PostResponsiveFontSize2 } from "../../../../constant/FontSizeResponsive";
-import { SummarizedPostIconResponsiveSize1 } from "../../../../constant/IconSizeResponsive";
+import HomePostLikeCountsText from "../../../texts/HomePostLikeCountsText";
+import HomePostCommentCountsText from "../../../texts/HomePostCommentCountsText";
+import HomePostViewCountsText from "../../../texts/HomePostViewCountsText";
 
 const StudyPostBox = ({ post }) => {
     return (
@@ -43,17 +42,21 @@ const StudyPostBox = ({ post }) => {
 
                         <Box
                             sx={{
-                                pt: 1,
+                                pt: 0.5,
                                 display: "flex",
                                 textOverflow: "ellipsis",
                                 justifyContent: "space-between"
                             }}
                         >
                             <Box sx={{ display: "flex", pr: 1 }}>
-                                <CreatedAtText createdAt={post.createdAt} />
+                                <CreatedAtText createdAt={post.createdAt} pl={0} />
                             </Box>
 
-                            <ViewCountsText viewCounts={post.viewCounts} width={SummarizedPostIconResponsiveSize1} height={SummarizedPostIconResponsiveSize1} fontSize={PostResponsiveFontSize2} />
+                            <Box sx={{ display: "flex", gap: 1 }}>
+                                <HomePostLikeCountsText likeCounts={post.likeCounts} />
+                                <HomePostCommentCountsText isCommentAllowed={post.isCommentAllowed} commentsCounts={post.commentCounts} postId={post.postId} />
+                                <HomePostViewCountsText viewCounts={post.viewCounts} />
+                            </Box>
                         </Box>
                     </Box>
                 </Box>

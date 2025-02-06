@@ -10,34 +10,34 @@ import HomeStudyPosts from "../../components/box/home/HomeStudyPosts";
 
 function HomePage() {
     return (
-        <Box sx={{ py: "10px", px: {md: "120px", sm: "40px", xs: "0px"} }}>
+        <Box sx={{ py: "0px", px: {md: "120px", sm: "40px", xs: "0px"} }}>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
                     <CategorySidebar />
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <Box sx={{ mb: 4 }}>
+                    <Box sx={{ mb: 3 }}>
                         <HomePropertyPosts />
                     </Box>
                     
-                    <Box sx={{ mb: 4 }}>
+                    <Box sx={{ mb: 3 }}>
                         <HomeJobPosts />
                     </Box>
 
-                    <Box sx={{ mb: 4 }}>
+                    <Box sx={{ mb: 3 }}>
                         <HomeTransactionPosts />
                     </Box>
 
-                    <Box sx={{ mb: 4 }}>
+                    <Box sx={{ mb: 3 }}>
                         <HomeSocietyPosts />
                     </Box>
 
-                    <Box sx={{ mb: 4 }}>
+                    <Box sx={{ mb: 3 }}>
                         <HomeTravelPosts />
                     </Box>
 
-                    <Box sx={{ mb: 4 }}>
+                    <Box sx={{ mb: 1 }}>
                         <HomeStudyPosts />
                     </Box>
                 </Grid>
