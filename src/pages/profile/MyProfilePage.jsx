@@ -12,6 +12,7 @@ import CommonOwnSummarizedPostBox from "../../components/box/post/CommonOwnSumma
 import { useNavigate } from "react-router-dom";
 import AdminButton from "../../components/buttons/AdminButton";
 import CommonSummarizedInquiryBox from "../../components/box/customer_center/CommonSummarizedInquiryBox";
+import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
 
 const MyProfilePage = () => {
     const navigate = useNavigate();
@@ -32,7 +33,7 @@ const MyProfilePage = () => {
     }
 
     return (
-        <Box sx={{ py: "10px", px: { md: "120px", sm: "40px", xs: "0px" } }}>
+        <Box sx={{ py: "10px", px: CommonPagePaddingXSize }}>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
                     <CategorySidebar />

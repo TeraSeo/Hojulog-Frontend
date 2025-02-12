@@ -13,7 +13,6 @@ const SchoolReivewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
     title: "",
     school: "",
-    rate: 0.0,
     blogContents: [],
     selectedKeywords: [],
     isPublic: true,
@@ -24,15 +23,11 @@ const SchoolReivewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, school, rate, selectedKeywords } = formValues;
+    const { title, school, selectedKeywords } = formValues;
 
     if (!title?.trim()) newErrors.title = titleRequiredError;
 
     if (!school?.trim()) newErrors.school = schoolRequiredError;
-
-    if (rate < 0.0 || rate > 5.0) {
-      newErrors.rate = "평점은 0.0에서 5.0 사이여야 합니다.";
-    }
 
     if (selectedKeywords.length > 12) {
       newErrors.keyword = keywordOverError;
@@ -68,11 +63,6 @@ const SchoolReivewMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           value={formValues.title}
           error={errors.title}
           onChange={(value) => handleInputChange("title", value)}
-        />
-        <RatingField
-          value={formValues.rate}
-          error={errors.rate}
-          onChange={(value) => handleInputChange("rate", value)}
         />
         <SchoolField
           value={formValues.school}

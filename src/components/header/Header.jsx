@@ -76,7 +76,7 @@ function Header() {
                 />
             </Box>
 
-            <Grid container alignItems="center" justifyContent="space-between" sx={{ py: "10px", px: {md: "140px", sm: "60px", xs: "20px"} }}>
+            <Grid container alignItems="center" justifyContent="space-between" sx={{ py: "10px", px: {md: "80px", sm: "60px", xs: "20px"} }}>
                 <Grid item xs={8} sm={8} md={4}>
                     <AppTitle />
                 </Grid>

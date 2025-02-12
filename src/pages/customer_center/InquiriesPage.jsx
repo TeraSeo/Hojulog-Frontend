@@ -5,6 +5,8 @@ import PostPaginationBox from "../../components/box/post/PostPaginationBox";
 import SummarizedInquiryTitleText from "../../components/texts/SummarizedInquiryTitleText";
 import InquiryStatusText from "../../components/texts/InquiryStatusText";
 import { getWholeInquiries } from "../../service/CustomerCenterService";
+import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
+import { TitleResponsiveFontSize1 } from "../../constant/FontSizeResponsive";
 
 const InquiriesPage = () => {
     const [inquiriesPostPageData, setInquiriesPostPageData] = useState({
@@ -38,14 +40,14 @@ const InquiriesPage = () => {
     }
 
     return (
-        <Box sx={{ py: "10px", px: { md: "120px", sm: "40px", xs: "0px" } }}>
+        <Box sx={{ py: "10px", px: CommonPagePaddingXSize }}>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
                     <CategorySidebar />
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
+                    <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1, fontSize: TitleResponsiveFontSize1 }}>
                         문의 내역
                     </Typography>
 

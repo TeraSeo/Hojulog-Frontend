@@ -6,6 +6,7 @@ import CategorySidebar from "../../components/bar/CategorySidebar";
 import { SubTitleResponsiveFontSize1, TitleResponsiveFontSize } from "../../constant/FontSizeResponsive";
 import HomeContainerBox from "../../components/box/home/HomeContainerBox";
 import CommonOwnSummarizedPostBox from "../../components/box/post/CommonOwnSummarizedPostBox";
+import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
 
 const OtherProfilePage = () => {
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ const OtherProfilePage = () => {
     }
 
     return (
-        <Box sx={{ py: "10px", px: { md: "120px", sm: "40px", xs: "0px" } }}>
+        <Box sx={{ py: "10px", px: CommonPagePaddingXSize }}>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
                     <CategorySidebar />

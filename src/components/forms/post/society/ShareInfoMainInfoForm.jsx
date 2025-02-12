@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Grid, Paper } from "@mui/material";
 import TitleField from "../../../textfields/TitleField";
-import DescriptionField from "../../../textfields/DescriptionField";
-import ContactField from "../../../textfields/ContactField";
-import EmailField from "../../../textfields/EmailField";
-import { isValidPhoneNumber } from "libphonenumber-js";
-import SuburbField from "../../../textfields/SuburbField";
-import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, keywordOverError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
+import { keywordOverError, titleRequiredError } from "../../../../constant/ErrorMsg";
 import PostVisibleField from "../../../textfields/PostVisibleField";
 import SocietyKeyWordField from "../../../textfields/SocietyKeyWordField";
 import CommentAvailabilityField from "../../../textfields/CommentAvailabilityField";

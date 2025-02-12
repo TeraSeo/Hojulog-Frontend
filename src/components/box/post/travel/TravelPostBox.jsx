@@ -3,7 +3,6 @@ import React from "react";
 import SummarizedPostTitleText from "../../../texts/SummarizedPostTitleText";
 import CreatedAtText from "../../../texts/CreatedAtText";
 import LocationButton from "../../../buttons/LocationButton";
-import PostRateBox from "../PostRateBox";
 import SummarizedDescriptionText from "../../../texts/SummarizedDescriptionText";
 import HomePostLikeCountsText from "../../../texts/HomePostLikeCountsText";
 import HomePostCommentCountsText from "../../../texts/HomePostCommentCountsText";
@@ -39,7 +38,6 @@ const TravelPostBox = ({ post }) => {
                             <Box sx={{whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",}}>
                                 <SummarizedPostTitleText title={post.title} postId={post.postId} category={"여행"} pl={0} />
                                 <SummarizedDescriptionText description={post.description} pl={0} />
-                                <PostRateBox rate={post.rate} px={0} />
                             </Box>
 
                             <Box sx={{ ml: 1 }}>

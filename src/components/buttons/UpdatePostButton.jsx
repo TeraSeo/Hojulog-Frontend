@@ -4,7 +4,7 @@ import { ButtonWidthSize1 } from "../../constant/WidthHeightResponsive";
 import { ButtonResponsiveFontSize1 } from "../../constant/FontSizeResponsive";
 import { useNavigate } from "react-router-dom";
 
-const UpdatePostButton = ({ postId }) => {
+const UpdatePostButton = ({ category, subCategory, postId }) => {
     const navigate = useNavigate();
 
     return (
@@ -19,7 +19,7 @@ const UpdatePostButton = ({ postId }) => {
                 overflow: "hidden",
                 flexShrink: 0
             }}
-            onClick={() => {}}
+            onClick={() => { navigate(`/update/${category}/${subCategory}/${postId}`) }}
         >
             수정
         </Button>

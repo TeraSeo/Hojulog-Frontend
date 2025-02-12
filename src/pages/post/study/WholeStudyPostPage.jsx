@@ -5,6 +5,7 @@ import StudyPostBox from "../../../components/box/post/study/StudyPostBox";
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import { getStudyPostsByPage } from "../../../service/PostService";
 import PageTitleText from "../../../components/texts/PageTitleText";
+import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
 
 function WholeStudyPostPage() {
     const [studyPageData, setStudyPageData] = useState({
@@ -34,7 +35,7 @@ function WholeStudyPostPage() {
     };
 
     return (
-        <Box sx={{ py: "10px", px: {md: "120px", sm: "40px", xs: "0px"} }}>
+        <Box sx={{ py: "10px", px: CommonPagePaddingXSize }}>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
                     <CategorySidebar />

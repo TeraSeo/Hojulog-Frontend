@@ -5,7 +5,6 @@ import CountrySelectField from "../../../textfields/CountrySelectField";
 import { countryRequiredError, keywordOverError, locationFormatError, locationRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
 import LocationField from "../../../textfields/LocationField";
 import LocationDialog from "../../../dialog/LocationDialog";
-import RatingField from "../../../textfields/RatingField";
 import ContentBlockManager from "../ContentBlockManager";
 import PostVisibleField from "../../../textfields/PostVisibleField";
 import TravelKeyWordField from "../../../textfields/TravelKeyWordField";
@@ -13,10 +12,10 @@ import CommentAvailabilityField from "../../../textfields/CommentAvailabilityFie
 
 const PlaceMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
+    // postId: mainInfoData.postId,
     title: "",
     country: "호주",
     location: "",
-    rate: 0.0,
     blogContents: [],
     selectedKeywords: [],
     isPublic: true,
@@ -51,7 +50,7 @@ const PlaceMainInfoForm = ({ onDataChange, setIsFormValid }) => {
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, country, location, rate, selectedKeywords } = formValues;
+    const { title, country, location, selectedKeywords } = formValues;
 
     if (!title?.trim()) newErrors.title = titleRequiredError;
 
@@ -61,10 +60,6 @@ const PlaceMainInfoForm = ({ onDataChange, setIsFormValid }) => {
       newErrors.location = locationRequiredError;
     } else if (!locationPattern.test(location)) {
       newErrors.location = locationFormatError;
-    }
-
-    if (rate < 0.0 || rate > 5.0) {
-      newErrors.rate = "평점은 0.0에서 5.0 사이여야 합니다.";
     }
 
     if (selectedKeywords.length > 12) {
@@ -93,7 +88,7 @@ const PlaceMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         주요 정보 입력
       </Typography>
       <Typography variant="body2" color="textSecondary" gutterBottom>
-        제목, 평점, 나라 등 정보를 입력하세요.
+        제목, 나라 등 정보를 입력하세요.
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 1 }}>
@@ -101,11 +96,6 @@ const PlaceMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           value={formValues.title}
           error={errors.title}
           onChange={(value) => handleInputChange("title", value)}
-        />
-        <RatingField
-          value={formValues.rate}
-          error={errors.rate}
-          onChange={(value) => handleInputChange("rate", value)}
         />
         <CountrySelectField
           value={formValues.country}

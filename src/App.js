@@ -79,6 +79,17 @@ import OthersUploadedPostPage from './pages/post/OthersUploadedPostPage';
 import CustomerCenterPage from './pages/customer_center/CustomerCenterPage';
 import AdminPage from './pages/admin/AdminPage';
 import InquiriesPage from './pages/customer_center/InquiriesPage';
+import RankingPage from './pages/ranking/RankingPage';
+import EditCoursePostPage from './pages/post/travel/EditCoursePostPage';
+import EditTravelPage from './pages/post/travel/EditTravelPage';
+import EditRestaurantPostPage from './pages/post/travel/EditRestaurantPostPage';
+import EditJobReviewPostPage from './pages/post/study/EditJobReviewPostPage';
+import EditLanguageStudyPostPage from './pages/post/study/EditLanguageStudyPostPage';
+import EditSchoolPostPage from './pages/post/study/EditSchoolPostPage';
+import EditWorkingHolidayPostPage from './pages/post/study/EditWorkingHolidayPostPage';
+import EditLifeStylePostPage from './pages/post/society/EditLifeStylePostPage';
+import EditHobbyPostPage from './pages/post/society/EditHobbyPostPage';
+import EditFreindshipPostPage from './pages/post/society/EditFreindshipPostPage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -186,9 +197,23 @@ function App() {
             <Route path="home" element={<HomePage />} />
             <Route path="mypage" element={<MyProfilePage />} />
             <Route path="admin" element={<AdminPage />} />
+            <Route path="ranking" element={<RankingPage />} />
             <Route path="customer/center" element={<CustomerCenterPage />} />
             <Route path="otherpage/:userId" element={<OtherProfilePage />} />
             <Route path="update/mypage/:userId" element={<UpdateProfilePage />} />
+
+            <Route path="update/여행/여행지/:postId" element={<EditTravelPage />} />
+            <Route path="update/여행/코스/:postId" element={<EditCoursePostPage />} />
+            <Route path="update/여행/레스토랑/:postId" element={<EditRestaurantPostPage />} />
+
+            <Route path="update/유학/취업후기/:postId" element={<EditJobReviewPostPage />} />
+            <Route path="update/유학/어학연수후기/:postId" element={<EditLanguageStudyPostPage />} />
+            <Route path="update/유학/학교후기/:postId" element={<EditSchoolPostPage />} />
+            <Route path="update/유학/워홀후기/:postId" element={<EditWorkingHolidayPostPage />} />
+
+            <Route path="update/생활/라이프스타일/:postId" element={<EditLifeStylePostPage />} />
+            <Route path="update/생활/동호회/:postId" element={<EditHobbyPostPage />} />
+            <Route path="update/생활/친목/:postId" element={<EditFreindshipPostPage />} />
 
             <Route path="부동산" element={<WholePropertyPostPage />} />
             <Route path="구인구직" element={<WholeJobPostPage />} />

@@ -1,0 +1,1 @@
+export const CommonPagePaddingXSize = {md: "60px", sm: "40px", xs: "0px"};

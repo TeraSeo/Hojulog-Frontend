@@ -5,6 +5,7 @@ import { getWholeOthersPosts } from "../../service/PostService";
 import PostPaginationBox from "../../components/box/post/PostPaginationBox";
 import CommonOwnSummarizedPostBoxByPost from "../../components/box/post/CommonOwnSummarizedPostBoxByPost";
 import { useParams } from "react-router-dom";
+import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
 
 function OthersUploadedPostPage() {
     const { userId, username } = useParams();
@@ -35,7 +36,7 @@ function OthersUploadedPostPage() {
     };
 
     return (
-        <Box sx={{ py: "10px", px: { md: "120px", sm: "40px", xs: "0px" } }}>
+        <Box sx={{ py: "10px", px: CommonPagePaddingXSize }}>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
                     <CategorySidebar />

@@ -4,6 +4,8 @@ import CategorySidebar from "../../components/bar/CategorySidebar";
 import { useNavigate, useParams } from "react-router-dom";
 import { getSpecificOwnUser, updateUserInfo } from "../../service/UserService";
 import { Logout } from "@mui/icons-material";
+import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
+import { TitleResponsiveFontSize1 } from "../../constant/FontSizeResponsive";
 
 const UpdateProfilePage = () => {
     const { userId } = useParams();
@@ -42,34 +44,36 @@ const UpdateProfilePage = () => {
 
     const handleSave = () => {
         const userFormData = new FormData();
-        userFormData.append("username", username);
-        userFormData.append("description", description);
-        if (profilePicture) {
-            userFormData.append("profilePicture", profilePicture);
-        }
-        else {
-            userFormData.append("profilePicture", null);
-        }
-
-        updateUserInfo(userFormData, userId).then((isUpdated) => {
-            if (isUpdated) {
-                navigate("/mypage");
+        if (username !== null && username !== "" && description !== null && description !== "") {
+            userFormData.append("username", username);
+            userFormData.append("description", description);
+            if (profilePicture) {
+                userFormData.append("profilePicture", profilePicture);
             }
             else {
-                Logout();
+                userFormData.append("profilePicture", null);
             }
-        });
+
+            updateUserInfo(userFormData, userId).then((isUpdated) => {
+                if (isUpdated) {
+                    navigate("/mypage");
+                }
+                else {
+                    Logout();
+                }
+            });
+        }
     };
 
     return (
-        <Box sx={{ py: "10px", px: { md: "120px", sm: "40px", xs: "0px" } }}>
+        <Box sx={{ py: "10px", px: CommonPagePaddingXSize }}>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
                     <CategorySidebar />
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <Typography variant="h5" sx={{ mb: 3 }}>
+                    <Typography sx={{ mb: 3, fontSize: TitleResponsiveFontSize1, fontWeight: "bold" }}>
                         내 정보 수정
                     </Typography>
                     <Box component="form" noValidate autoComplete="off" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>

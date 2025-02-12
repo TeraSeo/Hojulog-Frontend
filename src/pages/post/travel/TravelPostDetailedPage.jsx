@@ -20,6 +20,7 @@ const TravelPostDetailedPage = () => {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const commentBoxRef = useRef(null);
   const navigate = useNavigate();
+  const userId = Number(localStorage.getItem('userId'));
 
   useEffect(() => {
     fetchPostData(postId);
@@ -29,7 +30,7 @@ const TravelPostDetailedPage = () => {
     getSpecificTravelPost(postId)
       .then((data) => {
         setTravelPostData(data);
-        if (!data.isPublic) {
+        if (!data.isPublic && data.userId !== userId) {
           setDialogOpen(true);
         }
       })
@@ -59,15 +60,14 @@ const TravelPostDetailedPage = () => {
   }
 
   return (
-    <Box sx={{ px: { md: "120px", sm: "40px", xs: "0px" }, position: "relative", height: "100vh", overflowY: "auto" }}>
-      {/* Content Section */}
+    <Box sx={{ px: { md: "120px", sm: "40px", xs: "0px" } }}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
           <CategorySidebar />
         </Grid>
 
         <Grid item xs={12} md={9}>
-          <Box sx={{ filter: travelPostData.isPublic ? "none" : "blur(5px)", transition: "filter 0.3s ease-in-out" }}>
+          <Box sx={{ filter: travelPostData.isPublic || travelPostData.userId === userId ? "none" : "blur(5px)", transition: "filter 0.3s ease-in-out" }}>
             <TravelDetailBox
               userId={travelPostData.userId}
               title={travelPostData.title}
@@ -83,7 +83,6 @@ const TravelPostDetailedPage = () => {
         </Grid>
       </Grid>
 
-      {/* Interaction Section */}
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end" }}>
         <LikeCountsText
           initialLikes={travelPostData.likeCounts}

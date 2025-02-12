@@ -5,6 +5,7 @@ import { getJobSeekingPostsByPage } from "../../../service/PostService";
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import JobPostBox from "../../../components/box/post/job/JobPostBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
+import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
 
 const WholeJobSeekingPostPage = () => {
     const [postPageData, setPostPageData] = useState({
@@ -34,7 +35,7 @@ const WholeJobSeekingPostPage = () => {
     };
 
     return (
-        <Box sx={{ px: { md: "120px", sm: "40px", xs: "0px" } }}>
+        <Box sx={{ px: CommonPagePaddingXSize }}>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
                     <CategorySidebar />

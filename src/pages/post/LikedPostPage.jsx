@@ -4,6 +4,8 @@ import CategorySidebar from "../../components/bar/CategorySidebar";
 import { getWholeLikedPosts } from "../../service/PostService";
 import PostPaginationBox from "../../components/box/post/PostPaginationBox";
 import CommonOwnSummarizedPostBoxByPost from "../../components/box/post/CommonOwnSummarizedPostBoxByPost";
+import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
+import { TitleResponsiveFontSize1 } from "../../constant/FontSizeResponsive";
 
 function LikedPostPage() {
     const [likedPostPageData, setLikedPostPageData] = useState({
@@ -33,14 +35,14 @@ function LikedPostPage() {
     };
 
     return (
-        <Box sx={{ py: "10px", px: { md: "120px", sm: "40px", xs: "0px" } }}>
+        <Box sx={{ py: "10px", px: CommonPagePaddingXSize }}>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
                     <CategorySidebar />
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
+                    <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1, fontSize: TitleResponsiveFontSize1 }}>
                         내가 좋아요 한 게시물
                     </Typography>
 

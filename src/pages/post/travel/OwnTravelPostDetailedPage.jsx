@@ -14,6 +14,7 @@ import ViewCountsText from '../../../components/texts/ViewCountsText';
 import { PostResponsiveFontSize2 } from '../../../constant/FontSizeResponsive';
 import { DetailedPostIconResponsiveSize2 } from '../../../constant/IconSizeResponsive';
 import SecretPostDialog from '../../../components/dialog/SecretPostDialog';
+import { CommonPagePaddingXSize } from '../../../constant/PaddingResponsiveSize';
 
 const OwnTravelPostDetailedPage = () => {
   const { postId } = useParams();
@@ -22,6 +23,7 @@ const OwnTravelPostDetailedPage = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [isUnlocked, setIsUnlocked] = useState(false);
   const navigate = useNavigate();
+  const userId = Number(localStorage.getItem('userId'));
     
   
   useEffect(() => {
@@ -32,7 +34,7 @@ const OwnTravelPostDetailedPage = () => {
     getSpecificTravelPost(postId)
       .then((data) => {
         setTravelPostData(data);
-        if (!data.isPublic) {
+        if (!data.isPublic && data.userId !== userId) {
           setDialogOpen(true);
         }
       })
@@ -61,14 +63,14 @@ const OwnTravelPostDetailedPage = () => {
   }
 
   return (
-    <Box sx={{  px: { md: "120px", sm: "40px", xs: "0px" } }}>
+    <Box sx={{ px: CommonPagePaddingXSize }}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
           <CategorySidebar />
         </Grid>
 
         <Grid item xs={12} md={9}>
-          <Box sx={{ filter: travelPostData.isPublic ? "none" : "blur(5px)", transition: "filter 0.3s ease-in-out" }}>
+          <Box sx={{ filter: travelPostData.isPublic || travelPostData.userId === userId ? "none" : "blur(5px)", transition: "filter 0.3s ease-in-out" }}>
             <TravelDetailBox userId={travelPostData.userId} title={travelPostData.title} subCategory={travelPostData.subCategory} postId={travelPostData.postId} createdAt={travelPostData.createdAt} price={travelPostData.price} rate={travelPostData.rate} createdDate={travelPostData.createdAt} blogContents={travelPostData.blogContents} keywords={travelPostData.keywords} />
           </Box>
         </Grid>
@@ -83,7 +85,7 @@ const OwnTravelPostDetailedPage = () => {
       </Box>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end", gap: 1 }}>
-          <UpdatePostButton postId={travelPostData.postId} />
+          <UpdatePostButton category={"여행"} subCategory={travelPostData.subCategory} postId={travelPostData.postId} />
           <RemovePostButton postId={travelPostData.postId} />
       </Box>
 

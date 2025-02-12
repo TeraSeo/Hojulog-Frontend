@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Typography, Grid, Paper } from "@mui/material";
 import TitleField from "../../../textfields/TitleField";
 import { keywordOverError, titleRequiredError } from "../../../../constant/ErrorMsg";
-import RatingField from "../../../textfields/RatingField";
 import ContentBlockManager from "../ContentBlockManager";
 import PostVisibleField from "../../../textfields/PostVisibleField";
 import StudyKeyWordField from "../../../textfields/StudyKeyWordField";
@@ -11,7 +10,6 @@ import CommentAvailabilityField from "../../../textfields/CommentAvailabilityFie
 const WorkingHolidayMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
     title: "",
-    rate: 0.0,
     blogContents: [],
     selectedKeywords: [],
     isPublic: true,
@@ -22,13 +20,9 @@ const WorkingHolidayMainInfoForm = ({ onDataChange, setIsFormValid }) => {
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title,  rate, selectedKeywords } = formValues;
+    const { title, selectedKeywords } = formValues;
 
     if (!title?.trim()) newErrors.title = titleRequiredError;
-
-    if (rate < 0.0 || rate > 5.0) {
-      newErrors.rate = "평점은 0.0에서 5.0 사이여야 합니다.";
-    }
 
     if (selectedKeywords.length > 12) {
       newErrors.keyword = keywordOverError;
@@ -64,11 +58,6 @@ const WorkingHolidayMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           value={formValues.title}
           error={errors.title}
           onChange={(value) => handleInputChange("title", value)}
-        />
-        <RatingField
-          value={formValues.rate}
-          error={errors.rate}
-          onChange={(value) => handleInputChange("rate", value)}
         />
 
         <PostVisibleField

@@ -9,3 +9,6 @@ export const PostResponsiveFontSize1 = { md: "14px", sm: "12px", xs: "10px" };
 export const PostResponsiveFontSize2 = { md: "13px", sm: "11px", xs: "9px" };
 export const PostResponsiveFontSize3 = { md: "10px", sm: "9px", xs: "8px" };
 export const ComponentTextResponsiveFontSize1 = { md: "11px", sm: "10px", xs: "9px" };
+export const RankResponsiveFontSize1 = { md: "18px", sm: "16px", xs: "14px" };
+export const RankUsernameResponsiveFontSize1 = { md: "15px", sm: "14px", xs: "12px" };
+export const RankLikeCountResponsiveFontSize1 = { md: "14px", sm: "13px", xs: "12px" };

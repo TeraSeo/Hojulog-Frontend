@@ -1,10 +1,16 @@
-import { Box } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import React from "react"
 import CreatedAtText from "../../texts/CreatedAtText";
 import SummarizedOwnPostTitleText from "../../texts/SummarizedOwnPostTitleText";
-import ViewCountsText from "../../texts/ViewCountsText";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { PostEditButtonResponsiveSize1, PostRemoveButtonResponsiveSize1 } from "../../../constant/ComponentSizeResponsive";
+import { PostEditIconResponsiveSize1, PostRemoveIconResponsiveSize1 } from "../../../constant/IconSizeResponsive";
+import { useNavigate } from "react-router-dom";
 
 const CommonOwnSummarizedPostBoxByPost = ({ post }) => {
+    const navigate = useNavigate();
+
     return (
         <Box
             sx={{
@@ -36,8 +42,40 @@ const CommonOwnSummarizedPostBoxByPost = ({ post }) => {
                             <CreatedAtText createdAt={post.createdAt} />
                         </Box>
                     </Box>
-                    <Box sx={{ alignContent: "end" }}>
-                        <ViewCountsText viewCounts={post.viewCounts} />
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                        <IconButton
+                            onClick={() => { navigate(`/update/${post.category}/${post.subCategory}/${post.id}`) }}
+                            sx={{
+                                color: "white",
+                                backgroundColor: "#1976d2",
+                                "&:hover": { backgroundColor: "#115293" },
+                                borderRadius: "8px",
+                                width: PostEditButtonResponsiveSize1,
+                                height: PostEditButtonResponsiveSize1,
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}
+                        >
+                            <EditIcon sx={{ fontSize: PostEditIconResponsiveSize1 }} />
+                        </IconButton>
+
+                        <IconButton
+                            onClick={() => {}}
+                            sx={{
+                                color: "white",
+                                backgroundColor: "#d32f2f",
+                                "&:hover": { backgroundColor: "#9a0007" },
+                                borderRadius: "8px",
+                                width: PostRemoveButtonResponsiveSize1,
+                                height: PostRemoveButtonResponsiveSize1,
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}
+                        >
+                            <DeleteIcon sx={{ fontSize: PostRemoveIconResponsiveSize1 }} />
+                        </IconButton>
                     </Box>
                 </Box>
             </Box>

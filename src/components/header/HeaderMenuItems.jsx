@@ -6,20 +6,21 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle"; 
 import HeadsetMicIcon from "@mui/icons-material/HeadsetMic";
+import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import { useNavigate } from "react-router-dom";
 
 function HeaderMenuItems({ isAuthenticated, handleLogout }) {
     const navigate = useNavigate();
 
     return (
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2, px: "130px" }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2, px: "70px" }}>
             {isAuthenticated ? (
                 <>
                     <Button
                         variant="text"
                         startIcon={<NoteAltIcon />}
                         sx={{
-                            color: "#FFFFFF", // 666
+                            color: "#FFFFFF",
                             fontSize: "14px",
                             fontWeight: "bold",
                             textTransform: "none",
@@ -27,6 +28,20 @@ function HeaderMenuItems({ isAuthenticated, handleLogout }) {
                         onClick={() => navigate("/launch")}
                     >
                         등록하기
+                    </Button>
+
+                    <Button
+                        variant="text"
+                        startIcon={<LeaderboardIcon />}
+                        sx={{
+                            color: "#FFFFFF",
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                            textTransform: "none",
+                        }}
+                        onClick={() => navigate("/ranking")}
+                    >
+                        이주의 순위
                     </Button>
 
                     <Button

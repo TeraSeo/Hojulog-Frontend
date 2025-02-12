@@ -6,6 +6,7 @@ import InquiryMediaUploadForm from "../../components/forms/customer_center/Inqui
 import { primaryColor } from "../../constant/Color";
 import { useNavigate } from "react-router-dom";
 import { postInquiry } from "../../service/CustomerCenterService";
+import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
 
 const CustomerCenterPage = () => {
     const [isMainValid, setIsMainValid] = useState(false);
@@ -41,7 +42,7 @@ const CustomerCenterPage = () => {
         }
       };
 
-    return <Box sx={{ py: "0px", px: { md: "120px", sm: "40px", xs: "0px" } }}>
+    return <Box sx={{ py: "0px", px: CommonPagePaddingXSize }}>
         <Grid container spacing={3}>
             <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
                 <CategorySidebar />

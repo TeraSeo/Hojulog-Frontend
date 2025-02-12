@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Divider } from '@mui/material';
 import DetailedPostTitleText from '../../../texts/DetailedPostTitleText';
-import PostRateBox from '../PostRateBox';
 import CreatedAtText from '../../../texts/CreatedAtText';
 import BlogContentBox from '../BlogContentBox';
 import PostProfileBox from '../PostProfileBox';
@@ -9,12 +8,8 @@ import PostKeywordText from '../../../texts/PostKeywordText';
 
 const TravelDetailBox = ({ userId, title, subCategory, rate, createdDate, blogContents=[], keywords=[] }) => {
   return (
-    <Box>
-      <Box>
         <Box sx={{ pl: 1 }}>
             <DetailedPostTitleText subCategory={subCategory} title={title} />
-
-            <PostRateBox rate={rate} px={0} />
 
             <PostProfileBox userId={userId} />
             
@@ -31,8 +26,6 @@ const TravelDetailBox = ({ userId, title, subCategory, rate, createdDate, blogCo
               </Box>
             )}
         </Box>
-      </Box>
-    </Box>
   );
 };
 

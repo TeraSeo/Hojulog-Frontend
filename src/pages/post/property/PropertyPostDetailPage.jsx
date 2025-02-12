@@ -11,6 +11,7 @@ import ViewCountsText from '../../../components/texts/ViewCountsText';
 import PostCommentBox from '../../../components/box/comment/PostCommentsBox';
 import { PostResponsiveFontSize2 } from '../../../constant/FontSizeResponsive';
 import { DetailedPostIconResponsiveSize2 } from '../../../constant/IconSizeResponsive';
+import { CommonPagePaddingXSize } from '../../../constant/PaddingResponsiveSize';
 
 const PropertyPostDetailPage = () => {
   const { postId } = useParams();
@@ -38,7 +39,7 @@ const PropertyPostDetailPage = () => {
   }
 
   return (
-    <Box sx={{  px: { md: "120px", sm: "40px", xs: "0px" } }}>
+    <Box sx={{  px: CommonPagePaddingXSize }}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
           <CategorySidebar />

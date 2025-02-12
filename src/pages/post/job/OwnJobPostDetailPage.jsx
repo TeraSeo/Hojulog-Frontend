@@ -13,6 +13,7 @@ import CommentsCountsText from '../../../components/texts/CommentsCountsText';
 import ViewCountsText from '../../../components/texts/ViewCountsText';
 import { DetailedPostIconResponsiveSize2 } from '../../../constant/IconSizeResponsive';
 import { PostResponsiveFontSize2 } from '../../../constant/FontSizeResponsive';
+import { CommonPagePaddingXSize } from '../../../constant/PaddingResponsiveSize';
 
 const OwnJobPostDetailPage = () => {
   const { postId } = useParams();
@@ -40,7 +41,7 @@ const OwnJobPostDetailPage = () => {
   }
 
   return (
-    <Box sx={{ py: "0px", px: { md: "120px", sm: "40px", xs: "0px" } }}>
+    <Box sx={{ py: "0px", px: CommonPagePaddingXSize }}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
           <CategorySidebar />

@@ -8,7 +8,6 @@ import BlogContentBox from '../BlogContentBox';
 
 const SoceityDetailBox = ({ userId, title, subCategory, createdAt, blogContents=[], keywords=[] }) => {
   return (
-    <Box>
       <Box sx={{ pl: 1 }}>
           <DetailedPostTitleText subCategory={subCategory} title={title} />
 
@@ -27,7 +26,6 @@ const SoceityDetailBox = ({ userId, title, subCategory, createdAt, blogContents=
             </Box>
           )}
       </Box>
-    </Box>
   );
 };
 

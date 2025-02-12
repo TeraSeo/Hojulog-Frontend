@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import HomeContainerBox from "../../components/box/home/HomeContainerBox";
 import { useNavigate } from "react-router-dom";
 import { getAdminData } from "../../service/AdminService";
+import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
 
 const AdminPage = () => {
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ const AdminPage = () => {
     }
 
     return (
-        <Box sx={{ py: "0px", px: { md: "120px", sm: "40px", xs: "0px" } }}>
+        <Box sx={{ py: "0px", px: CommonPagePaddingXSize }}>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={12}>
                     <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>

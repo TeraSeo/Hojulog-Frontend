@@ -12,6 +12,7 @@ import SoceityDetailBox from '../../../components/box/post/society/SocietyDetail
 import { PostResponsiveFontSize2 } from '../../../constant/FontSizeResponsive';
 import { DetailedPostIconResponsiveSize2 } from '../../../constant/IconSizeResponsive';
 import SecretPostDialog from '../../../components/dialog/SecretPostDialog';
+import { CommonPagePaddingXSize } from '../../../constant/PaddingResponsiveSize';
 
 const SocietyPostDetailPage = () => {
   const { postId } = useParams();
@@ -20,6 +21,7 @@ const SocietyPostDetailPage = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [isUnlocked, setIsUnlocked] = useState(false);
   const navigate = useNavigate();
+  const userId = Number(localStorage.getItem('userId'));
 
   useEffect(() => {
     fetchPostData(postId);
@@ -29,7 +31,7 @@ const SocietyPostDetailPage = () => {
     getSpecificSocietyPost(postId)
       .then((data) => {
         setSocietyPostData(data);
-        if (!data.isPublic) {
+        if (!data.isPublic && data.userId !== userId) {
           setDialogOpen(true);
         }
       })
@@ -58,14 +60,14 @@ const SocietyPostDetailPage = () => {
   }
 
   return (
-    <Box sx={{  px: { md: "120px", sm: "40px", xs: "0px" } }}>
+    <Box sx={{  px: CommonPagePaddingXSize }}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={3} sx={{ display: { xs: "none", md: "block" } }}>
           <CategorySidebar />
         </Grid>
 
         <Grid item xs={12} md={9}>
-          <Box sx={{ filter: societyPostData.isPublic ? "none" : "blur(5px)", transition: "filter 0.3s ease-in-out" }}>
+          <Box sx={{ filter: societyPostData.isPublic || societyPostData.userId === userId ? "none" : "blur(5px)", transition: "filter 0.3s ease-in-out" }}>
             <SoceityDetailBox userId={societyPostData.userId} imageUrls={societyPostData.imageUrls} description={societyPostData.description} title={societyPostData.title} subCategory={societyPostData.subCategory} postId={societyPostData.postId} contact={societyPostData.contact} email={societyPostData.email} createdAt={societyPostData.createdAt} blogContents={societyPostData.blogContents} keywords={societyPostData.keywords} />
           </Box>
         </Grid>
