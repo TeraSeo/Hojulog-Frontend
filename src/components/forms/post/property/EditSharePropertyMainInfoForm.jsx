@@ -4,31 +4,44 @@ import TitleField from "../../../textfields/TitleField";
 import DescriptionField from "../../../textfields/DescriptionField";
 import ContactField from "../../../textfields/ContactField";
 import EmailField from "../../../textfields/EmailField";
+import PeriodField from "../../../textfields/PeriodField";
+import PriceField from "../../../textfields/PriceField";
+import AvailableTimeField from "../../../textfields/AvailableTimeField";
 import SuburbField from "../../../textfields/SuburbField";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import LocationField from "../../../textfields/LocationField";
 import LocationDialog from "../../../dialog/LocationDialog";
-import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, jobTypeRequiredError, keywordOverError, locationFormatError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
-import JobKeyWordField from "../../../textfields/JobKeyWordField";
+import { availableTimeRequiredError, contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, keywordOverError, locationFormatError, locationRequiredError, periodRequiredError, priceFormatError, priceRequiredError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
+import RoomCountField from "../../../textfields/RoomCountField";
+import BathroomTypeField from "../../../textfields/BathroomTypeField";
+import ParkableField from "../../../textfields/ParkableField";
+import BillIncludedField from "../../../textfields/BillIncludedField";
+import PropertyKeyWordField from "../../../textfields/PropertyKeyWordField";
 import CommentAvailabilityField from "../../../textfields/CommentAvailabilityField";
-import JobTypeField from "../../../textfields/JobTypeField";
 
-const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
+const EditSharePropertyMainInfoForm = ({ onDataChange, setIsFormValid, mainInfoData }) => {
   const [formValues, setFormValues] = useState({
-    title: "",
-    description: "",
-    contact: "",
-    email: "",
-    suburb: "",
-    jobType: "",
-    location: "",
-    selectedKeywords: [],
-    isCommentAllowed: true
+    postId: mainInfoData.postId,
+    title: mainInfoData.title,
+    description: mainInfoData.description,
+    contact: mainInfoData.contact,
+    email: mainInfoData.email,
+    period: mainInfoData.period,
+    price: String(mainInfoData.price),
+    availableTime: mainInfoData.availableTime,
+    suburb: mainInfoData.suburb,
+    location: mainInfoData.location,
+    roomCount: mainInfoData.roomCount,
+    bathroomType: mainInfoData.bathroomType,
+    isParkable: mainInfoData.isParkable,
+    isBillIncluded: mainInfoData.isBillIncluded,
+    selectedKeywords: mainInfoData.selectedKeywords,
+    isCommentAllowed: mainInfoData.isCommentAllowed
   });
 
   const [errors, setErrors] = useState({});
   const [mapOpen, setMapOpen] = useState(false);
-    
+
   const locationPattern = /^https:\/\/(www\.)?google\.[a-z]+\/maps(\?.*|\/.*)?$/;
 
   const validateLocation = (value) => {
@@ -51,11 +64,10 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
       location: url
     }));
   };
-  
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, suburb, location, jobType, selectedKeywords } = formValues;
+    const { title, description, contact, email, period, price, availableTime, suburb, location, selectedKeywords } = formValues;
 
     if (!title?.trim()) newErrors.title = titleRequiredError;
     if (!description?.trim()) newErrors.description = descriptionRequiredError;
@@ -73,15 +85,27 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
       newErrors.email = emailFormatError;
     }
 
+    if (!period?.trim()) {
+      newErrors.period = periodRequiredError;
+    }
+
+    if (!price?.trim()) {
+      newErrors.price = priceRequiredError;
+    } else if (isNaN(price)) {
+      newErrors.price = priceFormatError;
+    }
+
+    if (!availableTime?.trim()) {
+      newErrors.availableTime = availableTimeRequiredError;
+    }
+
     if (!suburb?.trim()) {
       newErrors.suburb = suburbRequiredError;
     }
 
-    if (!jobType?.trim()) {
-      newErrors.jobType = jobTypeRequiredError;
-    }
-    
-    if (location?.trim() && !locationPattern.test(location)) {
+    if (!location.trim()) {
+      newErrors.location = locationRequiredError;
+    } else if (!locationPattern.test(location)) {
       newErrors.location = locationFormatError;
     }
 
@@ -111,7 +135,7 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         주요 정보 입력
       </Typography>
       <Typography variant="body2" color="textSecondary" gutterBottom>
-        제목, 설명, 연락처, 이메일, 과목, 지역 등 정보를 입력하세요.
+        제목, 설명, 연락처, 이메일, 기간, 가격, 지역 등 정보를 입력하세요.
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 1 }}>
@@ -130,15 +154,45 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           error={errors.contact}
           onChange={(value) => handleInputChange("contact", value)}
         />
-        <JobTypeField
-          value={formValues.jobType}
-          error={errors.jobType}
-          onChange={(value) => handleInputChange("jobType", value)}
-        />
         <EmailField
           value={formValues.email}
           error={errors.email}
           onChange={(value) => handleInputChange("email", value)}
+        />
+        <PeriodField
+          value={formValues.period}
+          error={errors.period}
+          onChange={(value) => handleInputChange("period", value)}
+        />
+        <PriceField
+          value={formValues.price}
+          error={errors.price}
+          onChange={(value) => handleInputChange("price", value)}
+        />
+        <RoomCountField
+          value={formValues.roomCount}
+          error={errors.roomCount}
+          onChange={(value) => handleInputChange("roomCount", value)}
+        />
+        <BathroomTypeField
+          value={formValues.bathroomType}
+          error={errors.bathroomType}
+          onChange={(value) => handleInputChange("bathroomType", value)}
+        />
+        <ParkableField
+          value={formValues.isParkable}
+          error={errors.isParkable}
+          onChange={(value) => handleInputChange("isParkable", value)}
+        />
+        <BillIncludedField
+          value={formValues.isBillIncluded}
+          error={errors.isBillIncluded}
+          onChange={(value) => handleInputChange("isBillIncluded", value)}
+        />
+        <AvailableTimeField
+          value={formValues.availableTime}
+          error={errors.availableTime}
+          onChange={(value) => handleInputChange("availableTime", value)}
         />
         <SuburbField
           value={formValues.suburb}
@@ -160,7 +214,7 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           onChange={(value) => handleInputChange("isCommentAllowed", value)} 
         />
 
-        <JobKeyWordField
+        <PropertyKeyWordField
             selectedKeywords={formValues.selectedKeywords} 
             error={errors.keyword}
             onChange={(value) => handleInputChange("selectedKeywords", value)} 
@@ -178,4 +232,4 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   );
 };
 
-export default TutoringMainInfoForm;
+export default EditSharePropertyMainInfoForm;

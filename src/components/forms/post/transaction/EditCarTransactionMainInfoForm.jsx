@@ -4,94 +4,67 @@ import TitleField from "../../../textfields/TitleField";
 import DescriptionField from "../../../textfields/DescriptionField";
 import ContactField from "../../../textfields/ContactField";
 import EmailField from "../../../textfields/EmailField";
-import SuburbField from "../../../textfields/SuburbField";
 import { isValidPhoneNumber } from "libphonenumber-js";
-import LocationField from "../../../textfields/LocationField";
-import LocationDialog from "../../../dialog/LocationDialog";
-import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, jobTypeRequiredError, keywordOverError, locationFormatError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
-import JobKeyWordField from "../../../textfields/JobKeyWordField";
+import TransactionTypeField from "../../../textfields/TransactionTypeField";
+import IsFreeField from "../../../textfields/IsFreeField";
+import PriceField from "../../../textfields/PriceField";
+import SuburbField from "../../../textfields/SuburbField";
+import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, keywordOverError, priceFormatError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
+import TransactionKeyWordField from "../../../textfields/TransactionKeyWordField";
 import CommentAvailabilityField from "../../../textfields/CommentAvailabilityField";
-import JobTypeField from "../../../textfields/JobTypeField";
 
-const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
+const EditCarTransactionMainInfoForm = ({ onDataChange, setIsFormValid, mainInfoData }) => {
   const [formValues, setFormValues] = useState({
-    title: "",
-    description: "",
-    contact: "",
-    email: "",
-    suburb: "",
-    jobType: "",
-    location: "",
-    selectedKeywords: [],
-    isCommentAllowed: true
+    postId: mainInfoData.postId,
+    title: mainInfoData.title,
+    description: mainInfoData.description,
+    contact: mainInfoData.contact,
+    email: mainInfoData.email,
+    transactionType: mainInfoData.transactionType,
+    priceType: mainInfoData.priceType,
+    price: mainInfoData.price,
+    suburb: mainInfoData.suburb,
+    selectedKeywords: mainInfoData.selectedKeywords,
+    isCommentAllowed: mainInfoData.isCommentAllowed
   });
 
   const [errors, setErrors] = useState({});
-  const [mapOpen, setMapOpen] = useState(false);
-    
-  const locationPattern = /^https:\/\/(www\.)?google\.[a-z]+\/maps(\?.*|\/.*)?$/;
-
-  const validateLocation = (value) => {
-    if (!locationPattern.test(value)) {
-      setErrors((prev) => ({
-        ...prev,
-        location: locationFormatError,
-      }));
-    } else {
-      setErrors((prev) => ({
-        ...prev,
-        location: "",
-      }));
-    }
-  };
-
-  const handleLocationSelected = (url) => {
-    setFormValues((prev) => ({
-      ...prev,
-      location: url
-    }));
-  };
-  
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, suburb, location, jobType, selectedKeywords } = formValues;
-
+    const { title, description, contact, email, priceType, price, suburb, selectedKeywords } = formValues;
+  
     if (!title?.trim()) newErrors.title = titleRequiredError;
     if (!description?.trim()) newErrors.description = descriptionRequiredError;
-
+  
     if (!contact?.trim() && !email?.trim()) {
       newErrors.contact = contactRequiredError;
       newErrors.email = emailRequiredError;
     }
-
+  
     if (contact?.trim() && !isValidPhoneNumber(contact)) {
       newErrors.contact = contactFormatError;
     }
-
+  
     if (email?.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       newErrors.email = emailFormatError;
+    }
+
+    if (priceType === "유료" && (!price || isNaN(price) || parseFloat(price) <= 0)) {
+      newErrors.price = priceFormatError;
     }
 
     if (!suburb?.trim()) {
       newErrors.suburb = suburbRequiredError;
     }
 
-    if (!jobType?.trim()) {
-      newErrors.jobType = jobTypeRequiredError;
-    }
-    
-    if (location?.trim() && !locationPattern.test(location)) {
-      newErrors.location = locationFormatError;
-    }
-
     if (selectedKeywords.length > 12) {
       newErrors.keyword = keywordOverError;
     }
-
+  
     setErrors(newErrors);
     setIsFormValid(Object.keys(newErrors).length === 0);
-  };
+  };  
 
   useEffect(() => {
     checkFormValidity();
@@ -111,7 +84,7 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         주요 정보 입력
       </Typography>
       <Typography variant="body2" color="textSecondary" gutterBottom>
-        제목, 설명, 연락처, 이메일, 과목, 지역 등 정보를 입력하세요.
+        제목, 설명, 연락처, 이메일, 가격, 지역 등 정보를 입력하세요.
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 1 }}>
@@ -130,29 +103,33 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           error={errors.contact}
           onChange={(value) => handleInputChange("contact", value)}
         />
-        <JobTypeField
-          value={formValues.jobType}
-          error={errors.jobType}
-          onChange={(value) => handleInputChange("jobType", value)}
-        />
         <EmailField
           value={formValues.email}
           error={errors.email}
           onChange={(value) => handleInputChange("email", value)}
         />
+
+        <TransactionTypeField
+          value={formValues.transactionType}
+          onChange={(value) => handleInputChange("transactionType", value)}
+        />
+
+        <IsFreeField
+          value={formValues.priceType}
+          onChange={(value) => handleInputChange("priceType", value)}
+        />
+        {formValues.priceType === "유료" && (
+          <PriceField
+            value={formValues.price}
+            error={errors.price}
+            onChange={(value) => handleInputChange("price", value)}
+            smSize={12}
+          />
+        )}
         <SuburbField
           value={formValues.suburb}
           error={errors.suburb}
           onChange={(value) => handleInputChange("suburb", value)}
-        />
-        <LocationField
-          location={formValues.location}
-          error={errors.location}
-          onLocationChange={(value) => {
-            handleInputChange("location", value);
-            validateLocation(value);
-          }}
-          onMapOpen={() => setMapOpen(true)}
         />
 
         <CommentAvailabilityField
@@ -160,22 +137,14 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           onChange={(value) => handleInputChange("isCommentAllowed", value)} 
         />
 
-        <JobKeyWordField
+        <TransactionKeyWordField
             selectedKeywords={formValues.selectedKeywords} 
             error={errors.keyword}
             onChange={(value) => handleInputChange("selectedKeywords", value)} 
         />
       </Grid>
-
-      <LocationDialog
-        open={mapOpen}
-        onClose={() => setMapOpen(false)}
-        onConfirm={() => setMapOpen(false)}
-        onLocationSelected={handleLocationSelected}
-        googleMapsApiKey = "AIzaSyAbpOOHTMEZeY_WNnQjuROdIUCAPpwM45Q"
-      />
     </Paper>
   );
 };
 
-export default TutoringMainInfoForm;
+export default EditCarTransactionMainInfoForm;

@@ -1,21 +1,36 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Paper, Typography, Grid,Box, Button } from "@mui/material";
-import { postJob } from "../../../service/PostService";
-import { useNavigate } from "react-router-dom";
+import { getUpdateTransactionPostDto, updateTransaction } from "../../../service/PostService";
+import { useNavigate, useParams } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
-import RecruitmentMainInfoForm from "../../../components/forms/post/job/RecruitmentMainInfoForm";
-import RecruitmentMediaUploadForm from "../../../components/forms/post/job/RecruitmentMediaUploadForm";
+import EditEtcTransactionMainInfoForm from "../../../components/forms/post/transaction/EditEtcTransactionMainInfoForm";
+import EditEtcTransactionMediaUploadForm from "../../../components/forms/post/transaction/EditEtcTransactionMediaUploadForm";
 
-const LaunchRecruitmentPage = () => {
+const EditEtcTransactionPage = () => {
+  const { postId } = useParams();
   const [isMainValid, setIsMainValid] = useState(false);
   const [isMediaValid, setIsMediaValid] = useState(false);
-  const [mainInfoData, setMainInfoData] = useState({});
+  const [mainInfoData, setMainInfoData] = useState(null);
   const [mediaData, setMediaData] = useState({});
+  const [existingImages, setExistingImages] = useState([]);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+        fetchPostData(postId);
+    }, []);
+
+    const fetchPostData = (postId) => {
+        getUpdateTransactionPostDto(postId)
+            .then((data) => {
+                setMainInfoData(data.updateTransactionMainInfoPostDto);
+                setExistingImages(data.updateTransactionMediaInfoPostDto.existingImages);
+            })
+            .catch((error) => console.error("Error fetching posts:", error));
+        };
 
   const mainInfoRef = useRef(null);
   const mediaUploadRef = useRef(null);
@@ -47,24 +62,29 @@ const LaunchRecruitmentPage = () => {
     const userId = localStorage.getItem('userId');
     const formData = new FormData();
 
-    const jobData = {
-      ...mainInfoData,
-      "category": "구인구직",
-      "subCategory": "구인",
-      "userId": userId
+    const transactionData = {
+      "updateTransactionMainInfoPostDto": {
+            ...mainInfoData,
+            "category": "사고팔기",
+            "subCategory": "기타",
+            "userId": userId
+        },
+        "updateTransactionMediaInfoPostDto": {
+            "existingImages": existingImages,
+        }
     };
 
     formData.append(
-      "jobPostDto",
-      new Blob([JSON.stringify(jobData)], { type: "application/json" })
+      "updateTransactionPostDto",
+      new Blob([JSON.stringify(transactionData)], { type: "application/json" })
     );
 
-    mediaData.selectedImages.forEach((file) => formData.append("images", file));
+    mediaData.newImages.forEach((file) => formData.append("images", file));
 
     setIsLoading(true);
-    const isCreated = await postJob(formData);
+    const isCreated = await updateTransaction(formData);
         if (isCreated) {
-            navigate("/");
+            navigate("/own/posts");
         } else {
           setError("제출에 실패했습니다. 다시 제출 해주세요.");
           setIsLoading(false);
@@ -79,13 +99,17 @@ const LaunchRecruitmentPage = () => {
     setIsPreviewOpen(false);
   };
 
+  if (mainInfoData === null) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Paper
       elevation={3}
       sx={{ padding: 4, margin: 4, maxWidth: 800, mx: "auto", backgroundColor: "#f7f9fc" }}
     >
       <Typography variant="h4" gutterBottom align="center" sx={{ color: primaryColor }}>
-        구인 등록하기
+        기타 매물 수정하기
       </Typography>
       <Typography variant="subtitle1" align="center" color="textSecondary" sx={{ marginBottom: 4 }}>
         필요한 모든 정보를 입력해주세요
@@ -95,16 +119,19 @@ const LaunchRecruitmentPage = () => {
 
       <Grid container spacing={4}>
         <Grid item xs={12} ref={mainInfoRef}>
-          <RecruitmentMainInfoForm
+          <EditEtcTransactionMainInfoForm
             onDataChange={(data) => setMainInfoData(data)}
             setIsFormValid={setIsMainValid}
+            mainInfoData={mainInfoData}
           />
         </Grid>
         <Grid item xs={12} ref={mediaUploadRef}>
           <Grid item xs={12}>
-            <RecruitmentMediaUploadForm
+            <EditEtcTransactionMediaUploadForm
               onMediaChange={(media) => setMediaData(media)}
               setIsMediaValid={setIsMediaValid}
+              existingImages={existingImages}
+              setExistingImages={(images) => setExistingImages(images)}
             />
           </Grid>
         </Grid>
@@ -142,4 +169,4 @@ const LaunchRecruitmentPage = () => {
   );
 };
 
-export default LaunchRecruitmentPage;
+export default EditEtcTransactionPage;

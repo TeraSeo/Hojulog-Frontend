@@ -90,6 +90,16 @@ import EditWorkingHolidayPostPage from './pages/post/study/EditWorkingHolidayPos
 import EditLifeStylePostPage from './pages/post/society/EditLifeStylePostPage';
 import EditHobbyPostPage from './pages/post/society/EditHobbyPostPage';
 import EditFreindshipPostPage from './pages/post/society/EditFreindshipPostPage';
+import EditSharePropertyPage from './pages/post/property/EditSharePropertyPage';
+import EditRentPropertyPage from './pages/post/property/EditRentPropertyPage';
+import EditTransactionPropertyPage from './pages/post/property/EditTransactionPropertyPage';
+import EditRecruitmentPage from './pages/post/job/EditRecruitmentPage';
+import EditJobSeekingPage from './pages/post/job/EditJobSeekingPage';
+import EditTutoringPage from './pages/post/job/EditTutoringPage';
+import EditCarTransactionPage from './pages/post/transaction/EditCarTransactionPage';
+import EditNecessitiesTransactionPage from './pages/post/transaction/EditNecessitiesTransactionPage';
+import EditEtcTransactionPage from './pages/post/transaction/EditEtcTransactionPage';
+import EditProductRentTransactionPage from './pages/post/transaction/EditProductRentTransactionPage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -214,6 +224,19 @@ function App() {
             <Route path="update/생활/라이프스타일/:postId" element={<EditLifeStylePostPage />} />
             <Route path="update/생활/동호회/:postId" element={<EditHobbyPostPage />} />
             <Route path="update/생활/친목/:postId" element={<EditFreindshipPostPage />} />
+
+            <Route path="update/부동산/쉐어/:postId" element={<EditSharePropertyPage/>} />
+            <Route path="update/부동산/렌트/:postId" element={<EditRentPropertyPage />} />
+            <Route path="update/부동산/매매/:postId" element={<EditTransactionPropertyPage />} />
+
+            <Route path="update/구인구직/구인/:postId" element={<EditRecruitmentPage/>} />
+            <Route path="update/구인구직/구직/:postId" element={<EditJobSeekingPage />} />
+            <Route path="update/구인구직/과외/:postId" element={<EditTutoringPage />} />
+
+            <Route path="update/사고팔기/자동차/:postId" element={<EditCarTransactionPage/>} />
+            <Route path="update/사고팔기/생활용품/:postId" element={<EditNecessitiesTransactionPage/>} />
+            <Route path="update/사고팔기/기타/:postId" element={<EditEtcTransactionPage/>} />
+            <Route path="update/사고팔기/대여/:postId" element={<EditProductRentTransactionPage/>} />
 
             <Route path="부동산" element={<WholePropertyPostPage />} />
             <Route path="구인구직" element={<WholeJobPostPage />} />

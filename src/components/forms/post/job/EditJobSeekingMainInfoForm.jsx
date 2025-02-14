@@ -4,31 +4,32 @@ import TitleField from "../../../textfields/TitleField";
 import DescriptionField from "../../../textfields/DescriptionField";
 import ContactField from "../../../textfields/ContactField";
 import EmailField from "../../../textfields/EmailField";
+import JobTypeField from "../../../textfields/JobTypeField";
 import SuburbField from "../../../textfields/SuburbField";
-import { isValidPhoneNumber } from "libphonenumber-js";
 import LocationField from "../../../textfields/LocationField";
 import LocationDialog from "../../../dialog/LocationDialog";
+import { isValidPhoneNumber } from "libphonenumber-js";
 import { contactFormatError, contactRequiredError, descriptionRequiredError, emailFormatError, emailRequiredError, jobTypeRequiredError, keywordOverError, locationFormatError, suburbRequiredError, titleRequiredError } from "../../../../constant/ErrorMsg";
 import JobKeyWordField from "../../../textfields/JobKeyWordField";
 import CommentAvailabilityField from "../../../textfields/CommentAvailabilityField";
-import JobTypeField from "../../../textfields/JobTypeField";
 
-const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
+const EditJobSeekingMainInfoForm = ({ onDataChange, setIsFormValid, mainInfoData }) => {
   const [formValues, setFormValues] = useState({
-    title: "",
-    description: "",
-    contact: "",
-    email: "",
-    suburb: "",
-    jobType: "",
-    location: "",
-    selectedKeywords: [],
-    isCommentAllowed: true
+    postId: mainInfoData.postId,
+    title: mainInfoData.title,
+    description: mainInfoData.description,
+    contact: mainInfoData.contact, 
+    email: mainInfoData.email,
+    jobType: mainInfoData.jobType,
+    suburb: mainInfoData.suburb,
+    location: mainInfoData.location,
+    selectedKeywords: mainInfoData.selectedKeywords,
+    isCommentAllowed: mainInfoData.isCommentAllowed
   });
 
   const [errors, setErrors] = useState({});
   const [mapOpen, setMapOpen] = useState(false);
-    
+
   const locationPattern = /^https:\/\/(www\.)?google\.[a-z]+\/maps(\?.*|\/.*)?$/;
 
   const validateLocation = (value) => {
@@ -51,11 +52,10 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
       location: url
     }));
   };
-  
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, description, contact, email, suburb, location, jobType, selectedKeywords } = formValues;
+    const { title, description, contact, email, jobType, suburb, location, selectedKeywords } = formValues;
 
     if (!title?.trim()) newErrors.title = titleRequiredError;
     if (!description?.trim()) newErrors.description = descriptionRequiredError;
@@ -73,14 +73,14 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
       newErrors.email = emailFormatError;
     }
 
+    if (!jobType?.trim()) {
+      newErrors.jobType = jobTypeRequiredError;
+    }
+
     if (!suburb?.trim()) {
       newErrors.suburb = suburbRequiredError;
     }
 
-    if (!jobType?.trim()) {
-      newErrors.jobType = jobTypeRequiredError;
-    }
-    
     if (location?.trim() && !locationPattern.test(location)) {
       newErrors.location = locationFormatError;
     }
@@ -111,7 +111,7 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         주요 정보 입력
       </Typography>
       <Typography variant="body2" color="textSecondary" gutterBottom>
-        제목, 설명, 연락처, 이메일, 과목, 지역 등 정보를 입력하세요.
+        제목, 설명, 연락처, 이메일, 근무 형태, 지역 등 정보를 입력하세요.
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 1 }}>
@@ -130,21 +130,22 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           error={errors.contact}
           onChange={(value) => handleInputChange("contact", value)}
         />
-        <JobTypeField
-          value={formValues.jobType}
-          error={errors.jobType}
-          onChange={(value) => handleInputChange("jobType", value)}
-        />
         <EmailField
           value={formValues.email}
           error={errors.email}
           onChange={(value) => handleInputChange("email", value)}
+        />
+        <JobTypeField
+          value={formValues.jobType}
+          error={errors.jobType}
+          onChange={(value) => handleInputChange("jobType", value)}
         />
         <SuburbField
           value={formValues.suburb}
           error={errors.suburb}
           onChange={(value) => handleInputChange("suburb", value)}
         />
+
         <LocationField
           location={formValues.location}
           error={errors.location}
@@ -160,7 +161,7 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           onChange={(value) => handleInputChange("isCommentAllowed", value)} 
         />
 
-        <JobKeyWordField
+        <JobKeyWordField 
             selectedKeywords={formValues.selectedKeywords} 
             error={errors.keyword}
             onChange={(value) => handleInputChange("selectedKeywords", value)} 
@@ -178,4 +179,4 @@ const TutoringMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   );
 };
 
-export default TutoringMainInfoForm;
+export default EditJobSeekingMainInfoForm;

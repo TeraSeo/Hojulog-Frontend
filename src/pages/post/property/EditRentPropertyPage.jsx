@@ -1,21 +1,37 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Paper, Typography, Grid,Box, Button } from "@mui/material";
-import { postJob } from "../../../service/PostService";
-import { useNavigate } from "react-router-dom";
+import { getUpdatePropertyPostDto, updateProperty } from "../../../service/PostService";
+import { useNavigate, useParams } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
-import RecruitmentMainInfoForm from "../../../components/forms/post/job/RecruitmentMainInfoForm";
-import RecruitmentMediaUploadForm from "../../../components/forms/post/job/RecruitmentMediaUploadForm";
+import PropertyPostPreviewDialog from "../../../components/preview/PropertyPostPreviewDialog";
+import EditRentPropertyMainInfoForm from "../../../components/forms/post/property/EditRentPropertyMainInfoForm";
+import EditRentPropertyMediaInfoForm from "../../../components/forms/post/property/EditRentPropertyMediaInfoForm";
 
-const LaunchRecruitmentPage = () => {
-  const [isMainValid, setIsMainValid] = useState(false);
-  const [isMediaValid, setIsMediaValid] = useState(false);
-  const [mainInfoData, setMainInfoData] = useState({});
+const EditRentPropertyPage = () => {
+  const { postId } = useParams();
+  const [isMainValid, setIsMainValid] = useState(true);
+  const [isMediaValid, setIsMediaValid] = useState(true);
+  const [mainInfoData, setMainInfoData] = useState(null);
   const [mediaData, setMediaData] = useState({});
+  const [existingImages, setExistingImages] = useState([]);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+        fetchPostData(postId);
+    }, []);
+
+  const fetchPostData = (postId) => {
+    getUpdatePropertyPostDto(postId)
+        .then((data) => {
+            setMainInfoData(data.updatePropertyMainInfoPostDto);
+            setExistingImages(data.updatePropertyMediaInfoPostDto.existingImages);
+        })
+        .catch((error) => console.error("Error fetching posts:", error));
+    };
 
   const mainInfoRef = useRef(null);
   const mediaUploadRef = useRef(null);
@@ -47,24 +63,29 @@ const LaunchRecruitmentPage = () => {
     const userId = localStorage.getItem('userId');
     const formData = new FormData();
 
-    const jobData = {
-      ...mainInfoData,
-      "category": "구인구직",
-      "subCategory": "구인",
-      "userId": userId
+    const propertyData = {
+      "updatePropertyMainInfoPostDto": {
+            ...mainInfoData,
+            "category": "부동산",
+            "subCategory": "매매",
+            "userId": userId
+        },
+        "updatePropertyMediaInfoPostDto": {
+            "existingImages": existingImages,
+        }
     };
 
     formData.append(
-      "jobPostDto",
-      new Blob([JSON.stringify(jobData)], { type: "application/json" })
+      "updatePropertyPostDto",
+      new Blob([JSON.stringify(propertyData)], { type: "application/json" })
     );
 
-    mediaData.selectedImages.forEach((file) => formData.append("images", file));
+    mediaData.newImages.forEach((file) => formData.append("images", file));
 
     setIsLoading(true);
-    const isCreated = await postJob(formData);
+    const isCreated = await updateProperty(formData);
         if (isCreated) {
-            navigate("/");
+            navigate("/own/posts");
         } else {
           setError("제출에 실패했습니다. 다시 제출 해주세요.");
           setIsLoading(false);
@@ -79,13 +100,17 @@ const LaunchRecruitmentPage = () => {
     setIsPreviewOpen(false);
   };
 
+  if (mainInfoData === null) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Paper
       elevation={3}
       sx={{ padding: 4, margin: 4, maxWidth: 800, mx: "auto", backgroundColor: "#f7f9fc" }}
     >
       <Typography variant="h4" gutterBottom align="center" sx={{ color: primaryColor }}>
-        구인 등록하기
+        렌트 매물 수정하기
       </Typography>
       <Typography variant="subtitle1" align="center" color="textSecondary" sx={{ marginBottom: 4 }}>
         필요한 모든 정보를 입력해주세요
@@ -95,16 +120,19 @@ const LaunchRecruitmentPage = () => {
 
       <Grid container spacing={4}>
         <Grid item xs={12} ref={mainInfoRef}>
-          <RecruitmentMainInfoForm
+          <EditRentPropertyMainInfoForm
             onDataChange={(data) => setMainInfoData(data)}
             setIsFormValid={setIsMainValid}
+            mainInfoData={mainInfoData}
           />
         </Grid>
         <Grid item xs={12} ref={mediaUploadRef}>
           <Grid item xs={12}>
-            <RecruitmentMediaUploadForm
+            <EditRentPropertyMediaInfoForm
               onMediaChange={(media) => setMediaData(media)}
               setIsMediaValid={setIsMediaValid}
+              existingImages={existingImages}
+              setExistingImages={(images) => setExistingImages(images)}
             />
           </Grid>
         </Grid>
@@ -138,8 +166,16 @@ const LaunchRecruitmentPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <PropertyPostPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        propertyPostData={mainInfoData}
+        mediaData={mediaData}
+        subCategory={"렌트"}
+      />
     </Paper>
   );
 };
 
-export default LaunchRecruitmentPage;
+export default EditRentPropertyPage;
