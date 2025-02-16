@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../components/bar/CategorySidebar";
 import { getWholeLikedPosts } from "../../service/PostService";
 import PostPaginationBox from "../../components/box/post/PostPaginationBox";
-import CommonOwnSummarizedPostBoxByPost from "../../components/box/post/CommonOwnSummarizedPostBoxByPost";
 import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
 import { TitleResponsiveFontSize1 } from "../../constant/FontSizeResponsive";
+import CommonLikedSummarizedPostBoxByPost from "../../components/box/post/CommonLikedSummarizedPostBoxByPost";
 
 function LikedPostPage() {
     const [likedPostPageData, setLikedPostPageData] = useState({
@@ -47,7 +47,7 @@ function LikedPostPage() {
                     </Typography>
 
                     {likedPostPageData.posts.map((post, index) => (
-                        <CommonOwnSummarizedPostBoxByPost post={post} />
+                        <CommonLikedSummarizedPostBoxByPost post={post} />
                     ))}
                     
                     <PostPaginationBox totalPage={likedPostPageData.pageSize} currentPage={likedPostPageData.currentPage} handlePageChange={handlePageChange} />

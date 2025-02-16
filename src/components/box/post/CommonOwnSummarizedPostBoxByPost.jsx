@@ -7,9 +7,19 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { PostEditButtonResponsiveSize1, PostRemoveButtonResponsiveSize1 } from "../../../constant/ComponentSizeResponsive";
 import { PostEditIconResponsiveSize1, PostRemoveIconResponsiveSize1 } from "../../../constant/IconSizeResponsive";
 import { useNavigate } from "react-router-dom";
+import { deletePostById } from "../../../service/PostService";
 
 const CommonOwnSummarizedPostBoxByPost = ({ post }) => {
     const navigate = useNavigate();
+
+    const handleDelete = async (postId) => {
+        if (window.confirm("게시물을 삭제하시겠습니까?")) {
+            const isDeleted = await deletePostById(postId);
+            if (isDeleted) {
+                window.location.reload();
+            }
+        }
+    };
 
     return (
         <Box
@@ -61,7 +71,7 @@ const CommonOwnSummarizedPostBoxByPost = ({ post }) => {
                         </IconButton>
 
                         <IconButton
-                            onClick={() => {}}
+                            onClick={() => handleDelete(post.id)}
                             sx={{
                                 color: "white",
                                 backgroundColor: "#d32f2f",

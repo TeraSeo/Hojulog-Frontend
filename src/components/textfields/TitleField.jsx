@@ -14,7 +14,7 @@ const TitleField = ({ value, error, onChange }) => {
   return (
     <Grid item xs={12}>
       <Typography variant="subtitle1" sx={{ color: "#001f5b" }} gutterBottom>
-        제품 제목
+        제목
       </Typography> 
       <TextField
         fullWidth

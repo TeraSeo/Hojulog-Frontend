@@ -1080,6 +1080,7 @@ function postStudy(postData) {
 }
 
 function updateTravel(postData) {
+    const userId = localStorage.getItem('userId') || "";
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
@@ -1088,6 +1089,7 @@ function updateTravel(postData) {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
             'refreshToken': refreshToken,
+            "userId": userId
         }
     })
     .then(response => {
@@ -1103,6 +1105,7 @@ function updateTravel(postData) {
 }
 
 function updateProperty(postData) {
+    const userId = localStorage.getItem('userId') || "";
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
@@ -1111,6 +1114,7 @@ function updateProperty(postData) {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
             'refreshToken': refreshToken,
+            "userId": userId
         }
     })
     .then(response => {
@@ -1126,6 +1130,7 @@ function updateProperty(postData) {
 }
 
 function updateJob(postData) {
+    const userId = localStorage.getItem('userId') || "";
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
@@ -1134,6 +1139,7 @@ function updateJob(postData) {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
             'refreshToken': refreshToken,
+            "userId": userId
         }
     })
     .then(response => {
@@ -1149,6 +1155,7 @@ function updateJob(postData) {
 }
 
 function updateTransaction(postData) {
+    const userId = localStorage.getItem('userId') || "";
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
@@ -1157,6 +1164,7 @@ function updateTransaction(postData) {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
             'refreshToken': refreshToken,
+            "userId": userId
         }
     })
     .then(response => {
@@ -1172,6 +1180,7 @@ function updateTransaction(postData) {
 }
 
 function updateStudy(postData) {
+    const userId = localStorage.getItem('userId') || "";
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
@@ -1180,6 +1189,7 @@ function updateStudy(postData) {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
             'refreshToken': refreshToken,
+            "userId": userId
         }
     })
     .then(response => {
@@ -1195,6 +1205,7 @@ function updateStudy(postData) {
 }
 
 function updateSociety(postData) {
+    const userId = localStorage.getItem('userId') || "";
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
@@ -1203,6 +1214,7 @@ function updateSociety(postData) {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
             'refreshToken': refreshToken,
+            "userId": userId
         }
     })
     .then(response => {
@@ -1218,6 +1230,7 @@ function updateSociety(postData) {
 }
 
 function getUpdatePropertyPostDto(postId) {
+    const userId = localStorage.getItem('userId') || "";
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
@@ -1227,6 +1240,7 @@ function getUpdatePropertyPostDto(postId) {
             'Content-Type': 'application/json',
             'accessToken': accessToken,
             'refreshToken': refreshToken,
+            "userId": userId
         },
         params: {
             "postId": postId
@@ -1244,6 +1258,7 @@ function getUpdatePropertyPostDto(postId) {
 }
 
 function getUpdateJobPostDto(postId) {
+    const userId = localStorage.getItem('userId') || "";
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
@@ -1253,6 +1268,7 @@ function getUpdateJobPostDto(postId) {
             'Content-Type': 'application/json',
             'accessToken': accessToken,
             'refreshToken': refreshToken,
+            "userId": userId
         },
         params: {
             "postId": postId
@@ -1270,6 +1286,7 @@ function getUpdateJobPostDto(postId) {
 }
 
 function getUpdateTransactionPostDto(postId) {
+    const userId = localStorage.getItem('userId') || "";
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
@@ -1279,6 +1296,7 @@ function getUpdateTransactionPostDto(postId) {
             'Content-Type': 'application/json',
             'accessToken': accessToken,
             'refreshToken': refreshToken,
+            "userId": userId
         },
         params: {
             "postId": postId
@@ -1296,6 +1314,7 @@ function getUpdateTransactionPostDto(postId) {
 }
 
 function getUpdateTravelPostDto(postId) {
+    const userId = localStorage.getItem('userId') || "";
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
@@ -1305,6 +1324,7 @@ function getUpdateTravelPostDto(postId) {
             'Content-Type': 'application/json',
             'accessToken': accessToken,
             'refreshToken': refreshToken,
+            "userId": userId
         },
         params: {
             "postId": postId
@@ -1322,6 +1342,7 @@ function getUpdateTravelPostDto(postId) {
 }
 
 function getUpdateStudyPostDto(postId) {
+    const userId = localStorage.getItem('userId') || "";
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
@@ -1331,6 +1352,7 @@ function getUpdateStudyPostDto(postId) {
             'Content-Type': 'application/json',
             'accessToken': accessToken,
             'refreshToken': refreshToken,
+            "userId": userId
         },
         params: {
             "postId": postId
@@ -1348,6 +1370,7 @@ function getUpdateStudyPostDto(postId) {
 }
 
 function getUpdateSocietyPostDto(postId) {
+    const userId = localStorage.getItem('userId') || "";
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
@@ -1357,6 +1380,7 @@ function getUpdateSocietyPostDto(postId) {
             'Content-Type': 'application/json',
             'accessToken': accessToken,
             'refreshToken': refreshToken,
+            "userId": userId
         },
         params: {
             "postId": postId
@@ -1373,4 +1397,32 @@ function getUpdateSocietyPostDto(postId) {
     )
 }
 
-export { getPostsByPageNCondition, getPropertyPostsByPage, getJobPostsByPage, getTransactionPostsByPage, getSocietyPostsByPage, getTravelPostsByPage, getStudyPostsByPage, getSharePostsByPage, getRentPostsByPage, getPropertyTransactionPostsByPage, getRecruitmentPostsByPage, getJobSeekingPostsByPage, getJobTutoringPostsByPage, getCarPostsByPage, getNecessitiesPostsByPage, getTransactionEtcPostsByPage, getClubPostsByPage, getLifeStylePostsByPage, getFriendshipPostsByPage, getRestaurantPostsByPage, getPlacePostsByPage, getCoursePostsByPage, getSchoolPostsByPage, getWorkingHolidayPostsByPage, getLanguageStudyPostsByPage, getJobReviewPostsByPage, getWholeOwnPosts, getWholeOthersPosts, getWholeLikedPosts, getRecent5JobPosts, getRecent5PropertyPosts, getRecent5TransactionPosts, getRecent5SocietyPosts, getRecent5TravelPosts, getRecent5StudyPosts, getSpecificPropertyPost, getSpecificJobPost, getSpecificTransactionPost, getSpecificSocietyPost, getSpecificTravelPost, getSpecificStudyPost, getSpecificPost, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy, updateProperty, updateJob, updateTransaction, updateSociety, updateTravel, updateStudy, getUpdatePropertyPostDto, getUpdateJobPostDto, getUpdateTransactionPostDto, getUpdateTravelPostDto, getUpdateStudyPostDto, getUpdateSocietyPostDto };
+function deletePostById(postId) {
+    const userId = localStorage.getItem('userId') || "";
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.delete("http://localhost:8080/api/post/delete/post", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+            "userId": userId
+        },
+        params: {
+            "postId": postId
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+export { getPostsByPageNCondition, getPropertyPostsByPage, getJobPostsByPage, getTransactionPostsByPage, getSocietyPostsByPage, getTravelPostsByPage, getStudyPostsByPage, getSharePostsByPage, getRentPostsByPage, getPropertyTransactionPostsByPage, getRecruitmentPostsByPage, getJobSeekingPostsByPage, getJobTutoringPostsByPage, getCarPostsByPage, getNecessitiesPostsByPage, getTransactionEtcPostsByPage, getClubPostsByPage, getLifeStylePostsByPage, getFriendshipPostsByPage, getRestaurantPostsByPage, getPlacePostsByPage, getCoursePostsByPage, getSchoolPostsByPage, getWorkingHolidayPostsByPage, getLanguageStudyPostsByPage, getJobReviewPostsByPage, getWholeOwnPosts, getWholeOthersPosts, getWholeLikedPosts, getRecent5JobPosts, getRecent5PropertyPosts, getRecent5TransactionPosts, getRecent5SocietyPosts, getRecent5TravelPosts, getRecent5StudyPosts, getSpecificPropertyPost, getSpecificJobPost, getSpecificTransactionPost, getSpecificSocietyPost, getSpecificTravelPost, getSpecificStudyPost, getSpecificPost, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy, updateProperty, updateJob, updateTransaction, updateSociety, updateTravel, updateStudy, getUpdatePropertyPostDto, getUpdateJobPostDto, getUpdateTransactionPostDto, getUpdateTravelPostDto, getUpdateStudyPostDto, getUpdateSocietyPostDto, deletePostById };
