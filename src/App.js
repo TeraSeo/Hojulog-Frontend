@@ -100,6 +100,12 @@ import EditCarTransactionPage from './pages/post/transaction/EditCarTransactionP
 import EditNecessitiesTransactionPage from './pages/post/transaction/EditNecessitiesTransactionPage';
 import EditEtcTransactionPage from './pages/post/transaction/EditEtcTransactionPage';
 import EditProductRentTransactionPage from './pages/post/transaction/EditProductRentTransactionPage';
+import PropertySearchPage from './pages/search/PropertySearchPage';
+import JobSearchPage from './pages/search/JobSearchPage';
+import SocietySearchPage from './pages/search/SocietySearchPage';
+import TransactionSearchPage from './pages/search/TransactionSearchPage';
+import TravelSearchPage from './pages/search/TravelSearchPage';
+import StudySearchPage from './pages/search/StudySearchPage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -237,6 +243,13 @@ function App() {
             <Route path="update/사고팔기/생활용품/:postId" element={<EditNecessitiesTransactionPage/>} />
             <Route path="update/사고팔기/기타/:postId" element={<EditEtcTransactionPage/>} />
             <Route path="update/사고팔기/대여/:postId" element={<EditProductRentTransactionPage/>} />
+
+            <Route path="search/부동산/:title/:suburb/:subCategory/:keywords" element={<PropertySearchPage/>} />
+            <Route path="search/구인구직/:title/:suburb/:subCategory/:keywords" element={<JobSearchPage/>} />
+            <Route path="search/사고팔기/:title/:suburb/:subCategory/:keywords" element={<TransactionSearchPage/>} />
+            <Route path="search/생활/:title/:suburb/:subCategory/:keywords" element={<SocietySearchPage/>} />
+            <Route path="search/여행/:title/:suburb/:subCategory/:keywords" element={<TravelSearchPage/>} />
+            <Route path="search/유학/:title/:suburb/:subCategory/:keywords" element={<StudySearchPage/>} />
 
             <Route path="부동산" element={<WholePropertyPostPage />} />
             <Route path="구인구직" element={<WholeJobPostPage />} />

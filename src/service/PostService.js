@@ -1397,6 +1397,261 @@ function getUpdateSocietyPostDto(postId) {
     )
 }
 
+function searchPropertyPost(title, subCategory, suburb, keywords, page) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.get("http://localhost:8080/api/post/get/property/by/search/option", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        },
+        params: {
+            "title": title, 
+            "subCategory": subCategory,
+            "suburb" : suburb,
+            "keywords": keywords,
+            "page": page,
+            "size": 10
+        },
+        paramsSerializer: (params) => {
+            return Object.keys(params)
+                .map(key => {
+                    if (Array.isArray(params[key])) {
+                        return params[key]
+                            .map(value => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+                            .join("&");
+                    }
+                    return `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`;
+                })
+                .join("&");
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function searchJobPost(title, subCategory, suburb, keywords, page) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.get("http://localhost:8080/api/post/get/job/by/search/option", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        },
+        params: {
+            "title": title, 
+            "subCategory": subCategory,
+            "suburb" : suburb,
+            "keywords": keywords,
+            "page": page,
+            "size": 10
+        },
+        paramsSerializer: (params) => {
+            return Object.keys(params)
+                .map(key => {
+                    if (Array.isArray(params[key])) {
+                        return params[key]
+                            .map(value => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+                            .join("&");
+                    }
+                    return `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`;
+                })
+                .join("&");
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function searchTransactionPost(title, subCategory, suburb, keywords, page) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.get("http://localhost:8080/api/post/get/transaction/by/search/option", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        },
+        params: {
+            "title": title, 
+            "subCategory": subCategory,
+            "suburb" : suburb,
+            "keywords": keywords,
+            "page": page,
+            "size": 10
+        },
+        paramsSerializer: (params) => {
+            return Object.keys(params)
+                .map(key => {
+                    if (Array.isArray(params[key])) {
+                        return params[key]
+                            .map(value => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+                            .join("&");
+                    }
+                    return `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`;
+                })
+                .join("&");
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function searchSocietyPost(title, subCategory, keywords, page) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.get("http://localhost:8080/api/post/get/society/by/search/option", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        },
+        params: {
+            "title": title, 
+            "subCategory": subCategory,
+            "keywords": keywords,
+            "page": page,
+            "size": 10
+        },
+        paramsSerializer: (params) => {
+            return Object.keys(params)
+                .map(key => {
+                    if (Array.isArray(params[key])) {
+                        return params[key]
+                            .map(value => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+                            .join("&");
+                    }
+                    return `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`;
+                })
+                .join("&");
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function searchTravelPost(title, subCategory, keywords, page) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.get("http://localhost:8080/api/post/get/travel/by/search/option", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        },
+        params: {
+            "title": title, 
+            "subCategory": subCategory,
+            "keywords": keywords,
+            "page": page,
+            "size": 10
+        },
+        paramsSerializer: (params) => {
+            return Object.keys(params)
+                .map(key => {
+                    if (Array.isArray(params[key])) {
+                        return params[key]
+                            .map(value => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+                            .join("&");
+                    }
+                    return `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`;
+                })
+                .join("&");
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function searchStudyPost(title, subCategory, keywords, page) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.get("http://localhost:8080/api/post/get/study/by/search/option", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        },
+        params: {
+            "title": title, 
+            "subCategory": subCategory,
+            "keywords": keywords,
+            "page": page,
+            "size": 10
+        },
+        paramsSerializer: (params) => {
+            return Object.keys(params)
+                .map(key => {
+                    if (Array.isArray(params[key])) {
+                        return params[key]
+                            .map(value => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+                            .join("&");
+                    }
+                    return `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`;
+                })
+                .join("&");
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
 function deletePostById(postId) {
     const userId = localStorage.getItem('userId') || "";
     const accessToken = localStorage.getItem('accessToken');
@@ -1425,4 +1680,4 @@ function deletePostById(postId) {
     )
 }
 
-export { getPostsByPageNCondition, getPropertyPostsByPage, getJobPostsByPage, getTransactionPostsByPage, getSocietyPostsByPage, getTravelPostsByPage, getStudyPostsByPage, getSharePostsByPage, getRentPostsByPage, getPropertyTransactionPostsByPage, getRecruitmentPostsByPage, getJobSeekingPostsByPage, getJobTutoringPostsByPage, getCarPostsByPage, getNecessitiesPostsByPage, getTransactionEtcPostsByPage, getClubPostsByPage, getLifeStylePostsByPage, getFriendshipPostsByPage, getRestaurantPostsByPage, getPlacePostsByPage, getCoursePostsByPage, getSchoolPostsByPage, getWorkingHolidayPostsByPage, getLanguageStudyPostsByPage, getJobReviewPostsByPage, getWholeOwnPosts, getWholeOthersPosts, getWholeLikedPosts, getRecent5JobPosts, getRecent5PropertyPosts, getRecent5TransactionPosts, getRecent5SocietyPosts, getRecent5TravelPosts, getRecent5StudyPosts, getSpecificPropertyPost, getSpecificJobPost, getSpecificTransactionPost, getSpecificSocietyPost, getSpecificTravelPost, getSpecificStudyPost, getSpecificPost, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy, updateProperty, updateJob, updateTransaction, updateSociety, updateTravel, updateStudy, getUpdatePropertyPostDto, getUpdateJobPostDto, getUpdateTransactionPostDto, getUpdateTravelPostDto, getUpdateStudyPostDto, getUpdateSocietyPostDto, deletePostById };
+export { getPostsByPageNCondition, getPropertyPostsByPage, getJobPostsByPage, getTransactionPostsByPage, getSocietyPostsByPage, getTravelPostsByPage, getStudyPostsByPage, getSharePostsByPage, getRentPostsByPage, getPropertyTransactionPostsByPage, getRecruitmentPostsByPage, getJobSeekingPostsByPage, getJobTutoringPostsByPage, getCarPostsByPage, getNecessitiesPostsByPage, getTransactionEtcPostsByPage, getClubPostsByPage, getLifeStylePostsByPage, getFriendshipPostsByPage, getRestaurantPostsByPage, getPlacePostsByPage, getCoursePostsByPage, getSchoolPostsByPage, getWorkingHolidayPostsByPage, getLanguageStudyPostsByPage, getJobReviewPostsByPage, getWholeOwnPosts, getWholeOthersPosts, getWholeLikedPosts, getRecent5JobPosts, getRecent5PropertyPosts, getRecent5TransactionPosts, getRecent5SocietyPosts, getRecent5TravelPosts, getRecent5StudyPosts, getSpecificPropertyPost, getSpecificJobPost, getSpecificTransactionPost, getSpecificSocietyPost, getSpecificTravelPost, getSpecificStudyPost, getSpecificPost, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy, updateProperty, updateJob, updateTransaction, updateSociety, updateTravel, updateStudy, getUpdatePropertyPostDto, getUpdateJobPostDto, getUpdateTransactionPostDto, getUpdateTravelPostDto, getUpdateStudyPostDto, getUpdateSocietyPostDto, searchPropertyPost, searchJobPost, searchTransactionPost, searchSocietyPost, searchTravelPost, searchStudyPost, deletePostById };
