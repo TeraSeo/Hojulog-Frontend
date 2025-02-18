@@ -6,6 +6,7 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import ProductRentTransactionMainInfoForm from "../../../components/forms/post/transaction/ProductRentTransactionMainInfoForm";
 import ProductRentTransactionMediaUploadForm from "../../../components/forms/post/transaction/ProductRentTransactionMediaUploadForm";
+import TransactionPostPreviewDialog from "../../../components/preview/transaction/TransactionPostPreviewDialog";
 
 const LaunchProductRentTransactionPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
@@ -138,6 +139,14 @@ const LaunchProductRentTransactionPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <TransactionPostPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        transactionPostData={mainInfoData}
+        mediaData={mediaData}
+        subCategory={"대여"}
+      />
     </Paper>
   );
 };

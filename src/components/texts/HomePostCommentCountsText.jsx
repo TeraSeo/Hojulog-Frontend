@@ -6,11 +6,11 @@ import { HomePostIconResponsiveSize1 } from "../../constant/IconSizeResponsive";
 import { PostResponsiveFontSize3 } from "../../constant/FontSizeResponsive";
 import CommentsDialog from "../dialog/CommentsDialog";
 
-const HomePostCommentCountsText = ({ isCommentAllowed, commentsCounts, postId }) => {
+const HomePostCommentCountsText = ({ isCommentAllowed, commentsCounts, postId, isDialogAllowed=true }) => {
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
-        if (isCommentAllowed) setOpen(true);
+        if (isCommentAllowed && isDialogAllowed) setOpen(true);
     };
 
     const handleClose = () => setOpen(false);

@@ -9,7 +9,7 @@ import PostDescriptionText from '../../../texts/PostDescriptionText';
 import PostProfileBox from '../PostProfileBox';
 import PostKeywordText from '../../../texts/PostKeywordText';
 
-const TransactionDetailBox = ({ userId, imageUrls, description, title, subCategory, contact, email, price, createdAt, keywords=[] }) => {
+const TransactionDetailBox = ({ userId, imageUrls, description, title, subCategory, contact, email, priceType, price, createdAt, keywords=[] }) => {
   return (
     <Box>
       <ScrollableImageGallery imageUrls={imageUrls} />
@@ -26,7 +26,7 @@ const TransactionDetailBox = ({ userId, imageUrls, description, title, subCatego
           >
             <DetailedPostTitleText subCategory={subCategory} title={title} />
 
-            <TransactionPriceText price={price} />
+            <TransactionPriceText priceType={priceType} price={price} />
         </Box>
 
         <PostProfileBox userId={userId} />

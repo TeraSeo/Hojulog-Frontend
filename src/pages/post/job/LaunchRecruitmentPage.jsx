@@ -6,6 +6,7 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import RecruitmentMainInfoForm from "../../../components/forms/post/job/RecruitmentMainInfoForm";
 import RecruitmentMediaUploadForm from "../../../components/forms/post/job/RecruitmentMediaUploadForm";
+import JobPostPreviewDialog from "../../../components/preview/job/JobPostPreviewDialog";
 
 const LaunchRecruitmentPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
@@ -138,6 +139,14 @@ const LaunchRecruitmentPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <JobPostPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        jobPostData={mainInfoData}
+        mediaData={mediaData}
+        subCategory={"구인"}
+      />
     </Paper>
   );
 };

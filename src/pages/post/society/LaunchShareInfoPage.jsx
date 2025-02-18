@@ -4,6 +4,7 @@ import { postSociety } from "../../../service/PostService";
 import { useNavigate } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
 import ShareInfoMainInfoForm from "../../../components/forms/post/society/ShareInfoMainInfoForm";
+import SocietyPreviewDialog from "../../../components/preview/society/SocietyPreviewDialog";
 
 const LaunchShareInfoPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
@@ -124,6 +125,13 @@ const LaunchShareInfoPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <SocietyPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        societyPostData={mainInfoData}
+        subCategory={"라이프스타일"}
+      />
     </Paper>
   );
 };

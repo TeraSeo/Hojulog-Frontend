@@ -6,7 +6,7 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import TransactionPropertyMainInfoForm from "../../../components/forms/post/property/TransactionPropertyMainInfoForm";
 import TransactionPropertyMediaUploadForm from "../../../components/forms/post/property/TransactionPropertyMediaUploadForm";
-import PropertyPostPreviewDialog from "../../../components/preview/PropertyPostPreviewDialog";
+import PropertyPostPreviewDialog from "../../../components/preview/property/PropertyPostPreviewDialog";
 
 const LaunchTransactionPropertyPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);

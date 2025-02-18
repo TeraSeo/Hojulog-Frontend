@@ -6,6 +6,7 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import EditEtcTransactionMainInfoForm from "../../../components/forms/post/transaction/EditEtcTransactionMainInfoForm";
 import EditEtcTransactionMediaUploadForm from "../../../components/forms/post/transaction/EditEtcTransactionMediaUploadForm";
+import EditTransactionPreviewDialog from "../../../components/preview/transaction/EditTransactionPreviewDialog";
 
 const EditEtcTransactionPage = () => {
   const { postId } = useParams();
@@ -165,6 +166,15 @@ const EditEtcTransactionPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <EditTransactionPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        transactionPostData={mainInfoData}
+        mediaData={mediaData}
+        existingImages={existingImages}
+        subCategory={"기타"}
+      />
     </Paper>
   );
 };

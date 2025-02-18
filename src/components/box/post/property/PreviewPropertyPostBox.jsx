@@ -12,7 +12,8 @@ import BillIncludedText from "../../../texts/BillIncludedText";
 import PreviewTitleText from "../../../texts/preview/PreviewTitleText";
 import PreviewSubCategoryText from "../../../texts/preview/PreviewSubCategoryText";
 import PreviewPostImageBox from "../../../preview/PreviewPostImageBox";
-import PropertyDetailedPreviewDialog from "../../../preview/PropertyDetailedPreviewDialog";
+import PropertyDetailedPreviewDialog from "../../../preview/property/PropertyDetailedPreviewDialog";
+import { PostImageWidthResponiveSize } from "../../../../constant/ComponentSizeResponsive";
 
 const PreviewPropertyPostBox = ({ post, mediaData, subCategory }) => {
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -35,7 +36,9 @@ const PreviewPropertyPostBox = ({ post, mediaData, subCategory }) => {
             }}
         >
             <Box sx={{ display: "flex", flex: 1, overflow: "hidden" }}>
-                <PreviewPostImageBox images={mediaData.selectedImages} title={post.title} />
+                <Box sx={{ width: PostImageWidthResponiveSize, flexShrink: 0 }}>
+                    <PreviewPostImageBox images={mediaData.selectedImages} title={post.title} />
+                </Box>
                 <Box
                     sx={{
                         display: "flex",

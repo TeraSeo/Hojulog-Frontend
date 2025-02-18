@@ -4,6 +4,7 @@ import { postSociety } from "../../../service/PostService";
 import { useNavigate } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
 import FriendshipMainInfoForm from "../../../components/forms/post/society/FriendshipMainInfoForm";
+import SocietyPreviewDialog from "../../../components/preview/society/SocietyPreviewDialog";
 
 const LaunchFriendshipPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
@@ -124,6 +125,13 @@ const LaunchFriendshipPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <SocietyPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        societyPostData={mainInfoData}
+        subCategory={"친목"}
+      />
     </Paper>
   );
 };

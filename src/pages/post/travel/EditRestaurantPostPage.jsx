@@ -4,6 +4,7 @@ import { getUpdateTravelPostDto, updateTravel } from "../../../service/PostServi
 import { useNavigate, useParams } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
 import EditRestaurantMainInfoForm from "../../../components/forms/post/travel/EditRestaurantMainInfoForm";
+import TravelPostPreviewDialog from "../../../components/preview/travel/TravelPostPreviewDialog";
 
 const EditRestaurantPostPage = () => {
     const { postId } = useParams();
@@ -144,6 +145,13 @@ const EditRestaurantPostPage = () => {
             </Box>
         </Grid>
         </Grid>
+
+        <TravelPostPreviewDialog
+            open={isPreviewOpen}
+            onClose={handleClosePreview}
+            travelPostData={mainInfoData}
+            subCategory={"레스토랑"}
+        />
     </Paper>
     );
 };

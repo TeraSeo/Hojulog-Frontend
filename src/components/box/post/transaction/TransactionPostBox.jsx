@@ -6,10 +6,10 @@ import SuburbText from "../../../texts/SuburbText";
 import PriceText from "../../../texts/PriceText";
 import ViewCountsText from "../../../texts/ViewCountsText";
 import NormalPostImageBox from "../NormalPostImageBox";
-import CommentsCountsText from "../../../texts/CommentsCountsText";
 import { PostImageWidthResponiveSize } from "../../../../constant/ComponentSizeResponsive";
 import { PostResponsiveFontSize2 } from "../../../../constant/FontSizeResponsive";
 import { SummarizedPostIconResponsiveSize1 } from "../../../../constant/IconSizeResponsive";
+import FreeText from "../../../texts/\bFreeText";
 
 const TransactionPostBox = ({ post }) => {
     return (
@@ -47,12 +47,16 @@ const TransactionPostBox = ({ post }) => {
                         </Box>
 
                         <Box sx={{ px: 1, pt: 0.5 }}>
-                            <PriceText price={post.price} />
+                            {
+                                post.priceType === "유료" ?
+                                    <PriceText price={post.price} />:
+                                    <FreeText />
+                            }
                         </Box>
                     </Box>
 
                     <Box sx={{ display: "flex", justifyContent: "end" }}>
-                        <CommentsCountsText commentsCounts={post.commentCounts} width={SummarizedPostIconResponsiveSize1} height={SummarizedPostIconResponsiveSize1} fontSize={PostResponsiveFontSize2} />
+                        {/* <CommentsCountsText commentsCounts={post.commentCounts} width={SummarizedPostIconResponsiveSize1} height={SummarizedPostIconResponsiveSize1} fontSize={PostResponsiveFontSize2} /> */}
                         <ViewCountsText viewCounts={post.viewCounts} width={SummarizedPostIconResponsiveSize1} height={SummarizedPostIconResponsiveSize1} fontSize={PostResponsiveFontSize2} />
                     </Box>
                 </Box>

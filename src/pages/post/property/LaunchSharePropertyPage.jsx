@@ -6,7 +6,7 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import SharePropertyMainInfoForm from "../../../components/forms/post/property/SharePropertyMainInfoForm";
 import SharePropertyMediaUploadForm from "../../../components/forms/post/property/SharePropertyMediaUploadForm";
-import PropertyPostPreviewDialog from "../../../components/preview/PropertyPostPreviewDialog";
+import PropertyPostPreviewDialog from "../../../components/preview/property/PropertyPostPreviewDialog";
 
 const LaunchSharePropertyPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);

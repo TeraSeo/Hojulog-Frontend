@@ -4,6 +4,7 @@ import { postStudy } from "../../../service/PostService";
 import { useNavigate } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
 import JobReviewMainInfoForm from "../../../components/forms/post/study/JobReviewMainInfoForm";
+import StudyPreviewDialog from "../../../components/preview/study/StudyPreviewDialog";
 
 const LaunchJobReviewPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
@@ -124,6 +125,13 @@ const LaunchJobReviewPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <StudyPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        studyPostData={mainInfoData}
+        subCategory={"취업후기"}
+      />
     </Paper>
   );
 };

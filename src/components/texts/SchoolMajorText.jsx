@@ -6,7 +6,7 @@ import { primaryColor } from "../../constant/Color";
 import { SubTitleResponsiveFontSize1 } from "../../constant/FontSizeResponsive";
 import { SchoolIconResponsiveSize } from "../../constant/IconSizeResponsive";
 
-const SchoolMajorText = ({ school, major }) => {
+const SchoolMajorText = ({ school }) => {
   return (
     <Box sx={{ display: "flex", gap: 2 }}>
       {school && (
@@ -15,16 +15,6 @@ const SchoolMajorText = ({ school, major }) => {
           <Typography variant="body2" sx={{ fontSize: SubTitleResponsiveFontSize1 }}>
             <strong>School: </strong>
             {school}
-          </Typography>
-        </Box>
-      )}
-
-      {major && (
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1, mt: 1 }}>
-          <ImportContactsIcon sx={{ color: primaryColor, fontSize: SchoolIconResponsiveSize }} />
-          <Typography variant="body2" sx={{ fontSize: SubTitleResponsiveFontSize1 }}>
-            <strong>Major: </strong>
-            {major}
           </Typography>
         </Box>
       )}

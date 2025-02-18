@@ -6,6 +6,7 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import TutoringMainInfoForm from "../../../components/forms/post/job/TutoringMainInfoForm";
 import TutoringMediaUploadForm from "../../../components/forms/post/job/TutoringMediaUploadForm";
+import JobPostPreviewDialog from "../../../components/preview/job/JobPostPreviewDialog";
 
 const LaunchTutoringPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
@@ -138,6 +139,14 @@ const LaunchTutoringPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <JobPostPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        jobPostData={mainInfoData}
+        mediaData={mediaData}
+        subCategory={"과외"}
+      />
     </Paper>
   );
 };

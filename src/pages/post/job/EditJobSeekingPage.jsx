@@ -6,6 +6,7 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import EditJobSeekingMainInfoForm from "../../../components/forms/post/job/EditJobSeekingMainInfoForm";
 import EditJobSeekingMediaInfoForm from "../../../components/forms/post/job/EditJobSeekingMediaInfoForm";
+import EditJobPostPreviewDialog from "../../../components/preview/job/EditJobPostPreviewDialog";
 
 const EditJobSeekingPage = () => {
   const { postId } = useParams();
@@ -165,6 +166,15 @@ const EditJobSeekingPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <EditJobPostPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        jobPostData={mainInfoData}
+        mediaData={mediaData}
+        existingImages={existingImages}
+        subCategory={"구직"}
+      />
     </Paper>
   );
 };

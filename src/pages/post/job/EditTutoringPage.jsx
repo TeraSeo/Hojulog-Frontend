@@ -6,6 +6,7 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import EditTutoringMainInfoForm from "../../../components/forms/post/job/EditTutoringMainInfoForm";
 import EditTutoringMediaInfoForm from "../../../components/forms/post/job/EditTutoringMediaInfoForm";
+import EditJobPostPreviewDialog from "../../../components/preview/job/EditJobPostPreviewDialog";
 
 const EditTutoringPage = () => {
   const { postId } = useParams();
@@ -165,6 +166,15 @@ const EditTutoringPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <EditJobPostPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        jobPostData={mainInfoData}
+        mediaData={mediaData}
+        existingImages={existingImages}
+        subCategory={"과외"}
+      />
     </Paper>
   );
 };

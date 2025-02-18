@@ -3,7 +3,7 @@ import { Box, IconButton } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-const PreviewScrollableImageGallery = ({ imageUrls }) => {
+const PreviewScrollableImageGallery = ({ imageUrls=[] }) => {
   const [showScrollButtons, setShowScrollButtons] = useState(false);
   const scrollContainerRef = useRef(null);
 

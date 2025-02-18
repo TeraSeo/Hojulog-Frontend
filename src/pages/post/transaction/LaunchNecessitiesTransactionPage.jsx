@@ -6,6 +6,7 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import NecessitiesTransactionMainInfoForm from "../../../components/forms/post/transaction/NecessitiesTransactionMainInfoForm";
 import NecessitiesTransactionMediaUploadForm from "../../../components/forms/post/transaction/NecessitiesTransactionMediaUploadForm";
+import TransactionPostPreviewDialog from "../../../components/preview/transaction/TransactionPostPreviewDialog";
 
 const LaunchNecessitiesTransactionPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
@@ -138,6 +139,14 @@ const LaunchNecessitiesTransactionPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <TransactionPostPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        transactionPostData={mainInfoData}
+        mediaData={mediaData}
+        subCategory={"생활용품"}
+      />
     </Paper>
   );
 };

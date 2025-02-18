@@ -6,6 +6,7 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import CarTransactionMainInfoForm from "../../../components/forms/post/transaction/CarTransactionMainInfoForm";
 import CarTransactionMediaUploadForm from "../../../components/forms/post/transaction/CarTransactionMediaUploadForm";
+import TransactionPostPreviewDialog from "../../../components/preview/transaction/TransactionPostPreviewDialog";
 
 const LaunchCarTransactionPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
@@ -138,6 +139,14 @@ const LaunchCarTransactionPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <TransactionPostPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        transactionPostData={mainInfoData}
+        mediaData={mediaData}
+        subCategory={"자동차"}
+      />
     </Paper>
   );
 };

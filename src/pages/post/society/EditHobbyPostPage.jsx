@@ -4,6 +4,7 @@ import { getUpdateSocietyPostDto, postSociety, updateSociety } from "../../../se
 import { useNavigate, useParams } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
 import EditHobbyMainInfoForm from "../../../components/forms/post/society/EditHobbyMainInfoForm";
+import SocietyPreviewDialog from "../../../components/preview/society/SocietyPreviewDialog";
 
 const EditHobbyPostPage = () => {
   const { postId } = useParams();
@@ -146,6 +147,13 @@ const EditHobbyPostPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <SocietyPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        societyPostData={mainInfoData}
+        subCategory={"동호회"}
+      />
     </Paper>
   );
 };

@@ -4,6 +4,7 @@ import { postStudy } from "../../../service/PostService";
 import { useNavigate } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
 import LanguageStudyMainInfoForm from "../../../components/forms/post/study/LanguageStudyMainInfoForm";
+import StudyPreviewDialog from "../../../components/preview/study/StudyPreviewDialog";
 
 const LaunchLanguageStudyPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
@@ -124,6 +125,13 @@ const LaunchLanguageStudyPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <StudyPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        studyPostData={mainInfoData}
+        subCategory={"어학연수후기"}
+      />
     </Paper>
   );
 };

@@ -6,6 +6,7 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import EditNecessitiesTransactionMainInfoForm from "../../../components/forms/post/transaction/EditNecessitiesTransactionMainInfoForm";
 import EditNecessitiesTransactionMediaUploadForm from "../../../components/forms/post/transaction/EditNecessitiesTransactionMediaUploadForm";
+import EditTransactionPreviewDialog from "../../../components/preview/transaction/EditTransactionPreviewDialog";
 
 const EditNecessitiesTransactionPage = () => {
   const { postId } = useParams();
@@ -165,6 +166,15 @@ const EditNecessitiesTransactionPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <EditTransactionPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        transactionPostData={mainInfoData}
+        mediaData={mediaData}
+        existingImages={existingImages}
+        subCategory={"생활용품"}
+      />
     </Paper>
   );
 };

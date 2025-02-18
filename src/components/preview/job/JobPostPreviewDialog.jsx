@@ -1,13 +1,13 @@
 import React from "react";
 import { Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import TravelPostBox from "../box/post/travel/TravelPostBox";
+import JobPreviewPropertyBox from "../../box/post/job/JobPreviewPropertyBox";
 
-const TravelPostPreviewDialog = ({ open, onClose, travelPostData }) => {
+const JobPostPreviewDialog = ({ open, onClose, jobPostData, mediaData, subCategory }) => {
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
       <DialogTitle>
-        Detailed View
+        미리보기
         <IconButton
           aria-label="close"
           onClick={onClose}
@@ -17,10 +17,10 @@ const TravelPostPreviewDialog = ({ open, onClose, travelPostData }) => {
         </IconButton>
       </DialogTitle>
       <DialogContent dividers>
-        <TravelPostBox post={travelPostData} />
+        <JobPreviewPropertyBox post={jobPostData} mediaData={mediaData} subCategory={subCategory} />
       </DialogContent>
     </Dialog>
   );
 };
 
-export default TravelPostPreviewDialog;
+export default JobPostPreviewDialog;

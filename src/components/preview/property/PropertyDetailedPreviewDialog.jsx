@@ -1,22 +1,26 @@
 import React from "react";
 import { Dialog, DialogTitle, DialogContent, IconButton, Box, Divider, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import DetailedPostTitleText from "../texts/DetailedPostTitleText";
-import ContactText from "../texts/ContactText";
-import PriceCard from "../texts/PriceCard";
-import RoomCountsText from "../texts/RoomCountsText";
-import BathRoomTypeText from "../texts/BathRoomTypeText";
-import ParkAvailabilityText from "../texts/ParkAvailabilityText";
-import CreatedAtText from "../texts/CreatedAtText";
-import PropertyDetailText from "../texts/PropertyDetailText";
-import PreviewScrollableImageGallery from "./PreviewScrollableImageGallery";
-import EmbeddedMap from "../box/post/EmbeddedMap";
+import DetailedPostTitleText from "../../texts/DetailedPostTitleText";
+import ContactText from "../../texts/ContactText";
+import PriceCard from "../../texts/PriceCard";
+import RoomCountsText from "../../texts/RoomCountsText";
+import BathRoomTypeText from "../../texts/BathRoomTypeText";
+import ParkAvailabilityText from "../../texts/ParkAvailabilityText";
+import CreatedAtText from "../../texts/CreatedAtText";
+import PropertyDetailText from "../../texts/PropertyDetailText";
+import PreviewScrollableImageGallery from "../PreviewScrollableImageGallery";
+import EmbeddedMap from "../../box/post/EmbeddedMap";
+import PostKeywordText from "../../texts/PostKeywordText";
+import PostProfileBox from "../../box/post/PostProfileBox";
 
 const PropertyDetailedPreviewDialog = ({ open, onClose, subCategory, post, mediaData }) => {
+  const userId = localStorage.getItem('userId') || "";
+
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
       <DialogTitle>
-        Detailed View
+        미리보기
         <IconButton
           aria-label="close"
           onClick={onClose}
@@ -33,6 +37,8 @@ const PropertyDetailedPreviewDialog = ({ open, onClose, subCategory, post, media
 
                 <Box sx={{ pl: 1 }}>
                     <DetailedPostTitleText subCategory={subCategory} title={post.title} />
+
+                    <PostProfileBox userId={userId} />
                     
                     <ContactText contact={post.contact} email={post.email} />
 
@@ -80,6 +86,12 @@ const PropertyDetailedPreviewDialog = ({ open, onClose, subCategory, post, media
                     <Divider sx={{ my: 2.5 }} />
                     <PropertyDetailText price={post.price} period={post.period} isBillIncluded={post.isBillIncluded} availableTime={post.availableTime} bathroomType={post.bathroomType} isParkable={post.isParkable} roomCount={post.roomCount} />
 
+                    {post.selectedKeywords.length > 0 && (
+                      <Box>
+                        <Divider sx={{ my: 2.5 }} />
+                        <PostKeywordText keywords={post.selectedKeywords} />
+                      </Box>
+                    )}
                 </Box>
             </Box>
 

@@ -4,9 +4,9 @@ import { getUpdatePropertyPostDto, updateProperty } from "../../../service/PostS
 import { useNavigate, useParams } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
-import PropertyPostPreviewDialog from "../../../components/preview/PropertyPostPreviewDialog";
 import EditTransactionPropertyMainInfoForm from "../../../components/forms/post/property/EditTransactionPropertyMainInfoForm";
 import EditTransactionPropertyMediaUploadForm from "../../../components/forms/post/property/EditTransactionPropertyMediaUploadForm";
+import EditPropertyPostPreviewDialog from "../../../components/preview/property/EditPropertyPostPreviewDialog";
 
 const EditTransactionPropertyPage = () => {
   const { postId } = useParams();
@@ -168,13 +168,14 @@ const EditTransactionPropertyPage = () => {
         </Grid>
       </Grid>
 
-      <PropertyPostPreviewDialog
-        open={isPreviewOpen}
-        onClose={handleClosePreview}
-        propertyPostData={mainInfoData}
-        mediaData={mediaData}
-        subCategory={"매매"}
-      />
+      <EditPropertyPostPreviewDialog
+          open={isPreviewOpen}
+          onClose={handleClosePreview}
+          propertyPostData={mainInfoData}
+          mediaData={mediaData}
+          existingImages={existingImages}
+          subCategory={"매매"}
+        />
     </Paper>
   );
 };

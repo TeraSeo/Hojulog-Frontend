@@ -4,6 +4,7 @@ import { getUpdateStudyPostDto, updateStudy } from "../../../service/PostService
 import { useNavigate, useParams } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
 import EditWorkingHolidayMainInfoForm from "../../../components/forms/post/study/EditWorkingHolidayMainInfoForm";
+import StudyPreviewDialog from "../../../components/preview/study/StudyPreviewDialog";
 
 const EditWorkingHolidayPostPage = () => {
   const { postId } = useParams();
@@ -144,6 +145,13 @@ const EditWorkingHolidayPostPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <StudyPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        studyPostData={mainInfoData}
+        subCategory={"위홀후기"}
+      />
     </Paper>
   );
 };

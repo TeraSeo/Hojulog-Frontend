@@ -4,6 +4,7 @@ import { getUpdateStudyPostDto, updateStudy } from "../../../service/PostService
 import { useNavigate, useParams } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
 import EditLanguageStudyMainInfoForm from "../../../components/forms/post/study/EditLanguageStudyMainInfoForm";
+import StudyPreviewDialog from "../../../components/preview/study/StudyPreviewDialog";
 
 const EditLanguageStudyPostPage = () => {
   const { postId } = useParams();
@@ -144,6 +145,13 @@ const EditLanguageStudyPostPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <StudyPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        studyPostData={mainInfoData}
+        subCategory={"어학연수후기"}
+      />
     </Paper>
   );
 };

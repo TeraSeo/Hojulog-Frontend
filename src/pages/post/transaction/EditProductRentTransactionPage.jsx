@@ -6,6 +6,7 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import EditProductRentMainInfoForm from "../../../components/forms/post/transaction/EditProductRentMainInfoForm";
 import EditProductRentMediaUploadForm from "../../../components/forms/post/transaction/EditProductRentMediaUploadForm";
+import EditTransactionPreviewDialog from "../../../components/preview/transaction/EditTransactionPreviewDialog";
 
 const EditProductRentTransactionPage = () => {
   const { postId } = useParams();
@@ -165,6 +166,15 @@ const EditProductRentTransactionPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <EditTransactionPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        transactionPostData={mainInfoData}
+        mediaData={mediaData}
+        existingImages={existingImages}
+        subCategory={"대여"}
+      />
     </Paper>
   );
 };

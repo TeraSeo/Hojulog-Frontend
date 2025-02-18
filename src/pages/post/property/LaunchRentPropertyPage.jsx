@@ -6,7 +6,7 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import RentPropertyMainInfoForm from "../../../components/forms/post/property/RentPropertyMainInfoForm";
 import RentPropertyMediaUploadForm from "../../../components/forms/post/property/RentPropertyMediaUploadForm";
-import PropertyPostPreviewDialog from "../../../components/preview/PropertyPostPreviewDialog";
+import PropertyPostPreviewDialog from "../../../components/preview/property/PropertyPostPreviewDialog";
 
 const LaunchRentPropertyPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);

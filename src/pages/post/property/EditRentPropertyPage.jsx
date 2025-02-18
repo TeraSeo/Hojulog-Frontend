@@ -4,9 +4,9 @@ import { getUpdatePropertyPostDto, updateProperty } from "../../../service/PostS
 import { useNavigate, useParams } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
-import PropertyPostPreviewDialog from "../../../components/preview/PropertyPostPreviewDialog";
 import EditRentPropertyMainInfoForm from "../../../components/forms/post/property/EditRentPropertyMainInfoForm";
 import EditRentPropertyMediaInfoForm from "../../../components/forms/post/property/EditRentPropertyMediaInfoForm";
+import EditPropertyPostPreviewDialog from "../../../components/preview/property/EditPropertyPostPreviewDialog";
 
 const EditRentPropertyPage = () => {
   const { postId } = useParams();
@@ -167,11 +167,12 @@ const EditRentPropertyPage = () => {
         </Grid>
       </Grid>
 
-      <PropertyPostPreviewDialog
+      <EditPropertyPostPreviewDialog
         open={isPreviewOpen}
         onClose={handleClosePreview}
         propertyPostData={mainInfoData}
         mediaData={mediaData}
+        existingImages={existingImages}
         subCategory={"렌트"}
       />
     </Paper>

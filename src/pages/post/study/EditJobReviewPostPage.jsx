@@ -4,6 +4,7 @@ import { getUpdateStudyPostDto, updateStudy } from "../../../service/PostService
 import { useNavigate, useParams } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
 import EditJobReviewMainInfoForm from "../../../components/forms/post/study/EditJobReviewMainInfoForm";
+import StudyPreviewDialog from "../../../components/preview/study/StudyPreviewDialog";
 
 const EditJobReviewPostPage = () => {
   const { postId } = useParams();
@@ -144,6 +145,13 @@ const EditJobReviewPostPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <StudyPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        studyPostData={mainInfoData}
+        subCategory={"취업후기"}
+      />
     </Paper>
   );
 };

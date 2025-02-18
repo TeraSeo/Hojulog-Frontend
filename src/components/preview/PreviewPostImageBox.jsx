@@ -7,7 +7,7 @@ const PreviewPostImageBox = ({ images = [], title }) => {
     images.length > 0 && images[0] instanceof File
       ? URL.createObjectURL(images[0])
       : NoImageAvailable;
-
+  
   return (
     <Card
       sx={{

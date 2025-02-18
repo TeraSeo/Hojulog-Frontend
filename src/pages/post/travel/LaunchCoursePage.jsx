@@ -4,6 +4,7 @@ import { postTravel } from "../../../service/PostService";
 import { useNavigate } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
 import CourseMainInfoForm from "../../../components/forms/post/travel/CourseMainInfoForm";
+import TravelPostPreviewDialog from "../../../components/preview/travel/TravelPostPreviewDialog";
 
 const LaunchCoursePage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
@@ -124,6 +125,13 @@ const LaunchCoursePage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <TravelPostPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        travelPostData={mainInfoData}
+        subCategory={"코스"}
+      />
     </Paper>
   );
 };

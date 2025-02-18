@@ -4,6 +4,7 @@ import { postSociety } from "../../../service/PostService";
 import { useNavigate } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
 import HobbyMainInfoForm from "../../../components/forms/post/society/HobbyMainInfoForm";
+import SocietyPreviewDialog from "../../../components/preview/society/SocietyPreviewDialog";
 
 const LaunchHobbyPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
@@ -126,6 +127,13 @@ const LaunchHobbyPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <SocietyPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        societyPostData={mainInfoData}
+        subCategory={"동호회"}
+      />
     </Paper>
   );
 };

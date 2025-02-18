@@ -1,13 +1,13 @@
 import React from "react";
 import { Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import PreviewPropertyPostBox from "../box/post/property/PreviewPropertyPostBox";
+import EditPreviewPropertyPostBox from "../../box/post/property/EditPreviewPropertyPostBox";
 
-const PropertyPostPreviewDialog = ({ open, onClose, propertyPostData, mediaData, subCategory }) => {
+const EditPropertyPostPreviewDialog = ({ open, onClose, propertyPostData, mediaData, existingImages=[], subCategory }) => {
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
       <DialogTitle>
-        Detailed View
+        미리보기
         <IconButton
           aria-label="close"
           onClick={onClose}
@@ -17,10 +17,10 @@ const PropertyPostPreviewDialog = ({ open, onClose, propertyPostData, mediaData,
         </IconButton>
       </DialogTitle>
       <DialogContent dividers>
-        <PreviewPropertyPostBox post={propertyPostData} mediaData={mediaData} subCategory={subCategory} />
+        <EditPreviewPropertyPostBox post={propertyPostData} mediaData={mediaData} subCategory={subCategory} existingImages={existingImages} />
       </DialogContent>
     </Dialog>
   );
 };
 
-export default PropertyPostPreviewDialog;
+export default EditPropertyPostPreviewDialog;

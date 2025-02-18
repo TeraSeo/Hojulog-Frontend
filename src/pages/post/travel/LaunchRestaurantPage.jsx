@@ -4,7 +4,7 @@ import { postTravel } from "../../../service/PostService";
 import { useNavigate } from "react-router-dom";
 import { primaryColor } from "../../../constant/Color";
 import RestaurantMainInfoForm from "../../../components/forms/post/travel/RestaurantMainInfoForm";
-import TravelPostPreviewDialog from "../../../components/preview/TravelPostPreviewDialog";
+import TravelPostPreviewDialog from "../../../components/preview/travel/TravelPostPreviewDialog";
 
 const LaunchRestaurantPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
@@ -130,6 +130,7 @@ const LaunchRestaurantPage = () => {
         open={isPreviewOpen}
         onClose={handleClosePreview}
         travelPostData={mainInfoData}
+        subCategory={"레스토랑"}
       />
     </Paper>
   );

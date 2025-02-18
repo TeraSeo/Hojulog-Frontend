@@ -6,6 +6,8 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import JobSeekingMainInfoForm from "../../../components/forms/post/job/JobSeekingMainInfoForm";
 import JobSeekingMediaUploadForm from "../../../components/forms/post/job/JobSeekingMediaUploadForm";
+import PropertyPostPreviewDialog from "../../../components/preview/property/PropertyPostPreviewDialog";
+import JobPostPreviewDialog from "../../../components/preview/job/JobPostPreviewDialog";
 
 const LaunchJobSeekingPage = () => {
   const [isMainValid, setIsMainValid] = useState(false);
@@ -138,6 +140,14 @@ const LaunchJobSeekingPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <JobPostPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        jobPostData={mainInfoData}
+        mediaData={mediaData}
+        subCategory={"구직"}
+      />
     </Paper>
   );
 };

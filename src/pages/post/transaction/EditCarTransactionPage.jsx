@@ -6,6 +6,7 @@ import { primaryColor } from "../../../constant/Color";
 import PostStepper from "../../../components/bar/PostStepper";
 import EditCarTransactionMainInfoForm from "../../../components/forms/post/transaction/EditCarTransactionMainInfoForm";
 import EditCarTransactionMediaUploadForm from "../../../components/forms/post/transaction/EditCarTransactionMediaUploadForm";
+import EditTransactionPreviewDialog from "../../../components/preview/transaction/EditTransactionPreviewDialog";
 
 const EditCarTransactionPage = () => {
   const { postId } = useParams();
@@ -165,6 +166,15 @@ const EditCarTransactionPage = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <EditTransactionPreviewDialog
+        open={isPreviewOpen}
+        onClose={handleClosePreview}
+        transactionPostData={mainInfoData}
+        mediaData={mediaData}
+        existingImages={existingImages}
+        subCategory={"자동차"}
+      />
     </Paper>
   );
 };

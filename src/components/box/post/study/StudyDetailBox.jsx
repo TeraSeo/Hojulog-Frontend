@@ -8,14 +8,14 @@ import PostProfileBox from '../PostProfileBox';
 import PostKeywordText from '../../../texts/PostKeywordText';
 
 
-const StudyDetailBox = ({ userId, title, subCategory, school, major, rate, createdAt, blogContents=[], keywords=[] }) => {
+const StudyDetailBox = ({ userId, title, subCategory, school, createdAt, blogContents=[], keywords=[] }) => {
   return (
         <Box sx={{ pl: 1 }}>
             <DetailedPostTitleText subCategory={subCategory} title={title} />
 
             <PostProfileBox userId={userId} />
 
-            <SchoolMajorText school={school} major={major} />
+            <SchoolMajorText school={school} />
 
             <Divider sx={{ my: 2.5 }} />
 
