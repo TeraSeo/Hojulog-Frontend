@@ -64,4 +64,223 @@ function getAdminData(page) {
     )
 }
 
-export { validateIsAdmin, getAdminData };
+function getUserInfo(userId) {
+    const accessToken = localStorage.getItem('accessToken'); 
+    const refreshToken = localStorage.getItem('refreshToken'); 
+
+    if (!accessToken || !refreshToken) {
+        return Promise.resolve(false);
+    }
+
+    return axios.get("http://localhost:8080/api/admin/get/user", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken
+        },
+        params: {
+            "userId": userId
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getUserPageData(page) {
+    const accessToken = localStorage.getItem('accessToken'); 
+    const refreshToken = localStorage.getItem('refreshToken'); 
+
+    if (!accessToken || !refreshToken) {
+        return Promise.resolve(false);
+    }
+
+    return axios.get("http://localhost:8080/api/admin/get/pageable/user", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken
+        },
+        params: {
+            "page": page,
+            "size": 10
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getInquiryInfo(inquiryId) {
+    const accessToken = localStorage.getItem('accessToken'); 
+    const refreshToken = localStorage.getItem('refreshToken'); 
+
+    if (!accessToken || !refreshToken) {
+        return Promise.resolve(false);
+    }
+
+    return axios.get("http://localhost:8080/api/admin/get/inquiry", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken
+        },
+        params: {
+            "inquiryId": inquiryId
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getSpecificInquiryInfo(inquiryId) {
+    const accessToken = localStorage.getItem('accessToken'); 
+    const refreshToken = localStorage.getItem('refreshToken'); 
+
+    if (!accessToken || !refreshToken) {
+        return Promise.resolve(false);
+    }
+
+    return axios.get("http://localhost:8080/api/admin/get/specific/inquiry", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken
+        },
+        params: {
+            "inquiryId": inquiryId
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getInquiryPageData(page) {
+    const accessToken = localStorage.getItem('accessToken'); 
+    const refreshToken = localStorage.getItem('refreshToken'); 
+
+    if (!accessToken || !refreshToken) {
+        return Promise.resolve(false);
+    }
+
+    return axios.get("http://localhost:8080/api/admin/get/pageable/inquiry", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken
+        },
+        params: {
+            "page": page,
+            "size": 10
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function updateUser(userId, formData) {
+    const accessToken = localStorage.getItem('accessToken'); 
+    const refreshToken = localStorage.getItem('refreshToken'); 
+
+    if (!accessToken || !refreshToken) {
+        return Promise.resolve(false);
+    }
+
+    return axios.put("http://localhost:8080/api/admin/update/user", 
+        {
+            userId,
+            log: formData.log,
+            likeCountThisWeek: formData.likeCountThisWeek,
+            role: formData.role,
+            isLocked: formData.isLocked
+        },
+        {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function replyInquiry(inquiryId, response) {
+    const accessToken = localStorage.getItem('accessToken'); 
+    const refreshToken = localStorage.getItem('refreshToken'); 
+
+    if (!accessToken || !refreshToken) {
+        return Promise.resolve(false);
+    }
+
+    return axios.put("http://localhost:8080/api/admin/update/inquiry", 
+        {
+            inquiryId,
+            response
+        },
+        {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+export { validateIsAdmin, getAdminData, getUserInfo, getUserPageData, getInquiryInfo, getSpecificInquiryInfo, getInquiryPageData, updateUser, replyInquiry };

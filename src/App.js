@@ -106,6 +106,10 @@ import SocietySearchPage from './pages/search/SocietySearchPage';
 import TransactionSearchPage from './pages/search/TransactionSearchPage';
 import TravelSearchPage from './pages/search/TravelSearchPage';
 import StudySearchPage from './pages/search/StudySearchPage';
+import AdminUserListPage from './pages/admin/AdminUserListPage';
+import AdminInquiryListPage from './pages/admin/AdminInquiryListPage';
+import AdminUserEditBox from './components/box/admin/AdminUserEditBox';
+import AdminInquiryEditBox from './components/box/admin/AdminInquiryEditBox';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -213,10 +217,14 @@ function App() {
             <Route path="home" element={<HomePage />} />
             <Route path="mypage" element={<MyProfilePage />} />
             <Route path="admin" element={<AdminPage />} />
+            <Route path="admin/userList" element={<AdminUserListPage />} />
+            <Route path="admin/inquiryList" element={<AdminInquiryListPage />} />
             <Route path="ranking" element={<RankingPage />} />
             <Route path="customer/center" element={<CustomerCenterPage />} />
             <Route path="otherpage/:userId" element={<OtherProfilePage />} />
             <Route path="update/mypage/:userId" element={<UpdateProfilePage />} />
+            <Route path="update/admin/user/:userId" element={<AdminUserEditBox />} />
+            <Route path="update/admin/inquiry/:inquiryId" element={<AdminInquiryEditBox />} />
 
             <Route path="update/여행/여행지/:postId" element={<EditTravelPage />} />
             <Route path="update/여행/코스/:postId" element={<EditCoursePostPage />} />

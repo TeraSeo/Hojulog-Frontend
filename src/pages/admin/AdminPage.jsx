@@ -4,6 +4,8 @@ import HomeContainerBox from "../../components/box/home/HomeContainerBox";
 import { useNavigate } from "react-router-dom";
 import { getAdminData } from "../../service/AdminService";
 import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
+import SingleUserBox from "../../components/box/admin/SingleUserBox";
+import SingleInquiryBox from "../../components/box/admin/SingleInquiryBox";
 
 const AdminPage = () => {
     const navigate = useNavigate();
@@ -30,20 +32,20 @@ const AdminPage = () => {
                     </Typography>
 
                     <Box sx={{ mb: 3 }}>
-                        <HomeContainerBox title="유저 리스트" onDetailClicked={() => {  }}>
+                        <HomeContainerBox title="유저 리스트" onDetailClicked={() => { navigate("/admin/userList") }}>
                             {adminData.userIds.map((userId, index) => (
                                 <Box key={index}>
-                                    { userId }
+                                    <SingleUserBox userId={userId} />
                                 </Box>
                             ))}
                         </HomeContainerBox>
                     </Box>
 
                     <Box sx={{ my: 3 }}>
-                        <HomeContainerBox title="문의 리스트" onDetailClicked={() => {  }}>
+                        <HomeContainerBox title="문의 리스트" onDetailClicked={() => { navigate("/admin/inquiryList") }}>
                             {adminData.inquiryIds.map((inquiryId, index) => (
                                 <Box key={index}>
-                                    { inquiryId }
+                                    <SingleInquiryBox inquiryId={inquiryId} />
                                 </Box>
                             ))}
                         </HomeContainerBox>
