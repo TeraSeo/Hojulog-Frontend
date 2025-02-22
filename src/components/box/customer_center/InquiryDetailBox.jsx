@@ -1,36 +1,12 @@
-import { Box, Typography, TextField, Button } from "@mui/material";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { replyInquiry } from "../../../service/AdminService";
-import ScrollableImageGallery from "../post/ScrollableImageGallery";
+import { Box, Typography } from "@mui/material";
+import React from "react";
 import { PostResponsiveFontSize1, PostTitleFontSize, SubTitleResponsiveFontSize1 } from "../../../constant/FontSizeResponsive";
+import ScrollableImageGallery from "../post/ScrollableImageGallery";
 import PostProfileBox from "../post/PostProfileBox";
 
-const AdminInquiryEditBox = ({ inquiryData }) => {
-    const navigate = useNavigate();
-    const [responseText, setResponseText] = useState(inquiryData.response);
-
-    const handleResponseChange = (e) => {
-        setResponseText(e.target.value);
-    };
-
-    const handleSubmitResponse = async () => {
-        if (responseText !== "") {
-            const isUpdated = await replyInquiry(inquiryData.id, responseText);
-            if (isUpdated) {
-                navigate("/admin");
-            }
-        }
-    };
-
+const InquiryDetailBox = ({ inquiryData }) => {
     return (
         <Box sx={{ p: 3, border: "1px solid #ccc", borderRadius: "8px", maxWidth: "600px", mx: "auto" }}>
-            <Typography variant="h5" gutterBottom>문의 답변</Typography>
-
-            <ScrollableImageGallery imageUrls={inquiryData.imageUrls} />
-
-            <PostProfileBox userId={inquiryData.userId} />
-
             <Typography
                 variant="body2"
                 sx={{
@@ -46,6 +22,10 @@ const AdminInquiryEditBox = ({ inquiryData }) => {
                 {inquiryData.title || "No Title Available"}
             </Typography>
 
+            <ScrollableImageGallery imageUrls={inquiryData.imageUrls} />
+
+            <PostProfileBox userId={inquiryData.userId} />
+
             <Box>
                 <Typography
                     variant="body2"
@@ -55,6 +35,7 @@ const AdminInquiryEditBox = ({ inquiryData }) => {
                         whiteSpace: "nowrap",
                         overflow: "hidden",
                         fontSize: SubTitleResponsiveFontSize1,
+                        pt: 1
                     }}
                 >
                     문의내역
@@ -78,27 +59,25 @@ const AdminInquiryEditBox = ({ inquiryData }) => {
             </Box>
 
             <Box sx={{ mt: 3 }}>
-                <Typography variant="body2" sx={{ fontWeight: "600", mb: 1 }}>답변 작성</Typography>
-                <TextField
-                    multiline
-                    rows={4}
-                    fullWidth
-                    variant="outlined"
-                    value={responseText}
-                    onChange={handleResponseChange}
-                    placeholder="답변을 입력하세요..."
-                />
-                <Button
-                    variant="contained"
-                    color="primary"
-                    sx={{ mt: 2 }}
-                    onClick={handleSubmitResponse}
+                <Typography variant="body2" sx={{ fontWeight: "600", mb: 1 }}>답변</Typography>
+                
+                <Typography
+                    variant="body2"
+                    sx={{
+                        fontWeight: "400",
+                        textAlign: "start",
+                        whiteSpace: "pre-line",
+                        wordWrap: "break-word",
+                        overflow: "auto",
+                        width: "100%",
+                        fontSize: PostResponsiveFontSize1,
+                    }}
                 >
-                    답변 제출
-                </Button>
+                    {inquiryData.response || "아직 답변이 없습니다."}
+                </Typography>
             </Box>
         </Box>
     );
 };
 
-export default AdminInquiryEditBox;
+export default InquiryDetailBox;

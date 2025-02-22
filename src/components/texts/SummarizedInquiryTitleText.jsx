@@ -1,11 +1,14 @@
 import { Typography } from "@mui/material";
 import React from "react";
 import { PostResponsiveFontSize1 } from "../../constant/FontSizeResponsive";
+import { useNavigate } from "react-router-dom";
 
 const SummarizedInquiryTitleText = ({ inquiryText, inquiryId, pt=1 }) => {
+    const navigate = useNavigate();
+
     return <Typography
         variant="body2"
-        onClick={() => {}}
+        onClick={() => {navigate(`/inquiry/detail/${inquiryId}`)}}
         sx={{
             pt: pt,
             fontWeight: "600",

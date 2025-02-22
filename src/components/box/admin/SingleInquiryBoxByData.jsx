@@ -19,19 +19,19 @@ const SingleInquiryBoxByData = ({ inquiry }) => {
             }}
         >
 
-            <Box sx={{ display: "flex", flexGrow: 1, alignItems: "center", justifyContent: "space-between" }}>
-                <Typography variant="body2" sx={{  fontWeight: "bold" }}>
+            <Box sx={{ display: "flex", flexGrow: 1, alignItems: "center" }}>
+                <Typography variant="body2" sx={{  fontWeight: "bold", width: "10px" }}>
                     {inquiry.inquiryId}
                 </Typography>
 
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                     <Typography variant="body2" sx={{ fontWeight: "bold", width: "50px" }}>제목:</Typography>
-                    <Typography variant="body2">{inquiry.title}</Typography>
+                    <Typography variant="body2" sx={{ pr: 5, width: "230px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{inquiry.title}</Typography>
                 </Box>
 
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                     <Typography variant="body2" sx={{ fontWeight: "bold", width: "50px" }}>설명:</Typography>
-                    <Typography variant="body2">{inquiry.description}</Typography>
+                    <Typography variant="body2" sx={{ pr: 5, width: "480px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{inquiry.description}</Typography>
                 </Box>
 
                 <Box sx={{ display: "flex", alignItems: "center" }}>

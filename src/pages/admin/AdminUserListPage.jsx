@@ -6,6 +6,7 @@ import CategorySidebar from "../../components/bar/CategorySidebar";
 import PageTitleText from "../../components/texts/PageTitleText";
 import PostPaginationBox from "../../components/box/post/PostPaginationBox";
 import SingleUserBoxByData from "../../components/box/admin/SingleUserBoxByData";
+import ThisWeekLogDividingButton from "../../components/buttons/ThisWeekLogDividingButton";
 
 const AdminUserListPage = () => {
     const [userData, setUserData] = useState({
@@ -45,7 +46,11 @@ const AdminUserListPage = () => {
             </Grid>
 
             <Grid item xs={12} md={9}>
-                <PageTitleText title={"유저 리스트"} />
+                <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
+                    <PageTitleText title={"유저 리스트"} />
+
+                    <ThisWeekLogDividingButton />
+                </Box>
 
                 {userData.users.map((user, index) => (
                     <React.Fragment key={index}>

@@ -283,4 +283,34 @@ function replyInquiry(inquiryId, response) {
     )
 }
 
-export { validateIsAdmin, getAdminData, getUserInfo, getUserPageData, getInquiryInfo, getSpecificInquiryInfo, getInquiryPageData, updateUser, replyInquiry };
+function provideLogThisWeek() {
+    const accessToken = localStorage.getItem('accessToken'); 
+    const refreshToken = localStorage.getItem('refreshToken'); 
+
+    if (!accessToken || !refreshToken) {
+        return Promise.resolve(false);
+    }
+
+    return axios.put("http://localhost:8080/api/admin/provide/logs/this-week", 
+        {},
+        {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'accessToken': accessToken,
+                'refreshToken': refreshToken
+            }
+        }
+    )
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+export { validateIsAdmin, getAdminData, getUserInfo, getUserPageData, getInquiryInfo, getSpecificInquiryInfo, getInquiryPageData, updateUser, replyInquiry, provideLogThisWeek };

@@ -15,8 +15,9 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
+import NotificationButton from "../buttons/NotificationButton";
 
-function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout }) {
+function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout, newNotifications = 0 }) {
     const navigate = useNavigate();
 
     const handleNavigate = (path) => {
@@ -85,6 +86,10 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout }) {
                         <ListItemIcon><HeadsetMicIcon sx={{ color: "#666" }} /></ListItemIcon>
                         <ListItemText primary="고객센터" sx={{ color: "#666", fontWeight: "bold" }} />
                     </ListItem>
+
+                    {/* 알림 버튼 with Badge */}
+                    <NotificationButton />
+
                     <ListItem button onClick={() => handleLogout()}>
                         <ListItemIcon><LogoutIcon /></ListItemIcon>
                         <ListItemText primary="로그아웃" />

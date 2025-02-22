@@ -108,8 +108,9 @@ import TravelSearchPage from './pages/search/TravelSearchPage';
 import StudySearchPage from './pages/search/StudySearchPage';
 import AdminUserListPage from './pages/admin/AdminUserListPage';
 import AdminInquiryListPage from './pages/admin/AdminInquiryListPage';
-import AdminUserEditBox from './components/box/admin/AdminUserEditBox';
-import AdminInquiryEditBox from './components/box/admin/AdminInquiryEditBox';
+import AdminInquiryEditPage from './pages/admin/AdminInquiryEditPage';
+import AdminUserEditPage from './pages/admin/AdminUserEditPage';
+import InquiryDetailPage from './pages/customer_center/InquiryDetailPage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -223,8 +224,8 @@ function App() {
             <Route path="customer/center" element={<CustomerCenterPage />} />
             <Route path="otherpage/:userId" element={<OtherProfilePage />} />
             <Route path="update/mypage/:userId" element={<UpdateProfilePage />} />
-            <Route path="update/admin/user/:userId" element={<AdminUserEditBox />} />
-            <Route path="update/admin/inquiry/:inquiryId" element={<AdminInquiryEditBox />} />
+            <Route path="update/admin/user/:userId" element={<AdminUserEditPage />} />
+            <Route path="update/admin/inquiry/:inquiryId" element={<AdminInquiryEditPage />} />
 
             <Route path="update/여행/여행지/:postId" element={<EditTravelPage />} />
             <Route path="update/여행/코스/:postId" element={<EditCoursePostPage />} />
@@ -297,6 +298,7 @@ function App() {
             <Route path="others/posts/:userId/:username" element={<OthersUploadedPostPage />} />
             <Route path="liked/posts" element={<LikedPostPage />} />
             <Route path="inquiries" element={<InquiriesPage />} />
+            <Route path="inquiry/detail/:inquiryId" element={<InquiryDetailPage/>} />
 
             {generateDynamicRoutes()}
 

@@ -1,37 +1,16 @@
 import { Box, Typography, TextField, Select, MenuItem, FormControl, InputLabel, Switch, Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { getUserInfo, updateUser } from "../../../service/AdminService";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { updateUser } from "../../../service/AdminService";
 
-const AdminUserEditBox = () => {
+const AdminUserEditBox = ({ userData }) => {
     const navigate = useNavigate();
-    const { userId } = useParams();
-    const [userData, setUserData] = useState(null);
     const [formData, setFormState] = useState({
-        log: "",
-        likeCountThisWeek: 0,
-        role: "",
-        isLocked: false
+        log: userData.log,
+        likeCountThisWeek: userData.likeCountThisWeek,
+        role: userData.role,
+        isLocked: userData.isLocked
     });
-
-    useEffect(() => {
-        fetchUserData(userId);
-    }, [userId]);
-
-    const fetchUserData = async (userId) => {
-        try {
-            const data = await getUserInfo(userId);
-            setUserData(data);
-            setFormState({
-                log: data.log,
-                likeCountThisWeek: data.likeCountThisWeek,
-                role: data.role,
-                isLocked: data.isLocked
-            });
-        } catch (error) {
-            console.error("Error fetching user data:", error);
-        }
-    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -50,7 +29,7 @@ const AdminUserEditBox = () => {
         }
 
         try {
-            const isUpdated = await updateUser(userId, formData)
+            const isUpdated = await updateUser(userData.id, formData)
             if (isUpdated) {
                 navigate("/admin");
             }
@@ -58,12 +37,8 @@ const AdminUserEditBox = () => {
             console.error("Error updating user:", error);
             alert("Failed to update user");
         }
-    };
-
-    if (!userData) {
-        return <Typography>Loading...</Typography>;
     }
-
+    
     return (
         <Box sx={{ p: 3, border: "1px solid #ccc", borderRadius: "8px", maxWidth: "600px", mx: "auto" }}>
             <Typography variant="h5" gutterBottom>유저 수정</Typography>
