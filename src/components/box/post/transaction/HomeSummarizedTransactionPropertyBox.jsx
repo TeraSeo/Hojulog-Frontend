@@ -4,6 +4,7 @@ import SummarizedPostTitleText from "../../../texts/SummarizedPostTitleText";
 import SummarizedPostImageBox from "../SummarizedPostImageBox";
 import CreatedAtText from "../../../texts/CreatedAtText";
 import PriceText from "../../../texts/PriceText";
+import FreeText from "../../../texts/\bFreeText";
 
 const HomeSummarizedTransactionPropertyBox = ({ post }) => {
     return (
@@ -20,7 +21,11 @@ const HomeSummarizedTransactionPropertyBox = ({ post }) => {
                         textAlign: "start",
                     }}
                 >
-                    <PriceText price={post.price} />
+                    {
+                        post.priceType === "유료" ?
+                            <PriceText price={post.price} />:
+                            <FreeText />
+                    }
                 </Typography>
                 
                 <CreatedAtText createdAt={post.createdAt} />

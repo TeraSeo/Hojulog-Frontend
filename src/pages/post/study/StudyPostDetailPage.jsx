@@ -13,6 +13,7 @@ import { PostResponsiveFontSize2 } from '../../../constant/FontSizeResponsive';
 import { DetailedPostIconResponsiveSize2 } from '../../../constant/IconSizeResponsive';
 import SecretPostDialog from '../../../components/dialog/SecretPostDialog';
 import { CommonPagePaddingXSize } from '../../../constant/PaddingResponsiveSize';
+import { checkIsUserPaid, viewSecretPost } from '../../../service/UserService';
 
 const StudyPostDetailPage = () => {
   const { postId } = useParams();
@@ -29,10 +30,26 @@ const StudyPostDetailPage = () => {
 
   const fetchPostData = (postId) => {
     getSpecificStudyPost(postId)
-      .then((data) => {
+      .then(async (data) => {
         setStudyPostData(data);
-        if (!data.isPublic && data.userId !== userId) {
-          setDialogOpen(true);
+        if (!data.isPublic && localStorage.getItem('userId') === null) {
+          const isConfirmed = window.confirm("비밀글 열람은 로그인이 필요합니다. 로그인하시겠습니까?");
+          if (isConfirmed) {
+            navigate("/login");
+          } else {
+            navigate(-1);
+          }
+        }
+        else {
+          if (!data.isPublic && data.userId !== userId) {
+            const isPaid = await checkIsUserPaid(userId, data.postId);
+            if (isPaid) {
+              setIsUnlocked(true);
+            }
+            else {
+              setDialogOpen(true);
+            }
+          }
         }
       })
       .catch((error) => console.error("Error fetching posts:", error));
@@ -42,9 +59,15 @@ const StudyPostDetailPage = () => {
     commentBoxRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleUseCredit = () => {
-    setIsUnlocked(true);
-    setDialogOpen(false);
+  const handleUseCredit = async () => {
+    const isValid = await viewSecretPost(userId, studyPostData.postId);
+    if (isValid) {
+      setIsUnlocked(true);
+      setDialogOpen(false);
+    }
+    else {
+      alert("포인트가 부족합니다.")
+    }
   };
 
   const handleDenyAccess = () => {
@@ -67,7 +90,7 @@ const StudyPostDetailPage = () => {
         </Grid>
 
         <Grid item xs={12} md={9}>
-          <Box sx={{ filter: studyPostData.isPublic || studyPostData.userId === userId ? "none" : "blur(5px)", transition: "filter 0.3s ease-in-out" }}>
+          <Box sx={{ filter: isUnlocked || studyPostData.isPublic || studyPostData.userId === userId ? "none" : "blur(5px)", transition: "filter 0.3s ease-in-out" }}>
             <StudyDetailBox userId={studyPostData.userId} description={studyPostData.description} title={studyPostData.title} subCategory={studyPostData.subCategory} postId={studyPostData.postId} school={studyPostData.school} createdAt={studyPostData.createdAt} blogContents={studyPostData.blogContents} keywords={studyPostData.keywords} />
           </Box>
         </Grid>
@@ -92,7 +115,7 @@ const StudyPostDetailPage = () => {
         }
       </Box>
 
-      <SecretPostDialog dialogOpen={dialogOpen} handleUseCredit={handleDenyAccess} handleDenyAccess={handleDenyAccess} />
+      <SecretPostDialog dialogOpen={dialogOpen} handleUseCredit={handleUseCredit} handleDenyAccess={handleDenyAccess} />
     </Box>
   );
 };

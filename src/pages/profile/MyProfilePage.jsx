@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import AdminButton from "../../components/buttons/AdminButton";
 import CommonSummarizedInquiryBox from "../../components/box/customer_center/CommonSummarizedInquiryBox";
 import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
+import ProfileStatsText from "../../components/texts/ProfileStatsText";
 
 const MyProfilePage = () => {
     const navigate = useNavigate();
@@ -73,10 +74,16 @@ const MyProfilePage = () => {
                             </Box>
                         </Box>
 
-                        <UpdateProfileButton userId={ userData.id } />
+                        <Box>
+                            <UpdateProfileButton userId={ userData.id } />
+                        </Box>
+                    </Box>
+
+                    <Box sx={{ my: 3 }}>
+                        <ProfileStatsText logPoints={ userData.log } weeklyLikes={ userData.likeCountThisWeek } />
                     </Box>
                     
-                    <Box sx={{ my: 3 }}>
+                    <Box sx={{ mt: 3 }}>
                         <HomeContainerBox title="내가 올린 게시물" onDetailClicked={() => { navigate("/own/posts") }}>
                             {userData.uploadedPostIds.map((uploadedPostId, index) => (
                                 <Box key={index}>

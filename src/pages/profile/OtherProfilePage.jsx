@@ -7,6 +7,7 @@ import { SubTitleResponsiveFontSize1, TitleResponsiveFontSize } from "../../cons
 import HomeContainerBox from "../../components/box/home/HomeContainerBox";
 import CommonOwnSummarizedPostBox from "../../components/box/post/CommonOwnSummarizedPostBox";
 import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
+import ProfileStatsText from "../../components/texts/ProfileStatsText";
 
 const OtherProfilePage = () => {
     const navigate = useNavigate();
@@ -72,6 +73,10 @@ const OtherProfilePage = () => {
                     </Box>
 
                     <Box sx={{ my: 3 }}>
+                        <ProfileStatsText logPoints={ userData.log } weeklyLikes={ userData.likeCountThisWeek } />
+                    </Box>
+
+                    <Box sx={{ mt: 3 }}>
                         <HomeContainerBox title={userData.username + "님이 올린 게시물"} onDetailClicked={() => { navigate(`/others/posts/${userId}/${userData.username}`) }}>
                             {userData.uploadedPostIds.map((uploadedPostId, index) => (
                                 <Box key={index}>

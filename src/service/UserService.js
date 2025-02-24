@@ -235,4 +235,56 @@ function updateUserInfo(userFormData, userId) {
     )
 }
 
-export { login, register, sendOtp, checkIsOtpCorrect, validateToken, getSpecificSummarisedUser, getSpecificSummarisedUserProfile, getSpecificUser, getSpecificOwnUser, updateUserInfo };
+function viewSecretPost(viewerId, postId) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.put("http://localhost:8080/api/user/view/secret/post", {}, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        },
+        params: {
+            "viewerId": viewerId,
+            "postId": postId
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return null;
+        }
+    )
+}
+
+function checkIsUserPaid(viewerId, postId) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.get("http://localhost:8080/api/user/check/is/paid", {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        },
+        params: {
+            "viewerId": viewerId,
+            "postId": postId
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return null;
+        }
+    )
+}
+
+export { login, register, sendOtp, checkIsOtpCorrect, validateToken, getSpecificSummarisedUser, getSpecificSummarisedUserProfile, getSpecificUser, getSpecificOwnUser, updateUserInfo, viewSecretPost, checkIsUserPaid };

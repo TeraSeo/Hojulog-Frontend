@@ -12,6 +12,7 @@ import EmbeddedMap from '../../../components/box/post/EmbeddedMap';
 import { PostResponsiveFontSize2 } from '../../../constant/FontSizeResponsive';
 import { DetailedPostIconResponsiveSize2 } from '../../../constant/IconSizeResponsive';
 import SecretPostDialog from '../../../components/dialog/SecretPostDialog';
+import { checkIsUserPaid, viewSecretPost } from '../../../service/UserService';
 
 const TravelPostDetailedPage = () => {
   const { postId } = useParams();
@@ -28,10 +29,26 @@ const TravelPostDetailedPage = () => {
 
   const fetchPostData = (postId) => {
     getSpecificTravelPost(postId)
-      .then((data) => {
+      .then(async (data) => {
         setTravelPostData(data);
-        if (!data.isPublic && data.userId !== userId) {
-          setDialogOpen(true);
+        if (!data.isPublic && localStorage.getItem('userId') === null) {
+          const isConfirmed = window.confirm("비밀글 열람은 로그인이 필요합니다. 로그인하시겠습니까?");
+          if (isConfirmed) {
+            navigate("/login");
+          } else {
+            navigate(-1);
+          }
+        }
+        else {
+          if (!data.isPublic && data.userId !== userId) {
+            const isPaid = await checkIsUserPaid(userId, data.postId);
+            if (isPaid) {
+              setIsUnlocked(true);
+            }
+            else {
+              setDialogOpen(true);
+            }
+          }
         }
       })
       .catch((error) => console.error("Error fetching posts:", error));
@@ -41,12 +58,18 @@ const TravelPostDetailedPage = () => {
     commentBoxRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleUseCredit = () => {
-    setIsUnlocked(true);
-    setDialogOpen(false);
+  const handleUseCredit = async () => {
+    const isValid = await viewSecretPost(userId, travelPostData.postId);
+    if (isValid) {
+      setIsUnlocked(true);
+      setDialogOpen(false);
+    }
+    else {
+      alert("포인트가 부족합니다.")
+    }
   };
 
-  const handleDenyAccess = () => {
+  const handleDenyAccess = async () => {
     if (window.history.length > 1) {
         navigate(-1); 
     } else {
@@ -67,7 +90,7 @@ const TravelPostDetailedPage = () => {
         </Grid>
 
         <Grid item xs={12} md={9}>
-          <Box sx={{ filter: travelPostData.isPublic || travelPostData.userId === userId ? "none" : "blur(5px)", transition: "filter 0.3s ease-in-out" }}>
+          <Box sx={{ filter: isUnlocked || travelPostData.isPublic || travelPostData.userId === userId ? "none" : "blur(5px)", transition: "filter 0.3s ease-in-out" }}>
             <TravelDetailBox
               userId={travelPostData.userId}
               title={travelPostData.title}
@@ -116,7 +139,7 @@ const TravelPostDetailedPage = () => {
         {travelPostData.isCommentAllowed ? <PostCommentBox postId={postId} /> : <Box />}
       </Box>
 
-      <SecretPostDialog dialogOpen={dialogOpen} handleUseCredit={handleDenyAccess} handleDenyAccess={handleDenyAccess} />
+      <SecretPostDialog dialogOpen={dialogOpen} handleUseCredit={handleUseCredit} handleDenyAccess={handleDenyAccess} />
     </Box>
   );
 };

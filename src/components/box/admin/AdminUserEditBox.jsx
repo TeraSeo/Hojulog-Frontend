@@ -67,10 +67,10 @@ const AdminUserEditBox = ({ userData }) => {
                 name="likeCountThisWeek"
                 type="number"
                 value={formData.likeCountThisWeek}
-                onChange={handleChange}
                 fullWidth
                 margin="normal"
-                required
+                InputProps={{ readOnly: true }}
+
             />
 
             <FormControl fullWidth margin="normal" required>

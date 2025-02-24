@@ -228,7 +228,6 @@ function updateUser(userId, formData) {
         {
             userId,
             log: formData.log,
-            likeCountThisWeek: formData.likeCountThisWeek,
             role: formData.role,
             isLocked: formData.isLocked
         },
