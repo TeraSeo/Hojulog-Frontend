@@ -2,8 +2,11 @@ import { Avatar, Box, Typography } from "@mui/material";
 import React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { RankLikeCountResponsiveFontSize1, RankResponsiveFontSize1, RankUsernameResponsiveFontSize1 } from "../../../constant/FontSizeResponsive";
+import { useNavigate } from "react-router-dom";
 
-const RankListBox = ({ otherRanks }) => {
+const RankListBox = ({ otherRanks=[] }) => {
+    const navigate = useNavigate();
+
     return (
         <Box 
             sx={{ 
@@ -13,7 +16,7 @@ const RankListBox = ({ otherRanks }) => {
                 padding: { md: "20px", sm: "15px", xs: "10px" }, 
             }}
         >
-            {otherRanks.map((user) => (
+            {otherRanks.map((user, index) => (
                 <Box 
                     key={user.rank} 
                     sx={{ 
@@ -23,6 +26,7 @@ const RankListBox = ({ otherRanks }) => {
                         width: "95%", 
                         my: 2,
                     }}
+                    onClick={() => navigate(`/otherpage/${user.userId}`)}
                 >
                     <Typography 
                         sx={{ 
@@ -32,7 +36,7 @@ const RankListBox = ({ otherRanks }) => {
                             minWidth: "30px", 
                         }}
                     >
-                        {user.rank}
+                        {index + 4}
                     </Typography>
 
                     <Box
@@ -84,7 +88,7 @@ const RankListBox = ({ otherRanks }) => {
                                     fontSize: RankLikeCountResponsiveFontSize1
                                 }}
                             >
-                                {user.points}
+                                {user.likeCountThisWeek}
                             </Typography>
                         </Box>
                     </Box>

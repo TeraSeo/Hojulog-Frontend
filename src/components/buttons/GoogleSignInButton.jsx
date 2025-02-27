@@ -21,7 +21,7 @@ function GoogleSignInButton() {
             }}
             href="http://localhost:8080/oauth2/authorize/google?redirect_uri=http://localhost:3000/oauth2/redirect"
         >
-            Sign in with Google
+            구글 계정으로 로그인
         </Button>
     );
 }

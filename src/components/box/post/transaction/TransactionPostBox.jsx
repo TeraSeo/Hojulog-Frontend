@@ -10,8 +10,11 @@ import { PostImageWidthResponiveSize } from "../../../../constant/ComponentSizeR
 import { PostResponsiveFontSize2 } from "../../../../constant/FontSizeResponsive";
 import { SummarizedPostIconResponsiveSize1 } from "../../../../constant/IconSizeResponsive";
 import FreeText from "../../../texts/\bFreeText";
+import ResponsivePinnedChip from "../../../texts/ResponsivePinnedChip";
 
 const TransactionPostBox = ({ post }) => {
+    const isPinned = post.pinnedAdExpiry && new Date(post.pinnedAdExpiry) > new Date();
+
     return (
         <Box
             sx={{
@@ -33,6 +36,7 @@ const TransactionPostBox = ({ post }) => {
                     }}
                 >
                     <Box>
+                        <Box sx={{ ml: 1 }}><ResponsivePinnedChip isPinned={isPinned} /></Box>
                         <SummarizedPostTitleText title={post.title} postId={post.postId} category={"사고팔기"} pt={0} />
                         <Box
                             sx={{

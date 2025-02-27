@@ -2,8 +2,11 @@ import { Box, Avatar, Typography } from "@mui/material";
 import React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import StarIcon from "@mui/icons-material/Star"; 
+import { useNavigate } from "react-router-dom";
 
-const TopRankingBox = ({ topRanks }) => {
+const TopRankingBox = ({ topRanks=[] }) => {
+    const navigate = useNavigate();
+
     return (
         <Box 
             sx={{ 
@@ -29,12 +32,13 @@ const TopRankingBox = ({ topRanks }) => {
                     flexDirection: "column",
                     alignItems: "center",
                 }}
+                onClick={() => navigate(`/otherpage/${topRanks[1].userId}`)}
             >
                 <Typography sx={{ fontWeight: "bold", fontSize: { md: "24px", sm: "22px", xs: "20px" }, color: "silver" }}>
                     🥈
                 </Typography>
                 <Avatar
-                    src={topRanks[1].profileUrl}
+                    src={topRanks[1]?.profileUrl || ""}
                     sx={{ 
                         width: { md: "100px", sm: "80px", xs: "60px" }, 
                         height: { md: "100px", sm: "80px", xs: "60px" }, 
@@ -46,7 +50,7 @@ const TopRankingBox = ({ topRanks }) => {
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mt: 1 }}>
                     <FavoriteIcon sx={{ color: "red", fontSize: { md: "16px", sm: "14px", xs: "12px" }, mr: 0.5 }} />
                     <Typography sx={{ fontWeight: "bold", fontSize: { md: "14px", sm: "12px", xs: "10px" } }}>
-                        {topRanks[1].points}
+                        {topRanks[1].likeCountThisWeek}
                     </Typography>
                 </Box>
             </Box>
@@ -65,6 +69,7 @@ const TopRankingBox = ({ topRanks }) => {
                     flexDirection: "column",
                     alignItems: "center",
                 }}
+                onClick={() => navigate(`/otherpage/${topRanks[0].userId}`)}
             >
                 <StarIcon 
                     sx={{ 
@@ -92,7 +97,7 @@ const TopRankingBox = ({ topRanks }) => {
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mt: 1 }}>
                     <FavoriteIcon sx={{ color: "red", fontSize: { md: "17px", sm: "15px", xs: "13px" }, mr: 0.5 }} />
                     <Typography sx={{ fontWeight: "bold", fontSize: { md: "15px", sm: "13px", xs: "11px" } }}>
-                        {topRanks[0].points}
+                        {topRanks[0].likeCountThisWeek}
                     </Typography>
                 </Box>
             </Box>
@@ -111,6 +116,7 @@ const TopRankingBox = ({ topRanks }) => {
                     flexDirection: "column",
                     alignItems: "center",
                 }}
+                onClick={() => navigate(`/otherpage/${topRanks[2].userId}`)}
             >
                 <Typography sx={{ fontWeight: "bold", fontSize: { md: "24px", sm: "22px", xs: "20px" }, color: "#cd7f32" }}>
                     🥉
@@ -128,7 +134,7 @@ const TopRankingBox = ({ topRanks }) => {
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mt: 1 }}>
                     <FavoriteIcon sx={{ color: "red", fontSize: { md: "16px", sm: "14px", xs: "12px" }, mr: 0.5 }} />
                     <Typography sx={{ fontWeight: "bold", fontSize: { md: "14px", sm: "12px", xs: "10px" } }}>
-                        {topRanks[2].points}
+                        {topRanks[2].likeCountThisWeek}
                     </Typography>
                 </Box>
             </Box>

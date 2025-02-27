@@ -83,7 +83,7 @@ function Header() {
                 
                 <Grid item xs={4} sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <IconButton onClick={toggleDrawer(true)}>
-                        <MenuIcon />
+                        <MenuIcon sx={{ fontSize: { xs: 20, sm: 23, md: 25 } }} />
                     </IconButton>
                 </Grid>
             </Grid>

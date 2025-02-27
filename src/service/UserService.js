@@ -41,9 +41,9 @@ function register(data) {
         })
         .catch(error => {
             if (error.response?.status === 409) {
-                return { success: false, message: "Account has already been registered with this email" };
+                return { success: false, message: "동일한 이메일로 등록된 계정이 이미 있습니다!" };
             } else {
-                return { success: false, message: "Failed to register account" };
+                return { success: false, message: "회원가입에 실패했습니다!" };
             }
         });
 }
@@ -287,4 +287,26 @@ function checkIsUserPaid(viewerId, postId) {
     )
 }
 
-export { login, register, sendOtp, checkIsOtpCorrect, validateToken, getSpecificSummarisedUser, getSpecificSummarisedUserProfile, getSpecificUser, getSpecificOwnUser, updateUserInfo, viewSecretPost, checkIsUserPaid };
+function getTopRanks() {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.get("http://localhost:8080/api/user/get/top10/users", {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return null;
+        }
+    )
+}
+
+export { login, register, sendOtp, checkIsOtpCorrect, validateToken, getSpecificSummarisedUser, getSpecificSummarisedUserProfile, getSpecificUser, getSpecificOwnUser, updateUserInfo, viewSecretPost, checkIsUserPaid, getTopRanks };

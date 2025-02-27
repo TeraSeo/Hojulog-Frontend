@@ -7,8 +7,11 @@ import SuburbText from "../../../texts/SuburbText";
 import ViewCountsText from "../../../texts/ViewCountsText";
 import { SummarizedPostIconResponsiveSize2 } from "../../../../constant/IconSizeResponsive";
 import { PostResponsiveFontSize2 } from "../../../../constant/FontSizeResponsive";
+import ResponsivePinnedChip from "../../../texts/ResponsivePinnedChip";
 
 const JobPostBox = ({ post }) => {
+    const isPinned = post.pinnedAdExpiry && new Date(post.pinnedAdExpiry) > new Date();
+
     return (
         <Box
             sx={{
@@ -17,7 +20,8 @@ const JobPostBox = ({ post }) => {
                 borderRadius: "8px",
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                 px: { md: 2.5, sm: 2, xs: 1.5 },
-                py: { md: 3, sm: 2, xs: 1.5 }
+                py: { md: 3, sm: 2, xs: 1.5 },
+                backgroundColor: isPinned ? "#fff8e1" : "white",
             }}
         >
             <Box
@@ -31,7 +35,8 @@ const JobPostBox = ({ post }) => {
                 <Box>
                     <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                         <Box sx={{whiteSpace: "nowrap", minWidth: 0}}>
-                            <SummarizedPostTitleText title={post.title} postId={post.postId} category={"구인구직"} pt={0} pl={0} />
+                            <ResponsivePinnedChip isPinned={isPinned} />
+                            <SummarizedPostTitleText title={post.title} postId={post.postId} category={"구인구직"} pt={1} pl={0} />
                             <Box
                                 sx={{
                                     display: "flex",

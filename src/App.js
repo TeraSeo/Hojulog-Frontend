@@ -111,6 +111,7 @@ import AdminInquiryListPage from './pages/admin/AdminInquiryListPage';
 import AdminInquiryEditPage from './pages/admin/AdminInquiryEditPage';
 import AdminUserEditPage from './pages/admin/AdminUserEditPage';
 import InquiryDetailPage from './pages/customer_center/InquiryDetailPage';
+import RegisterFailedPage from './pages/auth/RegisterFailedPage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -170,7 +171,7 @@ function App() {
                   자동차: LaunchCarTransactionPage,
                   생활용품: LaunchNecessitiesTransactionPage,
                   기타: LaunchEtcTransactionPage,
-                  대여: LaunchProductRentTransactionPage
+                  // 대여: LaunchProductRentTransactionPage
                 },
                 생활: {
                   동호회: LaunchHobbyPage,
@@ -203,6 +204,7 @@ function App() {
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="register/succeeded" element={<RegisterSuccededPage />} />
+          <Route path="register/failed/" element={<RegisterFailedPage />} />
           <Route path="oauth2/redirect" element={<Oauth2RedirectPage />} />
           <Route
             path="otp"
@@ -251,7 +253,7 @@ function App() {
             <Route path="update/사고팔기/자동차/:postId" element={<EditCarTransactionPage/>} />
             <Route path="update/사고팔기/생활용품/:postId" element={<EditNecessitiesTransactionPage/>} />
             <Route path="update/사고팔기/기타/:postId" element={<EditEtcTransactionPage/>} />
-            <Route path="update/사고팔기/대여/:postId" element={<EditProductRentTransactionPage/>} />
+            {/* <Route path="update/사고팔기/대여/:postId" element={<EditProductRentTransactionPage/>} /> */}
 
             <Route path="search/부동산/:title/:suburb/:subCategory/:keywords" element={<PropertySearchPage/>} />
             <Route path="search/구인구직/:title/:suburb/:subCategory/:keywords" element={<JobSearchPage/>} />
@@ -278,8 +280,7 @@ function App() {
             <Route path="자동차" element={<WholeCarPostPage />} />
             <Route path="생활용품" element={<WholeNecessitiesPostPage />} />
             <Route path="기타" element={<WholeTransactionEtcPostPage />} />
-
-            <Route path="대여" element={<WholeStudyPostPage />} />
+            
             <Route path="동호회" element={<WholeClubPostPage />} />
             <Route path="라이프스타일" element={<WholeLifeStylePostPage />} />
             <Route path="친목" element={<WholeFriendshipPostPage />} />

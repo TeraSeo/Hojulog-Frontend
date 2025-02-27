@@ -13,8 +13,11 @@ import ParkAvailabilityText from "../../../texts/ParkAvailabilityText";
 import BillIncludedText from "../../../texts/BillIncludedText";
 import SubCatoryText from "../../../texts/SubCatoryText";
 import { PostImageWidthResponiveSize } from "../../../../constant/ComponentSizeResponsive";
+import ResponsivePinnedChip from "../../../texts/ResponsivePinnedChip";
 
 const PropertyPostBox = ({ post }) => {
+    const isPinned = post.pinnedAdExpiry && new Date(post.pinnedAdExpiry) > new Date();
+
     return (
         <Box
             sx={{
@@ -35,6 +38,9 @@ const PropertyPostBox = ({ post }) => {
                         minWidth: 0
                     }}>
                         <Box>
+                            <Box sx={{ ml: 1, mb: 0.5 }}>
+                                <ResponsivePinnedChip isPinned={isPinned} />
+                            </Box>
                             <Box sx={{ display: "flex", "&:hover": { color: "primary.main", textDecoration: "underline", transform: "scale(1.02)", cursor: "pointer" }}}>
                                 <SubCatoryText subCategory={post.subCategory} postId={post.postId} category={"부동산"} pt={0} />
                                 <SummarizedPostTitleText title={post.title} pl={0.5} postId={post.postId} category={"부동산"} pt={0} />

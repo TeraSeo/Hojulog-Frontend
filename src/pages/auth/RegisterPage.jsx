@@ -24,6 +24,8 @@ function RegisterPage() {
             borderRadius: 3,
             boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
             textAlign: 'center',
+            mx: 2,
+            my: 5
         }}
     >
         <RegisterForm />

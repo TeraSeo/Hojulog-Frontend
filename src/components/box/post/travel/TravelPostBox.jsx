@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Chip } from "@mui/material";
 import React from "react";
 import SummarizedPostTitleText from "../../../texts/SummarizedPostTitleText";
 import CreatedAtText from "../../../texts/CreatedAtText";
@@ -7,8 +7,11 @@ import SummarizedDescriptionText from "../../../texts/SummarizedDescriptionText"
 import HomePostLikeCountsText from "../../../texts/HomePostLikeCountsText";
 import HomePostCommentCountsText from "../../../texts/HomePostCommentCountsText";
 import HomePostViewCountsText from "../../../texts/HomePostViewCountsText";
+import ResponsivePinnedChip from "../../../texts/ResponsivePinnedChip";
 
 const TravelPostBox = ({ post }) => {
+    const isPinned = post.pinnedAdExpiry && new Date(post.pinnedAdExpiry) > new Date();
+
     return (
         <Box
             sx={{
@@ -20,9 +23,12 @@ const TravelPostBox = ({ post }) => {
                 borderRadius: "8px",
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                 px: { md: 2.5, xs: 2 },
-                py: { md: 2.5, xs: 1.5 }
+                py: { md: 2.5, xs: 1.5 },
+                backgroundColor: isPinned ? "#fff8e1" : "white",
+                position: "relative"
             }}
         >
+
             <Box sx={{ display: "flex", flex: 1, overflow: "hidden" }}>
                 <Box
                     sx={{
@@ -34,8 +40,9 @@ const TravelPostBox = ({ post }) => {
                     }}
                 >
                     <Box>
+                        <ResponsivePinnedChip isPinned={isPinned} />
                         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                            <Box sx={{whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",}}>
+                            <Box sx={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                                 <SummarizedPostTitleText title={post.title} postId={post.postId} category={"여행"} pl={0} />
                                 <SummarizedDescriptionText description={post.description} pl={0} />
                             </Box>

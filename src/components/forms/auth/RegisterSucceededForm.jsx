@@ -7,7 +7,7 @@ function RegisterSucceededForm() {
     const navigate = useNavigate();
 
     const handleGoToLogin = () => {
-        navigate("/login"); // Adjust this path as needed
+        navigate("/login"); // 경로를 필요에 따라 조정하세요.
     };
 
     return (
@@ -15,10 +15,10 @@ function RegisterSucceededForm() {
             <AuthTitleText />
 
             <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 2 }}>
-                Registration Successful!
+                회원가입 성공!
             </Typography>
             <Typography variant="body1" color="textSecondary" sx={{ mb: 3 }}>
-                Your account has been successfully created. You can now log in to access your account.
+                계정이 성공적으로 생성되었습니다. 이제 로그인하여 계정을 이용할 수 있습니다.
             </Typography>
             <Button
                 variant="contained"
@@ -32,7 +32,7 @@ function RegisterSucceededForm() {
                     fontWeight: 'bold',
                 }}
             >
-                Go to Login
+                로그인하러 가기
             </Button>
         </Box>
     );

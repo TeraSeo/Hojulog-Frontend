@@ -1680,4 +1680,31 @@ function deletePostById(postId) {
     )
 }
 
-export { getPostsByPageNCondition, getPropertyPostsByPage, getJobPostsByPage, getTransactionPostsByPage, getSocietyPostsByPage, getTravelPostsByPage, getStudyPostsByPage, getSharePostsByPage, getRentPostsByPage, getPropertyTransactionPostsByPage, getRecruitmentPostsByPage, getJobSeekingPostsByPage, getJobTutoringPostsByPage, getCarPostsByPage, getNecessitiesPostsByPage, getTransactionEtcPostsByPage, getClubPostsByPage, getLifeStylePostsByPage, getFriendshipPostsByPage, getRestaurantPostsByPage, getPlacePostsByPage, getCoursePostsByPage, getSchoolPostsByPage, getWorkingHolidayPostsByPage, getLanguageStudyPostsByPage, getJobReviewPostsByPage, getWholeOwnPosts, getWholeOthersPosts, getWholeLikedPosts, getRecent5JobPosts, getRecent5PropertyPosts, getRecent5TransactionPosts, getRecent5SocietyPosts, getRecent5TravelPosts, getRecent5StudyPosts, getSpecificPropertyPost, getSpecificJobPost, getSpecificTransactionPost, getSpecificSocietyPost, getSpecificTravelPost, getSpecificStudyPost, getSpecificPost, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy, updateProperty, updateJob, updateTransaction, updateSociety, updateTravel, updateStudy, getUpdatePropertyPostDto, getUpdateJobPostDto, getUpdateTransactionPostDto, getUpdateTravelPostDto, getUpdateStudyPostDto, getUpdateSocietyPostDto, searchPropertyPost, searchJobPost, searchTransactionPost, searchSocietyPost, searchTravelPost, searchStudyPost, deletePostById };
+function pinPost(postId) {
+    const userId = localStorage.getItem('userId');
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.put("http://localhost:8080/api/post/pin/post", {}, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        },
+        params: {
+            "userId": userId,
+            "postId": postId
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return null;
+        }
+    )
+}
+
+export { getPostsByPageNCondition, getPropertyPostsByPage, getJobPostsByPage, getTransactionPostsByPage, getSocietyPostsByPage, getTravelPostsByPage, getStudyPostsByPage, getSharePostsByPage, getRentPostsByPage, getPropertyTransactionPostsByPage, getRecruitmentPostsByPage, getJobSeekingPostsByPage, getJobTutoringPostsByPage, getCarPostsByPage, getNecessitiesPostsByPage, getTransactionEtcPostsByPage, getClubPostsByPage, getLifeStylePostsByPage, getFriendshipPostsByPage, getRestaurantPostsByPage, getPlacePostsByPage, getCoursePostsByPage, getSchoolPostsByPage, getWorkingHolidayPostsByPage, getLanguageStudyPostsByPage, getJobReviewPostsByPage, getWholeOwnPosts, getWholeOthersPosts, getWholeLikedPosts, getRecent5JobPosts, getRecent5PropertyPosts, getRecent5TransactionPosts, getRecent5SocietyPosts, getRecent5TravelPosts, getRecent5StudyPosts, getSpecificPropertyPost, getSpecificJobPost, getSpecificTransactionPost, getSpecificSocietyPost, getSpecificTravelPost, getSpecificStudyPost, getSpecificPost, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy, updateProperty, updateJob, updateTransaction, updateSociety, updateTravel, updateStudy, getUpdatePropertyPostDto, getUpdateJobPostDto, getUpdateTransactionPostDto, getUpdateTravelPostDto, getUpdateStudyPostDto, getUpdateSocietyPostDto, searchPropertyPost, searchJobPost, searchTransactionPost, searchSocietyPost, searchTravelPost, searchStudyPost, deletePostById, pinPost };

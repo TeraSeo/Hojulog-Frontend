@@ -1,24 +1,21 @@
 import React from "react";
 import { Typography, Box } from '@mui/material';
-import iconImg from '../../assets/images/icon_img.png';
+import iconImg from "../../assets/images/alog.JPEG";
 
 function AuthTitleText() {
     return (
         <Box sx={{ textAlign: 'center', mb: 3 }}>
-            <Typography variant="h4" sx={{ fontWeight: '700', mb: 1, color: '#333', display: 'flex', fontSize: '30px' }}>
+            <Typography variant="h4" sx={{ fontWeight: '700', mb: 1, color: '#333', display: 'flex', alignItems: "center", fontSize: '30px' }}>
                 <Box
-                    sx={
-                        {
-                        height: '50px',
-                        width: '25px',
-                        backgroundColor: '#3A0CA3',
+                    sx={{
+                        width: { xs: 80, sm: 85, md: 90 }, 
+                        height: { xs: 60, sm: 65, md: 70 }, 
                         backgroundImage: `url(${iconImg})`,
-                        backgroundSize: 'cover',
+                        backgroundSize: 'contain',
                         backgroundPosition: 'center',
-                        mr: '15px'
-                    }
-                }/>
-                BeginnersHub
+                    }}
+                />
+                호주로그
             </Typography>
         </Box>
     );
