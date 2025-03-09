@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { serverRoute } from '../constant/Route';
 
 function validateIsAdmin() {
     const accessToken = localStorage.getItem('accessToken'); 
@@ -8,7 +9,7 @@ function validateIsAdmin() {
         return Promise.resolve(false);
     }
 
-    return axios.post("http://localhost:8080/api/admin/validate/token", null, {
+    return axios.post(`${serverRoute}/api/admin/validate/token`, null, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -41,7 +42,7 @@ function getAdminData(page) {
         return Promise.resolve(false);
     }
 
-    return axios.get("http://localhost:8080/api/admin/get/specific", {
+    return axios.get(`${serverRoute}/api/admin/get/specific`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -72,7 +73,7 @@ function getUserInfo(userId) {
         return Promise.resolve(false);
     }
 
-    return axios.get("http://localhost:8080/api/admin/get/user", {
+    return axios.get(`${serverRoute}/api/admin/get/user`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -102,7 +103,7 @@ function getUserPageData(page) {
         return Promise.resolve(false);
     }
 
-    return axios.get("http://localhost:8080/api/admin/get/pageable/user", {
+    return axios.get(`${serverRoute}/api/admin/get/pageable/user`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -133,7 +134,7 @@ function getInquiryInfo(inquiryId) {
         return Promise.resolve(false);
     }
 
-    return axios.get("http://localhost:8080/api/admin/get/inquiry", {
+    return axios.get(`${serverRoute}/api/admin/get/inquiry`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -163,7 +164,7 @@ function getSpecificInquiryInfo(inquiryId) {
         return Promise.resolve(false);
     }
 
-    return axios.get("http://localhost:8080/api/admin/get/specific/inquiry", {
+    return axios.get(`${serverRoute}/api/admin/get/specific/inquiry`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -193,7 +194,7 @@ function getInquiryPageData(page) {
         return Promise.resolve(false);
     }
 
-    return axios.get("http://localhost:8080/api/admin/get/pageable/inquiry", {
+    return axios.get(`${serverRoute}/api/admin/get/pageable/inquiry`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -224,7 +225,7 @@ function updateUser(userId, formData) {
         return Promise.resolve(false);
     }
 
-    return axios.put("http://localhost:8080/api/admin/update/user", 
+    return axios.put(`${serverRoute}/api/admin/update/user`, 
         {
             userId,
             log: formData.log,
@@ -258,7 +259,7 @@ function replyInquiry(inquiryId, response) {
         return Promise.resolve(false);
     }
 
-    return axios.put("http://localhost:8080/api/admin/update/inquiry", 
+    return axios.put(`${serverRoute}/api/admin/update/inquiry`, 
         {
             inquiryId,
             response
@@ -290,7 +291,7 @@ function provideLogThisWeek() {
         return Promise.resolve(false);
     }
 
-    return axios.put("http://localhost:8080/api/admin/provide/logs/this-week", 
+    return axios.put(`${serverRoute}/api/admin/provide/logs/this-week`, 
         {},
         {
             headers: {

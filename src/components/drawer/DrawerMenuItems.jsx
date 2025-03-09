@@ -16,6 +16,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import NotificationButton from "../buttons/NotificationButton";
+import ForumIcon from "@mui/icons-material/Forum";
 
 function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout, newNotifications = 0 }) {
     const navigate = useNavigate();
@@ -77,6 +78,10 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout, newNotifi
                     <ListItem button onClick={() => handleNavigate("/ranking")}>
                         <ListItemIcon><LeaderboardIcon sx={{ color: "#666" }} /></ListItemIcon>
                         <ListItemText primary="이주의 순위" sx={{ color: "#666", fontWeight: "bold" }} />
+                    </ListItem>
+                    <ListItem button onClick={() => handleNavigate("/board")}>
+                        <ListItemIcon><ForumIcon sx={{ color: "#666" }} /></ListItemIcon>
+                        <ListItemText primary="게시판" sx={{ color: "#666", fontWeight: "bold" }} />
                     </ListItem>
                     <ListItem button onClick={() => handleNavigate("/mypage")}>
                         <ListItemIcon><AccountCircleIcon sx={{ color: "#666" }} /></ListItemIcon>

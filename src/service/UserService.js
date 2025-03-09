@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { serverRoute } from '../constant/Route';
 
 function login(data) {
-    return axios.post("http://localhost:8080/api/auth/login", {}, 
+    return axios.post(`${serverRoute}/api/auth/login`, {}, 
         {
             headers: {
                 'Accept': 'application/json',
@@ -29,7 +30,7 @@ function login(data) {
 }
 
 function register(data) {
-    return axios.post("http://localhost:8080/api/auth/register", data, {
+    return axios.post(`${serverRoute}/api/auth/register`, data, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -49,7 +50,7 @@ function register(data) {
 }
 
 function sendOtp(email) {
-    axios.post(`http://localhost:8080/api/auth/send/otp`, null, {
+    axios.post(`${serverRoute}/api/auth/send/otp`, null, {
         params: { email: email },
         headers: {
             'Accept': 'application/json',
@@ -60,7 +61,7 @@ function sendOtp(email) {
 
 
 function checkIsOtpCorrect(email, code) {
-    return axios.post("http://localhost:8080/api/auth/verify/otp", null, {
+    return axios.post(`${serverRoute}/api/auth/verify/otp`, null, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -95,7 +96,7 @@ function validateToken() {
         return Promise.resolve(false);
     }
 
-    return axios.post("http://localhost:8080/api/auth/validate/token", null, {
+    return axios.post(`${serverRoute}/api/auth/validate/token`, null, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -130,7 +131,7 @@ function validateToken() {
 }
 
 function getSpecificSummarisedUser(userId) {
-    return axios.get("http://localhost:8080/api/user/get/summarised/specific", {
+    return axios.get(`${serverRoute}/api/user/get/summarised/specific`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -150,7 +151,7 @@ function getSpecificSummarisedUser(userId) {
 }
 
 function getSpecificSummarisedUserProfile(userId) {
-    return axios.get("http://localhost:8080/api/user/get/summarized/specific/profile", {
+    return axios.get(`${serverRoute}/api/user/get/summarized/specific/profile`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -169,7 +170,7 @@ function getSpecificSummarisedUserProfile(userId) {
 }
 
 function getSpecificUser(userId) {
-    return axios.get("http://localhost:8080/api/user/get/specific", {
+    return axios.get(`${serverRoute}/api/user/get/specific`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -192,7 +193,7 @@ function getSpecificOwnUser() {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
-    return axios.get("http://localhost:8080/api/own/user/get/specific", {
+    return axios.get(`${serverRoute}/api/own/user/get/specific`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -216,7 +217,7 @@ function updateUserInfo(userFormData, userId) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
-    return axios.put("http://localhost:8080/api/own/user/update", userFormData, {
+    return axios.put(`${serverRoute}/api/own/user/update`, userFormData, {
         headers: {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
@@ -239,7 +240,7 @@ function viewSecretPost(viewerId, postId) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
-    return axios.put("http://localhost:8080/api/user/view/secret/post", {}, {
+    return axios.put(`${serverRoute}/api/user/view/secret/post`, {}, {
         headers: {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
@@ -265,7 +266,7 @@ function checkIsUserPaid(viewerId, postId) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
-    return axios.get("http://localhost:8080/api/user/check/is/paid", {
+    return axios.get(`${serverRoute}/api/user/check/is/paid`, {
         headers: {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
@@ -291,7 +292,7 @@ function getTopRanks() {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
-    return axios.get("http://localhost:8080/api/user/get/top10/users", {
+    return axios.get(`${serverRoute}/api/user/get/top10/users`, {
         headers: {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,

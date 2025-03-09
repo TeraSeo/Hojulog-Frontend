@@ -16,7 +16,7 @@ function SelectCategoryPage() {
       const subcategoryPath = selectedSubcategory.toLowerCase().replace(/\s+/g, "-");
       navigate(`/launch/${categoryPath}/${subcategoryPath}`);
     } else {
-      alert("Please select both category and subcategory.");
+      alert("카테고리와 하위 카테고리를 모두 선택하세요.");
     }
   };
 
@@ -25,16 +25,16 @@ function SelectCategoryPage() {
       <Paper elevation={4} sx={{ padding: "30px", borderRadius: "16px", maxWidth: "600px", width: "100%" }}>
 
         <Typography variant="h4" fontWeight="bold" textAlign="center" mb={2}>
-          Launch
+          등록하기
         </Typography>
         <Typography variant="body1" color="textSecondary" textAlign="center" mb={4}>
-          Select the category and subcategory that best represents your content.
+          콘텐츠를 가장 잘 나타내는 카테고리와 하위 카테고리를 선택하세요.
         </Typography>
 
         <Box mb={3}>
           <Typography variant="subtitle1" fontWeight="bold" sx={{ mb: 1 }}>
             <CategoryIcon fontSize="small" sx={{ mr: 1 }} />
-            Select Category
+            카테고리 선택
           </Typography>
           <TextField
             select
@@ -56,7 +56,7 @@ function SelectCategoryPage() {
         <Box mb={3}>
           <Typography variant="subtitle1" fontWeight="bold" sx={{ mb: 1 }}>
             <SubdirectoryArrowRightIcon fontSize="small" sx={{ mr: 1 }} />
-            Select Subcategory
+            세부 카테고리 선택
           </Typography>
           <TextField
             select
@@ -81,7 +81,7 @@ function SelectCategoryPage() {
           disabled={!selectedCategory || !selectedSubcategory}
           sx={{ padding: "10px 0", fontSize: "16px", fontWeight: "bold" }}
         >
-          Confirm Selection
+          선택 완료
         </Button>
       </Paper>
     </Box>

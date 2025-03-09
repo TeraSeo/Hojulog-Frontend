@@ -38,6 +38,9 @@ const CommonOwnSummarizedPostBoxByPost = ({ post }) => {
         if (isPinned) {
             window.location.reload();
         }
+        else {
+            alert("포인트가 부족합니다!");
+        }
     };
 
     const handleCancelPin = () => {

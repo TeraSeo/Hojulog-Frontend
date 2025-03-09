@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { serverRoute } from '../constant/Route';
 
 function getNotificationCount(userId) {
     const accessToken = localStorage.getItem('accessToken'); 
@@ -8,7 +9,7 @@ function getNotificationCount(userId) {
         return Promise.resolve(false);
     }
 
-    return axios.get("http://localhost:8080/api/notification/get/count", {
+    return axios.get(`${serverRoute}/api/notification/get/count`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -38,7 +39,7 @@ function getNotifications(userId) {
         return Promise.resolve(false);
     }
 
-    return axios.get("http://localhost:8080/api/notification/get/recent/notifications", {
+    return axios.get(`${serverRoute}/api/notification/get/recent/notifications`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -68,7 +69,7 @@ function setNotificationAsRead(notificationId) {
         return Promise.resolve(false);
     }
 
-    return axios.put("http://localhost:8080/api/notification/update/notification/as/read", 
+    return axios.put(`${serverRoute}/api/notification/update/notification/as/read`, 
         {
         },
         {

@@ -13,7 +13,7 @@ function OtpForm() {
 
     const checkOtp = async () => {
         if (otp.length < 4) {
-            setErrorMsg("Please fill in all OTP fields.");
+            setErrorMsg("모든 OTP 필드를 입력해주세요.");
             return;
         }
 
@@ -22,7 +22,7 @@ function OtpForm() {
             setErrorMsg('');
             navigate("/home")
         } else {
-            setErrorMsg("Invalid OTP. Please try again.");
+            setErrorMsg("잘못된 OTP입니다. 다시 시도해주세요.");
         }
     };
 
@@ -32,7 +32,7 @@ function OtpForm() {
 
     return (
         <Box sx={{ width: '100%', textAlign: 'center' }}>
-            <AuthTitleText title="Enter OTP" subtitle="Please enter the OTP sent to your email" />
+            <AuthTitleText title="OTP 입력" subtitle="이메일로 전송된 OTP를 입력해주세요" />
 
             <Box sx={{ display: 'flex', justifyContent: 'center', my: 3 }}>
                 <OTPInput
@@ -69,7 +69,7 @@ function OtpForm() {
                         fontWeight: 'bold',
                         padding: '10px 0',
                         borderRadius: '8px',
-                        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', // Subtle shadow
+                        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
                         '&:hover': {
                             backgroundColor: '#1565c0',
                             transform: 'scale(1.02)',
@@ -78,13 +78,13 @@ function OtpForm() {
                     }}
                     onClick={checkOtp}
                 >
-                    Verify
+                    확인
                 </Button>
             </Box>
 
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 3 }}>
                 <Typography variant="body2" sx={{ mr: 1 }}>
-                    Didn’t receive the OTP?
+                    OTP를 받지 못하셨나요?
                 </Typography>
                 <Button
                     onClick={handleResendOtp}
@@ -97,7 +97,7 @@ function OtpForm() {
                         },
                     }}
                 >
-                    Resend OTP
+                    OTP 다시 받기
                 </Button>
             </Box>
         </Box>

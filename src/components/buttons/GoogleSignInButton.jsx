@@ -1,8 +1,11 @@
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Button } from '@mui/material'; 
+import { clientDomain, serverDomain } from "../../constant/Route";
 
 function GoogleSignInButton() {
+    const url = `${serverDomain}/oauth2/authorize/google?redirect_uri=${clientDomain}/oauth2/redirect`;
+
     return (
         <Button
             variant="outlined"
@@ -19,7 +22,7 @@ function GoogleSignInButton() {
                 borderColor: 'grey.500',
                 },
             }}
-            href="http://localhost:8080/oauth2/authorize/google?redirect_uri=http://localhost:3000/oauth2/redirect"
+            href={url}
         >
             구글 계정으로 로그인
         </Button>

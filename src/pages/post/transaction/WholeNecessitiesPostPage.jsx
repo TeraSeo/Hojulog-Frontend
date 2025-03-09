@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, FormControl, InputLabel, Select, MenuItem, Typography, Button } from "@mui/material";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../../components/bar/CategorySidebar";
 import { getNecessitiesPostsByPage } from "../../../service/PostService";
@@ -6,7 +6,7 @@ import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import TransactionPostBox from "../../../components/box/post/transaction/TransactionPostBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
-import { primaryColor } from "../../../constant/Color";
+import TransactionFilter from "../../../components/box/post/transaction/TransactionFilter";
 
 const WholeNecessitiesPostPage = () => {
     const [postPageData, setPostPageData] = useState({
@@ -43,14 +43,6 @@ const WholeNecessitiesPostPage = () => {
         fetchPageData(value);
     };
 
-    const handleFilterChange = (e) => {
-        const { name, value } = e.target;
-        setFilters((prevFilters) => ({
-            ...prevFilters,
-            [name]: value
-        }));
-    };
-
     const applyFilters = () => {
         const filtered = postPageData.posts.filter((post) => {
             const transactionMatch = filters.transactionType === "전체" || post.transactionType === filters.transactionType;
@@ -75,44 +67,7 @@ const WholeNecessitiesPostPage = () => {
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
                         <PageTitleText title={"생활용품"} />
 
-                        <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", alignItems: "center" }}>
-                            {/* Transaction Type Filter */}
-                            <FormControl size="small">
-                                <InputLabel id="transaction-type-label">거래 유형</InputLabel>
-                                <Select
-                                    labelId="transaction-type-label"
-                                    name="transactionType"
-                                    value={filters.transactionType}
-                                    onChange={handleFilterChange}
-                                    label="거래 유형"
-                                >
-                                    <MenuItem value="전체">전체</MenuItem>
-                                    <MenuItem value="구매">구매</MenuItem>
-                                    <MenuItem value="판매">판매</MenuItem>
-                                </Select>
-                            </FormControl>
-
-                            {/* Price Type Filter */}
-                            <FormControl size="small">
-                                <InputLabel id="price-type-label">가격 여부</InputLabel>
-                                <Select
-                                    labelId="price-type-label"
-                                    name="priceType"
-                                    value={filters.priceType}
-                                    onChange={handleFilterChange}
-                                    label="가격 여부"
-                                >
-                                    <MenuItem value="전체">전체</MenuItem>
-                                    <MenuItem value="무료">무료</MenuItem>
-                                    <MenuItem value="유료">유료</MenuItem>
-                                </Select>
-                            </FormControl>
-
-                            {/* Apply Filters Button */}
-                            <Button variant="contained" sx={{ background: primaryColor }} onClick={applyFilters}>
-                                필터 적용
-                            </Button>
-                        </Box>
+                        <TransactionFilter filters={filters} setFilters={setFilters} applyFilters={applyFilters} />
                     </Box>
 
                     {/* Display Filtered Posts */}

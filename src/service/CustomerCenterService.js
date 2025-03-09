@@ -1,10 +1,11 @@
 import axios from 'axios';
+import { serverRoute } from '../constant/Route';
 
 function postInquiry(inquiryData) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
-    return axios.post("http://localhost:8080/api/inquiry/create", inquiryData, {
+    return axios.post(`${serverRoute}/api/inquiry/create`, inquiryData, {
         headers: {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
@@ -29,7 +30,7 @@ function getInquiryById(inquiryId) {
     const refreshToken = localStorage.getItem('refreshToken');
 
     return axios
-    .get("http://localhost:8080/api/inquiry/get/specific", {
+    .get(`${serverRoute}/api/inquiry/get/specific`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -52,7 +53,7 @@ function getWholeInquiries(page) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
-    return axios.get("http://localhost:8080/api/inquiry/get/pageable/inquiries", {
+    return axios.get(`${serverRoute}/api/inquiry/get/pageable/inquiries`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',

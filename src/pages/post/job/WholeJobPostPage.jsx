@@ -1,4 +1,4 @@
-import { Box, Grid, TextField, MenuItem, Select, InputLabel, FormControl, Typography, Button } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../../components/bar/CategorySidebar";
 import { getJobPostsByPage } from "../../../service/PostService";
@@ -6,7 +6,7 @@ import JobPostBox from "../../../components/box/post/job/JobPostBox";
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
-import { primaryColor } from "../../../constant/Color";
+import JobFilter from "../../../components/box/post/job/JobFilter";
 
 function WholeJobPostPage() {
     const [jobPageData, setJobPageData] = useState({ 
@@ -42,14 +42,6 @@ function WholeJobPostPage() {
         fetchPageData(value);
     };
 
-    const handleFilterChange = (e) => {
-        const { name, value } = e.target;
-        setFilters((prevFilters) => ({
-            ...prevFilters,
-            [name]: value
-        }));
-    };
-
     const applyFilters = () => {
         const filtered = jobPageData.posts.filter((post) => {
             const jobTypeMatch = filters.jobType === "전체" || post.jobType === filters.jobType;
@@ -70,29 +62,7 @@ function WholeJobPostPage() {
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
                         <PageTitleText title={"구인구직"} />
 
-                        <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", alignItems: "center" }}>
-                            {/* Job Type Filter */}
-                            <FormControl size="small">
-                                <InputLabel id="job-type-label">근무 형태</InputLabel>
-                                <Select
-                                    labelId="job-type-label"
-                                    name="jobType"
-                                    value={filters.jobType}
-                                    onChange={handleFilterChange}
-                                    label="근무 형태"
-                                >
-                                    <MenuItem value="전체">전체</MenuItem>
-                                    <MenuItem value="단기알바">단기알바</MenuItem>
-                                    <MenuItem value="파트타임">파트타임</MenuItem>
-                                    <MenuItem value="풀타임">풀타임</MenuItem>
-                                </Select>
-                            </FormControl>
-
-                            {/* Apply Filters Button */}
-                            <Button variant="contained" sx={{ background: primaryColor }} onClick={applyFilters}>
-                                필터 적용
-                            </Button>
-                        </Box>
+                        <JobFilter filters={filters} setFilters={setFilters} applyFilters={applyFilters} />
                     </Box>
 
                     {/* Display Filtered Posts */}

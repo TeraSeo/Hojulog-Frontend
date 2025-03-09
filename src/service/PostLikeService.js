@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { serverRoute } from '../constant/Route';
 
 function addPostLike(postId) {
     const accessToken = localStorage.getItem('accessToken');
@@ -9,7 +10,7 @@ function addPostLike(postId) {
         return null;
     }
 
-    return axios.post("http://localhost:8080/api/post-like/create", { postId, userId }, {
+    return axios.post(`${serverRoute}/api/post-like/create`, { postId, userId }, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -35,7 +36,7 @@ function removePostLike(postId) {
         return null;
     }
 
-    return axios.delete("http://localhost:8080/api/post-like/delete", { params: { postId, userId }, headers: {
+    return axios.delete(`${serverRoute}/api/post-like/delete`, { params: { postId, userId }, headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'accessToken': accessToken,

@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, TextField, MenuItem, Select, InputLabel, FormControl, Typography, Button } from "@mui/material";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../../components/bar/CategorySidebar";
 import { getSharePostsByPage } from "../../../service/PostService";
@@ -6,7 +6,7 @@ import PropertyPostBox from "../../../components/box/post/property/PropertyPostB
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
-import { primaryColor } from "../../../constant/Color";
+import PropertyFilter from "../../../components/box/post/property/PropertyFilter";
 
 const WholeSharePostPage = () => {
     const [postPageData, setPostPageData] = useState({
@@ -46,23 +46,6 @@ const WholeSharePostPage = () => {
         fetchPageData(value);
     };
 
-    const handleFilterChange = (e) => {
-        const { name, value } = e.target;
-
-        let updatedFilters = { ...filters, [name]: value };
-
-        // Validate Price Range
-        if (name === "minPrice" && updatedFilters.maxPrice !== "" && Number(value) > Number(updatedFilters.maxPrice)) {
-            setPriceError("최소 가격은 최대 가격보다 클 수 없습니다.");
-        } else if (name === "maxPrice" && updatedFilters.minPrice !== "" && Number(value) < Number(updatedFilters.minPrice)) {
-            setPriceError("최대 가격은 최소 가격보다 작을 수 없습니다.");
-        } else {
-            setPriceError("");
-        }
-
-        setFilters(updatedFilters);
-    };
-
     const applyFilters = () => {
         if (priceError) {
             alert("가격 범위를 확인해주세요.");
@@ -92,56 +75,7 @@ const WholeSharePostPage = () => {
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
                         <PageTitleText title={"쉐어"} />
 
-                        <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", alignItems: "center" }}>
-                            {/* Price Range Filter */}
-                            <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-                                <TextField
-                                    label="최소 가격"
-                                    variant="outlined"
-                                    size="small"
-                                    name="minPrice"
-                                    value={filters.minPrice}
-                                    onChange={handleFilterChange}
-                                    type="number"
-                                    error={Boolean(priceError)}
-                                    helperText={priceError && filters.minPrice ? priceError : ""}
-                                />
-                                <Typography>~</Typography>
-                                <TextField
-                                    label="최대 가격"
-                                    variant="outlined"
-                                    size="small"
-                                    name="maxPrice"
-                                    value={filters.maxPrice}
-                                    onChange={handleFilterChange}
-                                    type="number"
-                                    error={Boolean(priceError)}
-                                    helperText={priceError && filters.maxPrice ? priceError : ""}
-                                />
-                            </Box>
-
-                            {/* Period Filter */}
-                            <FormControl size="small">
-                                <InputLabel id="period-label">기간</InputLabel>
-                                <Select
-                                    labelId="period-label"
-                                    name="period"
-                                    value={filters.period}
-                                    onChange={handleFilterChange}
-                                    label="기간"
-                                >
-                                    <MenuItem value="전체">전체</MenuItem>
-                                    <MenuItem value="주">주</MenuItem>
-                                    <MenuItem value="월">월</MenuItem>
-                                    <MenuItem value="년">년</MenuItem>
-                                </Select>
-                            </FormControl>
-
-                            {/* Apply Filters Button */}
-                            <Button variant="contained" sx={{ background: primaryColor }} onClick={applyFilters}>
-                                필터 적용
-                            </Button>
-                        </Box>
+                        <PropertyFilter filters={filters} setFilters={setFilters} applyFilters={applyFilters} priceError={priceError} setPriceError={setPriceError} />
                     </Box>
 
                     {/* Display Filtered Posts */}

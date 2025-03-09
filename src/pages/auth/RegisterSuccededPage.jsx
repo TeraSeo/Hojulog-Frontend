@@ -13,6 +13,7 @@ function RegisterSuccededPage() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                px: 2
             }}
             >
             <Box

@@ -1,8 +1,11 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
 import OtpForm from "../../components/forms/auth/OtpForm";
 
 function OtpPage() {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
     return (
         <Grid
             container
@@ -12,13 +15,14 @@ function OtpPage() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                px: isMobile ? 4 : 0, // Add padding on small screens
             }}
         >
             <Box
                 sx={{
                     width: '100%',
                     maxWidth: 420,
-                    p: 4,
+                    p: isMobile ? 3 : 4, // Adjust padding
                     backgroundColor: 'white',
                     borderRadius: 3,
                     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',

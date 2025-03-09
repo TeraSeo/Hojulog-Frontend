@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Button } from "@mui/material";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
+import ForumIcon from "@mui/icons-material/Forum";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
@@ -42,6 +43,20 @@ function HeaderMenuItems({ isAuthenticated, handleLogout }) {
                         onClick={() => navigate("/ranking")}
                     >
                         이주의 순위
+                    </Button>
+
+                    <Button
+                        variant="text"
+                        startIcon={<ForumIcon />}
+                        sx={{
+                            color: "#FFFFFF",
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                            textTransform: "none",
+                        }}
+                        onClick={() => navigate("/board")}
+                    >
+                        게시판
                     </Button>
 
                     <Button

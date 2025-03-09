@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getSpecificInquiryInfo } from "../../service/AdminService";
 import { Typography } from "@mui/material";
 import InquiryDetailBox from "../../components/box/customer_center/InquiryDetailBox";
+import { getDetailedInquiryInfo } from "../../service/InquiryServie";
 
 const InquiryDetailPage = () => {
     const { inquiryId } = useParams();
@@ -14,7 +14,7 @@ const InquiryDetailPage = () => {
 
     const fetchInquiryData = async (inquiryId) => {
         try {
-            const data = await getSpecificInquiryInfo(inquiryId);
+            const data = await getDetailedInquiryInfo(inquiryId);
             setInquiryData(data);
         } catch (error) {
             console.error("Error fetching inquiry data:", error);

@@ -1,11 +1,12 @@
 import axios from 'axios';
+import { serverRoute } from '../constant/Route';
 
 function addPostBookmark(postId) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
     const userId = localStorage.getItem('userId');
 
-    return axios.post("http://localhost:8080/api/post-bookmark/create", { postId, userId }, {
+    return axios.post(`${serverRoute}/api/post-bookmark/create`, { postId, userId }, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -26,7 +27,7 @@ function removePostBookmark(postId) {
     const refreshToken = localStorage.getItem('refreshToken');
     const userId = localStorage.getItem('userId');
 
-    return axios.delete("http://localhost:8080/api/post-bookmark/delete", { params: { postId, userId }, headers: {
+    return axios.delete(`${serverRoute}/api/post-bookmark/delete`, { params: { postId, userId }, headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'accessToken': accessToken,

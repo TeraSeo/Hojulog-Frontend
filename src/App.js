@@ -22,7 +22,6 @@ import LaunchTutoringPage from './pages/post/job/LaunchTutoringPage';
 import LaunchCarTransactionPage from './pages/post/transaction/LaunchCarTransactionPage';
 import LaunchEtcTransactionPage from './pages/post/transaction/LaunchEtcTransactionPage';
 import LaunchNecessitiesTransactionPage from './pages/post/transaction/LaunchNecessitiesTransactionPage';
-import LaunchProductRentTransactionPage from './pages/post/transaction/LaunchProductRentTransactionPage';
 import LaunchHobbyPage from './pages/post/society/LaunchHobbyPage';
 import LaunchFriendshipPage from './pages/post/society/LaunchFriendshipPage';
 import LaunchShareInfoPage from './pages/post/society/LaunchShareInfoPage';
@@ -99,7 +98,6 @@ import EditTutoringPage from './pages/post/job/EditTutoringPage';
 import EditCarTransactionPage from './pages/post/transaction/EditCarTransactionPage';
 import EditNecessitiesTransactionPage from './pages/post/transaction/EditNecessitiesTransactionPage';
 import EditEtcTransactionPage from './pages/post/transaction/EditEtcTransactionPage';
-import EditProductRentTransactionPage from './pages/post/transaction/EditProductRentTransactionPage';
 import PropertySearchPage from './pages/search/PropertySearchPage';
 import JobSearchPage from './pages/search/JobSearchPage';
 import SocietySearchPage from './pages/search/SocietySearchPage';
@@ -112,6 +110,12 @@ import AdminInquiryEditPage from './pages/admin/AdminInquiryEditPage';
 import AdminUserEditPage from './pages/admin/AdminUserEditPage';
 import InquiryDetailPage from './pages/customer_center/InquiryDetailPage';
 import RegisterFailedPage from './pages/auth/RegisterFailedPage';
+import LaunchIdealTypeWorldCupPage16 from './pages/post/type-world-cup/LaunchIdealTypeWorldCupPage16';
+import LaunchIdealTypeWorldCupPage2 from './pages/post/type-world-cup/LaunchIdealTypeWorldCupPage2';
+import LaunchIdealTypeWorldCupPage4 from './pages/post/type-world-cup/LaunchIdealTypeWorldCupPage4';
+import LaunchIdealTypeWorldCupPage8 from './pages/post/type-world-cup/LaunchIdealTypeWorldCupPage8';
+import BoardPage from './pages/board/BoardPage';
+import LaunchBoardPage from './pages/board/LaunchBoardPage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -157,6 +161,12 @@ function App() {
             <RouteValidator
               category={category}
               componentMap={{
+                이상형월드컵: {
+                  "2강": LaunchIdealTypeWorldCupPage2,
+                  "4강": LaunchIdealTypeWorldCupPage4,
+                  "8강": LaunchIdealTypeWorldCupPage8,
+                  "16강": LaunchIdealTypeWorldCupPage16
+                },
                 부동산: {
                   쉐어: LaunchSharePropertyPage,
                   렌트: LaunchRentPropertyPage,
@@ -171,7 +181,6 @@ function App() {
                   자동차: LaunchCarTransactionPage,
                   생활용품: LaunchNecessitiesTransactionPage,
                   기타: LaunchEtcTransactionPage,
-                  // 대여: LaunchProductRentTransactionPage
                 },
                 생활: {
                   동호회: LaunchHobbyPage,
@@ -219,6 +228,8 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="home" element={<HomePage />} />
             <Route path="mypage" element={<MyProfilePage />} />
+            <Route path="board" element={<BoardPage />} />
+            <Route path="launch/board" element={<LaunchBoardPage />} />
             <Route path="admin" element={<AdminPage />} />
             <Route path="admin/userList" element={<AdminUserListPage />} />
             <Route path="admin/inquiryList" element={<AdminInquiryListPage />} />

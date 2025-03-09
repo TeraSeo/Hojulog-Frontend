@@ -18,9 +18,9 @@ function Oauth2RedirectPage() {
             alert("Failed to login.");
             navigate("/login")
         }
-    });
+    }, [location, navigate]);
 
-    return <div></div>;
+    return <div>Logging in...</div>;
 }
 
 export default Oauth2RedirectPage;

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { serverRoute } from '../constant/Route';
 
 function createComment(content, postId) {
     const accessToken = localStorage.getItem('accessToken');
@@ -9,7 +10,7 @@ function createComment(content, postId) {
         return false;
     }
 
-    return axios.post("http://localhost:8080/api/comment/create", { content, postId, userId }, {
+    return axios.post(`${serverRoute}/api/comment/create`, { content, postId, userId }, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -38,7 +39,7 @@ function createResponseComment(content, parentCommentId) {
         return false;
     }
 
-    return axios.post("http://localhost:8080/api/comment/response/create", { content, parentCommentId, userId }, {
+    return axios.post(`${serverRoute}/api/comment/response/create`, { content, parentCommentId, userId }, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -62,7 +63,7 @@ function getCommentsByPostId(postId) {
     const userId = localStorage.getItem('userId') || "";
 
     return axios
-    .get("http://localhost:8080/api/comment/get/specific", {
+    .get(`${serverRoute}/api/comment/get/specific`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -83,7 +84,7 @@ function getResponseComment(responseCommentId) {
     const userId = localStorage.getItem('userId') || "";
 
     return axios
-    .get("http://localhost:8080/api/comment/get/response/comment", {
+    .get(`${serverRoute}/api/comment/get/response/comment`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -104,7 +105,7 @@ function removeCommentById(commentId) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
-    return axios.delete("http://localhost:8080/api/comment/delete", { params: { commentId }, headers: {
+    return axios.delete(`${serverRoute}/api/comment/delete`, { params: { commentId }, headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'accessToken': accessToken,

@@ -1,8 +1,11 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import { SiKakao } from "react-icons/si";
+import { serverDomain, clientDomain } from '../../constant/Route';
 
 function KakaoSignInButton() {
+  const url = `${serverDomain}/oauth2/authorize/kakao?redirect_uri=${clientDomain}/oauth2/redirect`;
+  
   return (
     <Button
       variant="contained"
@@ -17,7 +20,7 @@ function KakaoSignInButton() {
           backgroundColor: '#FADA00', // Slightly darker Kakao yellow
         },
       }}
-      href="http://localhost:8080/oauth2/authorize/kakao?redirect_uri=http://localhost:3000/oauth2/redirect"
+      href={url}
     >
       카카오로 로그인
     </Button>

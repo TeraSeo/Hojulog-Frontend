@@ -12,7 +12,7 @@ const UpdateProfilePage = () => {
     const navigate = useNavigate();
 
     const [username, setUsername] = useState("");
-    const [description, setDescription] = useState("");
+    const [description, setDescription] = useState("설명을 작성해주세요!");
     const [profilePictureUrl, setProfilePictureUrl] = useState("");
     const [profilePicture, setProfilePicture] = useState(null);
 
@@ -44,7 +44,7 @@ const UpdateProfilePage = () => {
 
     const handleSave = () => {
         const userFormData = new FormData();
-        if (username !== null && username !== "" && description !== null && description !== "") {
+        if (username !== null && username !== "" && description !== null) {
             userFormData.append("username", username);
             userFormData.append("description", description);
             if (profilePicture) {

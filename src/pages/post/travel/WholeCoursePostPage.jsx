@@ -1,4 +1,4 @@
-import { Box, Grid, FormControl, InputLabel, Select, MenuItem, Typography, Button } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../../components/bar/CategorySidebar";
 import { getCoursePostsByPage } from "../../../service/PostService";
@@ -6,8 +6,7 @@ import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import TravelPostBox from "../../../components/box/post/travel/TravelPostBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
-import { primaryColor } from "../../../constant/Color";
-import countries from "../../../constant/Countries"; // Assuming countries list is imported
+import TravelFilter from "../../../components/box/post/travel/TravelFilter";
 
 const WholeCoursePostPage = () => {
     const [postPageData, setPostPageData] = useState({
@@ -40,10 +39,6 @@ const WholeCoursePostPage = () => {
         fetchPageData(value);
     };
 
-    const handleCountryChange = (e) => {
-        setSelectedCountry(e.target.value);
-    };
-
     const applyFilters = () => {
         const filtered = postPageData.posts.filter((post) => {
             return selectedCountry === "전체" || post.country === selectedCountry;
@@ -63,28 +58,7 @@ const WholeCoursePostPage = () => {
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
                         <PageTitleText title={"코스"} />
 
-                        <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", alignItems: "center" }}>
-                            {/* Country Filter */}
-                            <FormControl size="small" sx={{ minWidth: 150 }}>
-                                <InputLabel id="country-label">국가</InputLabel>
-                                <Select
-                                    labelId="country-label"
-                                    value={selectedCountry}
-                                    onChange={handleCountryChange}
-                                    label="국가"
-                                >
-                                    <MenuItem value="전체">전체</MenuItem>
-                                    {countries.map((country, index) => (
-                                        <MenuItem key={index} value={country}>{country}</MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-
-                            {/* Apply Filters Button */}
-                            <Button variant="contained" sx={{ background: primaryColor }} onClick={applyFilters}>
-                                필터 적용
-                            </Button>
-                        </Box>
+                        <TravelFilter selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry} applyFilters={applyFilters} />
                     </Box>
 
                     {/* Display Filtered Posts */}
