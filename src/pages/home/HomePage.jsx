@@ -8,6 +8,7 @@ import HomeSocietyPosts from "../../components/box/home/HomeSocietyPosts";
 import HomeTravelPosts from "../../components/box/home/HomeTravelPosts";
 import HomeStudyPosts from "../../components/box/home/HomeStudyPosts";
 import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
+import HomeWorldCupPosts from "../../components/box/home/HomeWorldCupPosts";
 
 function HomePage() {
     return (
@@ -18,6 +19,10 @@ function HomePage() {
                 </Grid>
 
                 <Grid item xs={12} md={9}>
+                    <Box sx={{ mb: 3 }}>
+                        <HomeWorldCupPosts />
+                    </Box>
+                    
                     <Box sx={{ mb: 3 }}>
                         <HomePropertyPosts />
                     </Box>

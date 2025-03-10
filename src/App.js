@@ -110,12 +110,17 @@ import AdminInquiryEditPage from './pages/admin/AdminInquiryEditPage';
 import AdminUserEditPage from './pages/admin/AdminUserEditPage';
 import InquiryDetailPage from './pages/customer_center/InquiryDetailPage';
 import RegisterFailedPage from './pages/auth/RegisterFailedPage';
-import LaunchIdealTypeWorldCupPage16 from './pages/post/type-world-cup/LaunchIdealTypeWorldCupPage16';
-import LaunchIdealTypeWorldCupPage2 from './pages/post/type-world-cup/LaunchIdealTypeWorldCupPage2';
-import LaunchIdealTypeWorldCupPage4 from './pages/post/type-world-cup/LaunchIdealTypeWorldCupPage4';
-import LaunchIdealTypeWorldCupPage8 from './pages/post/type-world-cup/LaunchIdealTypeWorldCupPage8';
 import BoardPage from './pages/board/BoardPage';
 import LaunchBoardPage from './pages/board/LaunchBoardPage';
+import WholeWorldCupPostPage from './pages/post/type-world-cup/WholeWorldCupPostPage';
+import WorldCupDetailPage from './pages/post/type-world-cup/WorldCupDetailPage';
+import LaunchPropertyIdealTypeWorldCupPage from './pages/post/type-world-cup/LaunchPropertyIdealTypeWorldCupPage';
+import LaunchJobIdealTypeWroldCupPage from './pages/post/type-world-cup/LaunchJobIdealTypeWroldCupPage';
+import LaunchSocietyIdealTypeWorldCupPage from './pages/post/type-world-cup/LaunchSocietyIdealTypeWorldCupPage';
+import LaunchStudyIdealTypeWorldCupPage from './pages/post/type-world-cup/LaunchStudyIdealTypeWorldCupPage';
+import LaunchTransactionIdealTypeWorldCupPage from './pages/post/type-world-cup/LaunchTransactionIdealTypeWorldCupPage';
+import LaunchTravelIdealTypeWorldCupPage from './pages/post/type-world-cup/LaunchTravelIdealTypeWorldCupPage';
+import LaunchEtcIdealTypeWorldCupPage from './pages/post/type-world-cup/LaunchEtcIdealTypeWorldCupPage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -162,10 +167,13 @@ function App() {
               category={category}
               componentMap={{
                 이상형월드컵: {
-                  "2강": LaunchIdealTypeWorldCupPage2,
-                  "4강": LaunchIdealTypeWorldCupPage4,
-                  "8강": LaunchIdealTypeWorldCupPage8,
-                  "16강": LaunchIdealTypeWorldCupPage16
+                  부동산: LaunchPropertyIdealTypeWorldCupPage,
+                  구인구직: LaunchJobIdealTypeWroldCupPage,
+                  사고팔기: LaunchTransactionIdealTypeWorldCupPage,
+                  생활: LaunchSocietyIdealTypeWorldCupPage,
+                  여행: LaunchTravelIdealTypeWorldCupPage,
+                  유학: LaunchStudyIdealTypeWorldCupPage,
+                  자유: LaunchEtcIdealTypeWorldCupPage,
                 },
                 부동산: {
                   쉐어: LaunchSharePropertyPage,
@@ -273,6 +281,8 @@ function App() {
             <Route path="search/여행/:title/:suburb/:subCategory/:keywords" element={<TravelSearchPage/>} />
             <Route path="search/유학/:title/:suburb/:subCategory/:keywords" element={<StudySearchPage/>} />
 
+            <Route path="이상형월드컵" element={<WholeWorldCupPostPage />} />
+
             <Route path="부동산" element={<WholePropertyPostPage />} />
             <Route path="구인구직" element={<WholeJobPostPage />} />
             <Route path="사고팔기" element={<WholeTransactionPostPage />} />
@@ -314,6 +324,7 @@ function App() {
 
             {generateDynamicRoutes()}
 
+            <Route path="post/이상형월드컵/detail/:postId" element={<WorldCupDetailPage />} />
             <Route path="post/부동산/detail/:postId" element={<PropertyPostDetailPage />} />
             <Route path="post/구인구직/detail/:postId" element={<JobPostDetailPage />} />
             <Route path="post/사고팔기/detail/:postId" element={<TransactionPostDetailPage />} />
