@@ -1,27 +1,33 @@
 import React, { useRef } from "react";
 import { Box, Button, FormControl, InputLabel, Paper } from "@mui/material";
 import { primaryColor } from "../../constant/Color";
+import { convertHEICtoJPEG } from "../../service/ImageService";
 
 const WorldCupImageCoverUploader = ({ coverImageUrl, setCoverImage, setCoverImageUrl }) => {
-  const fileInputRef = useRef(null); 
+  const fileInputRef = useRef(null);
 
-  const handleCoverImageUpload = (event) => {
-    const file = event.target.files[0];
+  const handleCoverImageUpload = async (event) => {
+    if (!event.target.files || event.target.files.length === 0) return;
 
-    if (file) {
-      setCoverImage(file);
-      setCoverImageUrl(URL.createObjectURL(file));
+    let file = event.target.files[0];
 
-      
-      event.target.value = "";
-    }
+    console.log(`📢 Selected file: ${file.name}, Type: ${file.type}`);
+
+    // Convert HEIC to JPEG if needed
+    file = await convertHEICtoJPEG(file);
+
+    setCoverImage(file);
+    setCoverImageUrl(URL.createObjectURL(file));
+
+    // Reset input value to allow re-upload
+    event.target.value = "";
   };
 
   const handleRemoveImage = () => {
     setCoverImage(null);
     setCoverImageUrl("");
 
-    
+    // Reset input field
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -60,7 +66,7 @@ const WorldCupImageCoverUploader = ({ coverImageUrl, setCoverImage, setCoverImag
             type="file"
             accept="image/*"
             hidden
-            ref={fileInputRef} 
+            ref={fileInputRef}
             onChange={handleCoverImageUpload}
           />
         </Button>
@@ -93,7 +99,7 @@ const WorldCupImageCoverUploader = ({ coverImageUrl, setCoverImage, setCoverImag
                 color: "white",
                 ":hover": { backgroundColor: "rgba(0, 0, 0, 0.8)" },
               }}
-              onClick={handleRemoveImage} 
+              onClick={handleRemoveImage}
             >
               삭제
             </Button>

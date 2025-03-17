@@ -34,7 +34,7 @@ const OwnStudyPostDetailPage = () => {
       .then((data) => {
         setStudyPostData(data);
         if (!data.isPublic && data.userId !== userId) {
-          setDialogOpen(true);
+          navigate("/");
         }
       })
       .catch((error) => console.error("Error fetching posts:", error));

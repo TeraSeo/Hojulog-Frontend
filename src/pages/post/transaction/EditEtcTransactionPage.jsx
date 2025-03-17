@@ -30,7 +30,7 @@ const EditEtcTransactionPage = () => {
                 setMainInfoData(data.updateTransactionMainInfoPostDto);
                 setExistingImages(data.updateTransactionMediaInfoPostDto.existingImages);
             })
-            .catch((error) => console.error("Error fetching posts:", error));
+            .catch((error) => navigate("/"));
         };
 
   const mainInfoRef = useRef(null);

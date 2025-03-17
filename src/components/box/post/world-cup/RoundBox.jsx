@@ -1,14 +1,22 @@
 import React from "react";
-import { Box, Typography, Button, Grid } from "@mui/material";
+import { Box, Typography, Button, Grid, useMediaQuery } from "@mui/material";
 import { motion } from "framer-motion";
 import noImageAvailable from "../../../../assets/images/no_image_available.jpeg";
 
 const RoundBox = ({ candidate1, candidate2, onSelectWinner, selectedWinner, losingCandidate }) => {
+    const isSmallScreen = useMediaQuery("(max-width:600px)"); // 600px 이하일 때 세로 배치
+
     return (
         <Box sx={{ backgroundColor: "#f4f4f4", p: 3, borderRadius: 2, position: "relative" }}>
-            <Grid container spacing={2} justifyContent="center">
+            <Grid 
+                container 
+                spacing={2} 
+                justifyContent="center" 
+                alignItems="center" 
+                direction={isSmallScreen ? "column" : "row"} // 반응형 적용
+            >
                 {/* Candidate 1 */}
-                <Grid item xs={5.5}>
+                <Grid item xs={isSmallScreen ? 12 : 5.5}>
                     <motion.div
                         initial={{ x: 0, opacity: 1 }}
                         animate={
@@ -58,21 +66,23 @@ const RoundBox = ({ candidate1, candidate2, onSelectWinner, selectedWinner, losi
                 </Grid>
 
                 {/* VS Box */}
-                <Grid item xs={1} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <Grid item xs={isSmallScreen ? 12 : 1} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <Typography
                         sx={{
                             fontSize: "32px",
                             fontWeight: "bold",
                             color: "#FF8C00",
                             textShadow: "2px 2px 2px rgba(0,0,0,0.6)",
+                            textAlign: "center",
+                            whiteSpace: isSmallScreen ? "pre-line" : "nowrap", // 줄바꿈
                         }}
                     >
-                        VS
+                        {isSmallScreen ? "VS" : "VS"}
                     </Typography>
                 </Grid>
 
                 {/* Candidate 2 */}
-                <Grid item xs={5.5}>
+                <Grid item xs={isSmallScreen ? 12 : 5.5}>
                     <motion.div
                         initial={{ x: 0, opacity: 1 }}
                         animate={

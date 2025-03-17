@@ -35,6 +35,9 @@ const CategorySidebar = () => {
         if (subCategory === "레스토랑(카페,펍)") {
             navigate("/레스토랑");
         }
+        else if (subCategory === "부동산" || subCategory === "구인구직" || subCategory === "사고팔기" || subCategory === "생활" || subCategory === "여행" || subCategory === "유학" || subCategory === "자유") {
+            navigate(`/이상형월드컵/${subCategory}`);
+        }
         else {
             navigate(`/${subCategory}`);
         }

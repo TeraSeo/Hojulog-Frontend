@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getSpecificJobPost } from '../../../service/PostService';
 import { Box, Grid } from '@mui/material';
 import CategorySidebar from '../../../components/bar/CategorySidebar';
@@ -16,6 +16,8 @@ import { PostResponsiveFontSize2 } from '../../../constant/FontSizeResponsive';
 import { CommonPagePaddingXSize } from '../../../constant/PaddingResponsiveSize';
 
 const OwnJobPostDetailPage = () => {
+  const navigate = useNavigate();
+  const userId = localStorage.getItem('userId') || "";
   const { postId } = useParams();
   const [jobPostData, setJobPostData] = useState();
   const commentBoxRef = useRef(null);
@@ -28,6 +30,7 @@ const OwnJobPostDetailPage = () => {
     getSpecificJobPost(postId)
       .then((data) => {
         setJobPostData(data);
+        if (userId !== data.userId) { navigate("/"); }
       })
       .catch((error) => console.error("Error fetching posts:", error));
   };

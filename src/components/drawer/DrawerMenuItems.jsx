@@ -17,6 +17,7 @@ import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import NotificationButton from "../buttons/NotificationButton";
 import ForumIcon from "@mui/icons-material/Forum";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 
 function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout, newNotifications = 0 }) {
     const navigate = useNavigate();
@@ -41,6 +42,10 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout, newNotifi
                 카테고리
             </Typography>
             <List>
+                <ListItem button onClick={() => handleNavigate("/이상형월드컵")}>
+                    <ListItemIcon><EmojiEventsIcon /></ListItemIcon>
+                    <ListItemText primary="이상형월드컵" secondary="이상형월드컵 정보 확인하기" />
+                </ListItem>
                 <ListItem button onClick={() => handleNavigate("/부동산")}>
                     <ListItemIcon><ApartmentIcon /></ListItemIcon>
                     <ListItemText primary="부동산" secondary="부동산 매물 정보 확인하기" />

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getSpecificTransactionPost } from '../../../service/PostService';
 import { Box, Grid } from '@mui/material';
 import CategorySidebar from '../../../components/bar/CategorySidebar';
@@ -15,6 +15,8 @@ import { DetailedPostIconResponsiveSize2 } from '../../../constant/IconSizeRespo
 import { CommonPagePaddingXSize } from '../../../constant/PaddingResponsiveSize';
 
 const OwnTransactionPostDetailPage = () => {
+  const navigate = useNavigate();
+  const userId = localStorage.getItem('userId') || "";
   const { postId } = useParams();
   const [transactionPostData, setTransactionPostData] = useState();
   const commentBoxRef = useRef(null);
@@ -27,6 +29,7 @@ const OwnTransactionPostDetailPage = () => {
     getSpecificTransactionPost(postId)
       .then((data) => {
         setTransactionPostData(data);
+        if (userId !== data.userId) { navigate("/"); }
       })
       .catch((error) => console.error("Error fetching posts:", error));
   };

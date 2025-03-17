@@ -6,6 +6,7 @@ import PostPaginationBox from "../../components/box/post/PostPaginationBox";
 import CommonOwnSummarizedPostBoxByPost from "../../components/box/post/CommonOwnSummarizedPostBoxByPost";
 import { useParams } from "react-router-dom";
 import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
+import CommonOthersSummarizedPostBoxByPost from "../../components/box/post/CommonOthersSummarizedPostBoxByPost";
 
 function OthersUploadedPostPage() {
     const { userId, username } = useParams();
@@ -47,8 +48,8 @@ function OthersUploadedPostPage() {
                         {username}님이 올린 게시물
                     </Typography>
 
-                    {othersUploadedPostPageData.posts.map((post, index) => (
-                        <CommonOwnSummarizedPostBoxByPost post={post} />
+                    {othersUploadedPostPageData.posts.map((post) => (
+                        <CommonOthersSummarizedPostBoxByPost post={post} />
                     ))}
                     
                     <PostPaginationBox totalPage={othersUploadedPostPageData.pageSize} currentPage={othersUploadedPostPageData.currentPage} handlePageChange={handlePageChange} />

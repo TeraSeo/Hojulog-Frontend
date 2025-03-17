@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getSpecificPropertyPost } from '../../../service/PostService';
 import { Box, Grid } from '@mui/material';
 import CategorySidebar from '../../../components/bar/CategorySidebar';
@@ -16,6 +16,8 @@ import { DetailedPostIconResponsiveSize2 } from '../../../constant/IconSizeRespo
 import { CommonPagePaddingXSize } from '../../../constant/PaddingResponsiveSize';
 
 const OwnPropertyPostDetailPage = () => {
+  const navigate = useNavigate();
+  const userId = localStorage.getItem('userId') || "";
   const { postId } = useParams();
   const [propertyPostData, setPropertyPostData] = useState();
   const commentBoxRef = useRef(null);
@@ -28,7 +30,7 @@ const OwnPropertyPostDetailPage = () => {
     getSpecificPropertyPost(postId)
       .then((data) => {
         setPropertyPostData(data);
-        alert(propertyPostData.isUserLiked);
+        if (userId !== data.userId) { navigate("/"); }
       })
       .catch((error) => console.error("Error fetching posts:", error));
   };

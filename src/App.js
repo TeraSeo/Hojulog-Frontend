@@ -121,6 +121,22 @@ import LaunchStudyIdealTypeWorldCupPage from './pages/post/type-world-cup/Launch
 import LaunchTransactionIdealTypeWorldCupPage from './pages/post/type-world-cup/LaunchTransactionIdealTypeWorldCupPage';
 import LaunchTravelIdealTypeWorldCupPage from './pages/post/type-world-cup/LaunchTravelIdealTypeWorldCupPage';
 import LaunchEtcIdealTypeWorldCupPage from './pages/post/type-world-cup/LaunchEtcIdealTypeWorldCupPage';
+import OwnWorldCupPostDetailPage from './pages/post/type-world-cup/OwnWorldCupPostDetailPage';
+import EditPropertyIdealTypePage from './pages/post/type-world-cup/EditPropertyIdealTypePage';
+import EditEtcIdealTypePage from './pages/post/type-world-cup/EditEtcIdealTypePage';
+import EditJobIdealTypePage from './pages/post/type-world-cup/EditJobIdealTypePage';
+import EditSocietyIdealTypePage from './pages/post/type-world-cup/EditSocietyIdealTypePage';
+import EditStudyIdealTypePage from './pages/post/type-world-cup/EditStudyIdealTypePage';
+import EditTransactionIdealType from './pages/post/type-world-cup/EditTransactionIdealType';
+import EditTravelIdealTypePage from './pages/post/type-world-cup/EditTravelIdealTypePage';
+import WorldCupSearchPage from './pages/search/WorldCupSearchPage';
+import WholePropertyWorldCupPostPage from './pages/post/type-world-cup/WholePropertyWorldCupPostPage';
+import WholeJobWorldCupPostPage from './pages/post/type-world-cup/WholeJobWorldCupPostPage';
+import WholeTransactionWorldCupPostPage from './pages/post/type-world-cup/WholeTransactionWorldCupPostPage';
+import WholeSocietyWorldCupPostPage from './pages/post/type-world-cup/WholeSocietyWorldCupPostPage';
+import WholeTravelWorldCupPostPage from './pages/post/type-world-cup/WholeTravelWorldCupPostPage';
+import WholeStudyWorldCupPostPage from './pages/post/type-world-cup/WholeStudyWorldCupPostPage';
+import WholeEtcWorldCupPostPage from './pages/post/type-world-cup/WholeEtcWorldCupPostPage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -248,6 +264,14 @@ function App() {
             <Route path="update/admin/user/:userId" element={<AdminUserEditPage />} />
             <Route path="update/admin/inquiry/:inquiryId" element={<AdminInquiryEditPage />} />
 
+            <Route path="update/이상형월드컵/부동산/:postId" element={<EditPropertyIdealTypePage />} />
+            <Route path="update/이상형월드컵/구인구직/:postId" element={<EditJobIdealTypePage />} />
+            <Route path="update/이상형월드컵/사고팔기/:postId" element={<EditTransactionIdealType />} />
+            <Route path="update/이상형월드컵/생활/:postId" element={<EditSocietyIdealTypePage />} />
+            <Route path="update/이상형월드컵/여행/:postId" element={<EditTravelIdealTypePage />} />
+            <Route path="update/이상형월드컵/유학/:postId" element={<EditStudyIdealTypePage />} />
+            <Route path="update/이상형월드컵/자유/:postId" element={<EditEtcIdealTypePage />} />
+
             <Route path="update/여행/여행지/:postId" element={<EditTravelPage />} />
             <Route path="update/여행/코스/:postId" element={<EditCoursePostPage />} />
             <Route path="update/여행/레스토랑/:postId" element={<EditRestaurantPostPage />} />
@@ -274,6 +298,7 @@ function App() {
             <Route path="update/사고팔기/기타/:postId" element={<EditEtcTransactionPage/>} />
             {/* <Route path="update/사고팔기/대여/:postId" element={<EditProductRentTransactionPage/>} /> */}
 
+            <Route path="search/이상형월드컵/:title/:suburb/:subCategory/:keywords" element={<WorldCupSearchPage/>} />
             <Route path="search/부동산/:title/:suburb/:subCategory/:keywords" element={<PropertySearchPage/>} />
             <Route path="search/구인구직/:title/:suburb/:subCategory/:keywords" element={<JobSearchPage/>} />
             <Route path="search/사고팔기/:title/:suburb/:subCategory/:keywords" element={<TransactionSearchPage/>} />
@@ -282,13 +307,20 @@ function App() {
             <Route path="search/유학/:title/:suburb/:subCategory/:keywords" element={<StudySearchPage/>} />
 
             <Route path="이상형월드컵" element={<WholeWorldCupPostPage />} />
-
             <Route path="부동산" element={<WholePropertyPostPage />} />
             <Route path="구인구직" element={<WholeJobPostPage />} />
             <Route path="사고팔기" element={<WholeTransactionPostPage />} />
             <Route path="생활" element={<WholeSocietyPostPage />} />
             <Route path="여행" element={<WholeTravelPostPage />} />
             <Route path="유학" element={<WholeStudyPostPage />} />
+
+            <Route path="이상형월드컵/부동산" element={<WholePropertyWorldCupPostPage />} />
+            <Route path="이상형월드컵/구인구직" element={<WholeJobWorldCupPostPage />} />
+            <Route path="이상형월드컵/사고팔기" element={<WholeTransactionWorldCupPostPage />} />
+            <Route path="이상형월드컵/생활" element={<WholeSocietyWorldCupPostPage />} />
+            <Route path="이상형월드컵/여행" element={<WholeTravelWorldCupPostPage />} />
+            <Route path="이상형월드컵/유학" element={<WholeStudyWorldCupPostPage />} />
+            <Route path="이상형월드컵/자유" element={<WholeEtcWorldCupPostPage />} />
 
             <Route path="쉐어" element={<WholeSharePostPage />} />
             <Route path="렌트" element={<WholeRentPostPage />} />
@@ -332,6 +364,7 @@ function App() {
             <Route path="post/여행/detail/:postId" element={<TravelPostDetailedPage />} />
             <Route path="post/유학/detail/:postId" element={<StudyPostDetailPage />} />
 
+            <Route path="own/post/이상형월드컵/detail/:postId" element={<OwnWorldCupPostDetailPage />} />
             <Route path="own/post/부동산/detail/:postId" element={<OwnPropertyPostDetailPage />} />
             <Route path="own/post/구인구직/detail/:postId" element={<OwnJobPostDetailPage />} />
             <Route path="own/post/사고팔기/detail/:postId" element={<OwnTransactionPostDetailPage />} />
@@ -339,6 +372,13 @@ function App() {
             <Route path="own/post/여행/detail/:postId" element={<OwnTravelPostDetailedPage />} />
             <Route path="own/post/유학/detail/:postId" element={<OwnStudyPostDetailPage />} />
             
+            <Route path="others/post/이상형월드컵/detail/:postId" element={<WorldCupDetailPage />} />
+            <Route path="others/post/부동산/detail/:postId" element={<PropertyPostDetailPage />} />
+            <Route path="others/post/구인구직/detail/:postId" element={<JobPostDetailPage />} />
+            <Route path="others/post/사고팔기/detail/:postId" element={<TransactionPostDetailPage />} />
+            <Route path="others/post/생활/detail/:postId" element={<SocietyPostDetailPage />} />
+            <Route path="others/post/여행/detail/:postId" element={<TravelPostDetailedPage />} />
+            <Route path="others/post/유학/detail/:postId" element={<StudyPostDetailPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -31,7 +31,7 @@ const AddCommentBox = ({ comment, setComment, handleCommentSubmit }) => {
         <InputBase
           placeholder="여기에 댓글을 입력하세요..."
           value={comment}
-          onChange={(e) => setComment(e.target.value)}
+          onChange={(e) => { if (e.target.value.length <= 1000) { setComment(e.target.value) } }}
           sx={{
             flex: 1,
             fontSize: SubTitleResponsiveFontSize1,

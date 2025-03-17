@@ -28,7 +28,7 @@ function getPostsByPageNCondition(page, condition) {
 }
 
 function getWorldCupPostsByPage(page) {
-    return axios.get(`${serverRoute}/api/post/get/pageable/recent/world-cup`, {
+    return axios.get(`${serverRoute}/api/post/get/pageable/recent/worldcup`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -168,6 +168,29 @@ function getStudyPostsByPage(page) {
         params: {
             "page": page,
             "size": 10
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getWorldCupPostsBySubCategoryNPage(subcategory, page) {
+    return axios.get(`${serverRoute}/api/post/get/pageable/worldcup/subcategory`, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10,
+            "subCategory": subcategory
         }
     })
     .then((response) => {
@@ -620,12 +643,16 @@ function getJobReviewPostsByPage(page) {
 
 function getWholeOwnPosts(page) {
     const userId = localStorage.getItem('userId') || "";
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
 
     return axios.get(`${serverRoute}/api/post/get/pageable/own/posts`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            "userId": userId
+            "userId": userId,
+            "accessToken": accessToken,
+            "refreshToken": refreshToken
         },
         params: {
             "page": page,
@@ -637,6 +664,7 @@ function getWholeOwnPosts(page) {
         }
     )
     .catch((error) => {
+            alert(error);
             console.log(error);
             return [];
         }
@@ -692,7 +720,7 @@ function getWholeLikedPosts(page) {
 }
 
 function getRecent5WorldCupPosts() {
-    return axios.get(`${serverRoute}/api/post/get/recent-5/world-cup/post`, {
+    return axios.get(`${serverRoute}/api/post/get/recent-5/worldcup/post`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -817,14 +845,59 @@ function getRecent5StudyPosts() {
     )  
 }
 
-function getSpecificWorldCupPost(postId) {
+function getSpecificCandidateDtoList(postId) {
     const userId = localStorage.getItem('userId') || "";
 
-    return axios.get(`${serverRoute}/api/post/get/specific/world-cup`, {
+    return axios.get(`${serverRoute}/api/post/get/specific/candidateDtoList`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'userId': userId
+        },
+        params: {
+            "postId": postId,
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getSpecificWorldCupPost(postId) {
+    const userId = localStorage.getItem('userId') || "";
+
+    return axios.get(`${serverRoute}/api/post/get/specific/worldcup`, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'userId': userId
+        },
+        params: {
+            "postId": postId,
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getSpecificUpdateWorldCupPost(postId) {
+    return axios.get(`${serverRoute}/api/post/get/specific/update/worldcup`, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
         },
         params: {
             "postId": postId,
@@ -1010,7 +1083,7 @@ function postWorldCup(postData) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
 
-    return axios.post(`${serverRoute}/api/post/create/world-cup`, postData, {
+    return axios.post(`${serverRoute}/api/post/create/worldcup`, postData, {
         headers: {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
@@ -1153,6 +1226,31 @@ function postStudy(postData) {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
             'refreshToken': refreshToken,
+        }
+    })
+    .then(response => {
+        if (response.data) {
+            return true;
+        }
+        return false;
+    })
+    .catch(error => {
+        console.log(error);
+        return false;
+    });    
+}
+
+function updateWorldCup(postData) {
+    const userId = localStorage.getItem('userId') || "";
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.put(`${serverRoute}/api/post/update/worldcup`, postData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+            "userId": userId
         }
     })
     .then(response => {
@@ -1485,6 +1583,49 @@ function getUpdateSocietyPostDto(postId) {
     )
 }
 
+function searchWorldCupPost(title, subCategory, suburb, keywords, page) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.get(`${serverRoute}/api/post/get/worldcup/by/search/option`, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        },
+        params: {
+            "title": title, 
+            "subCategory": subCategory,
+            "suburb" : suburb,
+            "keywords": keywords,
+            "page": page,
+            "size": 10
+        },
+        paramsSerializer: (params) => {
+            return Object.keys(params)
+                .map(key => {
+                    if (Array.isArray(params[key])) {
+                        return params[key]
+                            .map(value => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+                            .join("&");
+                    }
+                    return `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`;
+                })
+                .join("&");
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
 function searchPropertyPost(title, subCategory, suburb, keywords, page) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
@@ -1795,4 +1936,25 @@ function pinPost(postId) {
     )
 }
 
-export { getPostsByPageNCondition, getWorldCupPostsByPage, getPropertyPostsByPage, getJobPostsByPage, getTransactionPostsByPage, getSocietyPostsByPage, getTravelPostsByPage, getStudyPostsByPage, getSharePostsByPage, getRentPostsByPage, getPropertyTransactionPostsByPage, getRecruitmentPostsByPage, getJobSeekingPostsByPage, getJobTutoringPostsByPage, getCarPostsByPage, getNecessitiesPostsByPage, getTransactionEtcPostsByPage, getClubPostsByPage, getLifeStylePostsByPage, getFriendshipPostsByPage, getRestaurantPostsByPage, getPlacePostsByPage, getCoursePostsByPage, getSchoolPostsByPage, getWorkingHolidayPostsByPage, getLanguageStudyPostsByPage, getJobReviewPostsByPage, getWholeOwnPosts, getWholeOthersPosts, getWholeLikedPosts, getRecent5WorldCupPosts, getRecent5JobPosts, getRecent5PropertyPosts, getRecent5TransactionPosts, getRecent5SocietyPosts, getRecent5TravelPosts, getRecent5StudyPosts, getSpecificWorldCupPost, getSpecificPropertyPost, getSpecificJobPost, getSpecificTransactionPost, getSpecificSocietyPost, getSpecificTravelPost, getSpecificStudyPost, getSpecificPost, postWorldCup, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy, updateProperty, updateJob, updateTransaction, updateSociety, updateTravel, updateStudy, getUpdatePropertyPostDto, getUpdateJobPostDto, getUpdateTransactionPostDto, getUpdateTravelPostDto, getUpdateStudyPostDto, getUpdateSocietyPostDto, searchPropertyPost, searchJobPost, searchTransactionPost, searchSocietyPost, searchTravelPost, searchStudyPost, deletePostById, pinPost };
+function updateWorldCupVictory(candidateId) {
+    return axios.put(`${serverRoute}/api/post/add/victory`, {}, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        params: {
+            "candidateId": candidateId
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return null;
+        }
+    )
+}
+
+export { getPostsByPageNCondition, getWorldCupPostsByPage, getPropertyPostsByPage, getJobPostsByPage, getTransactionPostsByPage, getSocietyPostsByPage, getTravelPostsByPage, getWorldCupPostsBySubCategoryNPage, getStudyPostsByPage, getSharePostsByPage, getRentPostsByPage, getPropertyTransactionPostsByPage, getRecruitmentPostsByPage, getJobSeekingPostsByPage, getJobTutoringPostsByPage, getCarPostsByPage, getNecessitiesPostsByPage, getTransactionEtcPostsByPage, getClubPostsByPage, getLifeStylePostsByPage, getFriendshipPostsByPage, getRestaurantPostsByPage, getPlacePostsByPage, getCoursePostsByPage, getSchoolPostsByPage, getWorkingHolidayPostsByPage, getLanguageStudyPostsByPage, getJobReviewPostsByPage, getWholeOwnPosts, getWholeOthersPosts, getWholeLikedPosts, getRecent5WorldCupPosts, getRecent5JobPosts, getRecent5PropertyPosts, getRecent5TransactionPosts, getRecent5SocietyPosts, getRecent5TravelPosts, getRecent5StudyPosts, getSpecificCandidateDtoList, getSpecificWorldCupPost, getSpecificUpdateWorldCupPost, getSpecificPropertyPost, getSpecificJobPost, getSpecificTransactionPost, getSpecificSocietyPost, getSpecificTravelPost, getSpecificStudyPost, getSpecificPost, postWorldCup, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy, updateProperty, updateJob, updateTransaction, updateSociety, updateWorldCup, updateTravel, updateStudy, getUpdatePropertyPostDto, getUpdateJobPostDto, getUpdateTransactionPostDto, getUpdateTravelPostDto, getUpdateStudyPostDto, getUpdateSocietyPostDto, searchWorldCupPost, searchPropertyPost, searchJobPost, searchTransactionPost, searchSocietyPost, searchTravelPost, searchStudyPost, deletePostById, pinPost, updateWorldCupVictory };

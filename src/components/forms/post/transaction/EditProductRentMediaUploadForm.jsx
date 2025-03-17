@@ -3,6 +3,7 @@ import { Typography, Grid, Paper } from "@mui/material";
 import { useDropzone } from "react-dropzone";
 import ImageUploader from "../../../media/ImageUploader";
 import ImageUploadWithInitialValue from "../../../media/ImageUploadWithInitialValue";
+import { convertHEICtoJPEG } from "../../../../service/ImageService";
 
 const EditProductRentMediaUploadForm = ({ onMediaChange, setIsMediaValid, existingImages, setExistingImages }) => {
   const [newImages, setNewImages] = useState([]);
@@ -30,8 +31,9 @@ const EditProductRentMediaUploadForm = ({ onMediaChange, setIsMediaValid, existi
     }, [newImages]);
   
     const imagesDropzone = useDropzone({
-      onDrop: (acceptedFiles) => {
-        const validImages = acceptedFiles.filter((file) => file.type.startsWith("image/"));
+      onDrop: async (acceptedFiles) => {
+        const convertedFiles = await Promise.all(acceptedFiles.map((file) => convertHEICtoJPEG(file)));
+        const validImages = convertedFiles.filter((file) => file.type.startsWith("image/"));
         
         if (validImages.length + existingImages.length + newImages.length > 6) {
           setErrors((prev) => ({

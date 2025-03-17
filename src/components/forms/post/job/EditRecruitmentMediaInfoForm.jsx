@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Typography, Grid, Paper } from "@mui/material";
 import { useDropzone } from "react-dropzone";
 import ImageUploadWithInitialValue from "../../../media/ImageUploadWithInitialValue";
+import { convertHEICtoJPEG } from "../../../../service/ImageService";
 
 const EditRecruitmentMediaInfoForm = ({ onMediaChange, setIsMediaValid, existingImages, setExistingImages }) => {
   const [newImages, setNewImages] = useState([]);
@@ -29,8 +30,9 @@ const EditRecruitmentMediaInfoForm = ({ onMediaChange, setIsMediaValid, existing
   }, [newImages]);
 
   const imagesDropzone = useDropzone({
-      onDrop: (acceptedFiles) => {
-        const validImages = acceptedFiles.filter((file) => file.type.startsWith("image/"));
+      onDrop: async (acceptedFiles) => {
+        const convertedFiles = await Promise.all(acceptedFiles.map((file) => convertHEICtoJPEG(file)));
+        const validImages = convertedFiles.filter((file) => file.type.startsWith("image/"));
         
         if (validImages.length + existingImages.length + newImages.length > 6) {
           setErrors((prev) => ({

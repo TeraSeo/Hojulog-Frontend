@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Dialog, DialogContent, DialogTitle, TextField, Box, Button, MenuItem, Select, FormControl, InputLabel, Typography, Stack, Chip, FormHelperText } from "@mui/material";
 import { categories } from "../../constant/Categories";
 import { suburbs } from "../../constant/\bSuburb";
-import { jobKeyWords, propertyKeyWords, societyKeyWords, studyKeyWords, transactionKeyWords, travelKeyWords } from "../../constant/Keywords";
+import { jobKeyWords, propertyKeyWords, societyKeyWords, studyKeyWords, transactionKeyWords, travelKeyWords, worldCupJobKeyWords, worldCupPropertyKeyWords, worldCupSocietyKeyWords, worldCupStudyKeyWords, worldCupTransactionKeyWords, worldCupTravelKeyWords } from "../../constant/Keywords";
 import { useNavigate } from "react-router-dom";
 
 const keywordMapping = {
@@ -11,7 +11,16 @@ const keywordMapping = {
     "사고팔기": transactionKeyWords,
     "생활": societyKeyWords,
     "여행": travelKeyWords,
-    "유학": studyKeyWords
+    "유학": studyKeyWords,
+    "이상형월드컵": {
+        "부동산": worldCupPropertyKeyWords,
+        "구인구직": worldCupJobKeyWords,
+        "사고팔기": worldCupTransactionKeyWords,
+        "생활": worldCupSocietyKeyWords,
+        "여행": worldCupTravelKeyWords,
+        "유학": worldCupStudyKeyWords,
+        "자유": []
+    }
 };
 
 // Categories that require the suburb field
@@ -58,6 +67,13 @@ function SearchDialog({ open, onClose }) {
         const searchUrl = `/search/${encodeURIComponent(selectedCategory)}/${titleParam}/${suburbParam}/${subCategoryParam}/${keywordsParam}`;
         onClose();
         navigate(searchUrl);
+    };
+
+    const getKeywordsForCategory = () => {
+        if (selectedCategory === "이상형월드컵") {
+            return selectedSubCategory ? keywordMapping["이상형월드컵"][selectedSubCategory] : [];
+        }
+        return keywordMapping[selectedCategory] || [];
     };
 
     return (
@@ -111,7 +127,13 @@ function SearchDialog({ open, onClose }) {
                         <InputLabel>세부 카테고리</InputLabel>
                         <Select
                             value={selectedSubCategory}
-                            onChange={(e) => setSelectedSubCategory(e.target.value)}
+                            onChange={(e) => {
+                                    setSelectedSubCategory(e.target.value)
+                                    if (selectedCategory === "이상형월드컵") {
+                                        setSelectedKeywords([]);
+                                    }
+                                }
+                            }
                             label="세부 카테고리"
                         >
                             {selectedCategory &&
@@ -145,14 +167,14 @@ function SearchDialog({ open, onClose }) {
                 )}
 
                 {/* Keywords Section */}
-                {selectedCategory && (
+                {selectedCategory && getKeywordsForCategory().length > 0 && (
                     <Box sx={{ mb: 2, backgroundColor: "#fafafa", p: 2, borderRadius: "8px" }}>
                         <Typography variant="body2" sx={{ fontWeight: 600, textAlign: "start", fontSize: "14px", mb: 2, color: "#555" }}>
                             키워드
                         </Typography>
 
                         <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
-                            {keywordMapping[selectedCategory].map((keyword) => (
+                            {getKeywordsForCategory().map((keyword) => (
                                 <Chip
                                     key={keyword}
                                     label={keyword}

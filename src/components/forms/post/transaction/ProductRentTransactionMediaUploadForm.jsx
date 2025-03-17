@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Typography, Grid, Paper } from "@mui/material";
 import { useDropzone } from "react-dropzone";
 import ImageUploader from "../../../media/ImageUploader";
+import { convertHEICtoJPEG } from "../../../../service/ImageService";
 
 const ProductRentTransactionMediaUploadForm = ({ onMediaChange, setIsMediaValid }) => {
   const [selectedImages, setSelectedImages] = useState([]);
@@ -29,8 +30,9 @@ const ProductRentTransactionMediaUploadForm = ({ onMediaChange, setIsMediaValid 
   }, [selectedImages]);
 
   const imagesDropzone = useDropzone({
-    onDrop: (acceptedFiles) => {
-      const validImages = acceptedFiles.filter((file) => file.type.startsWith("image/"));
+    onDrop: async (acceptedFiles) => {
+      const convertedFiles = await Promise.all(acceptedFiles.map((file) => convertHEICtoJPEG(file)));
+      const validImages = convertedFiles.filter((file) => file.type.startsWith("image/"));
       if (validImages.length + selectedImages.length > 6) {
         setErrors((prev) => ({
           ...prev,

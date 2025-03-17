@@ -8,6 +8,7 @@ import HomeContainerBox from "../../components/box/home/HomeContainerBox";
 import CommonOwnSummarizedPostBox from "../../components/box/post/CommonOwnSummarizedPostBox";
 import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
 import ProfileStatsText from "../../components/texts/ProfileStatsText";
+import OthersCommonSummarizedPostBox from "../../components/box/post/OthersCommonSummarizedPostBox";
 
 const OtherProfilePage = () => {
     const navigate = useNavigate();
@@ -80,7 +81,7 @@ const OtherProfilePage = () => {
                         <HomeContainerBox title={userData.username + "님이 올린 게시물"} onDetailClicked={() => { navigate(`/others/posts/${userId}/${userData.username}`) }}>
                             {userData.uploadedPostIds.map((uploadedPostId, index) => (
                                 <Box key={index}>
-                                    <CommonOwnSummarizedPostBox postId={uploadedPostId} />
+                                    <OthersCommonSummarizedPostBox postId={uploadedPostId} />
                                 </Box>
                             ))}
                         </HomeContainerBox>

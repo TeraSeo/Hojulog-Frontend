@@ -62,7 +62,7 @@ const SingleWorldCupForm = ({ index, data, onTitleChange, onImageChange }) => {
         fullWidth
         label="제목 입력"
         variant="outlined"
-        value={String(data.title ?? "")} // Ensure title is always a string
+        value={data.title}
         onChange={(e) => onTitleChange(index, e.target.value)}
         sx={{ borderRadius: "8px" }}
       />

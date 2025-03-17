@@ -26,7 +26,7 @@ const WorldCupDetailPage = () => {
     }
 
     return <Box sx={{  px: CommonPagePaddingXSize }}>
-          <WorldCupDetailBox title={worldCupPostData.title} candidateDtoList={worldCupPostData.candidateDtoList} />
+          <WorldCupDetailBox title={worldCupPostData.title} candidateDtoList={worldCupPostData.candidateDtoList} worldCupPostData={worldCupPostData} />
       </Box>;
 }
 

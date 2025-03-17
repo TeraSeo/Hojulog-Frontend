@@ -9,6 +9,7 @@ import CommentAvailabilityField from "../../../components/textfields/CommentAvai
 import { useNavigate } from "react-router-dom";
 import WorldCupImageCoverUploader from "../../../components/media/WorldCupImageCoverUploader";
 import { worldCupPropertyKeyWords } from "../../../constant/Keywords";
+import { convertHEICtoJPEG } from "../../../service/ImageService";
 
 const candidateOptions = [2, 4, 8, 16];
 
@@ -48,6 +49,10 @@ const LaunchPropertyIdealTypeWorldCupPage = () => {
 
   const handleSubmit = async () => {
     if (!isValid) return;
+
+    const confirmation = window.confirm("등록하려면 10 로그가 소모됩니다. 제출하시겠습니까?");
+    if (!confirmation) return;
+
     setIsLoading(true);
 
     const userId = localStorage.getItem("userId") || "";
@@ -117,12 +122,13 @@ const LaunchPropertyIdealTypeWorldCupPage = () => {
               const updatedGroups = [...groups];
               updatedGroups[idx].title = val;
               setGroups(updatedGroups);
-            }} onImageChange={(idx, e) => {
+            }} onImageChange={async (idx, e) => {
               const file = e.target.files[0];
               if (file) {
+                const convertedFile = await convertHEICtoJPEG(file);
                 const updatedGroups = [...groups];
-                updatedGroups[idx].image = file;
-                updatedGroups[idx].imageUrl = URL.createObjectURL(file);
+                updatedGroups[idx].image = convertedFile;
+                updatedGroups[idx].imageUrl = URL.createObjectURL(convertedFile);
                 setGroups(updatedGroups);
               }
             }} />

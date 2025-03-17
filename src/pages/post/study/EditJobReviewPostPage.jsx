@@ -24,7 +24,7 @@ const EditJobReviewPostPage = () => {
             .then((data) => {
                 setMainInfoData(data);
             })
-            .catch((error) => console.error("Error fetching posts:", error));
+            .catch((error) => navigate("/"));
     };
 
   const mainInfoRef = useRef(null);

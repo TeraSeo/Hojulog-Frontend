@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useDropzone } from "react-dropzone";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { convertHEICtoJPEG } from "../../../service/ImageService";
 
 const  ContentBlockManagerWithInitialValue = ({ onChange, blogContents }) => {
   const [contentBlocks, setContentBlocks] = useState(blogContents || []);
@@ -15,18 +16,28 @@ const  ContentBlockManagerWithInitialValue = ({ onChange, blogContents }) => {
     onChange(updatedBlocks);
   };
 
-  const handleAddImage = (files) => {
-    const validImages = files.filter((file) => file.type.startsWith("image/"));
+  const handleAddImage = async (files) => {
+    const convertedFiles = await Promise.all(files.map((file) => convertHEICtoJPEG(file))); // Convert if needed
+        
+    const validImages = convertedFiles.filter(
+      (file) => file.type.startsWith("image/") && !file.type.startsWith("video/")
+    );
+  
+    if (validImages.length === 0) {
+      alert("Only image files are allowed.");
+      return;
+    }
+    
     const imageBlocks = validImages.map((file) => ({
       type: "image",
       content: URL.createObjectURL(file),
       file,
     }));
+  
     const updatedBlocks = [...contentBlocks, ...imageBlocks];
     setContentBlocks(updatedBlocks);
     onChange(updatedBlocks);
   };
-
   const handleContentChange = (index, newContent) => {
     const updatedBlocks = [...contentBlocks];
     updatedBlocks[index].content = newContent;
