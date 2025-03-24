@@ -33,7 +33,7 @@ const OwnSocietyPostDetailPage = () => {
     getSpecificSocietyPost(postId)
       .then((data) => {
         setSocietyPostData(data);
-        if (!data.isPublic && data.userId !== userId) {
+        if (userId.toString() !== data.userId.toString()) {
           navigate("/");
         }
       })
@@ -84,7 +84,7 @@ const OwnSocietyPostDetailPage = () => {
       </Box>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end", gap: 1 }}>
-        <UpdatePostButton postId={societyPostData.postId} />
+        <UpdatePostButton category={"생활"} subCategory={societyPostData.subCategory} postId={societyPostData.postId} />
         <RemovePostButton postId={societyPostData.postId} />
       </Box>
 

@@ -52,7 +52,7 @@ const EditEtcIdealTypePage = () => {
     const isMainTitleValid = mainTitle.trim() !== "";
     const areGroupTitlesValid = groups.every((group) => (group?.title ?? "").trim() !== "");
 
-    setMainTitleError(isMainTitleValid ? "" : "이상형 월드컵의 제목을 입력해주세요.");
+    setMainTitleError(isMainTitleValid ? "" : "Aussie Choice의 제목을 입력해주세요.");
     setGroupErrors(groups.map((group) => (group.title.trim() ? "" : "각 조의 제목을 입력해주세요.")));
 
     setIsValid(isMainTitleValid && areGroupTitlesValid);
@@ -102,7 +102,7 @@ const EditEtcIdealTypePage = () => {
   return (
     <Paper elevation={3} sx={{ padding: 4, margin: 4, maxWidth: 800, mx: "auto", backgroundColor: "#f7f9fc" }}>
       <Typography variant="h4" gutterBottom align="center" sx={{ color: primaryColor }}>
-        이상형 월드컵 만들기
+        Aussie Choice 만들기
       </Typography>
 
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>

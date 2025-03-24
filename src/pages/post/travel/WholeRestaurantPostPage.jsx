@@ -7,6 +7,7 @@ import TravelPostBox from "../../../components/box/post/travel/TravelPostBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
 import TravelFilter from "../../../components/box/post/travel/TravelFilter";
+import TravelNonOptionAddPostButton from "../../../components/buttons/post/travel/TravelNonOptionAddPostButton";
 
 const WholeRestaurantPostPage = () => {
     const [postPageData, setPostPageData] = useState({
@@ -16,7 +17,7 @@ const WholeRestaurantPostPage = () => {
     });
 
     const [filteredPosts, setFilteredPosts] = useState([]);
-    const [selectedCountry, setSelectedCountry] = useState("전체");
+    const [selectedTravelSuburb, setSelectedTravelSuburb] = useState("전체");
 
     useEffect(() => {
         fetchPageData(1);
@@ -41,7 +42,7 @@ const WholeRestaurantPostPage = () => {
 
     const applyFilters = () => {
         const filtered = postPageData.posts.filter((post) => {
-            return selectedCountry === "전체" || post.country === selectedCountry;
+            return selectedTravelSuburb === "전체" || post.travelSuburb === selectedTravelSuburb;
         });
 
         setFilteredPosts(filtered);
@@ -58,7 +59,7 @@ const WholeRestaurantPostPage = () => {
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
                         <PageTitleText title={"레스토랑(카페,펍)"} />
 
-                        <TravelFilter selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry} applyFilters={applyFilters} />
+                        <TravelFilter selectedTravelSuburb={selectedTravelSuburb} setSelectedTravelSuburb={setSelectedTravelSuburb} applyFilters={applyFilters} />
                     </Box>
 
                     {/* Display Filtered Posts */}
@@ -71,6 +72,8 @@ const WholeRestaurantPostPage = () => {
                     ) : (
                         <Typography variant="body1">조건에 맞는 게시물이 없습니다.</Typography>
                     )}
+
+                    <TravelNonOptionAddPostButton subCategory={"레스토랑"} />
 
                     <PostPaginationBox totalPage={postPageData.pageSize} currentPage={postPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>

@@ -4,7 +4,7 @@ import { ButtonResponsiveFontSize1 } from "../../constant/FontSizeResponsive";
 import { ButtonWidthSize1 } from "../../constant/WidthHeightResponsive";
 import { useNavigate } from "react-router-dom";
 
-const UpdateProfileButton = ({ userId }) => {
+const UpdateProfileButton = ({ userId, lastAttendanceTime }) => {
     const navigate = useNavigate();
 
     return <Box sx={{ display: "flex", justifyContent: "center" }}>

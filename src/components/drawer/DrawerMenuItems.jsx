@@ -44,7 +44,7 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout, newNotifi
             <List>
                 <ListItem button onClick={() => handleNavigate("/이상형월드컵")}>
                     <ListItemIcon><EmojiEventsIcon /></ListItemIcon>
-                    <ListItemText primary="이상형월드컵" secondary="이상형월드컵 정보 확인하기" />
+                    <ListItemText primary="Aussie Choice" secondary="Aussie Choice 정보 확인하기" />
                 </ListItem>
                 <ListItem button onClick={() => handleNavigate("/부동산")}>
                     <ListItemIcon><ApartmentIcon /></ListItemIcon>
@@ -84,10 +84,10 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout, newNotifi
                         <ListItemIcon><LeaderboardIcon sx={{ color: "#666" }} /></ListItemIcon>
                         <ListItemText primary="이주의 순위" sx={{ color: "#666", fontWeight: "bold" }} />
                     </ListItem>
-                    <ListItem button onClick={() => handleNavigate("/board")}>
+                    {/* <ListItem button onClick={() => handleNavigate("/board")}>
                         <ListItemIcon><ForumIcon sx={{ color: "#666" }} /></ListItemIcon>
                         <ListItemText primary="게시판" sx={{ color: "#666", fontWeight: "bold" }} />
-                    </ListItem>
+                    </ListItem> */}
                     <ListItem button onClick={() => handleNavigate("/mypage")}>
                         <ListItemIcon><AccountCircleIcon sx={{ color: "#666" }} /></ListItemIcon>
                         <ListItemText primary="마이페이지" sx={{ color: "#666", fontWeight: "bold" }} />
@@ -107,6 +107,14 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout, newNotifi
                 </List>
             ) : (
                 <List sx={{ mb: 4 }}>
+                    <ListItem button onClick={() => handleNavigate("/ranking")}>
+                        <ListItemIcon><LeaderboardIcon sx={{ color: "#666" }} /></ListItemIcon>
+                        <ListItemText primary="이주의 순위" sx={{ color: "#666", fontWeight: "bold" }} />
+                    </ListItem>
+                    {/* <ListItem button onClick={() => handleNavigate("/board")}>
+                        <ListItemIcon><ForumIcon sx={{ color: "#666" }} /></ListItemIcon>
+                        <ListItemText primary="게시판" sx={{ color: "#666", fontWeight: "bold" }} />
+                    </ListItem> */}
                     <ListItem button onClick={() => handleNavigate("/register")}>
                         <ListItemIcon><PersonAddIcon /></ListItemIcon>
                         <ListItemText primary="회원가입" />

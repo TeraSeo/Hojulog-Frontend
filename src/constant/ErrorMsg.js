@@ -15,6 +15,7 @@ export const jobTypeRequiredError = "근무 형태를 선택하세요.";
 export const schoolRequiredError = "학교 이름은 필수 입력 항목입니다.";
 export const majorRequiredError = "전공은 필수 입력 항목입니다.";
 export const countryRequiredError = "전공은 필수 입력 항목입니다.";
+export const travelSuburbRequiredError = "지역 선택은 필수 항목입니다.";
 export const keywordOverError = "키워드는 12개 까지 선택가능합니다.";
 // export const Error = "";
 // export const Error = "";

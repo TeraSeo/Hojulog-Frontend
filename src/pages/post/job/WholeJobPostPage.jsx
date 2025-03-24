@@ -7,6 +7,7 @@ import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
 import JobFilter from "../../../components/box/post/job/JobFilter";
+import JobAddPostButton from "../../../components/buttons/post/job/JobAddPostButton";
 
 function WholeJobPostPage() {
     const [jobPageData, setJobPageData] = useState({ 
@@ -75,6 +76,8 @@ function WholeJobPostPage() {
                     ) : (
                         <Typography variant="body1">조건에 맞는 게시물이 없습니다.</Typography>
                     )}
+
+                    <JobAddPostButton />
 
                     <PostPaginationBox totalPage={jobPageData.pageSize} currentPage={jobPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>

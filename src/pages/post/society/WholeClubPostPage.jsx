@@ -6,6 +6,7 @@ import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import SocietyPostBox from "../../../components/box/post/society/SocietyPostBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
+import SocietyNonOptionPostAddButton from "../../../components/buttons/post/society/SocietyNonOptionPostAddButton";
 
 const WholeClubPostPage = () => {
     const [postPageData, setPostPageData] = useState({
@@ -49,6 +50,8 @@ const WholeClubPostPage = () => {
                             <SocietyPostBox post={post} />
                         </Box>
                     ))}
+
+                    <SocietyNonOptionPostAddButton subCategory={"동호회"} />
                     
                     <PostPaginationBox totalPage={postPageData.pageSize} currentPage={postPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>

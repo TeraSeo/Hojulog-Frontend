@@ -30,7 +30,7 @@ const OwnPropertyPostDetailPage = () => {
     getSpecificPropertyPost(postId)
       .then((data) => {
         setPropertyPostData(data);
-        if (userId !== data.userId) { navigate("/"); }
+        if (userId.toString() !== data.userId.toString()) { navigate("/"); }
       })
       .catch((error) => console.error("Error fetching posts:", error));
   };
@@ -64,7 +64,7 @@ const OwnPropertyPostDetailPage = () => {
       </Box>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end", gap: 1 }}>
-        <UpdatePostButton postId={propertyPostData.postId} />
+        <UpdatePostButton category={"부동산"} subCategory={propertyPostData.subCategory} postId={propertyPostData.postId} />
         <RemovePostButton postId={propertyPostData.postId} />
       </Box>
 

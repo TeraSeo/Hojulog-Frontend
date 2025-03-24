@@ -1,32 +1,27 @@
 export const formatTimeDifference = (createdAt) => {
-    const now = new Date();
+    if (!createdAt) return "0초전";
+
+    // Get the current time in Sydney
+    const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Australia/Sydney" }));
+
+    // Parse `createdAt` as a date (assumed to be UTC or local)
     const createdDate = new Date(createdAt);
-    const diffInSeconds = Math.floor((now - createdDate) / 1000);
+    
+    // Ensure it's converted to Sydney time
+    const createdSydney = new Date(createdDate.toLocaleString("en-US", { timeZone: "Australia/Sydney" }));
 
-    const secondsInMinute = 60;
-    const secondsInHour = 3600;
-    const secondsInDay = 86400;
-    const secondsInWeek = 604800;
-    const secondsInYear = 31536000;
+    console.log("Now (Sydney):", now);
+    console.log("Created At (Original):", createdAt);
+    console.log("Created Date (Parsed):", createdDate);
+    console.log("Created Date (Sydney Adjusted):", createdSydney);
 
-    if (createdAt === "" || createdAt === null || createdAt === undefined) return '0초전';
+    const diffInSeconds = Math.floor((now - createdSydney) / 1000);
 
-    if (diffInSeconds < secondsInMinute) {
-        return `${diffInSeconds}초전`;
-    } else if (diffInSeconds < secondsInHour) {
-        const minutes = Math.floor(diffInSeconds / secondsInMinute);
-        return `${minutes}분전`;
-    } else if (diffInSeconds < secondsInDay) {
-        const hours = Math.floor(diffInSeconds / secondsInHour);
-        return `${hours}시간전`;
-    } else if (diffInSeconds < secondsInWeek) {
-        const days = Math.floor(diffInSeconds / secondsInDay);
-        return `${days}일전`;
-    } else if (diffInSeconds < secondsInYear) {
-        const weeks = Math.floor(diffInSeconds / secondsInWeek);
-        return `${weeks}주전`;
-    } else {
-        const years = Math.floor(diffInSeconds / secondsInYear);
-        return `${years}년전`;
-    }
+    if (diffInSeconds < 60) return `${diffInSeconds}초전`;
+    if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}분전`;
+    if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}시간전`;
+    if (diffInSeconds < 604800) return `${Math.floor(diffInSeconds / 86400)}일전`;
+    if (diffInSeconds < 31536000) return `${Math.floor(diffInSeconds / 604800)}주전`;
+    
+    return `${Math.floor(diffInSeconds / 31536000)}년전`;
 };

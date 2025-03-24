@@ -20,7 +20,7 @@ const HomeWorldCupPosts = () => {
     };
 
     return (
-        <HomeContainerBox title="이상형월드컵" onDetailClicked={() => { handleNavigate("/이상형월드컵") }}>
+        <HomeContainerBox title="Aussie Choice" onDetailClicked={() => { handleNavigate("/이상형월드컵") }}>
             <Box
                 sx={{
                     display: "flex",

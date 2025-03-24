@@ -1,27 +1,26 @@
 import { Box, FormControl, InputLabel, Select, MenuItem, Button } from "@mui/material";
 import React from "react";
-import countries from "../../../../constant/Countries";
 import { primaryColor } from "../../../../constant/Color";
+import { travelSuburbs } from "../../../../constant/Countries";
 
-const TravelFilter = ({ selectedCountry, setSelectedCountry, applyFilters }) => {
-    const handleCountryChange = (e) => {
-        setSelectedCountry(e.target.value);
+const TravelFilter = ({ selectedTravelSuburb, setSelectedTravelSuburb, applyFilters }) => {
+    const handleTravelSuburbChange = (e) => {
+        setSelectedTravelSuburb(e.target.value);
     };
 
     return (
         <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", alignItems: "center" }}>
-            {/* Country Filter */}
             <FormControl size="small" sx={{ minWidth: 150 }}>
-                <InputLabel id="country-label">국가</InputLabel>
+                <InputLabel id="suburb-label">지역</InputLabel>
                 <Select
-                    labelId="country-label"
-                    value={selectedCountry}
-                    onChange={handleCountryChange}
-                    label="국가"
+                    labelId="suburb-label"
+                    value={selectedTravelSuburb}
+                    onChange={handleTravelSuburbChange}
+                    label="지역"
                 >
                     <MenuItem value="전체">전체</MenuItem>
-                    {countries.map((country, index) => (
-                        <MenuItem key={index} value={country}>{country}</MenuItem>
+                    {travelSuburbs.map((suburb, index) => (
+                        <MenuItem key={index} value={suburb}>{suburb}</MenuItem>
                     ))}
                 </Select>
             </FormControl>

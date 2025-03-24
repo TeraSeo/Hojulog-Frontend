@@ -21,7 +21,7 @@ const OwnWorldCupPostDetailPage = () => {
         getSpecificWorldCupPost(postId)
           .then((data) => {
             setWorldCupPostData(data);
-            if (userId !== data.userId) { navigate("/"); }
+            if (userId.toString() !== data.userId.toString()) { navigate("/"); }
           })
           .catch((error) => console.error("Error fetching posts:", error));
       };
@@ -34,7 +34,7 @@ const OwnWorldCupPostDetailPage = () => {
           <WorldCupDetailBox title={worldCupPostData.title} candidateDtoList={worldCupPostData.candidateDtoList} worldCupPostData={worldCupPostData} />
 
           <Box sx={{ mt: 5, display: "flex", justifyContent: "end", gap: 1 }}>
-                <UpdatePostButton postId={worldCupPostData.postId} />
+                <UpdatePostButton category={"이상형월드컵"} subCategory={worldCupPostData.subCategory} postId={worldCupPostData.postId} />
                 <RemovePostButton postId={worldCupPostData.postId} />
             </Box>
       </Box>;

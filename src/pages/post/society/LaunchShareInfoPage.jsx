@@ -44,6 +44,7 @@ const LaunchShareInfoPage = () => {
             content: blog.content, 
             fontSize: blog.fontSize || 16, 
             fontWeight: blog.fontWeight || 400, 
+            fontFamily: blog.fontFamily || "Arial"
           };
         }
         return blog;
@@ -85,7 +86,7 @@ const LaunchShareInfoPage = () => {
       sx={{ padding: 4, margin: 4, maxWidth: 800, mx: "auto", backgroundColor: "#f7f9fc" }}
     >
       <Typography variant="h4" gutterBottom align="center" sx={{ color: primaryColor }}>
-        동호회 정보 등록하기
+      라이프스타일 정보 등록하기
       </Typography>
 
       <Grid container spacing={4}>

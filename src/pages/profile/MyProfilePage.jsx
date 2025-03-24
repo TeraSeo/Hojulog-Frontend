@@ -14,6 +14,7 @@ import AdminButton from "../../components/buttons/AdminButton";
 import CommonSummarizedInquiryBox from "../../components/box/customer_center/CommonSummarizedInquiryBox";
 import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
 import ProfileStatsText from "../../components/texts/ProfileStatsText";
+import AttendanceCheckButton from "../../components/buttons/AttendanceCheckButton";
 
 const MyProfilePage = () => {
     const navigate = useNavigate();
@@ -75,6 +76,7 @@ const MyProfilePage = () => {
                         </Box>
 
                         <Box>
+                            <AttendanceCheckButton userId={ userData.id } lastAttendanceTime={ userData.lastAttendanceTime } />
                             <UpdateProfileButton userId={ userData.id } />
                         </Box>
                     </Box>

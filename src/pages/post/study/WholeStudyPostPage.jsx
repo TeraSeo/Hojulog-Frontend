@@ -6,6 +6,7 @@ import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import { getStudyPostsByPage } from "../../../service/PostService";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
+import StudyAddPostButton from "../../../components/buttons/post/study/StudyAddPostButton";
 
 function WholeStudyPostPage() {
     const [studyPageData, setStudyPageData] = useState({
@@ -54,6 +55,8 @@ function WholeStudyPostPage() {
                             )}
                         </React.Fragment>
                     ))}
+
+                    <StudyAddPostButton />
                     
                     <PostPaginationBox totalPage={studyPageData.pageSize} currentPage={studyPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>

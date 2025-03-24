@@ -7,6 +7,7 @@ import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
 import PropertyFilter from "../../../components/box/post/property/PropertyFilter";
+import PropertyNonOptionPostAddButton from "../../../components/buttons/post/property/\bPropertyNonOptionPostAddButton";
 
 const WholeSharePostPage = () => {
     const [postPageData, setPostPageData] = useState({
@@ -93,6 +94,8 @@ const WholeSharePostPage = () => {
                     ) : (
                         <Typography variant="body1">조건에 맞는 게시물이 없습니다.</Typography>
                     )}
+
+                    <PropertyNonOptionPostAddButton subCategory={"쉐어"} />
 
                     <PostPaginationBox totalPage={postPageData.pageSize} currentPage={postPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>

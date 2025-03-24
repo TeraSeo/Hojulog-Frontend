@@ -29,7 +29,7 @@ const OwnTransactionPostDetailPage = () => {
     getSpecificTransactionPost(postId)
       .then((data) => {
         setTransactionPostData(data);
-        if (userId !== data.userId) { navigate("/"); }
+        if (userId.toString() !== data.userId.toString()) { navigate("/"); }
       })
       .catch((error) => console.error("Error fetching posts:", error));
   };
@@ -63,7 +63,7 @@ const OwnTransactionPostDetailPage = () => {
       </Box>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end", gap: 1}}>
-          <UpdatePostButton postId={transactionPostData.postId} />
+          <UpdatePostButton category={"사고팔기"} subCategory={transactionPostData.subCategory} postId={transactionPostData.postId} />
           <RemovePostButton postId={transactionPostData.postId} />
       </Box>
 

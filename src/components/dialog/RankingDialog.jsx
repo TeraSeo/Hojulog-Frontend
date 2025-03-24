@@ -14,11 +14,11 @@ const RankingDialog = ({ candidateDtoList, loading, onClose }) => {
                 sx={{
                     textAlign: "center",
                     fontWeight: "bold",
-                    fontSize: isSmallScreen ? "16px" : "20px", // Adjust title size
+                    fontSize: isSmallScreen ? "16px" : "20px",
                     padding: isSmallScreen ? "10px" : "16px"
                 }}
             >
-                World Cup Rankings
+                Aussie Choice 순위
             </DialogTitle>
             <DialogContent>
                 {loading ? (

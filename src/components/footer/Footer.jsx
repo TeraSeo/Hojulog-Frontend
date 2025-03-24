@@ -1,7 +1,9 @@
 import React from "react";
 import { Box, Typography, Link, Grid, IconButton } from "@mui/material";
-import { Facebook, Twitter, Instagram, LinkedIn } from "@mui/icons-material";
 import { primaryColor, secondaryColor } from "../../constant/Color";
+import StorefrontIcon from "@mui/icons-material/Storefront";
+import HomeWorkIcon from "@mui/icons-material/HomeWork";
+import ApartmentIcon from "@mui/icons-material/Apartment";
 
 function Footer() {
     return (
@@ -19,68 +21,59 @@ function Footer() {
                         Quick Links
                     </Typography>
                     <Link href="/" color="inherit" underline="none" sx={{ display: "block", mb: 1 }}>
-                        Home
+                        홈
                     </Link>
-                    <Link href="/about" color="inherit" underline="none" sx={{ display: "block", mb: 1 }}>
-                        About
+                    <Link href="/ranking" color="inherit" underline="none" sx={{ display: "block", mb: 1 }}>
+                        이주의 순위
                     </Link>
-                    <Link href="/contact" color="inherit" underline="none" sx={{ display: "block", mb: 1 }}>
-                        Contact
-                    </Link>
-                    <Link href="/advertise" color="inherit" underline="none" sx={{ display: "block" }}>
-                        Advertise
-                    </Link>
+                    {/* <Link href="/board" color="inherit" underline="none" sx={{ display: "block", mb: 1 }}>
+                        게시판
+                    </Link> */}
                 </Grid>
 
                 <Grid item xs={12} sm={4}>
                     <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
                         Contact Us
                     </Typography>
-                    <Typography variant="body2">1234 Street Address</Typography>
-                    <Typography variant="body2">City, State, ZIP</Typography>
-                    <Typography variant="body2">Email: info@example.com</Typography>
-                    <Typography variant="body2">Phone: (123) 456-7890</Typography>
+                    <Typography variant="body2">alogatoz0310@gmail.com</Typography>
                 </Grid>
 
                 <Grid item xs={12} sm={4}>
                     <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
-                        Follow Us
+                        Other Sites
                     </Typography>
                     <Box>
                         <IconButton
-                            href="https://facebook.com"
+                            href="https://www.facebook.com/marketplace/"
                             target="_blank"
                             sx={{ color: secondaryColor }}
                         >
-                            <Facebook />
+                            <StorefrontIcon />
                         </IconButton>
+
+                        {/* Flatmates.com.au */}
                         <IconButton
-                            href="https://twitter.com"
+                            href="https://www.flatmates.com.au/"
                             target="_blank"
                             sx={{ color: secondaryColor }}
                         >
-                            <Twitter />
+                            <HomeWorkIcon />
                         </IconButton>
+
+                        {/* Domain (Real Estate) */}
                         <IconButton
-                            href="https://instagram.com"
+                            href="https://www.domain.com.au/"
                             target="_blank"
                             sx={{ color: secondaryColor }}
                         >
-                            <Instagram />
-                        </IconButton>
-                        <IconButton
-                            href="https://linkedin.com"
-                            target="_blank"
-                            sx={{ color: secondaryColor }}
-                        >
-                            <LinkedIn />
+                            <ApartmentIcon />
                         </IconButton>
                     </Box>
                 </Grid>
             </Grid>
 
             <Typography variant="body2" sx={{ marginTop: "20px", color: "rgba(255, 255, 255, 0.7)" }}>
-                &copy; {new Date().getFullYear()} Your Company Name. All rights reserved.
+                &copy; {new Date().getFullYear()} 호주로그
             </Typography>
         </Box>
     );

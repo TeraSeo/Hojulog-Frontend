@@ -1,43 +1,42 @@
 import React, { useState } from "react";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { useDropzone } from "react-dropzone";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { convertHEICtoJPEG } from "../../../service/ImageService";
+import DescriptionBlockWithInitial from "./DescriptionBlockWithInitial";
+import ImageBlockWithInitial from "./ImageBlockWithInitial";
 
-const  ContentBlockManagerWithInitialValue = ({ onChange, blogContents }) => {
+const ContentBlockManagerWithInitialValue = ({ onChange, blogContents }) => {
   const [contentBlocks, setContentBlocks] = useState(blogContents || []);
 
   const handleAddDescription = () => {
     const updatedBlocks = [
       ...contentBlocks,
-      { type: "description", content: "", fontSize: 16, fontWeight: 400 },
+      { type: "description", content: "", fontSize: 16, fontWeight: 400, fontFamily: "Arial" },
     ];
     setContentBlocks(updatedBlocks);
     onChange(updatedBlocks);
   };
 
   const handleAddImage = async (files) => {
-    const convertedFiles = await Promise.all(files.map((file) => convertHEICtoJPEG(file))); // Convert if needed
-        
+    const convertedFiles = await Promise.all(files.map((file) => convertHEICtoJPEG(file)));
     const validImages = convertedFiles.filter(
       (file) => file.type.startsWith("image/") && !file.type.startsWith("video/")
     );
-  
     if (validImages.length === 0) {
       alert("Only image files are allowed.");
       return;
     }
-    
     const imageBlocks = validImages.map((file) => ({
       type: "image",
       content: URL.createObjectURL(file),
       file,
     }));
-  
     const updatedBlocks = [...contentBlocks, ...imageBlocks];
     setContentBlocks(updatedBlocks);
     onChange(updatedBlocks);
   };
+
   const handleContentChange = (index, newContent) => {
     const updatedBlocks = [...contentBlocks];
     updatedBlocks[index].content = newContent;
@@ -67,6 +66,13 @@ const  ContentBlockManagerWithInitialValue = ({ onChange, blogContents }) => {
       900,
       Math.max(100, Number(updatedBlocks[index].fontWeight) + increment)
     );
+    setContentBlocks(updatedBlocks);
+    onChange(updatedBlocks);
+  };
+
+  const handleFontFamilyChange = (index, fontFamily) => {
+    const updatedBlocks = [...contentBlocks];
+    updatedBlocks[index].fontFamily = fontFamily;
     setContentBlocks(updatedBlocks);
     onChange(updatedBlocks);
   };
@@ -124,95 +130,21 @@ const  ContentBlockManagerWithInitialValue = ({ onChange, blogContents }) => {
                       }}
                     >
                       {block.type === "description" ? (
-                        <Box>
-                          <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1 }}>
-                            <Button
-                              variant="outlined"
-                              onClick={() => handleFontSizeChange(index, 2)}
-                            >
-                              Font Size +
-                            </Button>
-                            <Button
-                              variant="outlined"
-                              onClick={() => handleFontSizeChange(index, -2)}
-                            >
-                              Font Size -
-                            </Button>
-                            <Button
-                              variant="outlined"
-                              onClick={() => handleFontWeightChange(index, 100)}
-                            >
-                              Bold +
-                            </Button>
-                            <Button
-                              variant="outlined"
-                              onClick={() => handleFontWeightChange(index, -100)}
-                            >
-                              Bold -
-                            </Button>
-                          </Box>
-                          <TextField
-                            fullWidth
-                            multiline
-                            rows={4}
-                            value={block.content}
-                            onChange={(e) => {
-                              const newValue = e.target.value.slice(0, 1000);
-                              handleContentChange(index, newValue);
-                            }}
-                            placeholder="Enter description..."
-                            inputProps={{
-                              maxLength: 1000,
-                              style: {
-                                fontSize: `${block.fontSize}px`,
-                                fontWeight: block.fontWeight,
-                              },
-                            }}
-                            sx={{ marginBottom: 1 }}
-                          />
-                          <Typography variant="caption" display="block" textAlign="right" sx={{ marginBottom: 2 }}>
-                            {block.content.length} / 1000 characters
-                          </Typography>
-                          <Button
-                            variant="outlined"
-                            color="error"
-                            onClick={() => handleRemoveBlock(index)}
-                            fullWidth
-                          >
-                            Remove
-                          </Button>
-                        </Box>
+                        <DescriptionBlockWithInitial
+                          block={block}
+                          index={index}
+                          onChange={handleContentChange}
+                          onRemove={handleRemoveBlock}
+                          onFontSizeChange={handleFontSizeChange}
+                          onFontWeightChange={handleFontWeightChange}
+                          onFontFamilyChange={handleFontFamilyChange}
+                        />
                       ) : block.type === "image" ? (
-                        block.imageUrl ?
-                        <Box>
-                          <img
-                            src={block.imageUrl}
-                            style={{ width: "100%", height: "auto", marginBottom: 8 }}
-                          />
-                          <Button
-                            variant="outlined"
-                            color="error"
-                            onClick={() => handleRemoveBlock(index)}
-                            fullWidth
-                          >
-                            Remove
-                          </Button>
-                        </Box> :
-                         <Box>
-                         <img
-                           src={block.content}
-                           alt="Uploaded"
-                           style={{ width: "100%", height: "auto", marginBottom: 8 }}
-                         />
-                         <Button
-                           variant="outlined"
-                           color="error"
-                           onClick={() => handleRemoveBlock(index)}
-                           fullWidth
-                         >
-                           Remove
-                         </Button>
-                       </Box> 
+                        <ImageBlockWithInitial
+                          block={block}
+                          index={index}
+                          onRemove={handleRemoveBlock}
+                        />
                       ) : null}
                     </Box>
                   )}

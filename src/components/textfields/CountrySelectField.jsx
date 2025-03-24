@@ -7,7 +7,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import PublicIcon from "@mui/icons-material/Public";
-import countries from "../../constant/Countries";
+import { countries } from "../../constant/Countries";
 
 const CountrySelectField = ({ value, error, onChange }) => {
   return (

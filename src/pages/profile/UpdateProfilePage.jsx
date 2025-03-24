@@ -22,6 +22,7 @@ const UpdateProfilePage = () => {
                 .then((data) => {
                     setUsername(data.username);
                     setDescription(data.description);
+                    if (data.description === null) setDescription(""); 
                     setProfilePictureUrl(data.profilePicture);
                 })
                 .catch((error) => console.error("Error fetching posts:", error));

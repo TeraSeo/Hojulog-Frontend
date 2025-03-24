@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "호주로그 | 호주 생활·여행·유학 정보 & Aussie Choice",
+  "name": "호주 생활·여행·유학·이민 정보 한눈에! 일상 블로그& 꿀팁 공유, 이상형 월드컵 “Aussie Choice” 까지 시드니·멜버른·브리즈번을 아우르는 라이프 플랫폼 | 호주로그에서 확인하세요.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "alog192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "alog512.png",
       "type": "image/png",
       "sizes": "512x512"
     }

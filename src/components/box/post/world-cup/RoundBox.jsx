@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, Button, Grid, useMediaQuery } from "@mui/material";
 import { motion } from "framer-motion";
-import noImageAvailable from "../../../../assets/images/no_image_available.jpeg";
+import BaseImage from "../../../../assets/images/alog.JPEG";
 
 const RoundBox = ({ candidate1, candidate2, onSelectWinner, selectedWinner, losingCandidate }) => {
     const isSmallScreen = useMediaQuery("(max-width:600px)"); // 600px 이하일 때 세로 배치
@@ -40,7 +40,7 @@ const RoundBox = ({ candidate1, candidate2, onSelectWinner, selectedWinner, losi
                         >
                             <Box sx={{ position: "relative", width: "100%" }}>
                                 <img
-                                    src={candidate1.imageUrl || noImageAvailable}
+                                    src={candidate1.imageUrl || BaseImage}
                                     alt={candidate1.title}
                                     style={{ width: "100%", height: "auto", borderRadius: 8 }}
                                 />
@@ -106,7 +106,7 @@ const RoundBox = ({ candidate1, candidate2, onSelectWinner, selectedWinner, losi
                         >
                             <Box sx={{ position: "relative", width: "100%" }}>
                                 <img
-                                    src={candidate2.imageUrl || noImageAvailable}
+                                    src={candidate2.imageUrl || BaseImage}
                                     alt={candidate2.title}
                                     style={{ width: "100%", height: "auto", borderRadius: 8 }}
                                 />

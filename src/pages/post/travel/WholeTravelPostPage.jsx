@@ -7,6 +7,7 @@ import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
 import TravelFilter from "../../../components/box/post/travel/TravelFilter";
+import TravelAddPostButton from "../../../components/buttons/post/travel/TravelAddPostButton";
 
 function WholeTravelPostPage() {
     const [travelPageData, setTravelPageData] = useState({ 
@@ -16,7 +17,7 @@ function WholeTravelPostPage() {
     });
 
     const [filteredPosts, setFilteredPosts] = useState([]);
-    const [selectedCountry, setSelectedCountry] = useState("전체");
+    const [selectedTravelSuburb, setSelectedTravelSuburb] = useState("전체");
 
     useEffect(() => {
         fetchPageData(1);
@@ -41,7 +42,7 @@ function WholeTravelPostPage() {
 
     const applyFilters = () => {
         const filtered = travelPageData.posts.filter((post) => {
-            return selectedCountry === "전체" || post.country === selectedCountry;
+            return selectedTravelSuburb === "전체" || post.travelSuburb === selectedTravelSuburb;
         });
 
         setFilteredPosts(filtered);
@@ -58,10 +59,9 @@ function WholeTravelPostPage() {
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
                         <PageTitleText title={"여행"} />
 
-                        <TravelFilter selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry} applyFilters={applyFilters} />
+                        <TravelFilter selectedTravelSuburb={selectedTravelSuburb} setSelectedTravelSuburb={setSelectedTravelSuburb} applyFilters={applyFilters} />
                     </Box>
 
-                    {/* Display Filtered Posts */}
                     {filteredPosts.length > 0 ? (
                         filteredPosts.map((post, index) => (
                             <Box key={index}>
@@ -71,6 +71,8 @@ function WholeTravelPostPage() {
                     ) : (
                         <Typography variant="body1">조건에 맞는 게시물이 없습니다.</Typography>
                     )}
+
+                    <TravelAddPostButton />
 
                     <PostPaginationBox totalPage={travelPageData.pageSize} currentPage={travelPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>

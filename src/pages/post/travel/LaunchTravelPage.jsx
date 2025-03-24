@@ -44,6 +44,7 @@ const LaunchTravelPage = () => {
             content: blog.content, 
             fontSize: blog.fontSize || 16, 
             fontWeight: blog.fontWeight || 400, 
+            fontFamily: blog.fontFamily || "Arial"
           };
         }
         return blog;

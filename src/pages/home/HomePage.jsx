@@ -22,17 +22,9 @@ function HomePage() {
                     <Box sx={{ mb: 3 }}>
                         <HomeWorldCupPosts />
                     </Box>
-                    
-                    <Box sx={{ mb: 3 }}>
-                        <HomePropertyPosts />
-                    </Box>
-                    
-                    <Box sx={{ mb: 3 }}>
-                        <HomeJobPosts />
-                    </Box>
 
                     <Box sx={{ mb: 3 }}>
-                        <HomeTransactionPosts />
+                        <HomeTravelPosts />
                     </Box>
 
                     <Box sx={{ mb: 3 }}>
@@ -40,11 +32,19 @@ function HomePage() {
                     </Box>
 
                     <Box sx={{ mb: 3 }}>
-                        <HomeTravelPosts />
+                        <HomeStudyPosts />
                     </Box>
 
+                    <Box sx={{ mb: 3 }}>
+                        <HomeTransactionPosts />
+                    </Box>
+                    
+                    <Box sx={{ mb: 3 }}>
+                        <HomePropertyPosts />
+                    </Box>
+                    
                     <Box sx={{ mb: 1 }}>
-                        <HomeStudyPosts />
+                        <HomeJobPosts />
                     </Box>
                 </Grid>
             </Grid>

@@ -7,6 +7,7 @@ import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
 import TransactionFilter from "../../../components/box/post/transaction/TransactionFilter";
+import TransactionAddPostButton from "../../../components/buttons/post/transaction/TransactionAddPostButton";
 
 function WholeTransactionPostPage() {
     const [transactionPageData, setTransactionPageData] = useState({
@@ -85,6 +86,8 @@ function WholeTransactionPostPage() {
                     ) : (
                         <Typography variant="body1">조건에 맞는 게시물이 없습니다.</Typography>
                     )}
+
+                    <TransactionAddPostButton />
 
                     <PostPaginationBox totalPage={transactionPageData.pageSize} currentPage={transactionPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>

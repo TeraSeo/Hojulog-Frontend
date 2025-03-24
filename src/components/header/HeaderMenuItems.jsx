@@ -45,7 +45,7 @@ function HeaderMenuItems({ isAuthenticated, handleLogout }) {
                         이주의 순위
                     </Button>
 
-                    <Button
+                    {/* <Button
                         variant="text"
                         startIcon={<ForumIcon />}
                         sx={{
@@ -57,7 +57,7 @@ function HeaderMenuItems({ isAuthenticated, handleLogout }) {
                         onClick={() => navigate("/board")}
                     >
                         게시판
-                    </Button>
+                    </Button> */}
 
                     <Button
                         variant="text"
@@ -102,6 +102,33 @@ function HeaderMenuItems({ isAuthenticated, handleLogout }) {
                 </>
             ) : (
                 <>
+                    {/* <Button
+                        variant="text"
+                        startIcon={<ForumIcon />}
+                        sx={{
+                            color: "#FFFFFF",
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                            textTransform: "none",
+                        }}
+                        onClick={() => navigate("/board")}
+                    >
+                        게시판
+                    </Button> */}
+
+                    <Button
+                        variant="text"
+                        startIcon={<LeaderboardIcon />}
+                        sx={{
+                            color: "#FFFFFF",
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                            textTransform: "none",
+                        }}
+                        onClick={() => navigate("/ranking")}
+                    >
+                        이주의 순위
+                    </Button>
                     <Button
                         variant="text"
                         startIcon={<PersonAddIcon />}

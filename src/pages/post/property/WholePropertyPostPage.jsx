@@ -7,6 +7,7 @@ import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
 import PropertyFilter from "../../../components/box/post/property/PropertyFilter";
+import PropertyAddPostButton from "../../../components/buttons/post/property/PropertyAddPostButton";
 
 function WholePropertyPostPage() {
     const [propertyPageData, setPropertyPageData] = useState({
@@ -93,6 +94,8 @@ function WholePropertyPostPage() {
                     ) : (
                         <Typography variant="body1">조건에 맞는 게시물이 없습니다.</Typography>
                     )}
+
+                    <PropertyAddPostButton />
 
                     <PostPaginationBox totalPage={propertyPageData.pageSize} currentPage={propertyPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>

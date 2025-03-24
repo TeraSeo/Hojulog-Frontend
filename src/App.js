@@ -142,6 +142,12 @@ const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
     return "레스토랑";
   }
+  if (str === "Aussie Choice") {
+    return "이상형월드컵";
+  }
+  if (str === "워홀/유학") {
+    return "유학";
+  }
   return str.toLowerCase().replace(/\s+/g, '-');
 };
 
@@ -189,7 +195,7 @@ function App() {
                   생활: LaunchSocietyIdealTypeWorldCupPage,
                   여행: LaunchTravelIdealTypeWorldCupPage,
                   유학: LaunchStudyIdealTypeWorldCupPage,
-                  자유: LaunchEtcIdealTypeWorldCupPage,
+                  기타: LaunchEtcIdealTypeWorldCupPage,
                 },
                 부동산: {
                   쉐어: LaunchSharePropertyPage,
@@ -270,7 +276,7 @@ function App() {
             <Route path="update/이상형월드컵/생활/:postId" element={<EditSocietyIdealTypePage />} />
             <Route path="update/이상형월드컵/여행/:postId" element={<EditTravelIdealTypePage />} />
             <Route path="update/이상형월드컵/유학/:postId" element={<EditStudyIdealTypePage />} />
-            <Route path="update/이상형월드컵/자유/:postId" element={<EditEtcIdealTypePage />} />
+            <Route path="update/이상형월드컵/기타/:postId" element={<EditEtcIdealTypePage />} />
 
             <Route path="update/여행/여행지/:postId" element={<EditTravelPage />} />
             <Route path="update/여행/코스/:postId" element={<EditCoursePostPage />} />
@@ -320,7 +326,7 @@ function App() {
             <Route path="이상형월드컵/생활" element={<WholeSocietyWorldCupPostPage />} />
             <Route path="이상형월드컵/여행" element={<WholeTravelWorldCupPostPage />} />
             <Route path="이상형월드컵/유학" element={<WholeStudyWorldCupPostPage />} />
-            <Route path="이상형월드컵/자유" element={<WholeEtcWorldCupPostPage />} />
+            <Route path="이상형월드컵/기타" element={<WholeEtcWorldCupPostPage />} />
 
             <Route path="쉐어" element={<WholeSharePostPage />} />
             <Route path="렌트" element={<WholeRentPostPage />} />

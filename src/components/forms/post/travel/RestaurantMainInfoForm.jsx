@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Grid, Paper } from "@mui/material";
 import TitleField from "../../../textfields/TitleField";
-import CountrySelectField from "../../../textfields/CountrySelectField";
-import RatingField from "../../../textfields/RatingField";
 import LocationField from "../../../textfields/LocationField";
 import LocationDialog from "../../../dialog/LocationDialog";
 import {
-  countryRequiredError,
   keywordOverError,
   locationFormatError,
   locationRequiredError,
   titleRequiredError,
+  travelSuburbRequiredError,
 } from "../../../../constant/ErrorMsg";
 import ContentBlockManager from "../ContentBlockManager";
 import PostVisibleField from "../../../textfields/PostVisibleField";
 import TravelKeyWordField from "../../../textfields/TravelKeyWordField";
 import CommentAvailabilityField from "../../../textfields/CommentAvailabilityField";
+import TravelSuburbField from "../../../textfields/TravelSuburbField";
 
 const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
   const [formValues, setFormValues] = useState({
     title: "",
-    country: "호주",
+    travelSuburb: "시드니",
     location: "",
     blogContents: [],
     selectedKeywords: [],
@@ -49,11 +48,11 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
 
   const checkFormValidity = () => {
     const newErrors = {};
-    const { title, country, location, selectedKeywords } = formValues;
+    const { title, travelSuburb, location, selectedKeywords } = formValues;
 
     if (!title?.trim()) newErrors.title = titleRequiredError;
 
-    if (!country) newErrors.country = countryRequiredError;
+    if (!travelSuburb) newErrors.travelSuburb = travelSuburbRequiredError;
 
     if (!location.trim()) {
       newErrors.location = locationRequiredError;
@@ -87,7 +86,7 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
         주요 정보 입력
       </Typography>
       <Typography variant="body2" color="textSecondary" gutterBottom>
-        제목, 나라 등 정보를 입력하세요.
+        제목, 지역 등 정보를 입력하세요.
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 1 }}>
@@ -96,10 +95,10 @@ const RestaurantMainInfoForm = ({ onDataChange, setIsFormValid }) => {
           error={errors.title}
           onChange={(value) => handleInputChange("title", value)}
         />
-        <CountrySelectField
-          value={formValues.country}
-          error={errors.country}
-          onChange={(value) => handleInputChange("country", value)}
+        <TravelSuburbField
+          value={formValues.travelSuburb}
+          error={errors.travelSuburb}
+          onChange={(value) => handleInputChange("travelSuburb", value)}
         />
         <LocationField
           location={formValues.location}

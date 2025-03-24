@@ -236,6 +236,29 @@ function updateUserInfo(userFormData, userId) {
     )
 }
 
+function updateAttendance(userId) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.put(`${serverRoute}/api/own/user/update/attendance`, {}, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+            'userId': userId
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return null;
+        }
+    )
+}
+
 function viewSecretPost(viewerId, postId) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
@@ -310,4 +333,4 @@ function getTopRanks() {
     )
 }
 
-export { login, register, sendOtp, checkIsOtpCorrect, validateToken, getSpecificSummarisedUser, getSpecificSummarisedUserProfile, getSpecificUser, getSpecificOwnUser, updateUserInfo, viewSecretPost, checkIsUserPaid, getTopRanks };
+export { login, register, sendOtp, checkIsOtpCorrect, validateToken, getSpecificSummarisedUser, getSpecificSummarisedUserProfile, getSpecificUser, getSpecificOwnUser, updateUserInfo, updateAttendance, viewSecretPost, checkIsUserPaid, getTopRanks };

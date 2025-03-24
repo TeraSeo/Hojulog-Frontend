@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../components/bar/CategorySidebar";
 import { getWholeOthersPosts } from "../../service/PostService";
 import PostPaginationBox from "../../components/box/post/PostPaginationBox";
-import CommonOwnSummarizedPostBoxByPost from "../../components/box/post/CommonOwnSummarizedPostBoxByPost";
 import { useParams } from "react-router-dom";
 import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
 import CommonOthersSummarizedPostBoxByPost from "../../components/box/post/CommonOthersSummarizedPostBoxByPost";

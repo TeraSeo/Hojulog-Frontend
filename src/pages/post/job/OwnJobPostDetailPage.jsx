@@ -30,7 +30,7 @@ const OwnJobPostDetailPage = () => {
     getSpecificJobPost(postId)
       .then((data) => {
         setJobPostData(data);
-        if (userId !== data.userId) { navigate("/"); }
+        if (userId.toString() !== data.userId.toString()) { navigate("/"); }
       })
       .catch((error) => console.error("Error fetching posts:", error));
   };
@@ -64,7 +64,7 @@ const OwnJobPostDetailPage = () => {
       </Box>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end", gap: 1 }}>
-          <UpdatePostButton postId={jobPostData.postId} />
+          <UpdatePostButton category={"구인구직"} subCategory={jobPostData.subCategory} postId={jobPostData.postId} />
           <RemovePostButton postId={jobPostData.postId} />
       </Box> 
 

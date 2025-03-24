@@ -6,6 +6,7 @@ import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
 import WorldCupPostBox from "../../../components/box/post/world-cup/WorldCupPostBox";
+import AussieChoiceNonOptionAddPostButton from "../../../components/buttons/post/aussie-choice/AussieChoiceNonOptionAddPostButton";
 
 function WholePropertyWorldCupPostPage() {
     const [worldCupPageData, setWorldCupPageData] = useState({
@@ -43,7 +44,7 @@ function WholePropertyWorldCupPostPage() {
 
                 <Grid item xs={12} md={9}>
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
-                        <PageTitleText title={"부동산 이상형월드컵"} />
+                        <PageTitleText title={"부동산 Aussie Choice"} />
                     </Box>
                   
                     {worldCupPageData.posts.map((post, index) => (
@@ -56,6 +57,8 @@ function WholePropertyWorldCupPostPage() {
                             )}
                         </React.Fragment>
                     ))}
+
+                    <AussieChoiceNonOptionAddPostButton subCategory={"부동산"} />
 
                     <PostPaginationBox totalPage={worldCupPageData.pageSize} currentPage={worldCupPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>

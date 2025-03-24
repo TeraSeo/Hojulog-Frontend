@@ -6,6 +6,7 @@ import SocietyPostBox from "../../../components/box/post/society/SocietyPostBox"
 import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
+import SocietyAddPostButton from "../../../components/buttons/post/society/SocietyAddPostPage";
 
 function WholeSocietyPostPage() {
     const [societyPageData, setSocietyPageData] = useState({ 
@@ -49,6 +50,8 @@ function WholeSocietyPostPage() {
                             <SocietyPostBox post={post} />
                         </Box>
                     ))}
+
+                    <SocietyAddPostButton />
 
                     <PostPaginationBox totalPage={societyPageData.pageSize} currentPage={societyPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>

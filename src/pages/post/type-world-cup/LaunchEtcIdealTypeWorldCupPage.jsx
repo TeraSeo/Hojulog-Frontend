@@ -18,7 +18,7 @@ const LaunchEtcIdealTypeWorldCupPage = () => {
   const [groups, setGroups] = useState([]);
   const [mainTitle, setMainTitle] = useState("");
   const [isCommentAllowed, setIsCommentAllowed] = useState(true);
-  const [mainTitleError, setMainTitleError] = useState("이상형 월드컵의 제목을 입력해주세요.");
+  const [mainTitleError, setMainTitleError] = useState("Aussie Choice의 제목을 입력해주세요.");
   const [groupErrors, setGroupErrors] = useState([]);
   const [isValid, setIsValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +35,7 @@ const LaunchEtcIdealTypeWorldCupPage = () => {
     const isMainTitleValid = mainTitle.trim() !== "";
     const areGroupTitlesValid = groups.every((group) => (group?.title ?? "").trim() !== "");
 
-    setMainTitleError(isMainTitleValid ? "" : "이상형 월드컵의 제목을 입력해주세요.");
+    setMainTitleError(isMainTitleValid ? "" : "Aussie Choice의 제목을 입력해주세요.");
     setGroupErrors(groups.map((group) => (group.title.trim() ? "" : "각 조의 제목을 입력해주세요.")));
 
     setIsValid(isMainTitleValid && areGroupTitlesValid);
@@ -54,7 +54,7 @@ const LaunchEtcIdealTypeWorldCupPage = () => {
       worldCupTitle: mainTitle,
       userId: userId,
       isCommentAllowed: isCommentAllowed,
-      subCategory: "자유",
+      subCategory: "기타",
       selectedKeywords: [],
       candidateTitleList: groups.map((group) => group.title),
       imageUrlList: groups.map((group) => (group.image === null ? "" : "exists")),
@@ -84,7 +84,7 @@ const LaunchEtcIdealTypeWorldCupPage = () => {
   return (
     <Paper elevation={3} sx={{ padding: 4, margin: 4, maxWidth: 800, mx: "auto", backgroundColor: "#f7f9fc" }}>
       <Typography variant="h4" gutterBottom align="center" sx={{ color: primaryColor }}>
-        이상형 월드컵 만들기
+        Aussie Choice 만들기
       </Typography>
 
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>

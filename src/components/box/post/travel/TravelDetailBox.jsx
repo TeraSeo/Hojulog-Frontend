@@ -6,7 +6,7 @@ import BlogContentBox from '../BlogContentBox';
 import PostProfileBox from '../PostProfileBox';
 import PostKeywordText from '../../../texts/PostKeywordText';
 
-const TravelDetailBox = ({ userId, title, subCategory, rate, createdDate, blogContents=[], keywords=[] }) => {
+const TravelDetailBox = ({ userId, title, subCategory, createdDate, blogContents=[], keywords=[] }) => {
   return (
         <Box sx={{ pl: 1 }}>
             <DetailedPostTitleText subCategory={subCategory} title={title} />

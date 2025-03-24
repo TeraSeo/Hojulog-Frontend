@@ -1,5 +1,5 @@
 import React from "react";
-import NoImageAvailable from "../../../assets/images/no_image_available.jpeg";
+import BaseImage from "../../../assets/images/alog.JPEG";
 import { Box, Card, CardMedia } from "@mui/material";
 
 const SummarizedPostImageBox = ({ imageUrl, title }) => {
@@ -25,7 +25,7 @@ const SummarizedPostImageBox = ({ imageUrl, title }) => {
             >
                 <CardMedia
                     component="img"
-                    image={imageUrl || NoImageAvailable}
+                    image={imageUrl || BaseImage}
                     alt={title || "No Image Available"}
                     sx={{
                         position: "absolute",

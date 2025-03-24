@@ -12,8 +12,11 @@ function SelectCategoryPage() {
 
   const handleConfirm = () => {
     if (selectedCategory && selectedSubcategory) {
-      const categoryPath = selectedCategory.toLowerCase().replace(/\s+/g, "-");
-      const subcategoryPath = selectedSubcategory.toLowerCase().replace(/\s+/g, "-");
+      let categoryPath = selectedCategory.toLowerCase().replace(/\s+/g, "-");
+      if (categoryPath === "aussie-choice") categoryPath = "이상형월드컵";
+      if (categoryPath === "워홀/유학") categoryPath = "유학";
+      let subcategoryPath = selectedSubcategory.toLowerCase().replace(/\s+/g, "-");
+      if (subcategoryPath === "워홀/유학") subcategoryPath = "유학";
       navigate(`/launch/${categoryPath}/${subcategoryPath}`);
     } else {
       alert("카테고리와 하위 카테고리를 모두 선택하세요.");

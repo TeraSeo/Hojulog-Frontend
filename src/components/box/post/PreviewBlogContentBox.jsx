@@ -13,7 +13,8 @@ const PreviewBlogContentBox = ({ blogContents }) => {
                                 sx={{ 
                                     fontSize: { "md": `${content.fontSize}px`, "sm" : `${content.fontSiz - 2}px`, "xs": `${content.fontSize - 4}px` }, 
                                     fontWeight: content.fontWeight,
-                                    whiteSpace: "pre-wrap"
+                                    whiteSpace: "pre-wrap",
+                                    fontFamily: content.fontFamily || "Arial" 
                                 }}
                             >
                                 {content.content}

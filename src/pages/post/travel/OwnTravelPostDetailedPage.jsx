@@ -34,7 +34,7 @@ const OwnTravelPostDetailedPage = () => {
     getSpecificTravelPost(postId)
       .then((data) => {
         setTravelPostData(data);
-        if (!data.isPublic && data.userId !== userId) {
+        if (userId.toString() !== data.userId.toString()) {
           navigate("/");
         }
       })

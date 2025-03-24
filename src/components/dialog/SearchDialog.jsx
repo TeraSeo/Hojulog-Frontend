@@ -12,13 +12,13 @@ const keywordMapping = {
     "생활": societyKeyWords,
     "여행": travelKeyWords,
     "유학": studyKeyWords,
-    "이상형월드컵": {
+    "Aussie Choice": {
         "부동산": worldCupPropertyKeyWords,
         "구인구직": worldCupJobKeyWords,
         "사고팔기": worldCupTransactionKeyWords,
         "생활": worldCupSocietyKeyWords,
         "여행": worldCupTravelKeyWords,
-        "유학": worldCupStudyKeyWords,
+        "워홀/유학": worldCupStudyKeyWords,
         "자유": []
     }
 };
@@ -63,15 +63,29 @@ function SearchDialog({ open, onClose }) {
         const suburbParam = selectedSuburb ? encodeURIComponent(selectedSuburb) : "none";
         let subCategoryParam = selectedSubCategory ? encodeURIComponent(selectedSubCategory) : "none";
         if (selectedSubCategory.includes("레스토랑")) subCategoryParam = encodeURIComponent("레스토랑");
+        else if (selectedSubCategory.includes("워홀/유학")) subCategoryParam = encodeURIComponent("유학");
 
-        const searchUrl = `/search/${encodeURIComponent(selectedCategory)}/${titleParam}/${suburbParam}/${subCategoryParam}/${keywordsParam}`;
-        onClose();
-        navigate(searchUrl);
+
+        if (selectedCategory === "Aussie Choice") {
+            const searchUrl = `/search/${encodeURIComponent("이상형월드컵")}/${titleParam}/${suburbParam}/${subCategoryParam}/${keywordsParam}`;
+            onClose();
+            navigate(searchUrl);
+        }
+        else if (selectedCategory === "워홀/유학") {
+            const searchUrl = `/search/${encodeURIComponent("유학")}/${titleParam}/${suburbParam}/${subCategoryParam}/${keywordsParam}`;
+            onClose();
+            navigate(searchUrl);
+        }
+        else {
+            const searchUrl = `/search/${encodeURIComponent(selectedCategory)}/${titleParam}/${suburbParam}/${subCategoryParam}/${keywordsParam}`;
+            onClose();
+            navigate(searchUrl);
+        }
     };
 
     const getKeywordsForCategory = () => {
-        if (selectedCategory === "이상형월드컵") {
-            return selectedSubCategory ? keywordMapping["이상형월드컵"][selectedSubCategory] : [];
+        if (selectedCategory === "Aussie Choice") {
+            return selectedSubCategory ? keywordMapping["Aussie Choice"][selectedSubCategory] : [];
         }
         return keywordMapping[selectedCategory] || [];
     };
@@ -88,7 +102,6 @@ function SearchDialog({ open, onClose }) {
                 게시물 검색
             </DialogTitle>
             <DialogContent sx={{ p: 3 }}>
-                {/* Title Field */}
                 <Box sx={{ mb: 2 }}>
                     <TextField
                         fullWidth
@@ -100,7 +113,6 @@ function SearchDialog({ open, onClose }) {
                     />
                 </Box>
 
-                {/* Category & Subcategory (Same Row) */}
                 <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
                     <FormControl 
                         fullWidth 
@@ -146,7 +158,6 @@ function SearchDialog({ open, onClose }) {
                     </FormControl>
                 </Box>
 
-                {/* Suburb Field (Only for 부동산, 구인구직, 사고팔기) */}
                 {categoriesWithSuburb.includes(selectedCategory) && (
                     <Box sx={{ mb: 2 }}>
                         <FormControl fullWidth variant="outlined" sx={{ backgroundColor: "#fafafa", borderRadius: "8px" }}>
@@ -166,7 +177,6 @@ function SearchDialog({ open, onClose }) {
                     </Box>
                 )}
 
-                {/* Keywords Section */}
                 {selectedCategory && getKeywordsForCategory().length > 0 && (
                     <Box sx={{ mb: 2, backgroundColor: "#fafafa", p: 2, borderRadius: "8px" }}>
                         <Typography variant="body2" sx={{ fontWeight: 600, textAlign: "start", fontSize: "14px", mb: 2, color: "#555" }}>
@@ -194,7 +204,6 @@ function SearchDialog({ open, onClose }) {
                     </Box>
                 )}
 
-                {/* Buttons */}
                 <Box sx={{ display: "flex", justifyContent: "space-between", mt: 4 }}>
                     <Button onClick={onClose} sx={{ color: "#555", fontWeight: "bold", "&:hover": { backgroundColor: "#f0f0f0" } }}>
                         취소

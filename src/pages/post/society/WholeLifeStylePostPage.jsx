@@ -6,6 +6,7 @@ import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import SocietyPostBox from "../../../components/box/post/society/SocietyPostBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
+import SocietyNonOptionPostAddButton from "../../../components/buttons/post/society/SocietyNonOptionPostAddButton";
 
 const WholeLifeStylePostPage = () => {
     const [postPageData, setPostPageData] = useState({
@@ -50,6 +51,8 @@ const WholeLifeStylePostPage = () => {
                         </Box>
                     ))}
                     
+                    <SocietyNonOptionPostAddButton subCategory={"라이프스타일"} />
+
                     <PostPaginationBox totalPage={postPageData.pageSize} currentPage={postPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>
             </Grid>

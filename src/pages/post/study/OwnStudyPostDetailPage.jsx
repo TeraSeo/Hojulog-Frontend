@@ -33,7 +33,7 @@ const OwnStudyPostDetailPage = () => {
     getSpecificStudyPost(postId)
       .then((data) => {
         setStudyPostData(data);
-        if (!data.isPublic && data.userId !== userId) {
+        if (userId.toString() !== data.userId.toString()) {
           navigate("/");
         }
       })
@@ -84,7 +84,7 @@ const OwnStudyPostDetailPage = () => {
       </Box>
 
       <Box sx={{ mt: 5, display: "flex", justifyContent: "end", gap: 1 }}>
-        <UpdatePostButton postId={studyPostData.postId} />
+        <UpdatePostButton category={"유학"} subCategory={studyPostData.subCategory} postId={studyPostData.postId} />
         <RemovePostButton postId={studyPostData.postId} />
       </Box>
 

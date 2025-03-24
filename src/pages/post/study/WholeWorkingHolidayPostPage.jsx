@@ -6,6 +6,7 @@ import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import StudyPostBox from "../../../components/box/post/study/StudyPostBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
+import StudyNonOptionPostAddButton from "../../../components/buttons/post/study/StudyNonOptionPostAddButton";
 
 const WholeWorkingHolidayPostPage = () => {
     const [postPageData, setPostPageData] = useState({
@@ -54,6 +55,8 @@ const WholeWorkingHolidayPostPage = () => {
                             )}
                         </React.Fragment>
                     ))}
+
+                    <StudyNonOptionPostAddButton subCategory={"워홀후기"} />
                     
                     <PostPaginationBox totalPage={postPageData.pageSize} currentPage={postPageData.currentPage} handlePageChange={handlePageChange} />
                 </Grid>

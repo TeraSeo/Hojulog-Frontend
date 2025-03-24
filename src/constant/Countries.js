@@ -1,4 +1,22 @@
-const countries = [
+export const travelSuburbs = [
+  "시드니",
+  "뉴캐슬",
+  "울런공",
+  "멜버른",
+  "브리즈번",
+  "골드코스트",
+  "선샤인코스트",
+  "케언즈",
+  "퍼스",
+  "애들레이드",
+  "타즈메니아",
+  "켄버라",
+  "울룰루",
+  "다윈",
+  "기타"
+];
+
+export const countries = [
     "가나",
     "가봉",
     "가이아나",
@@ -191,5 +209,3 @@ const countries = [
     "호주",
     "기타"
   ];
-  
-  export default countries;  
