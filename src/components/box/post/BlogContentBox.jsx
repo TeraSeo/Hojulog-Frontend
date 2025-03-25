@@ -14,7 +14,7 @@ const BlogContentBox = ({ blogContents }) => {
                                     fontSize: { "md": `${content.fontSize}px`, "sm" : `${content.fontSiz - 2}px`, "xs": `${content.fontSize - 4}px` }, 
                                     fontWeight: content.fontWeight,
                                     whiteSpace: "pre-wrap",
-                                    fontFamily: content.fontFamily || "Arial"
+                                    fontFamily: content.fontFamily || "프리텐다드"
                                 }}
                             >
                                 {content.content}

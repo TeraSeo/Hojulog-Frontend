@@ -56,7 +56,7 @@ const DescriptionBlockWithInitial = ({
         >
           <InputLabel>Font</InputLabel>
           <Select
-            value={block.fontFamily || "Arial"}
+            value={block.fontFamily || "프리텐다드"}
             label="Font"
             onChange={(e) => onFontFamilyChange(index, e.target.value)}
           >
@@ -85,7 +85,7 @@ const DescriptionBlockWithInitial = ({
           style: {
             fontSize: `${block.fontSize}px`,
             fontWeight: block.fontWeight,
-            fontFamily: block.fontFamily || "Arial"
+            fontFamily: block.fontFamily || "프리텐다드"
           }
         }}
         sx={{

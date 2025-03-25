@@ -84,10 +84,10 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout, newNotifi
                         <ListItemIcon><LeaderboardIcon sx={{ color: "#666" }} /></ListItemIcon>
                         <ListItemText primary="이주의 순위" sx={{ color: "#666", fontWeight: "bold" }} />
                     </ListItem>
-                    {/* <ListItem button onClick={() => handleNavigate("/board")}>
+                    <ListItem button onClick={() => handleNavigate("/board")}>
                         <ListItemIcon><ForumIcon sx={{ color: "#666" }} /></ListItemIcon>
                         <ListItemText primary="게시판" sx={{ color: "#666", fontWeight: "bold" }} />
-                    </ListItem> */}
+                    </ListItem>
                     <ListItem button onClick={() => handleNavigate("/mypage")}>
                         <ListItemIcon><AccountCircleIcon sx={{ color: "#666" }} /></ListItemIcon>
                         <ListItemText primary="마이페이지" sx={{ color: "#666", fontWeight: "bold" }} />
@@ -97,7 +97,6 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout, newNotifi
                         <ListItemText primary="고객센터" sx={{ color: "#666", fontWeight: "bold" }} />
                     </ListItem>
 
-                    {/* 알림 버튼 with Badge */}
                     <NotificationButton />
 
                     <ListItem button onClick={() => handleLogout()}>
@@ -111,10 +110,10 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout, newNotifi
                         <ListItemIcon><LeaderboardIcon sx={{ color: "#666" }} /></ListItemIcon>
                         <ListItemText primary="이주의 순위" sx={{ color: "#666", fontWeight: "bold" }} />
                     </ListItem>
-                    {/* <ListItem button onClick={() => handleNavigate("/board")}>
+                    <ListItem button onClick={() => handleNavigate("/board")}>
                         <ListItemIcon><ForumIcon sx={{ color: "#666" }} /></ListItemIcon>
                         <ListItemText primary="게시판" sx={{ color: "#666", fontWeight: "bold" }} />
-                    </ListItem> */}
+                    </ListItem>
                     <ListItem button onClick={() => handleNavigate("/register")}>
                         <ListItemIcon><PersonAddIcon /></ListItemIcon>
                         <ListItemText primary="회원가입" />

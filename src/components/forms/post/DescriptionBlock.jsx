@@ -53,7 +53,7 @@ const DescriptionBlock = ({
         <FormControl size="small" sx={{ minWidth: 120, maxWidth: 160, flexGrow: 1 }}>
           <InputLabel>Font</InputLabel>
           <Select
-            value={block.fontFamily || "Arial"}
+            value={block.fontFamily || "프리텐다드"}
             label="Font"
             onChange={(e) => onFontFamilyChange(index, e.target.value)}
           >
@@ -82,7 +82,7 @@ const DescriptionBlock = ({
           style: {
             fontSize: `${block.fontSize}px`,
             fontWeight: block.fontWeight,
-            fontFamily: block.fontFamily || "Arial"
+            fontFamily: block.fontFamily || "프리텐다드"
           }
         }}
         sx={{

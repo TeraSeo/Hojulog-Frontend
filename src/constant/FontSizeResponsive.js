@@ -13,3 +13,5 @@ export const ComponentTextResponsiveFontSize1 = { md: "11px", sm: "10px", xs: "9
 export const RankResponsiveFontSize1 = { md: "18px", sm: "16px", xs: "14px" };
 export const RankUsernameResponsiveFontSize1 = { md: "15px", sm: "14px", xs: "12px" };
 export const RankLikeCountResponsiveFontSize1 = { md: "14px", sm: "13px", xs: "12px" };
+export const BoardResponsiveFont = { xs: "8px", sm: "10px", md: "12px", lg: "14px" } ;
+export const BoardSubtitleResponsiveFont = { xs: "9px", sm: "11px", md: "13px", lg: "15px" } ;

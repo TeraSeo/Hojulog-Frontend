@@ -12,7 +12,7 @@ const ContentBlockManagerWithInitialValue = ({ onChange, blogContents }) => {
   const handleAddDescription = () => {
     const updatedBlocks = [
       ...contentBlocks,
-      { type: "description", content: "", fontSize: 16, fontWeight: 400, fontFamily: "Arial" },
+      { type: "description", content: "", fontSize: 16, fontWeight: 400, fontFamily: "프리텐다드" },
     ];
     setContentBlocks(updatedBlocks);
     onChange(updatedBlocks);

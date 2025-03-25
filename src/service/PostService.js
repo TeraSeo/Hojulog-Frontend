@@ -27,6 +27,28 @@ function getPostsByPageNCondition(page, condition) {
     )
 }
 
+function getArticlePostsByPage(page) {
+    return axios.get(`${serverRoute}/api/post/get/pageable/recent/article`, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        params: {
+            "page": page,
+            "size": 10
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
 function getWorldCupPostsByPage(page) {
     return axios.get(`${serverRoute}/api/post/get/pageable/recent/worldcup`, {
         headers: {
@@ -641,6 +663,36 @@ function getJobReviewPostsByPage(page) {
     )
 }
 
+function getWholeOwnArticles(page) {
+    const userId = localStorage.getItem('userId') || "";
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.get(`${serverRoute}/api/post/get/pageable/own/articles`, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "userId": userId,
+            "accessToken": accessToken,
+            "refreshToken": refreshToken
+        },
+        params: {
+            "page": page,
+            "size": 10,
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            alert(error);
+            console.log(error);
+            return [];
+        }
+    )
+}
+
 function getWholeOwnPosts(page) {
     const userId = localStorage.getItem('userId') || "";
     const accessToken = localStorage.getItem('accessToken');
@@ -665,6 +717,29 @@ function getWholeOwnPosts(page) {
     )
     .catch((error) => {
             alert(error);
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getWholeOthersArticles(page, userId) {
+    return axios.get(`${serverRoute}/api/post/get/pageable/others/articles`, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "userId": userId
+        },
+        params: {
+            "page": page,
+            "size": 10,
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
             console.log(error);
             return [];
         }
@@ -849,6 +924,30 @@ function getSpecificCandidateDtoList(postId) {
     const userId = localStorage.getItem('userId') || "";
 
     return axios.get(`${serverRoute}/api/post/get/specific/candidateDtoList`, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'userId': userId
+        },
+        params: {
+            "postId": postId,
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getSpecificArticlePost(postId) {
+    const userId = localStorage.getItem('userId') || "";
+
+    return axios.get(`${serverRoute}/api/post/get/specific/article`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -1079,6 +1178,29 @@ function getSpecificPost(postId) {
     )
 }
 
+function postArticle(postData) {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.post(`${serverRoute}/api/post/create/article`, postData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        }
+    })
+    .then(response => {
+        if (response.data) {
+            return true;
+        }
+        return false;
+    })
+    .catch(error => {
+        console.log(error);
+        return false;
+    });    
+}
+
 function postWorldCup(postData) {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
@@ -1226,6 +1348,31 @@ function postStudy(postData) {
             "Content-Type": "multipart/form-data",
             'accessToken': accessToken,
             'refreshToken': refreshToken,
+        }
+    })
+    .then(response => {
+        if (response.data) {
+            return true;
+        }
+        return false;
+    })
+    .catch(error => {
+        console.log(error);
+        return false;
+    });    
+}
+
+function updateArticle(postData) {
+    const userId = localStorage.getItem('userId') || "";
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.put(`${serverRoute}/api/post/update/article`, postData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+            "userId": userId
         }
     })
     .then(response => {
@@ -1421,6 +1568,34 @@ function getUpdatePropertyPostDto(postId) {
     const refreshToken = localStorage.getItem('refreshToken');
 
     return axios.get(`${serverRoute}/api/post/get/update/propertyDto`, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+            "userId": userId
+        },
+        params: {
+            "postId": postId
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return [];
+        }
+    )
+}
+
+function getUpdateArticleDto(postId) {
+    const userId = localStorage.getItem('userId') || "";
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.get(`${serverRoute}/api/post/get/update/articleDto`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -1957,4 +2132,4 @@ function updateWorldCupVictory(candidateId) {
     )
 }
 
-export { getPostsByPageNCondition, getWorldCupPostsByPage, getPropertyPostsByPage, getJobPostsByPage, getTransactionPostsByPage, getSocietyPostsByPage, getTravelPostsByPage, getWorldCupPostsBySubCategoryNPage, getStudyPostsByPage, getSharePostsByPage, getRentPostsByPage, getPropertyTransactionPostsByPage, getRecruitmentPostsByPage, getJobSeekingPostsByPage, getJobTutoringPostsByPage, getCarPostsByPage, getNecessitiesPostsByPage, getTransactionEtcPostsByPage, getClubPostsByPage, getLifeStylePostsByPage, getFriendshipPostsByPage, getRestaurantPostsByPage, getPlacePostsByPage, getCoursePostsByPage, getSchoolPostsByPage, getWorkingHolidayPostsByPage, getLanguageStudyPostsByPage, getJobReviewPostsByPage, getWholeOwnPosts, getWholeOthersPosts, getWholeLikedPosts, getRecent5WorldCupPosts, getRecent5JobPosts, getRecent5PropertyPosts, getRecent5TransactionPosts, getRecent5SocietyPosts, getRecent5TravelPosts, getRecent5StudyPosts, getSpecificCandidateDtoList, getSpecificWorldCupPost, getSpecificUpdateWorldCupPost, getSpecificPropertyPost, getSpecificJobPost, getSpecificTransactionPost, getSpecificSocietyPost, getSpecificTravelPost, getSpecificStudyPost, getSpecificPost, postWorldCup, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy, updateProperty, updateJob, updateTransaction, updateSociety, updateWorldCup, updateTravel, updateStudy, getUpdatePropertyPostDto, getUpdateJobPostDto, getUpdateTransactionPostDto, getUpdateTravelPostDto, getUpdateStudyPostDto, getUpdateSocietyPostDto, searchWorldCupPost, searchPropertyPost, searchJobPost, searchTransactionPost, searchSocietyPost, searchTravelPost, searchStudyPost, deletePostById, pinPost, updateWorldCupVictory };
+export { getPostsByPageNCondition, getArticlePostsByPage, getWorldCupPostsByPage, getPropertyPostsByPage, getJobPostsByPage, getTransactionPostsByPage, getSocietyPostsByPage, getTravelPostsByPage, getWorldCupPostsBySubCategoryNPage, getStudyPostsByPage, getSharePostsByPage, getRentPostsByPage, getPropertyTransactionPostsByPage, getRecruitmentPostsByPage, getJobSeekingPostsByPage, getJobTutoringPostsByPage, getCarPostsByPage, getNecessitiesPostsByPage, getTransactionEtcPostsByPage, getClubPostsByPage, getLifeStylePostsByPage, getFriendshipPostsByPage, getRestaurantPostsByPage, getPlacePostsByPage, getCoursePostsByPage, getSchoolPostsByPage, getWorkingHolidayPostsByPage, getLanguageStudyPostsByPage, getJobReviewPostsByPage, getWholeOwnArticles, getWholeOwnPosts, getWholeOthersArticles, getWholeOthersPosts, getWholeLikedPosts, getRecent5WorldCupPosts, getRecent5JobPosts, getRecent5PropertyPosts, getRecent5TransactionPosts, getRecent5SocietyPosts, getRecent5TravelPosts, getRecent5StudyPosts, getSpecificCandidateDtoList, getSpecificArticlePost, getSpecificWorldCupPost, getSpecificUpdateWorldCupPost, getSpecificPropertyPost, getSpecificJobPost, getSpecificTransactionPost, getSpecificSocietyPost, getSpecificTravelPost, getSpecificStudyPost, getSpecificPost, postArticle, postWorldCup, postProperty, postJob, postTransaction, postSociety, postTravel, postStudy, updateProperty, updateJob, updateTransaction, updateSociety, updateArticle, updateWorldCup, updateTravel, updateStudy, getUpdatePropertyPostDto, getUpdateArticleDto, getUpdateJobPostDto, getUpdateTransactionPostDto, getUpdateTravelPostDto, getUpdateStudyPostDto, getUpdateSocietyPostDto, searchWorldCupPost, searchPropertyPost, searchJobPost, searchTransactionPost, searchSocietyPost, searchTravelPost, searchStudyPost, deletePostById, pinPost, updateWorldCupVictory };

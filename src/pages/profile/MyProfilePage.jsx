@@ -15,6 +15,7 @@ import CommonSummarizedInquiryBox from "../../components/box/customer_center/Com
 import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
 import ProfileStatsText from "../../components/texts/ProfileStatsText";
 import AttendanceCheckButton from "../../components/buttons/AttendanceCheckButton";
+import CommonOwnSummarizedArticleBox from "../../components/box/post/CommonOwnSummarizedArticleBox";
 
 const MyProfilePage = () => {
     const navigate = useNavigate();
@@ -90,6 +91,16 @@ const MyProfilePage = () => {
                             {userData.uploadedPostIds.map((uploadedPostId, index) => (
                                 <Box key={index}>
                                     <CommonOwnSummarizedPostBox postId={uploadedPostId} />
+                                </Box>
+                            ))}
+                        </HomeContainerBox>
+                    </Box>
+
+                    <Box sx={{ mt: 3 }}>
+                        <HomeContainerBox title="내가 올린 게시글" onDetailClicked={() => { navigate("/own/articles") }}>
+                            {userData.uploadedArticleIds.map((uploadedArticleId, index) => (
+                                <Box key={index}>
+                                    <CommonOwnSummarizedArticleBox postId={uploadedArticleId} />
                                 </Box>
                             ))}
                         </HomeContainerBox>

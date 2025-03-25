@@ -26,9 +26,9 @@ function Footer() {
                     <Link href="/ranking" color="inherit" underline="none" sx={{ display: "block", mb: 1 }}>
                         이주의 순위
                     </Link>
-                    {/* <Link href="/board" color="inherit" underline="none" sx={{ display: "block", mb: 1 }}>
+                    <Link href="/board" color="inherit" underline="none" sx={{ display: "block", mb: 1 }}>
                         게시판
-                    </Link> */}
+                    </Link>
                 </Grid>
 
                 <Grid item xs={12} sm={4}>

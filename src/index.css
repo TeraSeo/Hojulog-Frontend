@@ -11,3 +11,186 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: '프리텐다드';
+  src: url('./fonts/Pretendard-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '온글잎 박다현체';
+  src: url('./fonts/온글잎 박다현체.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'G마켓 산스';
+  src: url('./fonts/GmarketSansTTFMedium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '페이퍼로지';
+  src: url('./fonts/Paperlogy-4Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '온글잎 콘콘체';
+  src: url('./fonts/온글잎 콘콘체.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '여기어때 잘난체';
+  src: url('./fonts/Jalnan2TTF.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '고운돋움';
+  src: url('./fonts/GowunDodum-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '나눔고딕';
+  src: url('./fonts/NanumGothic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '카페24 아네모네';
+  src: url('./fonts/Cafe24Ohsquare-v2.0.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '베이글팻';
+  src: url('./fonts/BagelFatOne-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '조선궁서체';
+  src: url('./fonts/ChosunCentennial_ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '온글잎 위씨리스트';
+  src: url('./fonts/온글잎 위씨리스트.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '신라문화체';
+  src: url('./fonts/Shilla_Culture(M).ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '무적해병체';
+  src: url('./fonts/무적해병체Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '본고딕 (Noto Sans)';
+  src: url('./fonts/NotoSansKR-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '수트';
+  src: url('./fonts/SUIT-Variable.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '주아체';
+  src: url('./fonts/BMJUA_ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '제주돌담체';
+  src: url('./fonts/EF_jejudoldam(TTF).ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '검은고딕';
+  src: url('./fonts/BlackHanSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '도현체';
+  src: url('./fonts/BMDOHYEON_ttf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '세종글꽃체';
+  src: url('./fonts/SejongGeulggot.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '평창평화체';
+  src: url('./fonts/PyeongChangPeace-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '나눔스퀘어';
+  src: url('./fonts/NanumSquareL.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SF함박눈';
+  src: url('./fonts/SF함박눈TTF.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '더잠실체';
+  src: url('./fonts/The Jamsil 3 Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'KoPub바탕';
+  src: url('./fonts/KoPubWorld Batang Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+

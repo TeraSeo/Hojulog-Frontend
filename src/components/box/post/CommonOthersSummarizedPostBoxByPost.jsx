@@ -3,6 +3,7 @@ import React from "react";
 import CreatedAtText from "../../texts/CreatedAtText";
 import SummarizedOwnPostTitleText from "../../texts/SummarizedOwnPostTitleText";
 import OthersSummarizedOwnPostTitleText from "../../texts/OthersSummarizedOwnPostTitleText";
+import OthersSummarizedArtitleTitleText from "../../texts/OthersSummarizedArtitleTitleText";
 
 const CommonOthersSummarizedPostBoxByPost = ({ post }) => {
     return (
@@ -29,7 +30,7 @@ const CommonOthersSummarizedPostBoxByPost = ({ post }) => {
                 >
                     <Box>
                         <Box sx={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                            <OthersSummarizedOwnPostTitleText title={post.title} postId={post.id} category={post.category} />
+                            <OthersSummarizedArtitleTitleText title={post.title} postId={post.postId}  />
                         </Box>
 
                         <Box>

@@ -5,10 +5,10 @@ import { getSpecificUser } from "../../service/UserService";
 import CategorySidebar from "../../components/bar/CategorySidebar";
 import { SubTitleResponsiveFontSize1, TitleResponsiveFontSize } from "../../constant/FontSizeResponsive";
 import HomeContainerBox from "../../components/box/home/HomeContainerBox";
-import CommonOwnSummarizedPostBox from "../../components/box/post/CommonOwnSummarizedPostBox";
 import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
 import ProfileStatsText from "../../components/texts/ProfileStatsText";
 import OthersCommonSummarizedPostBox from "../../components/box/post/OthersCommonSummarizedPostBox";
+import OthersCommonSummarizedArticlePostBox from "../../components/box/post/OthersCommonSummarizedArticlePostBox";
 
 const OtherProfilePage = () => {
     const navigate = useNavigate();
@@ -82,6 +82,16 @@ const OtherProfilePage = () => {
                             {userData.uploadedPostIds.map((uploadedPostId, index) => (
                                 <Box key={index}>
                                     <OthersCommonSummarizedPostBox postId={uploadedPostId} />
+                                </Box>
+                            ))}
+                        </HomeContainerBox>
+                    </Box>
+
+                    <Box sx={{ mt: 3 }}>
+                        <HomeContainerBox title={userData.username + "님이 올린 게시글"} onDetailClicked={() => { navigate(`/others/articles/${userId}/${userData.username}`) }}>
+                            {userData.uploadedArticleIds.map((uploadedPostId, index) => (
+                                <Box key={index}>
+                                    <OthersCommonSummarizedArticlePostBox postId={uploadedPostId} />
                                 </Box>
                             ))}
                         </HomeContainerBox>

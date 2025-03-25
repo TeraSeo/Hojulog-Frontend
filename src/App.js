@@ -137,6 +137,11 @@ import WholeSocietyWorldCupPostPage from './pages/post/type-world-cup/WholeSocie
 import WholeTravelWorldCupPostPage from './pages/post/type-world-cup/WholeTravelWorldCupPostPage';
 import WholeStudyWorldCupPostPage from './pages/post/type-world-cup/WholeStudyWorldCupPostPage';
 import WholeEtcWorldCupPostPage from './pages/post/type-world-cup/WholeEtcWorldCupPostPage';
+import BoardDetailPage from './pages/board/BoardDetailPage';
+import OwnBoardDetailPage from './pages/board/OwnBoardDetailPage';
+import UploadArticlePage from './pages/post/UploadArticlePage';
+import EditBoardPage from './pages/board/EditBoardPage';
+import OthersUploadedArticlePage from './pages/post/OthersUploadedArticlePage';
 
 const normalize = (str) => {
   if (str === "레스토랑(카페,펍)") {
@@ -270,6 +275,8 @@ function App() {
             <Route path="update/admin/user/:userId" element={<AdminUserEditPage />} />
             <Route path="update/admin/inquiry/:inquiryId" element={<AdminInquiryEditPage />} />
 
+            <Route path="update/게시글/:postId" element={<EditBoardPage />} />
+
             <Route path="update/이상형월드컵/부동산/:postId" element={<EditPropertyIdealTypePage />} />
             <Route path="update/이상형월드컵/구인구직/:postId" element={<EditJobIdealTypePage />} />
             <Route path="update/이상형월드컵/사고팔기/:postId" element={<EditTransactionIdealType />} />
@@ -355,13 +362,16 @@ function App() {
 
             <Route path="launch" element={<SelectCategoryPage />} />
             <Route path="own/posts" element={<UploadedPostPage />} />
+            <Route path="own/articles" element={<UploadArticlePage />} />
             <Route path="others/posts/:userId/:username" element={<OthersUploadedPostPage />} />
+            <Route path="others/articles/:userId/:username" element={<OthersUploadedArticlePage />} />
             <Route path="liked/posts" element={<LikedPostPage />} />
             <Route path="inquiries" element={<InquiriesPage />} />
             <Route path="inquiry/detail/:inquiryId" element={<InquiryDetailPage/>} />
 
             {generateDynamicRoutes()}
 
+            <Route path="post/게시글/detail/:postId" element={<BoardDetailPage />} />
             <Route path="post/이상형월드컵/detail/:postId" element={<WorldCupDetailPage />} />
             <Route path="post/부동산/detail/:postId" element={<PropertyPostDetailPage />} />
             <Route path="post/구인구직/detail/:postId" element={<JobPostDetailPage />} />
@@ -370,6 +380,7 @@ function App() {
             <Route path="post/여행/detail/:postId" element={<TravelPostDetailedPage />} />
             <Route path="post/유학/detail/:postId" element={<StudyPostDetailPage />} />
 
+            <Route path="own/post/게시글/detail/:postId" element={<OwnBoardDetailPage />} />
             <Route path="own/post/이상형월드컵/detail/:postId" element={<OwnWorldCupPostDetailPage />} />
             <Route path="own/post/부동산/detail/:postId" element={<OwnPropertyPostDetailPage />} />
             <Route path="own/post/구인구직/detail/:postId" element={<OwnJobPostDetailPage />} />
@@ -378,6 +389,7 @@ function App() {
             <Route path="own/post/여행/detail/:postId" element={<OwnTravelPostDetailedPage />} />
             <Route path="own/post/유학/detail/:postId" element={<OwnStudyPostDetailPage />} />
             
+            <Route path="others/post/게시글/detail/:postId" element={<BoardDetailPage />} />
             <Route path="others/post/이상형월드컵/detail/:postId" element={<WorldCupDetailPage />} />
             <Route path="others/post/부동산/detail/:postId" element={<PropertyPostDetailPage />} />
             <Route path="others/post/구인구직/detail/:postId" element={<JobPostDetailPage />} />
