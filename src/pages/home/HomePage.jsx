@@ -9,6 +9,7 @@ import HomeTravelPosts from "../../components/box/home/HomeTravelPosts";
 import HomeStudyPosts from "../../components/box/home/HomeStudyPosts";
 import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
 import HomeWorldCupPosts from "../../components/box/home/HomeWorldCupPosts";
+import DisplayAds from "../../components/ads/DisplayAds";
 
 function HomePage() {
     return (
@@ -48,6 +49,8 @@ function HomePage() {
                     </Box>
                 </Grid>
             </Grid>
+            
+            <DisplayAds />
         </Box>
     );
 }

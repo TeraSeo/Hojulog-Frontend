@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getIsLocked } from "../../service/UserService";
 
 function Oauth2RedirectPage() {
     const location = useLocation();
@@ -13,7 +14,16 @@ function Oauth2RedirectPage() {
         if (accessToken && refreshToken) {
             localStorage.setItem('accessToken', accessToken); 
             localStorage.setItem('refreshToken', refreshToken);
-            navigate("/home")
+
+            getIsLocked().then((value) => {
+                if (value) {
+                    alert("비활성화된 계정입니다");
+                    navigate("/login")
+                }
+                else {
+                    navigate("/home")
+                }
+            });
         } else {
             alert("Failed to login.");
             navigate("/login")

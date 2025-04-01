@@ -46,6 +46,22 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout, newNotifi
                     <ListItemIcon><EmojiEventsIcon /></ListItemIcon>
                     <ListItemText primary="Aussie Choice" secondary="Aussie Choice 정보 확인하기" />
                 </ListItem>
+                <ListItem button onClick={() => handleNavigate("/여행")}>
+                    <ListItemIcon><FlightIcon /></ListItemIcon>
+                    <ListItemText primary="여행" secondary="여행 정보 찾기" />
+                </ListItem>
+                <ListItem button onClick={() => handleNavigate("/생활")}>
+                    <ListItemIcon><GroupIcon /></ListItemIcon>
+                    <ListItemText primary="생활" secondary="라이프스타일 정보 찾기" />
+                </ListItem>
+                <ListItem button onClick={() => handleNavigate("/유학")}>
+                    <ListItemIcon><SchoolIcon /></ListItemIcon>
+                    <ListItemText primary="워홀/유학" secondary="유학 및 학업 관련 후기 찾기" />
+                </ListItem>
+                <ListItem button onClick={() => handleNavigate("/사고팔기")}>
+                    <ListItemIcon><StoreIcon /></ListItemIcon>
+                    <ListItemText primary="사고팔기" secondary="중고 물품 사고팔기" />
+                </ListItem>
                 <ListItem button onClick={() => handleNavigate("/부동산")}>
                     <ListItemIcon><ApartmentIcon /></ListItemIcon>
                     <ListItemText primary="부동산" secondary="부동산 매물 정보 확인하기" />
@@ -53,22 +69,6 @@ function DrawerMenuItems({ isAuthenticated, handleClose, handleLogout, newNotifi
                 <ListItem button onClick={() => handleNavigate("/구인구직")}>
                     <ListItemIcon><WorkIcon /></ListItemIcon>
                     <ListItemText primary="구인구직" secondary="구직 또는 구인 정보, 후기 찾기" />
-                </ListItem>
-                <ListItem button onClick={() => handleNavigate("/사고팔기")}>
-                    <ListItemIcon><StoreIcon /></ListItemIcon>
-                    <ListItemText primary="사고팔기" secondary="중고 물품 사고팔기" />
-                </ListItem>
-                <ListItem button onClick={() => handleNavigate("/생활")}>
-                    <ListItemIcon><GroupIcon /></ListItemIcon>
-                    <ListItemText primary="생활" secondary="라이프스타일 정보 찾기" />
-                </ListItem>
-                <ListItem button onClick={() => handleNavigate("/여행")}>
-                    <ListItemIcon><FlightIcon /></ListItemIcon>
-                    <ListItemText primary="여행" secondary="여행 정보 찾기" />
-                </ListItem>
-                <ListItem button onClick={() => handleNavigate("/유학")}>
-                    <ListItemIcon><SchoolIcon /></ListItemIcon>
-                    <ListItemText primary="유학" secondary="유학 및 학업 관련 후기 찾기" />
                 </ListItem>
             </List>
 

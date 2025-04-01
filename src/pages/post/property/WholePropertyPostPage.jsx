@@ -16,8 +16,6 @@ function WholePropertyPostPage() {
         currentPage: 1
     });
 
-    const [filteredPosts, setFilteredPosts] = useState([]);
-
     const [filters, setFilters] = useState({
         minPrice: "",
         maxPrice: "",
@@ -31,14 +29,13 @@ function WholePropertyPostPage() {
     }, []);
 
     const fetchPageData = (page) => {
-        getPropertyPostsByPage(page)
+        getPropertyPostsByPage(page, filters.minPrice ? Number(filters.minPrice) : -1, filters.maxPrice ? Number(filters.maxPrice) : -1, filters.period)
             .then((data) => {
                 setPropertyPageData({
                     posts: data.posts,
                     pageSize: data.pageSize,
                     currentPage: page
                 });
-                setFilteredPosts(data.posts); // Initialize filtered posts
             })
             .catch((error) => console.error("Error fetching posts:", error));
     };
@@ -53,16 +50,15 @@ function WholePropertyPostPage() {
             return;
         }
 
-        const filtered = propertyPageData.posts.filter((post) => {
-            const price = Number(post.price);
-            const minPrice = filters.minPrice ? Number(filters.minPrice) : 0;
-            const maxPrice = filters.maxPrice ? Number(filters.maxPrice) : Infinity;
-            const periodMatch = filters.period === "전체" || post.period === filters.period;
-
-            return price >= minPrice && price <= maxPrice && periodMatch;
-        });
-
-        setFilteredPosts(filtered);
+        getPropertyPostsByPage(1, filters.minPrice ? Number(filters.minPrice) : -1, filters.maxPrice ? Number(filters.maxPrice) : -1, filters.period)
+            .then((data) => {
+                setPropertyPageData({
+                    posts: data.posts,
+                    pageSize: data.pageSize,
+                    currentPage: 1
+                });
+            })
+            .catch((error) => console.error("Error fetching posts:", error));
     };
 
     return (
@@ -80,13 +76,13 @@ function WholePropertyPostPage() {
                     </Box>
 
                     {/* Display Filtered Posts */}
-                    {filteredPosts.length > 0 ? (
-                        filteredPosts.map((post, index) => (
+                    {propertyPageData.posts.length > 0 ? (
+                        propertyPageData.posts.map((post, index) => (
                             <React.Fragment key={index}>
                                 <Box>
                                     <PropertyPostBox post={post} />
                                 </Box>
-                                {index < filteredPosts.length - 1 && (
+                                {index < propertyPageData.posts.length - 1 && (
                                     <Divider sx={{ my: 2 }} />
                                 )}
                             </React.Fragment>

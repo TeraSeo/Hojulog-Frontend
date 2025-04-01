@@ -16,11 +16,9 @@ function WholeTransactionPostPage() {
         currentPage: 0
     });
 
-    const [filteredPosts, setFilteredPosts] = useState([]);
-
     const [filters, setFilters] = useState({
-        transactionType: "전체", // 구매, 판매, 전체
-        priceType: "전체"        // 무료, 유료, 전체
+        transactionType: "전체",
+        priceType: "전체"
     });
 
     useEffect(() => {
@@ -28,14 +26,13 @@ function WholeTransactionPostPage() {
     }, []);
 
     const fetchPageData = (page) => {
-        getTransactionPostsByPage(page)
+        getTransactionPostsByPage(page, filters.transactionType, filters.priceType)
             .then((data) => {
                 setTransactionPageData({
                     posts: data.posts,
                     pageSize: data.pageSize,
                     currentPage: page
                 });
-                setFilteredPosts(data.posts); // Initialize filtered posts
             })
             .catch((error) => console.error("Error fetching posts:", error));
     };
@@ -45,16 +42,15 @@ function WholeTransactionPostPage() {
     };
 
     const applyFilters = () => {
-        const filtered = transactionPageData.posts.filter((post) => {
-            const transactionMatch = filters.transactionType === "전체" || post.transactionType === filters.transactionType;
-            const priceMatch = filters.priceType === "전체" || 
-                (filters.priceType === post.priceType) ||
-                (filters.priceType === post.priceType);
-
-            return transactionMatch && priceMatch;
-        });
-
-        setFilteredPosts(filtered);
+        getTransactionPostsByPage(1, filters.transactionType, filters.priceType)
+            .then((data) => {
+                setTransactionPageData({
+                    posts: data.posts,
+                    pageSize: data.pageSize,
+                    currentPage: 1
+                });
+            })
+            .catch((error) => console.error("Error fetching posts:", error));
     };
 
     return (
@@ -71,14 +67,13 @@ function WholeTransactionPostPage() {
                         <TransactionFilter filters={filters} setFilters={setFilters} applyFilters={applyFilters} />
                     </Box>
 
-                    {/* Display Filtered Posts */}
-                    {filteredPosts.length > 0 ? (
-                        filteredPosts.map((post, index) => (
+                    {transactionPageData.posts.length > 0 ? (
+                        transactionPageData.posts.map((post, index) => (
                             <React.Fragment key={index}>
                                 <Box>
                                     <TransactionPostBox post={post} />
                                 </Box>
-                                {index < filteredPosts.length - 1 && (
+                                {index < transactionPageData.posts.length - 1 && (
                                     <Divider sx={{ my: 2 }} />
                                 )}
                             </React.Fragment>

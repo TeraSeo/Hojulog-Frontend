@@ -16,7 +16,6 @@ const WholePlacePostPage = () => {
         currentPage: 1
     });
 
-    const [filteredPosts, setFilteredPosts] = useState([]);
     const [selectedTravelSuburb, setSelectedTravelSuburb] = useState("전체");
 
     useEffect(() => {
@@ -24,14 +23,13 @@ const WholePlacePostPage = () => {
     }, []);
 
     const fetchPageData = (page) => {
-        getPlacePostsByPage(page)
+        getPlacePostsByPage(page, selectedTravelSuburb)
             .then((data) => {
                 setPostPageData({
                     posts: data.posts,
                     pageSize: data.pageSize,
                     currentPage: page
                 });
-                setFilteredPosts(data.posts); // Initialize filtered posts
             })
             .catch((error) => console.error("Error fetching posts:", error));
     };
@@ -41,11 +39,15 @@ const WholePlacePostPage = () => {
     };
 
     const applyFilters = () => {
-        const filtered = postPageData.posts.filter((post) => {
-            return selectedTravelSuburb === "전체" || post.travelSuburb === selectedTravelSuburb;
-        });
-
-        setFilteredPosts(filtered);
+        getPlacePostsByPage(1, selectedTravelSuburb)
+            .then((data) => {
+                setPostPageData({
+                    posts: data.posts,
+                    pageSize: data.pageSize,
+                    currentPage: 1
+                });
+            })
+            .catch((error) => console.error("Error fetching posts:", error));
     };
 
     return (
@@ -62,9 +64,8 @@ const WholePlacePostPage = () => {
                         <TravelFilter selectedTravelSuburb={selectedTravelSuburb} setSelectedTravelSuburb={setSelectedTravelSuburb} applyFilters={applyFilters} />
                     </Box>
 
-                    {/* Display Filtered Posts */}
-                    {filteredPosts.length > 0 ? (
-                        filteredPosts.map((post, index) => (
+                    {postPageData.posts.length > 0 ? (
+                        postPageData.posts.map((post, index) => (
                             <Box key={index}>
                                 <TravelPostBox post={post} />
                             </Box>

@@ -16,12 +16,9 @@ const WholePropertyTransactionPostPage = () => {
         currentPage: 1
     });
 
-    const [filteredPosts, setFilteredPosts] = useState([]);
-
     const [filters, setFilters] = useState({
         minPrice: "",
         maxPrice: "",
-        period: "전체" 
     });
 
     const [priceError, setPriceError] = useState(""); 
@@ -31,14 +28,13 @@ const WholePropertyTransactionPostPage = () => {
     }, []);
 
     const fetchPageData = (page) => {
-        getPropertyTransactionPostsByPage(page)
+        getPropertyTransactionPostsByPage(page, filters.minPrice ? Number(filters.minPrice) : -1, filters.maxPrice ? Number(filters.maxPrice) : -1, "전체")
             .then((data) => {
                 setPostPageData({
                     posts: data.posts,
                     pageSize: data.pageSize,
                     currentPage: page
                 });
-                setFilteredPosts(data.posts); // Initialize filtered posts
             })
             .catch((error) => console.error("Error fetching posts:", error));
     };
@@ -53,16 +49,15 @@ const WholePropertyTransactionPostPage = () => {
             return;
         }
 
-        const filtered = postPageData.posts.filter((post) => {
-            const price = Number(post.price);
-            const minPrice = filters.minPrice ? Number(filters.minPrice) : 0;
-            const maxPrice = filters.maxPrice ? Number(filters.maxPrice) : Infinity;
-            const periodMatch = filters.period === "전체" || post.period === filters.period;
-
-            return price >= minPrice && price <= maxPrice && periodMatch;
-        });
-
-        setFilteredPosts(filtered);
+        getPropertyTransactionPostsByPage(1, filters.minPrice ? Number(filters.minPrice) : -1, filters.maxPrice ? Number(filters.maxPrice) : -1, "전체")
+            .then((data) => {
+                setPostPageData({
+                    posts: data.posts,
+                    pageSize: data.pageSize,
+                    currentPage: 1
+                });
+            })
+            .catch((error) => console.error("Error fetching posts:", error));
     };
 
     return (
@@ -76,17 +71,16 @@ const WholePropertyTransactionPostPage = () => {
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
                         <PageTitleText title={"매매"} />
 
-                        <PropertyFilter filters={filters} setFilters={setFilters} applyFilters={applyFilters} priceError={priceError} setPriceError={setPriceError} />
+                        <PropertyFilter filters={filters} setFilters={setFilters} applyFilters={applyFilters} priceError={priceError} setPriceError={setPriceError} isPeriodContained={false} />
                     </Box>
 
-                    {/* Display Filtered Posts */}
-                    {filteredPosts.length > 0 ? (
-                        filteredPosts.map((post, index) => (
+                    {postPageData.posts.length > 0 ? (
+                        postPageData.posts.map((post, index) => (
                             <React.Fragment key={index}>
                                 <Box>
                                     <PropertyPostBox post={post} />
                                 </Box>
-                                {index < filteredPosts.length - 1 && (
+                                {index < postPageData.posts.length - 1 && (
                                     <Divider sx={{ my: 2 }} />
                                 )}
                             </React.Fragment>

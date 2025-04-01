@@ -2,7 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import React, { useState } from "react";
 import AuthTitleText from "../../texts/AuthTitleText";
 import OTPInput from "react-otp-input";
-import { checkIsOtpCorrect, sendOtp } from "../../../service/UserService";
+import { checkIsOtpCorrect, getIsLocked, sendOtp } from "../../../service/UserService";
 import { useNavigate } from "react-router-dom";
 
 function OtpForm() {
@@ -20,7 +20,15 @@ function OtpForm() {
         const isOtpCorrect = await checkIsOtpCorrect(email, otp);
         if (isOtpCorrect) {
             setErrorMsg('');
-            navigate("/home")
+
+            const isAccountLocked = await getIsLocked();
+            if (isAccountLocked) {
+                alert("비활성화된 계정입니다!");
+                navigate("/login");
+            }
+            else {
+                navigate("/home");
+            }
         } else {
             setErrorMsg("잘못된 OTP입니다. 다시 시도해주세요.");
         }

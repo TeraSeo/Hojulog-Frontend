@@ -2,7 +2,7 @@ import { Box, TextField, Typography, FormControl, InputLabel, Select, MenuItem, 
 import React from "react";
 import { primaryColor } from "../../../../constant/Color";
 
-const PropertyFilter = ({ filters, setFilters, applyFilters, priceError, setPriceError }) => {
+const PropertyFilter = ({ filters, setFilters, applyFilters, priceError, setPriceError, isPeriodContained = true }) => {
     const handleFilterChange = (e) => {
         const { name, value } = e.target;
         let updatedFilters = { ...filters, [name]: value };
@@ -81,7 +81,7 @@ const PropertyFilter = ({ filters, setFilters, applyFilters, priceError, setPric
             </Box>
 
             {/* Period Filter */}
-            <FormControl 
+            { isPeriodContained && <FormControl 
                 size="small" 
                 sx={{
                     width: { xs: "80px", sm: "100px", md: "120px" }, // Adjust width of select field
@@ -133,7 +133,7 @@ const PropertyFilter = ({ filters, setFilters, applyFilters, priceError, setPric
                         년
                     </MenuItem>
                 </Select>
-            </FormControl>
+            </FormControl> }
 
             {/* Apply Filters Button */}
             <Button 

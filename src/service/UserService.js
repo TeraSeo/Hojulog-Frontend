@@ -110,7 +110,7 @@ function validateToken() {
             const newAccessToken = response.headers['accesstoken'];
             const newRefreshToken = response.headers['refreshtoken'];
             const userId = response.headers['userid'];
-
+            
             if (newAccessToken != null) {
                 localStorage.setItem('accessToken', newAccessToken);
             }
@@ -120,7 +120,8 @@ function validateToken() {
             if (userId != null) {
                 localStorage.setItem('userId', userId);
             }
-            return true;
+
+            return response.data;
         } else if (response.status === 401) {
             return false;
         }
@@ -242,7 +243,8 @@ function updateAttendance(userId) {
 
     return axios.put(`${serverRoute}/api/own/user/update/attendance`, {}, {
         headers: {
-            "Content-Type": "multipart/form-data",
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
             'accessToken': accessToken,
             'refreshToken': refreshToken,
             'userId': userId
@@ -333,4 +335,54 @@ function getTopRanks() {
     )
 }
 
-export { login, register, sendOtp, checkIsOtpCorrect, validateToken, getSpecificSummarisedUser, getSpecificSummarisedUserProfile, getSpecificUser, getSpecificOwnUser, updateUserInfo, updateAttendance, viewSecretPost, checkIsUserPaid, getTopRanks };
+function getIsLocked() {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.get(`${serverRoute}/api/user/get/is-locked`, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+        },
+        params: {
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return null;
+        }
+    );
+}
+
+function deactivate() {
+    const userId = localStorage.getItem('userId');
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return axios.put(`${serverRoute}/api/own/user/update/account/lock`, {}, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+            'userId': userId
+        }
+    })
+    .then((response) => {
+            return response.data;
+        }
+    )
+    .catch((error) => {
+            console.log(error);
+            return null;
+        }
+    );
+}
+
+export { login, register, sendOtp, checkIsOtpCorrect, validateToken, getSpecificSummarisedUser, getSpecificSummarisedUserProfile, getSpecificUser, getSpecificOwnUser, updateUserInfo, updateAttendance, viewSecretPost, checkIsUserPaid, getTopRanks, getIsLocked, deactivate };

@@ -16,7 +16,6 @@ function WholeTravelPostPage() {
         currentPage: 0 
     });
 
-    const [filteredPosts, setFilteredPosts] = useState([]);
     const [selectedTravelSuburb, setSelectedTravelSuburb] = useState("전체");
 
     useEffect(() => {
@@ -24,14 +23,13 @@ function WholeTravelPostPage() {
     }, []);
 
     const fetchPageData = (page) => {
-        getTravelPostsByPage(page)
+        getTravelPostsByPage(page, selectedTravelSuburb)
             .then((data) => {
                 setTravelPageData({
                     posts: data.posts,
                     pageSize: data.pageSize,
                     currentPage: page
                 });
-                setFilteredPosts(data.posts); // Initialize filtered posts
             })
             .catch((error) => console.error("Error fetching posts:", error));
     };
@@ -41,11 +39,15 @@ function WholeTravelPostPage() {
     };
 
     const applyFilters = () => {
-        const filtered = travelPageData.posts.filter((post) => {
-            return selectedTravelSuburb === "전체" || post.travelSuburb === selectedTravelSuburb;
-        });
-
-        setFilteredPosts(filtered);
+        getTravelPostsByPage(1, selectedTravelSuburb)
+            .then((data) => {
+                setTravelPageData({
+                    posts: data.posts,
+                    pageSize: data.pageSize,
+                    currentPage: 1
+                });
+            })
+            .catch((error) => console.error("Error fetching posts:", error));
     };
 
     return (
@@ -62,8 +64,8 @@ function WholeTravelPostPage() {
                         <TravelFilter selectedTravelSuburb={selectedTravelSuburb} setSelectedTravelSuburb={setSelectedTravelSuburb} applyFilters={applyFilters} />
                     </Box>
 
-                    {filteredPosts.length > 0 ? (
-                        filteredPosts.map((post, index) => (
+                    {travelPageData.posts.length > 0 ? (
+                        travelPageData.posts.map((post, index) => (
                             <Box key={index}>
                                 <TravelPostBox post={post} />
                             </Box>

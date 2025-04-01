@@ -16,10 +16,8 @@ const WholeTutoringPostPage = () => {
         currentPage: 1
     });
 
-    const [filteredPosts, setFilteredPosts] = useState([]);
-
     const [filters, setFilters] = useState({
-        jobType: "전체" // Default to 전체 (All)
+        jobType: "전체"
     });
 
     useEffect(() => {
@@ -27,14 +25,13 @@ const WholeTutoringPostPage = () => {
     }, []);
 
     const fetchPageData = (page) => {
-        getJobTutoringPostsByPage(page)
+        getJobTutoringPostsByPage(page, filters.jobType)
             .then((data) => {
                 setPostPageData({
                     posts: data.posts,
                     pageSize: data.pageSize,
                     currentPage: page
                 });
-                setFilteredPosts(data.posts); // Initialize filtered posts
             })
             .catch((error) => console.error("Error fetching posts:", error));
     };
@@ -44,12 +41,15 @@ const WholeTutoringPostPage = () => {
     };
 
     const applyFilters = () => {
-        const filtered = postPageData.posts.filter((post) => {
-            const jobTypeMatch = filters.jobType === "전체" || post.jobType === filters.jobType;
-            return jobTypeMatch;
-        });
-
-        setFilteredPosts(filtered);
+        getJobTutoringPostsByPage(1, filters.jobType)
+            .then((data) => {
+                setPostPageData({
+                    posts: data.posts,
+                    pageSize: data.pageSize,
+                    currentPage: 1
+                });
+            })
+            .catch((error) => console.error("Error fetching posts:", error));
     };
 
     return (
@@ -67,8 +67,8 @@ const WholeTutoringPostPage = () => {
                     </Box>
 
                     {/* Display Filtered Posts */}
-                    {filteredPosts.length > 0 ? (
-                        filteredPosts.map((post, index) => (
+                    {postPageData.posts.length > 0 ? (
+                        postPageData.posts.map((post, index) => (
                             <Box key={index}>
                                 <JobPostBox post={post} />
                             </Box>
