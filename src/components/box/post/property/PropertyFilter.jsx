@@ -2,7 +2,7 @@ import { Box, TextField, Typography, FormControl, InputLabel, Select, MenuItem, 
 import React from "react";
 import { primaryColor } from "../../../../constant/Color";
 
-const PropertyFilter = ({ filters, setFilters, applyFilters, priceError, setPriceError, isPeriodContained = true }) => {
+const PropertyFilter = ({ filters, setFilters, applyFilters, priceError, setPriceError, isPeriodContained = true, selectedSortOption, setSelectedSortOption, }) => {
     const handleFilterChange = (e) => {
         const { name, value } = e.target;
         let updatedFilters = { ...filters, [name]: value };
@@ -19,8 +19,26 @@ const PropertyFilter = ({ filters, setFilters, applyFilters, priceError, setPric
         setFilters(updatedFilters);
     };
 
+    const handleSortChange = (e) => {
+        setSelectedSortOption(e.target.value);
+      };
+
     return (
         <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", alignItems: "center" }}>
+            <FormControl size="small" sx={{ minWidth: 150 }}>
+                <InputLabel id="sort-label">정렬</InputLabel>
+                <Select
+                    labelId="sort-label"
+                    value={selectedSortOption}
+                    onChange={handleSortChange}
+                    label="정렬"
+                >
+                    <MenuItem value="최신순">최신순</MenuItem>
+                    <MenuItem value="좋아요순">좋아요순</MenuItem>
+                    <MenuItem value="조회수순">조회수순</MenuItem>
+                </Select>
+                </FormControl>
+
             {/* Price Range Filter */}
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
                 <TextField

@@ -16,6 +16,8 @@ const WholeRecruitmentPostPage = () => {
         currentPage: 1
     });
 
+    const [selectedSortOption, setSelectedSortOption] = useState("최신순");
+    
     const [filters, setFilters] = useState({
         jobType: "전체"
     });
@@ -25,7 +27,7 @@ const WholeRecruitmentPostPage = () => {
     }, []);
 
     const fetchPageData = (page) => {
-        getRecruitmentPostsByPage(page, filters.jobType)
+        getRecruitmentPostsByPage(page, filters.jobType, selectedSortOption)
             .then((data) => {
                 setPostPageData({
                     posts: data.posts,
@@ -41,7 +43,7 @@ const WholeRecruitmentPostPage = () => {
     };
 
     const applyFilters = () => {
-        getRecruitmentPostsByPage(1, filters.jobType)
+        getRecruitmentPostsByPage(1, filters.jobType, selectedSortOption)
             .then((data) => {
                 setPostPageData({
                     posts: data.posts,
@@ -63,7 +65,7 @@ const WholeRecruitmentPostPage = () => {
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
                         <PageTitleText title={"구인"} />
 
-                        <JobFilter filters={filters} setFilters={setFilters} applyFilters={applyFilters} />
+                        <JobFilter filters={filters} setFilters={setFilters} selectedSortOption={selectedSortOption} setSelectedSortOption={setSelectedSortOption} applyFilters={applyFilters} />
                     </Box>
 
                     {/* Display Filtered Posts */}

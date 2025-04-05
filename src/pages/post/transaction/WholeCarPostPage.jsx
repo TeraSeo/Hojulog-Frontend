@@ -16,6 +16,8 @@ const WholeCarPostPage = () => {
         currentPage: 1
     });
 
+    const [selectedSortOption, setSelectedSortOption] = useState("최신순");
+    
     const [filters, setFilters] = useState({
         transactionType: "전체", 
         priceType: "전체"
@@ -26,7 +28,7 @@ const WholeCarPostPage = () => {
     }, []);
 
     const fetchPageData = (page) => {
-        getCarPostsByPage(page, filters.transactionType, filters.priceType)
+        getCarPostsByPage(page, filters.transactionType, filters.priceType, selectedSortOption)
             .then((data) => {
                 setPostPageData({
                     posts: data.posts,
@@ -42,7 +44,7 @@ const WholeCarPostPage = () => {
     };
 
     const applyFilters = () => {
-        getCarPostsByPage(1, filters.transactionType, filters.priceType)
+        getCarPostsByPage(1, filters.transactionType, filters.priceType, selectedSortOption)
             .then((data) => {
                 setPostPageData({
                     posts: data.posts,
@@ -64,7 +66,7 @@ const WholeCarPostPage = () => {
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
                         <PageTitleText title={"자동차"} />
 
-                        <TransactionFilter filters={filters} setFilters={setFilters} applyFilters={applyFilters} />
+                        <TransactionFilter filters={filters} setFilters={setFilters} selectedSortOption={selectedSortOption} setSelectedSortOption={setSelectedSortOption} applyFilters={applyFilters} />
                     </Box>
 
                     {postPageData.posts.length > 0 ? (

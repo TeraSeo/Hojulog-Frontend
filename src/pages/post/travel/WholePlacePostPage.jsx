@@ -17,13 +17,14 @@ const WholePlacePostPage = () => {
     });
 
     const [selectedTravelSuburb, setSelectedTravelSuburb] = useState("전체");
+    const [selectedSortOption, setSelectedSortOption] = useState("최신순");
 
     useEffect(() => {
         fetchPageData(1);
     }, []);
 
     const fetchPageData = (page) => {
-        getPlacePostsByPage(page, selectedTravelSuburb)
+        getPlacePostsByPage(page, selectedTravelSuburb, selectedSortOption)
             .then((data) => {
                 setPostPageData({
                     posts: data.posts,
@@ -39,7 +40,7 @@ const WholePlacePostPage = () => {
     };
 
     const applyFilters = () => {
-        getPlacePostsByPage(1, selectedTravelSuburb)
+        getPlacePostsByPage(1, selectedTravelSuburb, selectedSortOption)
             .then((data) => {
                 setPostPageData({
                     posts: data.posts,
@@ -61,7 +62,7 @@ const WholePlacePostPage = () => {
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
                         <PageTitleText title={"여행지"} />
 
-                        <TravelFilter selectedTravelSuburb={selectedTravelSuburb} setSelectedTravelSuburb={setSelectedTravelSuburb} applyFilters={applyFilters} />
+                        <TravelFilter selectedTravelSuburb={selectedTravelSuburb} setSelectedTravelSuburb={setSelectedTravelSuburb} selectedSortOption={selectedSortOption} setSelectedSortOption={setSelectedSortOption} applyFilters={applyFilters} />
                     </Box>
 
                     {postPageData.posts.length > 0 ? (

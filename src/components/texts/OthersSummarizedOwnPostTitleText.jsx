@@ -8,7 +8,6 @@ const OthersSummarizedOwnPostTitleText = ({ title, pl = 1, postId, category }) =
 
     const handleClick = () => {
         if (postId) {
-            // const urlCategory = ConvertCateogryToUrlCategory(category);
             navigate(`/others/post/${category}/detail/${postId}`);
         }
     };

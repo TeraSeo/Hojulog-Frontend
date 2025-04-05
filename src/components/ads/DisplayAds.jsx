@@ -43,7 +43,7 @@ const DisplayAds = () => {
       data-ad-format="auto"
       data-full-width-responsive="true"
       // 🔥 실제 배포 시 아래 라인 반드시 제거!
-    //   data-adtest="on"
+      data-adtest="on"
     />
   );
 };

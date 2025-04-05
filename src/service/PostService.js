@@ -49,7 +49,7 @@ function getArticlePostsByPage(page) {
     )
 }
 
-function getWorldCupPostsByPage(page) {
+function getWorldCupPostsByPage(page, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/recent/worldcup`, {
         headers: {
             'Accept': 'application/json',
@@ -57,7 +57,8 @@ function getWorldCupPostsByPage(page) {
         },
         params: {
             "page": page,
-            "size": 10
+            "size": 10,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -71,7 +72,7 @@ function getWorldCupPostsByPage(page) {
     )
 }
 
-function getPropertyPostsByPage(page, minPrice, maxPrice, period) {
+function getPropertyPostsByPage(page, minPrice, maxPrice, period, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/recent/property`, {
         headers: {
             'Accept': 'application/json',
@@ -82,7 +83,8 @@ function getPropertyPostsByPage(page, minPrice, maxPrice, period) {
             "size": 10,
             "minPrice": minPrice,
             "maxPrice": maxPrice,
-            "period": period
+            "period": period,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -96,7 +98,7 @@ function getPropertyPostsByPage(page, minPrice, maxPrice, period) {
     )
 }
 
-function getJobPostsByPage(page, jobType) {
+function getJobPostsByPage(page, jobType, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/recent/job`, {
         headers: {
             'Accept': 'application/json',
@@ -105,7 +107,8 @@ function getJobPostsByPage(page, jobType) {
         params: {
             "page": page,
             "size": 10,
-            "jobType": jobType
+            "jobType": jobType,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -119,7 +122,7 @@ function getJobPostsByPage(page, jobType) {
     )
 }
 
-function getTransactionPostsByPage(page, transactionType, priceType) {
+function getTransactionPostsByPage(page, transactionType, priceType, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/recent/transaction`, {
         headers: {
             'Accept': 'application/json',
@@ -129,7 +132,8 @@ function getTransactionPostsByPage(page, transactionType, priceType) {
             "page": page,
             "size": 10,
             "transactionType": transactionType,
-            "priceType": priceType
+            "priceType": priceType,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -143,7 +147,7 @@ function getTransactionPostsByPage(page, transactionType, priceType) {
     )
 }
 
-function getSocietyPostsByPage(page) {
+function getSocietyPostsByPage(page, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/recent/society`, {
         headers: {
             'Accept': 'application/json',
@@ -151,7 +155,8 @@ function getSocietyPostsByPage(page) {
         },
         params: {
             "page": page,
-            "size": 10
+            "size": 10,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -165,7 +170,7 @@ function getSocietyPostsByPage(page) {
     )
 }
 
-function getTravelPostsByPage(page, selectedTravelSuburb) {
+function getTravelPostsByPage(page, selectedTravelSuburb, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/recent/travel`, {
         headers: {
             'Accept': 'application/json',
@@ -174,7 +179,8 @@ function getTravelPostsByPage(page, selectedTravelSuburb) {
         params: {
             "page": page,
             "size": 10,
-            "travelSuburb": selectedTravelSuburb
+            "travelSuburb": selectedTravelSuburb,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -188,7 +194,7 @@ function getTravelPostsByPage(page, selectedTravelSuburb) {
     )
 }
 
-function getStudyPostsByPage(page) {
+function getStudyPostsByPage(page, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/recent/study`, {
         headers: {
             'Accept': 'application/json',
@@ -196,7 +202,8 @@ function getStudyPostsByPage(page) {
         },
         params: {
             "page": page,
-            "size": 10
+            "size": 10,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -210,7 +217,7 @@ function getStudyPostsByPage(page) {
     )
 }
 
-function getWorldCupPostsBySubCategoryNPage(subcategory, page) {
+function getWorldCupPostsBySubCategoryNPage(subcategory, page, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/worldcup/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -219,7 +226,8 @@ function getWorldCupPostsBySubCategoryNPage(subcategory, page) {
         params: {
             "page": page,
             "size": 10,
-            "subCategory": subcategory
+            "subCategory": subcategory,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -233,7 +241,7 @@ function getWorldCupPostsBySubCategoryNPage(subcategory, page) {
     )
 }
 
-function getSharePostsByPage(page, minPrice, maxPrice, period) {
+function getSharePostsByPage(page, minPrice, maxPrice, period, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/property/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -245,7 +253,8 @@ function getSharePostsByPage(page, minPrice, maxPrice, period) {
             "subCategory": "쉐어",
             "minPrice": minPrice,
             "maxPrice": maxPrice,
-            "period": period
+            "period": period,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -259,7 +268,7 @@ function getSharePostsByPage(page, minPrice, maxPrice, period) {
     )
 }
 
-function getRentPostsByPage(page, minPrice, maxPrice, period) {
+function getRentPostsByPage(page, minPrice, maxPrice, period, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/property/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -271,7 +280,8 @@ function getRentPostsByPage(page, minPrice, maxPrice, period) {
             "subCategory": "렌트",
             "minPrice": minPrice,
             "maxPrice": maxPrice,
-            "period": period
+            "period": period,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -285,7 +295,7 @@ function getRentPostsByPage(page, minPrice, maxPrice, period) {
     )
 }
 
-function getPropertyTransactionPostsByPage(page, minPrice, maxPrice, period) {
+function getPropertyTransactionPostsByPage(page, minPrice, maxPrice, period, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/property/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -297,7 +307,8 @@ function getPropertyTransactionPostsByPage(page, minPrice, maxPrice, period) {
             "subCategory": "매매",
             "minPrice": minPrice,
             "maxPrice": maxPrice,
-            "period": period
+            "period": period,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -311,7 +322,7 @@ function getPropertyTransactionPostsByPage(page, minPrice, maxPrice, period) {
     )
 }
 
-function getRecruitmentPostsByPage(page, jobType) {
+function getRecruitmentPostsByPage(page, jobType, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/job/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -321,7 +332,8 @@ function getRecruitmentPostsByPage(page, jobType) {
             "page": page,
             "size": 10,
             "subCategory": "구인",
-            "jobType": jobType
+            "jobType": jobType,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -335,7 +347,7 @@ function getRecruitmentPostsByPage(page, jobType) {
     )
 }
 
-function getJobSeekingPostsByPage(page, jobType) {
+function getJobSeekingPostsByPage(page, jobType, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/job/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -345,7 +357,8 @@ function getJobSeekingPostsByPage(page, jobType) {
             "page": page,
             "size": 10,
             "subCategory": "구직",
-            "jobType": jobType
+            "jobType": jobType,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -359,7 +372,7 @@ function getJobSeekingPostsByPage(page, jobType) {
     )
 }
 
-function getJobTutoringPostsByPage(page, jobType) {
+function getJobTutoringPostsByPage(page, jobType, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/job/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -369,7 +382,8 @@ function getJobTutoringPostsByPage(page, jobType) {
             "page": page,
             "size": 10,
             "subCategory": "과외",
-            "jobType": jobType
+            "jobType": jobType,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -383,7 +397,7 @@ function getJobTutoringPostsByPage(page, jobType) {
     )
 }
 
-function getCarPostsByPage(page, transactionType, priceType) {
+function getCarPostsByPage(page, transactionType, priceType, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/transaction/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -394,7 +408,8 @@ function getCarPostsByPage(page, transactionType, priceType) {
             "size": 10,
             "subCategory": "자동차",
             "transactionType": transactionType,
-            "priceType": priceType
+            "priceType": priceType,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -408,7 +423,7 @@ function getCarPostsByPage(page, transactionType, priceType) {
     )
 }
 
-function getNecessitiesPostsByPage(page, transactionType, priceType) {
+function getNecessitiesPostsByPage(page, transactionType, priceType, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/transaction/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -419,7 +434,8 @@ function getNecessitiesPostsByPage(page, transactionType, priceType) {
             "size": 10,
             "subCategory": "생활용품",
             "transactionType": transactionType,
-            "priceType": priceType
+            "priceType": priceType,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -433,7 +449,7 @@ function getNecessitiesPostsByPage(page, transactionType, priceType) {
     )
 }
 
-function getTransactionEtcPostsByPage(page, transactionType, priceType) {
+function getTransactionEtcPostsByPage(page, transactionType, priceType, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/transaction/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -444,7 +460,8 @@ function getTransactionEtcPostsByPage(page, transactionType, priceType) {
             "size": 10,
             "subCategory": "기타",
             "transactionType": transactionType,
-            "priceType": priceType
+            "priceType": priceType,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -458,7 +475,7 @@ function getTransactionEtcPostsByPage(page, transactionType, priceType) {
     )
 }
 
-function getClubPostsByPage(page) {
+function getClubPostsByPage(page, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/society/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -467,7 +484,8 @@ function getClubPostsByPage(page) {
         params: {
             "page": page,
             "size": 10,
-            "subCategory": "동호회"
+            "subCategory": "동호회",
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -481,7 +499,7 @@ function getClubPostsByPage(page) {
     )
 }
 
-function getLifeStylePostsByPage(page) {
+function getLifeStylePostsByPage(page, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/society/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -490,7 +508,8 @@ function getLifeStylePostsByPage(page) {
         params: {
             "page": page,
             "size": 10,
-            "subCategory": "라이프스타일"
+            "subCategory": "라이프스타일",
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -504,7 +523,7 @@ function getLifeStylePostsByPage(page) {
     )
 }
 
-function getFriendshipPostsByPage(page) {
+function getFriendshipPostsByPage(page, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/society/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -513,7 +532,8 @@ function getFriendshipPostsByPage(page) {
         params: {
             "page": page,
             "size": 10,
-            "subCategory": "친목"
+            "subCategory": "친목",
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -527,7 +547,7 @@ function getFriendshipPostsByPage(page) {
     )
 }
 
-function getRestaurantPostsByPage(page, selectedTravelSuburb) {
+function getRestaurantPostsByPage(page, selectedTravelSuburb, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/travel/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -537,7 +557,8 @@ function getRestaurantPostsByPage(page, selectedTravelSuburb) {
             "page": page,
             "size": 10,
             "subCategory": "레스토랑",
-            "travelSuburb": selectedTravelSuburb
+            "travelSuburb": selectedTravelSuburb,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -551,7 +572,7 @@ function getRestaurantPostsByPage(page, selectedTravelSuburb) {
     )
 }
 
-function getPlacePostsByPage(page, selectedTravelSuburb) {
+function getPlacePostsByPage(page, selectedTravelSuburb, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/travel/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -561,7 +582,8 @@ function getPlacePostsByPage(page, selectedTravelSuburb) {
             "page": page,
             "size": 10,
             "subCategory": "여행지",
-            "travelSuburb": selectedTravelSuburb
+            "travelSuburb": selectedTravelSuburb,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -575,7 +597,7 @@ function getPlacePostsByPage(page, selectedTravelSuburb) {
     )
 }
 
-function getCoursePostsByPage(page, selectedTravelSuburb) {
+function getCoursePostsByPage(page, selectedTravelSuburb, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/travel/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -585,7 +607,8 @@ function getCoursePostsByPage(page, selectedTravelSuburb) {
             "page": page,
             "size": 10,
             "subCategory": "코스",
-            "travelSuburb": selectedTravelSuburb
+            "travelSuburb": selectedTravelSuburb,
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -599,7 +622,7 @@ function getCoursePostsByPage(page, selectedTravelSuburb) {
     )
 }
 
-function getSchoolPostsByPage(page) {
+function getSchoolPostsByPage(page, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/study/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -608,7 +631,8 @@ function getSchoolPostsByPage(page) {
         params: {
             "page": page,
             "size": 10,
-            "subCategory": "학교후기"
+            "subCategory": "학교후기",
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -622,7 +646,7 @@ function getSchoolPostsByPage(page) {
     )
 }
 
-function getWorkingHolidayPostsByPage(page) {
+function getWorkingHolidayPostsByPage(page, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/study/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -631,7 +655,8 @@ function getWorkingHolidayPostsByPage(page) {
         params: {
             "page": page,
             "size": 10,
-            "subCategory": "워홀후기"
+            "subCategory": "워홀후기",
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -645,7 +670,7 @@ function getWorkingHolidayPostsByPage(page) {
     )
 }
 
-function getLanguageStudyPostsByPage(page) {
+function getLanguageStudyPostsByPage(page, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/study/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -654,7 +679,8 @@ function getLanguageStudyPostsByPage(page) {
         params: {
             "page": page,
             "size": 10,
-            "subCategory": "어학연수후기"
+            "subCategory": "어학연수후기",
+            "option": selectedSortOption
         }
     })
     .then((response) => {
@@ -668,7 +694,7 @@ function getLanguageStudyPostsByPage(page) {
     )
 }
 
-function getJobReviewPostsByPage(page) {
+function getJobReviewPostsByPage(page, selectedSortOption) {
     return axios.get(`${serverRoute}/api/post/get/pageable/study/subcategory`, {
         headers: {
             'Accept': 'application/json',
@@ -677,7 +703,8 @@ function getJobReviewPostsByPage(page) {
         params: {
             "page": page,
             "size": 10,
-            "subCategory": "취업후기"
+            "subCategory": "취업후기",
+            "option": selectedSortOption
         }
     })
     .then((response) => {

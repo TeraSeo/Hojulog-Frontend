@@ -7,6 +7,7 @@ import PostPaginationBox from "../../../components/box/post/PostPaginationBox";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
 import SocietyAddPostButton from "../../../components/buttons/post/society/SocietyAddPostPage";
+import SocietyFilter from "../../../components/box/post/society/SocietyFilter";
 
 function WholeSocietyPostPage() {
     const [societyPageData, setSocietyPageData] = useState({ 
@@ -15,12 +16,14 @@ function WholeSocietyPostPage() {
         currentPage: 0 
     });
 
+    const [selectedSortOption, setSelectedSortOption] = useState("최신순");
+
     useEffect(() => {
         fetchPageData(1);
     }, []);
 
     const fetchPageData = (page) => {
-        getSocietyPostsByPage(page)
+        getSocietyPostsByPage(page, selectedSortOption)
             .then((data) => {
                 setSocietyPageData({
                     posts: data.posts,
@@ -35,6 +38,18 @@ function WholeSocietyPostPage() {
         fetchPageData(value);
     };
 
+    const applyFilters = () => {
+        getSocietyPostsByPage(1, selectedSortOption)
+            .then((data) => {
+                setSocietyPageData({
+                    posts: data.posts,
+                    pageSize: data.pageSize,
+                    currentPage: 1
+                });
+            })
+            .catch((error) => console.error("Error fetching posts:", error));
+    };
+
     return (
         <Box sx={{ py: "10px", px: CommonPagePaddingXSize }}>
             <Grid container spacing={3}>
@@ -43,7 +58,11 @@ function WholeSocietyPostPage() {
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <PageTitleText title={"생활"} />
+                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
+                        <PageTitleText title={"생활"} />
+
+                        <SocietyFilter selectedSortOption={selectedSortOption} setSelectedSortOption={setSelectedSortOption} applyFilters={applyFilters} />
+                    </Box>
 
                     {societyPageData.posts.map((post, index) => (
                         <Box key={index}>

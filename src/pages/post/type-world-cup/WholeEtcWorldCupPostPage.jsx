@@ -7,6 +7,7 @@ import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
 import WorldCupPostBox from "../../../components/box/post/world-cup/WorldCupPostBox";
 import AussieChoiceNonOptionAddPostButton from "../../../components/buttons/post/aussie-choice/AussieChoiceNonOptionAddPostButton";
+import WorldCupFilter from "../../../components/box/post/world-cup/WorldCupFilter";
 
 function WholeEtcWorldCupPostPage() {
     const [worldCupPageData, setWorldCupPageData] = useState({
@@ -15,12 +16,14 @@ function WholeEtcWorldCupPostPage() {
         currentPage: 1
     });
 
+    const [selectedSortOption, setSelectedSortOption] = useState("최신순");
+
     useEffect(() => {
         fetchPageData(1);
     }, []);
 
     const fetchPageData = (page) => {
-        getWorldCupPostsBySubCategoryNPage("기타", page)
+        getWorldCupPostsBySubCategoryNPage("기타", page, selectedSortOption)
             .then((data) => {
                 setWorldCupPageData({
                     posts: data.posts,
@@ -35,6 +38,18 @@ function WholeEtcWorldCupPostPage() {
         fetchPageData(value);
     };
 
+    const applyFilters = () => {
+        getWorldCupPostsBySubCategoryNPage("기타", 1, selectedSortOption)
+            .then((data) => {
+                setWorldCupPageData({
+                    posts: data.posts,
+                    pageSize: data.pageSize,
+                    currentPage: 1
+                });
+            })
+            .catch((error) => console.error("Error fetching posts:", error));
+    };
+
     return (
         <Box sx={{ px: CommonPagePaddingXSize }}>
             <Grid container spacing={3}>
@@ -45,6 +60,8 @@ function WholeEtcWorldCupPostPage() {
                 <Grid item xs={12} md={9}>
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
                         <PageTitleText title={"기타 Aussie Choice"} />
+
+                        <WorldCupFilter selectedSortOption={selectedSortOption} setSelectedSortOption={setSelectedSortOption} applyFilters={applyFilters} />
                     </Box>
                   
                     {worldCupPageData.posts.map((post, index) => (

@@ -16,6 +16,8 @@ function WholeTransactionPostPage() {
         currentPage: 0
     });
 
+    const [selectedSortOption, setSelectedSortOption] = useState("최신순");
+
     const [filters, setFilters] = useState({
         transactionType: "전체",
         priceType: "전체"
@@ -26,7 +28,7 @@ function WholeTransactionPostPage() {
     }, []);
 
     const fetchPageData = (page) => {
-        getTransactionPostsByPage(page, filters.transactionType, filters.priceType)
+        getTransactionPostsByPage(page, filters.transactionType, filters.priceType, selectedSortOption)
             .then((data) => {
                 setTransactionPageData({
                     posts: data.posts,
@@ -42,7 +44,7 @@ function WholeTransactionPostPage() {
     };
 
     const applyFilters = () => {
-        getTransactionPostsByPage(1, filters.transactionType, filters.priceType)
+        getTransactionPostsByPage(1, filters.transactionType, filters.priceType, selectedSortOption)
             .then((data) => {
                 setTransactionPageData({
                     posts: data.posts,
@@ -64,7 +66,7 @@ function WholeTransactionPostPage() {
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
                         <PageTitleText title={"사고팔기"} />
 
-                        <TransactionFilter filters={filters} setFilters={setFilters} applyFilters={applyFilters} />
+                        <TransactionFilter filters={filters} setFilters={setFilters} selectedSortOption={selectedSortOption} setSelectedSortOption={setSelectedSortOption} applyFilters={applyFilters} />
                     </Box>
 
                     {transactionPageData.posts.length > 0 ? (

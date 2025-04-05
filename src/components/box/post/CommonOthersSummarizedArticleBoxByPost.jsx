@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
 import React from "react";
 import CreatedAtText from "../../texts/CreatedAtText";
-import OthersSummarizedOwnPostTitleText from "../../texts/OthersSummarizedOwnPostTitleText";
+import OthersSummarizedArtitleTitleText from "../../texts/OthersSummarizedArtitleTitleText";
 
-const CommonOthersSummarizedPostBoxByPost = ({ post }) => {
+const CommonOthersSummarizedArticleBoxByPost = ({ post }) => {
     return (
         <Box
             sx={{
@@ -28,7 +28,7 @@ const CommonOthersSummarizedPostBoxByPost = ({ post }) => {
                 >
                     <Box>
                         <Box sx={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                            <OthersSummarizedOwnPostTitleText title={post.title} postId={post.id} category={post.category} />
+                            <OthersSummarizedArtitleTitleText title={post.title} postId={post.postId}  />
                         </Box>
 
                         <Box>
@@ -41,4 +41,4 @@ const CommonOthersSummarizedPostBoxByPost = ({ post }) => {
     );
 };
 
-export default CommonOthersSummarizedPostBoxByPost;
+export default CommonOthersSummarizedArticleBoxByPost;

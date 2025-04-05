@@ -16,6 +16,8 @@ const WholeSharePostPage = () => {
         currentPage: 1
     });
 
+    const [selectedSortOption, setSelectedSortOption] = useState("최신순");
+
     const [filters, setFilters] = useState({
         minPrice: "",
         maxPrice: "",
@@ -29,7 +31,7 @@ const WholeSharePostPage = () => {
     }, []);
 
     const fetchPageData = (page) => {
-        getSharePostsByPage(page, filters.minPrice ? Number(filters.minPrice) : -1, filters.maxPrice ? Number(filters.maxPrice) : -1, filters.period)
+        getSharePostsByPage(page, filters.minPrice ? Number(filters.minPrice) : -1, filters.maxPrice ? Number(filters.maxPrice) : -1, filters.period, selectedSortOption)
             .then((data) => {
                 setPostPageData({
                     posts: data.posts,
@@ -50,7 +52,7 @@ const WholeSharePostPage = () => {
             return;
         }
 
-        getSharePostsByPage(1, filters.minPrice ? Number(filters.minPrice) : -1, filters.maxPrice ? Number(filters.maxPrice) : -1, filters.period)
+        getSharePostsByPage(1, filters.minPrice ? Number(filters.minPrice) : -1, filters.maxPrice ? Number(filters.maxPrice) : -1, filters.period, selectedSortOption)
             .then((data) => {
                 setPostPageData({
                     posts: data.posts,
@@ -72,7 +74,7 @@ const WholeSharePostPage = () => {
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
                         <PageTitleText title={"쉐어"} />
 
-                        <PropertyFilter filters={filters} setFilters={setFilters} applyFilters={applyFilters} priceError={priceError} setPriceError={setPriceError} />
+                        <PropertyFilter filters={filters} setFilters={setFilters} selectedSortOption={selectedSortOption} setSelectedSortOption={setSelectedSortOption} applyFilters={applyFilters} priceError={priceError} setPriceError={setPriceError} />
                     </Box>
 
                     {postPageData.posts.length > 0 ? (

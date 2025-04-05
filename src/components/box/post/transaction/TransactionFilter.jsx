@@ -2,7 +2,7 @@ import { Box, FormControl, InputLabel, Select, MenuItem, Button } from "@mui/mat
 import React from "react";
 import { primaryColor } from "../../../../constant/Color";
 
-const TransactionFilter = ({ filters, setFilters, applyFilters }) => {
+const TransactionFilter = ({ filters, setFilters, selectedSortOption, setSelectedSortOption, applyFilters }) => {
     const handleFilterChange = (e) => {
         const { name, value } = e.target;
         setFilters((prevFilters) => ({
@@ -11,8 +11,26 @@ const TransactionFilter = ({ filters, setFilters, applyFilters }) => {
         }));
     };
 
+    const handleSortChange = (e) => {
+        setSelectedSortOption(e.target.value);
+      };
+
     return (
         <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", alignItems: "center" }}>
+            <FormControl size="small" sx={{ minWidth: 150 }}>
+                <InputLabel id="sort-label">정렬</InputLabel>
+                <Select
+                    labelId="sort-label"
+                    value={selectedSortOption}
+                    onChange={handleSortChange}
+                    label="정렬"
+                >
+                    <MenuItem value="최신순">최신순</MenuItem>
+                    <MenuItem value="좋아요순">좋아요순</MenuItem>
+                    <MenuItem value="조회수순">조회수순</MenuItem>
+                </Select>
+            </FormControl>
+
             {/* Transaction Type Filter */}
             <FormControl 
                 size="small"

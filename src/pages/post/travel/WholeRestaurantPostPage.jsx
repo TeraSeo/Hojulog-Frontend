@@ -17,13 +17,14 @@ const WholeRestaurantPostPage = () => {
     });
 
     const [selectedTravelSuburb, setSelectedTravelSuburb] = useState("전체");
+    const [selectedSortOption, setSelectedSortOption] = useState("최신순");
 
     useEffect(() => {
         fetchPageData(1);
     }, []);
 
     const fetchPageData = (page) => {
-        getRestaurantPostsByPage(page, selectedTravelSuburb)
+        getRestaurantPostsByPage(page, selectedTravelSuburb, selectedSortOption)
             .then((data) => {
                 setPostPageData({
                     posts: data.posts,
@@ -39,7 +40,7 @@ const WholeRestaurantPostPage = () => {
     };
 
     const applyFilters = () => {
-        getRestaurantPostsByPage(1, selectedTravelSuburb)
+        getRestaurantPostsByPage(1, selectedTravelSuburb, selectedSortOption)
             .then((data) => {
                 setPostPageData({
                     posts: data.posts,
@@ -61,7 +62,7 @@ const WholeRestaurantPostPage = () => {
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
                         <PageTitleText title={"레스토랑(카페,펍)"} />
 
-                        <TravelFilter selectedTravelSuburb={selectedTravelSuburb} setSelectedTravelSuburb={setSelectedTravelSuburb} applyFilters={applyFilters} />
+                        <TravelFilter selectedTravelSuburb={selectedTravelSuburb} setSelectedTravelSuburb={setSelectedTravelSuburb} selectedSortOption={selectedSortOption} setSelectedSortOption={setSelectedSortOption} applyFilters={applyFilters} />
                     </Box>
 
                     {postPageData.posts.length > 0 ? (

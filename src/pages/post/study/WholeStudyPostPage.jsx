@@ -7,6 +7,7 @@ import { getStudyPostsByPage } from "../../../service/PostService";
 import PageTitleText from "../../../components/texts/PageTitleText";
 import { CommonPagePaddingXSize } from "../../../constant/PaddingResponsiveSize";
 import StudyAddPostButton from "../../../components/buttons/post/study/StudyAddPostButton";
+import StudyFilter from "../../../components/box/post/study/StudyFilter";
 
 function WholeStudyPostPage() {
     const [studyPageData, setStudyPageData] = useState({
@@ -15,12 +16,14 @@ function WholeStudyPostPage() {
         currentPage: 1
     });
 
+    const [selectedSortOption, setSelectedSortOption] = useState("최신순");
+
     useEffect(() => {
         fetchPageData(1);
     }, []);
 
     const fetchPageData = (page) => {
-        getStudyPostsByPage(page)
+        getStudyPostsByPage(page, selectedSortOption)
             .then((data) => {
                 setStudyPageData({
                     posts: data.posts,
@@ -35,6 +38,18 @@ function WholeStudyPostPage() {
         fetchPageData(value);
     };
 
+    const applyFilters = () => {
+        getStudyPostsByPage(1, selectedSortOption)
+            .then((data) => {
+                setStudyPageData({
+                    posts: data.posts,
+                    pageSize: data.pageSize,
+                    currentPage: 1
+                });
+            })
+            .catch((error) => console.error("Error fetching posts:", error));
+    };
+
     return (
         <Box sx={{ py: "10px", px: CommonPagePaddingXSize }}>
             <Grid container spacing={3}>
@@ -43,7 +58,11 @@ function WholeStudyPostPage() {
                 </Grid>
 
                 <Grid item xs={12} md={9}>
-                    <PageTitleText title={"유학"} />
+                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
+                        <PageTitleText title={"유학"} />
+
+                        <StudyFilter selectedSortOption={selectedSortOption} setSelectedSortOption={setSelectedSortOption} applyFilters={applyFilters} />
+                    </Box>
 
                     {studyPageData.posts.map((post, index) => (
                         <React.Fragment key={index}>

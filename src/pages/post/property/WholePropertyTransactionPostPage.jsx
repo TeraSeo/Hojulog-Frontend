@@ -16,6 +16,8 @@ const WholePropertyTransactionPostPage = () => {
         currentPage: 1
     });
 
+    const [selectedSortOption, setSelectedSortOption] = useState("최신순");
+
     const [filters, setFilters] = useState({
         minPrice: "",
         maxPrice: "",
@@ -28,7 +30,7 @@ const WholePropertyTransactionPostPage = () => {
     }, []);
 
     const fetchPageData = (page) => {
-        getPropertyTransactionPostsByPage(page, filters.minPrice ? Number(filters.minPrice) : -1, filters.maxPrice ? Number(filters.maxPrice) : -1, "전체")
+        getPropertyTransactionPostsByPage(page, filters.minPrice ? Number(filters.minPrice) : -1, filters.maxPrice ? Number(filters.maxPrice) : -1, "전체", selectedSortOption)
             .then((data) => {
                 setPostPageData({
                     posts: data.posts,
@@ -49,7 +51,7 @@ const WholePropertyTransactionPostPage = () => {
             return;
         }
 
-        getPropertyTransactionPostsByPage(1, filters.minPrice ? Number(filters.minPrice) : -1, filters.maxPrice ? Number(filters.maxPrice) : -1, "전체")
+        getPropertyTransactionPostsByPage(1, filters.minPrice ? Number(filters.minPrice) : -1, filters.maxPrice ? Number(filters.maxPrice) : -1, "전체", selectedSortOption)
             .then((data) => {
                 setPostPageData({
                     posts: data.posts,
@@ -71,7 +73,7 @@ const WholePropertyTransactionPostPage = () => {
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", mb: 2 }}>
                         <PageTitleText title={"매매"} />
 
-                        <PropertyFilter filters={filters} setFilters={setFilters} applyFilters={applyFilters} priceError={priceError} setPriceError={setPriceError} isPeriodContained={false} />
+                        <PropertyFilter filters={filters} setFilters={setFilters} selectedSortOption={selectedSortOption} setSelectedSortOption={setSelectedSortOption} applyFilters={applyFilters} priceError={priceError} setPriceError={setPriceError} />
                     </Box>
 
                     {postPageData.posts.length > 0 ? (

@@ -20,7 +20,7 @@ const navigate = useNavigate();
     };
 
     return (
-        <HomeContainerBox title="유학" onDetailClicked={() => { handleNavigate("/유학") }}>
+        <HomeContainerBox title="워홀/유학" onDetailClicked={() => { handleNavigate("/유학") }}>
             <Box
                 sx={{
                     gap: "16px",

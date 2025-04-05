@@ -1,40 +1,18 @@
 import { Box, FormControl, InputLabel, Select, MenuItem, Button } from "@mui/material";
 import React from "react";
 import { primaryColor } from "../../../../constant/Color";
-import { travelSuburbs } from "../../../../constant/Countries";
 
-const TravelFilter = ({
-  selectedTravelSuburb,
-  setSelectedTravelSuburb,
+const SocietyFilter = ({
   selectedSortOption,
   setSelectedSortOption,
   applyFilters
 }) => {
-  const handleTravelSuburbChange = (e) => {
-    setSelectedTravelSuburb(e.target.value);
-  };
-
   const handleSortChange = (e) => {
     setSelectedSortOption(e.target.value);
   };
 
   return (
     <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", alignItems: "center" }}>
-      <FormControl size="small" sx={{ minWidth: 150 }}>
-        <InputLabel id="suburb-label">지역</InputLabel>
-        <Select
-          labelId="suburb-label"
-          value={selectedTravelSuburb}
-          onChange={handleTravelSuburbChange}
-          label="지역"
-        >
-          <MenuItem value="전체">전체</MenuItem>
-          {travelSuburbs.map((suburb, index) => (
-            <MenuItem key={index} value={suburb}>{suburb}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-
       <FormControl size="small" sx={{ minWidth: 150 }}>
         <InputLabel id="sort-label">정렬</InputLabel>
         <Select
@@ -56,4 +34,4 @@ const TravelFilter = ({
   );
 };
 
-export default TravelFilter;
+export default SocietyFilter;

@@ -8,7 +8,6 @@ const OthersSummarizedArtitleTitleText = ({ title, pl = 1, postId }) => {
 
     const handleClick = () => {
         if (postId) {
-            // const urlCategory = ConvertCateogryToUrlCategory(category);
             navigate(`/others/post/게시글/detail/${postId}`);
         }
     };
@@ -16,7 +15,7 @@ const OthersSummarizedArtitleTitleText = ({ title, pl = 1, postId }) => {
     return (
          <Typography
             variant="body2"
-            onClick={handleClick}
+            onClick={() => { handleClick(); }}
             sx={{
                 pt: 1,
                 pl: pl,

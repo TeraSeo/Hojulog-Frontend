@@ -1,11 +1,11 @@
 import { Box, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategorySidebar from "../../components/bar/CategorySidebar";
-import { getWholeOthersArticles, getWholeOthersPosts } from "../../service/PostService";
+import { getWholeOthersArticles } from "../../service/PostService";
 import PostPaginationBox from "../../components/box/post/PostPaginationBox";
 import { useParams } from "react-router-dom";
 import { CommonPagePaddingXSize } from "../../constant/PaddingResponsiveSize";
-import CommonOthersSummarizedPostBoxByPost from "../../components/box/post/CommonOthersSummarizedPostBoxByPost";
+import CommonOthersSummarizedArticleBoxByPost from "../../components/box/post/CommonOthersSummarizedArticleBoxByPost";
 
 function OthersUploadedArticlePage() {
     const { userId, username } = useParams();
@@ -48,7 +48,7 @@ function OthersUploadedArticlePage() {
                     </Typography>
 
                     {othersUploadedArticlePageData.posts.map((post) => (
-                        <CommonOthersSummarizedPostBoxByPost post={post} />
+                        <CommonOthersSummarizedArticleBoxByPost post={post} />
                     ))}
                     
                     <PostPaginationBox totalPage={othersUploadedArticlePageData.pageSize} currentPage={othersUploadedArticlePageData.currentPage} handlePageChange={handlePageChange} />
