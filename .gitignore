@@ -11,8 +11,8 @@
 # production
 /build
 
-/public
-/public/src/components/ads/
+public/
+src/components/ads/
 
 # misc
 .DS_Store
