@@ -8,7 +8,7 @@ The frontend of Hojulog – a community blog platform for Korean residents in Au
 [https://hojulog.com](https://hojulog.com)
 
 ## 📚 Overview  
-Hojulog is a community platform that allows Korean residents in Australia to share information and communicate through blog posts. Users can log in with their Google or GitHub accounts and create content across various categories like travel, jobs, real estate, and daily life. This repository contains the frontend built with React and Material-UI, which interacts with a Spring Boot-based backend.
+Hojulog is a community platform that allows Korean residents in Australia to share information and communicate through blog posts. Users can log in with their Google or Kakao(Korean Social Media) accounts and create content across various categories like travel, jobs, real estate, and daily life. This repository contains the frontend built with React and Material-UI, which interacts with a Spring Boot-based backend.
 
 ## 💡 Key Features  
 - Responsive and mobile-friendly design using Material-UI  
