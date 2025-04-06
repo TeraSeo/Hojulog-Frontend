@@ -2,6 +2,7 @@
 The frontend of Hojulog – a community blog platform for Korean residents in Australia.
 
 ## Server Github Link
+[https://github.com/TeraSeo/HojuLog-Server-Public](https://github.com/TeraSeo/HojuLog-Server-Public)
 
 ## 🔗 Live Site  
 [https://hojulog.com](https://hojulog.com)
